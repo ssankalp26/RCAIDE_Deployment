@@ -17,9 +17,9 @@ sys.path.insert(0, os.path.abspath('../..'))  # Root directory
 sys.path.insert(0, os.path.abspath('../../RCAIDE'))  # RCAIDE directory
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath('.'))))  # Parent of docs
 
-project = 'RCAIDE_LEADS'
-copyright = '2024, lab'
-author = 'lab'
+project = 'RCAIDE'
+copyright = '2024, Laboratory of Electric Aircraft Design and Sustainavility'
+author = ' Laboratory of Electric Aircraft Design and Sustainavility'
 release = '1.0.0'
 
 # -- General configuration ---------------------------------------------------

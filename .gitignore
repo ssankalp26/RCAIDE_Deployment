@@ -75,5 +75,6 @@ nosetests.xml
  
 /doc/html
 /doc/latex
+.rst
   
 
