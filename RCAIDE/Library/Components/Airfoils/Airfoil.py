@@ -62,17 +62,13 @@ class Airfoil(Component):
         File containing x,y coordinates that define the airfoil shape. Typically a text file with two columns of numbers
         adhering tot eh Selig format: https://m-selig.ae.illinois.edu/ads/coord_database.html#seligFmt. 
 
-
-    References
-    ----------
-    .. [1] None currently listed
-    """    
+    """
     def __defaults__(self):
         """This sets the default values.
-    
+
         Assumptions:
             None
-        
+
         Source:
             None
         """         
