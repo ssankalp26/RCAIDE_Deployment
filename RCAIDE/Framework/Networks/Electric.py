@@ -227,24 +227,28 @@ class Electric(Network):
                         propulsor.unpack_propulsor_unknowns(segment) 
         return     
 
-    def residuals(self, segment):
-        """Calculates the residuals from running the network
+    def residuals(self,segment):
+        """ This packs the residuals to be sent to the mission solver.
 
-        Assumptions:
-        None
+           Assumptions:
+           None
 
-        Source:
-        N/A
+           Source:
+           N/A
 
-        Inputs:
-        segment - flight segment containing conditions, numerics and unknowns
+           Inputs:
+           state.conditions.energy:
+               motor(s).torque                      [N-m]
+               rotor(s).torque                      [N-m] 
+           residuals soecific to the battery cell   
 
-        Returns:
-        residuals - residuals from network calculations
+           Outputs:
+           residuals specific to battery cell and network
 
-        Properties Used:
-        None
+           Properties Used: 
+           N/A
         """
+              
         for network in segment.analyses.energy.vehicle.networks:
             for bus_i, bus in enumerate(network.busses):    
                 if bus.active:

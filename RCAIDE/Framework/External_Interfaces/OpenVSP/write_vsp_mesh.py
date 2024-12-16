@@ -20,9 +20,9 @@ import time
 import fileinput
 
 ## @ingroup Input_Output-OpenVSP
-def write_vsp_mesh(tag, aircraft_name):
-    """This writes a VSP mesh based on the vehicle tag and aircraft name
-
+def write_vsp_mesh(geometry,tag,half_mesh_flag,growth_ratio,growth_limiting_flag):
+    """This create an .stl surface mesh based on a vehicle stored in a .vsp3 file.
+    
     Assumptions:
     None
 
@@ -30,20 +30,23 @@ def write_vsp_mesh(tag, aircraft_name):
     N/A
 
     Inputs:
-    tag           - Name of aircraft in file
-    aircraft_name - Name of aircraft in VSP geometry
+    geometry.                                 - Also passed to set_sources
+      wings.main_wing.chords.mean_aerodynamic [m]
+    half_mesh_flag                            <boolean>  determines if a symmetry plane is created
+    growth_ratio                              [-]        growth ratio for the mesh
+    growth_limiting_flag                      <boolean>  determines if 3D growth limiting is used
 
-    Returns:
-    None
+    Outputs:
+    <tag>.stl                               
 
     Properties Used:
-    None
-    """
+    N/A
+    """      
     
     # Reset OpenVSP to avoid including a previous vehicle
     vsp.ClearVSPModel()
     
-    if 'turbofan' in aircraft_name.networks:
+    if 'turbofan' in geometry.networks:
         print('Warning: no meshing sources are currently implemented for the nacelle')
 
     # Turn on symmetry plane splitting to improve robustness of meshing process
@@ -93,12 +96,12 @@ def write_vsp_mesh(tag, aircraft_name):
         vsp.SetCFDMeshVal(vsp.CFD_LIMIT_GROWTH_FLAG, 1.0)
     
     # Set the max edge length so we have on average 50 elements per chord length
-    MAC     = aircraft_name.wings.main_wing.chords.mean_aerodynamic
+    MAC     = geometry.wings.main_wing.chords.mean_aerodynamic
     min_len = MAC/50.
     vsp.SetCFDMeshVal(vsp.CFD_MAX_EDGE_LEN,min_len)
     
     # vsp.AddDefaultSources()   
-    set_sources(aircraft_name)
+    set_sources(geometry)
     
     vsp.Update()
     
@@ -112,36 +115,50 @@ def write_vsp_mesh(tag, aircraft_name):
     print('VSP meshing for ' + tag + ' completed in ' + str(dt) + ' s')
     
 ## @ingroup Input_Output-OpenVSP
-def set_sources(vehicle):
-    """This sets mesh sources for the VSP geometry
-
+def set_sources(geometry):
+    """This sets meshing sources in a way similar to the OpenVSP default. Some source values can
+    also be optionally specified as below.
+    
     Assumptions:
     None
 
     Source:
-    N/A
+    https://github.com/OpenVSP/OpenVSP (with some modifications)
 
     Inputs:
-    vehicle - RCAIDE vehicle data structure containing mesh source settings
+    geometry.
+      wings.*.                              (passed to add_segment_sources())
+        tag                                 <string>
+        Segments.*.percent_span_location    [-] (.1 is 10%)
+        Segments.*.root_chord_percent       [-] (.1 is 10%)
+        chords.root                         [m]
+        chords.tip                          [m]
+        vsp_mesh                            (optional) - This holds settings that are used in add_segment_sources
+      fuselages.*.
+        tag                                 <string>
+        vsp_mesh.                           (optional)
+          length                            [m]
+          radius                            [m]
+        lengths.total                       (only used if vsp_mesh is not defined for the fuselage)
 
-    Returns:
-    None
+    Outputs:
+    <tag>.stl                               
 
     Properties Used:
-    None
-    """
+    N/A
+    """     
     # Extract information on geometry type (for some reason it seems VSP doesn't have a simple 
     # way to do this)
     comp_type_dict = dict()
     comp_dict      = dict()
-    for wing in vehicle.wings:
+    for wing in geometry.wings:
         comp_type_dict[wing.tag] = 'wing'
         comp_dict[wing.tag] = wing
-    for fuselage in vehicle.fuselages:
+    for fuselage in geometry.fuselages:
         comp_type_dict[fuselage.tag] = 'fuselage'
         comp_dict[fuselage.tag] = fuselage
     # network sources have not been implemented
-    #for network in vehicle.networks:
+    #for network in geometry.networks:
         #comp_type_dict[network.tag] = 'turbojet'
         #comp_dict[network.tag] = network
         
@@ -277,25 +294,36 @@ def set_sources(vehicle):
     
         
 ## @ingroup Input_Output-OpenVSP
-def add_segment_sources(wing_segment, wing_source_idx):
-    """This adds mesh sources to wing segments
-
+def add_segment_sources(comp,cr,ct,ii,u_start,num_secs,custom_flag,wingtip_flag,seg):
+    """This sets meshing sources for the wing segments according to their size and position.
+    
     Assumptions:
     None
 
     Source:
-    N/A
+    https://github.com/OpenVSP/OpenVSP (with some modifications)
 
     Inputs:
-    wing_segment    - Wing segment data structure
-    wing_source_idx - Index of wing source in VSP geometry
+    comp             <string> - OpenVSP component ID
+    cr               [m]      - root chord
+    ct               [m]      - tip chord
+    ii               [-]      - segment index
+    u_start          [-]      - OpenVSP parameter determining the u dimensional start point
+    num_secs         [-]      - number of segments on the corresponding wing
+    custom_flag      <boolean> - determines if custom source settings are to be used
+    wingtip_flag     <boolean> - indicates if the current segment is a wingtip
+    seg.vsp_mesh.    (only used if custom_flag is True)
+      inner_length   [m]       - length of inboard element edge
+      outer_length   [m]       - length of outboard element edge
+      inner_radius   [m]       - radius of influence for inboard source
+      outer_radius   [m]       - radius of influence for outboard source
 
-    Returns:
-    None
+    Outputs:
+    None - sources are added to OpenVSP instance                             
 
     Properties Used:
-    None
-    """
+    N/A
+    """     
     if custom_flag == True:
         len1 = seg.vsp_mesh.inner_length
         len2 = seg.vsp_mesh.outer_length
@@ -334,4 +362,4 @@ def add_segment_sources(wing_segment, wing_source_idx):
         vsp.AddCFDSource(vsp.LINE_SOURCE,comp,0,len1,rad1,uloc1,wloc1,len2,rad2,uloc2,wloc2)    
     
 if __name__ == '__main__':
-    write_vsp_mesh(tag, aircraft_name)
+    write_vsp_mesh(tag,True)

@@ -52,9 +52,11 @@ class Momentum_Theory_Wake(Component):
 
     
     def evaluate(self,rotor,wake_inputs,conditions):
-        """Wake evaluation is performed using a simplified vortex wake method for Fidelity Zero, 
+        """
+        
+        Wake evaluation is performed using a simplified vortex wake method for Fidelity Zero, 
         following Helmholtz vortex theory.
-
+        
         Assumptions:
         None
 
@@ -63,19 +65,23 @@ class Momentum_Theory_Wake(Component):
         http://web.mit.edu/drela/Public/web/qprop/qprop_theory.pdf
 
         Inputs:
-        self          - rotor wake
-        rotor         - RCAIDE rotor
-        wake_inputs   - wake input parameters (Ua: Axial velocity, Ut: Tangential velocity, r: radius distribution)
-        conditions    - flight conditions
-
+           self         - rotor wake
+           rotor        - RCAIDE rotor
+           wake_inputs.
+              Ua        - Axial velocity
+              Ut        - Tangential velocity
+              r         - radius distribution
+           conditions   - conditions
+           
+           
         Outputs:
-
+           va  - axially-induced velocity from rotor wake
+           vt  - tangentially-induced velocity from rotor wake
         
-        va - axially-induced velocity from rotor wake
-        vt - tangentially-induced velocity from rotor wake
-
         Properties Used:
         None
+        
+        
         """
         
         va, vt = fidelity_zero_wake_convergence(self, rotor, wake_inputs)
