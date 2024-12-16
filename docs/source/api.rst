@@ -1,10 +1,11 @@
-API Reference
-============
+===
+API
+===
 
-Core Modules
-===========
+.. autosummary::
+   :toctree: _autosummary
+   :template: custom-module-template.rst
+   :recursive:
 
-.. automodule:: RCAIDE
-   :members:
-   :undoc-members:
-   :show-inheritance: 
+    RCAIDE.Library
+    RCAIDE.Framework

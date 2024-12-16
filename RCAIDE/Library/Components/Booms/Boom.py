@@ -14,17 +14,40 @@ from RCAIDE.Framework.Core     import Data, Container
 #  BOOM
 # ----------------------------------------------------------------------------------------------------------------------  
 class Boom(Component):
-    """This is a standard boom for a rotor"""
+    """This is a standard boom for a rotor
+    
+    Attributes
+    ----------
+        tag : str
+            Identifier for the boom component, defaults to 'boom'
+        origin : list
+            3D coordinates of the boom origin, default [[0.0,0.0,0.0]]
+
+    Returns
+    -------
+        None
+
+    Notes
+    -----
+        The boom component is primarily used in rotor-based aircraft configurations
+        and serves as a structural element for mounting rotors and other components.
+    
+    Methods
+    -------
+    :inherited-members: none
+
+    """
     
     def __defaults__(self):
-        """This sets the default values.
+        """ :meta private:"""
+        #This sets the default values.
     
-        Assumptions:
-            None
+        #Assumptions:
+        #    None
         
-        Source:
-            None
-        """       
+        #Source:
+        #    None
+              
         
         self.tag                                    = 'boom'
         self.origin                                 = [[0.0,0.0,0.0]]
@@ -70,21 +93,20 @@ class Boom(Component):
         self.Segments                               = Container()
         
     def append_segment(self,segment):
-        """ Adds a segment to the rotor_boom. 
-    
+        """
         Assumptions:
-            None
+           None
             
         Source:
-            None
+           None
         
         Args:
-            self       : boom                  [unitless]
-            segment    : cross-section of boom [unitless]   
+           self       : boom                  [unitless]
+           segment    : cross-section of boom [unitless]   
             
         Outputs:
-            None 
-        """ 
+           None 
+        """
 
         # Assert database type
         if not isinstance(segment,Data):
@@ -97,20 +119,21 @@ class Boom(Component):
 
 class Container(Component.Container):
     def get_children(self):
-        """ Returns the components that can go inside
+        """ :meta private: """
+        #Returns the components that can go inside
     
-        Assumptions:
-            None
+        #Assumptions:
+        #    None
             
-        Source:
-            None
+        #Source:
+        #    None
+
+        #Args:
+        #    self       : container of booms [unitless]    
+            
+        #Outputs:
+        #    Boom       : boom               [unitless] 
         
-        Args:
-            self       : container of booms [unitless]    
-            
-        Outputs:
-            Boom       : boom               [unitless] 
-        """ 
         return [Boom]
 
 # ------------------------------------------------------------

@@ -63,10 +63,8 @@ Key Features
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Contents
-   
-   install
-   quick_start
-   contributing
-   api
-   modules
+   :caption: Contents:
+
+.. autosummary::
+   :toctree: generated/
+   :recursive:

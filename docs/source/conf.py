@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('../../RCAIDE'))  # RCAIDE directory
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath('.'))))  # Parent of docs
 
 project = 'RCAIDE'
-copyright = '2024, Laboratory of Electric Aircraft Design and Sustainavility'
-author = ' Laboratory of Electric Aircraft Design and Sustainavility'
+copyright = '2024, Laboratory of Electric Aircraft Design and Sustainability'
+author = ' Laboratory of Electric Aircraft Design and Sustainability'
 release = '1.0.0'
 
 # -- General configuration ---------------------------------------------------
@@ -30,7 +30,8 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
     'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon'  # Add support for Google/NumPy style docstrings
+    'sphinx.ext.napoleon' , # Add support for Google/NumPy style docstrings
+    'sphinx.ext.autosectionlabel' 
 ]
 
 templates_path = ['_templates']
@@ -49,25 +50,31 @@ autodoc_default_options = {
     'member-order': 'bysource',
     'special-members': '__init__',
     'undoc-members': True,
-    'exclude-members': '__weakref__'
+    'exclude-members': '__weakref__',
+    'inherited-members': False,
+    'show-inheritance': False
 }
 
 # Napoleon settings
-napoleon_google_docstring = True
-napoleon_numpy_docstring = True
-napoleon_include_init_with_doc = False
-napoleon_include_private_with_doc = False
-napoleon_include_special_with_doc = False
-napoleon_use_admonition_for_examples = False
-napoleon_use_admonition_for_notes = False
-napoleon_use_admonition_for_references = False
-napoleon_use_ivar = False
-napoleon_use_param = True
-napoleon_use_rtype = True
-napoleon_type_aliases = None
+# napoleon_google_docstring = False #True
+# napoleon_numpy_docstring = True
+# napoleon_include_init_with_doc = False
+# napoleon_include_private_with_doc = False
+# napoleon_include_special_with_doc = False
+# napoleon_use_admonition_for_examples = False
+# napoleon_use_admonition_for_notes = False
+# napoleon_use_admonition_for_references = False
+# napoleon_use_ivar = False
+# napoleon_use_param = True
+# napoleon_use_rtype = True
+# napoleon_type_aliases = None
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+
+add_module_names = False
+
+navigation_depth = 2
 
 html_theme = 'alabaster'
 html_static_path = ['_static']
@@ -97,10 +104,10 @@ html_context = {
     "default_mode": "auto",  # Default to light/dark mode based on user preference
 }
 
-html_static_path = ['_static']
 html_css_files = ['custom.css']  # Add custom styles (optional)
 
 
 # Mock load_plugin to avoid runtime errors
 sys.modules['RCAIDE.Framework.Plugins.load_plugin'] = Mock()
 
+autosectionlabel_prefix_document = False

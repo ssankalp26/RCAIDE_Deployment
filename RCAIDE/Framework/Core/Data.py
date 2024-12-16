@@ -310,23 +310,25 @@ class Data(dict):
         return args        
     
     def __init__(self,*args,**kwarg):
-        """ Initializes a new Data() class
+        """ :meta private:"""
+        # """ 
+        #     Initializes a new Data() class
     
-            Assumptions:
-            N/A
+        #     Assumptions:
+        #     N/A
     
-            Source:
-            N/A
+        #     Source:
+        #     N/A
     
-            Inputs:
-            N/A
+        #     Inputs:
+        #     N/A
     
-            Outputs:
-            N/A
+        #     Outputs:
+        #     N/A
     
-            Properties Used:
-            N/A    
-        """           
+        #     Properties Used:
+        #     N/A    
+        # """           
 
         # handle input data (ala class factory)
         input_data = Data.__base__(*args,**kwarg)
@@ -335,104 +337,109 @@ class Data(dict):
         self.update(input_data)    
 
     def __iter__(self):
-        """ Returns all the iterable values. Can be used in a for loop.
+        """ :meta private:"""
+        # """ Returns all the iterable values. Can be used in a for loop.
     
-            Assumptions:
-            N/A
+        #     Assumptions:
+        #     N/A
     
-            Source:
-            N/A
+        #     Source:
+        #     N/A
     
-            Inputs:
-            N/A
+        #     Inputs:
+        #     N/A
     
-            Outputs:
-            N/A
+        #     Outputs:
+        #     N/A
     
-            Properties Used:
-            N/A    
-        """           
+        #     Properties Used:
+        #     N/A    
+        # """           
         return iter(self.values())
     
     def itervalues(self):
-        """ Finds all the values that can be iterated over.
+        """ :meta private:"""
+        # """ Finds all the values that can be iterated over.
     
-            Assumptions:
-            N/A
+        #     Assumptions:
+        #     N/A
     
-            Source:
-            N/A
+        #     Source:
+        #     N/A
     
-            Inputs:
-            N/A
+        #     Inputs:
+        #     N/A
     
-            Outputs:
-            N/A
+        #     Outputs:
+        #     N/A
     
-            Properties Used:
-            N/A    
-        """             
+        #     Properties Used:
+        #     N/A    
+        # """             
         for k in super(Data,self).__iter__():
             yield self[k]   
     
     def values(self):
-        """ Returns all values inside the Data() class.
+        """ :meta private:"""
+        # """ Returns all values inside the Data() class.
     
-            Assumptions:
-            N/A
+        #     Assumptions:
+        #     N/A
     
-            Source:
-            N/A
+        #     Source:
+        #     N/A
     
-            Inputs:
-            N/A
+        #     Inputs:
+        #     N/A
     
-            Outputs:
-            values
+        #     Outputs:
+        #     values
     
-            Properties Used:
-            N/A    
-        """          
+        #     Properties Used:
+        #     N/A    
+        # """          
         return self.__values()          
             
     def __values(self):
-        """ Iterates over all keys to find all the data values.
+        """ :meta private:"""
+        #  Iterates over all keys to find all the data values.
     
-            Assumptions:
-            N/A
+        #     Assumptions:
+        #     N/A
     
-            Source:
-            N/A
+        #     Source:
+        #     N/A
     
-            Inputs:
-            N/A
+        #     Inputs:
+        #     N/A
     
-            Outputs:
-            values
+        #     Outputs:
+        #     values
     
-            Properties Used:
-            N/A    
-        """           
+        #     Properties Used:
+        #     N/A    
+        #            
         return [self[key] for key in super(Data,self).__iter__()]    
     
     def update(self,other):
-        """ Updates the internal values of a dictionary with given data
+        """ :meta private:"""
+        # """ Updates the internal values of a dictionary with given data
     
-            Assumptions:
-            N/A
+        #     Assumptions:
+        #     N/A
     
-            Source:
-            N/A
+        #     Source:
+        #     N/A
     
-            Inputs:
-            other
+        #     Inputs:
+        #     other
     
-            Outputs:
-            N/A
+        #     Outputs:
+        #     N/A
     
-            Properties Used:
-            N/A    
-        """           
+        #     Properties Used:
+        #     N/A    
+        # """           
         if not isinstance(other,dict):
             raise TypeError('input is not a dictionary type')
         for k,v in other.items():
