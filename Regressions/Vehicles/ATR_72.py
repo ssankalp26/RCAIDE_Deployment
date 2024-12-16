@@ -10,8 +10,7 @@
 # ---------------------------------------------------------------------------------------------------------------------- 
 # RCAIDE imports 
 import RCAIDE
-from RCAIDE.Framework.Core                                  import Units , Data    
-from RCAIDE.Library.Methods.Geometry.Planform               import wing_segmented_planform
+from RCAIDE.Framework.Core                                  import Units , Data     
 from RCAIDE.Library.Plots     import *     
 
 from   RCAIDE.Library.Methods.Propulsors.Turboprop_Propulsor   import design_turboprop

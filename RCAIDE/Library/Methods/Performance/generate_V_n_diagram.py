@@ -1,5 +1,5 @@
 ## @ingroup Methods-Performance
-# V_n_diagram.py
+# generate_V_n_diagram.py
 #
 # Created:  Nov 2018, S. Karpuk
 # Modified:
@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 # ----------------------------------------------------------------------
 
 ## @ingroup Methods-Performance
-def V_n_diagram(vehicle,analyses,weight,altitude,delta_ISA):
+def generate_V_n_diagram(vehicle,analyses,weight,altitude,delta_ISA):
     
     """ Computes a V-n diagram for a given aircraft and given regulations for ISA conditions
 
@@ -80,9 +80,7 @@ def V_n_diagram(vehicle,analyses,weight,altitude,delta_ISA):
 
     for wing in vehicle.wings: 
         reference_area  = vehicle.reference_area 
-        Cmac            = wing.chords.mean_aerodynamic
-
-    for envelope in vehicle:
+        Cmac            = wing.chords.mean_aerodynamic 
         pos_limit_load  = vehicle.flight_envelope.limit_loads.positive
         neg_limit_load  = vehicle.flight_envelope.limit_loads.negative
 
