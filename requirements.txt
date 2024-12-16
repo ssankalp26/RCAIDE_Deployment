@@ -27,4 +27,3 @@ sphinx
 sphinx-rtd-theme
 sphinx-autobuild
 sphinx-autoapi
-sphinx pydata-sphinx-theme
