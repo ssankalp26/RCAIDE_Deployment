@@ -105,3 +105,5 @@ html_css_files = ['custom.css']  # Add custom styles (optional)
 # Mock load_plugin to avoid runtime errors
 sys.modules['RCAIDE.Framework.Plugins.load_plugin'] = Mock()
 
+use_opensearch = 'https://docs.rcaide.leadsresearchgroup.com'
+
