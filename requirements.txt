@@ -23,7 +23,3 @@ tenacity
 threadpoolctl
 tzdata
 zipp
-sphinx
-sphinx-rtd-theme
-sphinx-autobuild
-sphinx-autoapi
