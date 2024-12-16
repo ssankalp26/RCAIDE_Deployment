@@ -74,11 +74,12 @@ html_static_path = ['_static']
 html_theme = 'pydata_sphinx_theme'
 
 html_theme_options = {
-    "github_url": "https://github.com/your-repo",  # Replace with your GitHub repo
-    "twitter_url": "https://twitter.com/your-handle",  # Replace with your Twitter handle (optional)
-    "navbar_end": ["search-field.html", "theme-switcher"],  # Add a theme switcher
-    "show_toc_level": 2,  # Control levels of table of contents
+    "github_url": "https://github.com/LEADS-BUP/RCAIDE",  # Update with your actual repo
+    "navbar_end": ["search-field.html", "theme-switcher"],
+    "show_toc_level": 2,
 }
+
+html_baseurl = "https://docs.rcaide.leadsresearchgroup.com"
 
 html_context = {
     "default_mode": "auto",  # Default to light/dark mode based on user preference
