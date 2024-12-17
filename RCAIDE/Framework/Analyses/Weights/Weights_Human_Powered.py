@@ -64,7 +64,7 @@ class Weights_Human_Powered(Weights):
         results = RCAIDE.Library.Methods.Weights.Correlation_Buildups.UAV.compute_operating_empty_weight(vehicle)
 
         # storing weigth breakdown into vehicle
-        vehicle.weight_breakdown = results
+        vehicle.mass_properties.weight_breakdown = results
 
         # updating empty weight
         vehicle.mass_properties.operating_empty = results.empty.total
