@@ -2,6 +2,14 @@
   <img src="https://github.com/leadsgroup/RCAIDE_Website/blob/main/assets/img/RCAIDE_Logo_No_Background.png" width=25% height=25%> 
 </p> 
 
+# 
+<div align="center">
+  
+[![Build status](https://ci.appveyor.com/api/projects/status/17mgaohuuexb301j?svg=true)](https://ci.appveyor.com/project/mclarke2/rcaide-leads)
+[![Coverage Status](https://coveralls.io/repos/github/leadsgroup/RCAIDE/badge.svg?branch=develop)](https://coveralls.io/github/leadsgroup/RCAIDE?branch=develop)
+
+</div>
+
 [RCAIDE: Research Community Aircraft Interdisciplinary Design Environment]([link](https://www.rcaide.leadsresearchgroup.com/))
 =======
 
@@ -74,8 +82,8 @@ RCAIDE is available on GNU/Linux, MacOS and Windows. We strongly recommend insta
 * Using pip (coming soon) 
 * Using conda (coming soon) 
 
-## Tutorials RCAIDE 
-(coming soon) 
+## Tutorials
+[See Tutorials here](https://docs.rcaide.leadsresearchgroup.com/tutorials.html)
 
 ## 📑 Citing RCAIDE
 (coming soon) 
@@ -102,7 +110,7 @@ Submit improvements or new features with a [pull request](https://github.com/lea
 
 ## 📫 Get in touch
 
-Share feedback, report issues, and request features via or [Github Issues](link)
+Share feedback, report issues, and request features via or [Github Issues](https://github.com/leadsgroup/RCAIDE_LEADS/issues)
 
 Engage with peers and maintainers in [Discussions](https://github.com/leadsgroup/RCAIDE_LEADS/discussions)
 
