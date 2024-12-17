@@ -67,6 +67,6 @@ Key Features
    
    install
    quick_start
-   contributing
+   tutorials
    api
    modules

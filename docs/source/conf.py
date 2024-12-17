@@ -74,15 +74,34 @@ html_static_path = ['_static']
 html_theme = 'pydata_sphinx_theme'
 
 html_theme_options = {
-    "github_url": "https://github.com/LEADS-BUP/RCAIDE",  # Update with your actual repo
-    "navbar_end": ["search-field.html", "theme-switcher"],
-    "show_toc_level": 2,
+    "navbar_start": ["navbar-logo"],
+    "navbar_center": ["navbar-nav"],
+    "navbar_end": ["navbar-icon-links"],
+    "navbar_persistent": ["search-button"],
+    "primary_sidebar_end": ["sidebar-ethical-ads"],
+    "navigation_with_keys": False,
+    "navbar_align": "left",
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/RCAIDE/RCAIDE",
+            "icon": "fab fa-github-square",
+            "type": "fontawesome",
+        }
+    ],
+    "navigation_depth": 2,
 }
 
 html_baseurl = "https://docs.rcaide.leadsresearchgroup.com"
 
 html_context = {
-    "default_mode": "auto",  # Default to light/dark mode based on user preference
+    "default_mode": "light",
+    "header_links": [
+        ("Home", "index"),
+        ("Tutorials", "tutorials"),
+        ("API", "api"),
+        ("GitHub", "https://github.com/RCAIDE/RCAIDE", True),
+    ]
 }
 
 html_theme = 'pydata_sphinx_theme'
