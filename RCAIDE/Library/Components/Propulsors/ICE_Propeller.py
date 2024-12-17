@@ -27,8 +27,8 @@ class ICE_Propeller(Propulsor):
     tag : str
         Identifier for the propulsion system, defaults to 'ice_propeller'
     
-    active_fuel_tanks : None or list
-        Collection of fuel tanks connected to the engine
+    active_fuel_tanks : list
+        List with names of active fuel tanks. Default is None.
         
     engine : None or Engine
         The internal combustion engine component
@@ -50,9 +50,11 @@ class ICE_Propeller(Propulsor):
     - Lower cost and maintenance requirements
     
     **Definitions**
+
     'Fixed-Pitch Propeller'
         A propeller with blades set at a fixed angle, optimized for 
         a specific flight regime (typically cruise)
+    
     'Blade Angle'
         The angle between the blade's chord line and the plane of rotation,
         measured at a specific radial station

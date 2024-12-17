@@ -41,9 +41,11 @@ class Propulsor(Component):
     their own performance calculation methods and system-specific attributes.
     
     **Definitions**
+
     'Propulsor'
         Any device that generates thrust or lift force through the manipulation 
         of fluid momentum (air in most cases)
+    
     'Wing-mounted'
         Configuration where the propulsor is attached to the aircraft's wing 
         rather than the fuselage or other structures
