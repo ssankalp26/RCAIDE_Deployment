@@ -23,8 +23,8 @@ class Constant_Speed_ICE_Propeller(Propulsor):
     tag : str
         Identifier for the propulsion system, defaults to 'ice_constant_speed_propeller'
     
-    active_fuel_tanks : None or list
-        Collection of fuel tanks connected to the engine
+    active_fuel_tanks : list
+        List with names of active fuel tanks. Default is None.
         
     engine : None or Engine
         The internal combustion engine component
@@ -39,9 +39,11 @@ class Constant_Speed_ICE_Propeller(Propulsor):
     by adjusting blade pitch.
     
     **Definitions**
+
     'Constant-Speed Propeller'
         A propeller that maintains a constant rotational speed by automatically 
         adjusting blade pitch to match power requirements
+
     'Governor'
         Mechanical or electronic device that controls propeller pitch to maintain 
         desired RPM

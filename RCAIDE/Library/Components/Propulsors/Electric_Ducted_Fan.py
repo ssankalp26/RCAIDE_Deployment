@@ -48,9 +48,11 @@ class Electric_Ducted_Fan(Propulsor):
     - Improved safety through shrouding
     
     **Definitions**
+
     'Ducted Fan'
         A propulsion device consisting of a fan enclosed within a duct/shroud 
         that improves thrust efficiency
+    
     'Electronic Speed Controller (ESC)'
         Device that controls the speed of the electric motor by regulating 
         power delivery based on input commands

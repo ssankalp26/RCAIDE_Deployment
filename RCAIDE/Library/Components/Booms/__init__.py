@@ -1,20 +1,10 @@
 # RCAIDE/Library/Components/Booms/__init__.py
 # 
 
-"""Boom class"""
-# ==============================================
-# Booms (:mod:`RCAIDE.Library.Components.Booms`)
-# ==============================================
-
-# This module contains the boom class for RCAIDE.
-
-# Classes
-# -------
-
-#    :toctree: generated/
-   
-#    Boom    -- Base class for aircraft boom components
-
+"""
+RCAIDE Package Setup for Boom Components. This module initializes the boom components package, providing access to structural 
+boom elements used in aircraft and rotorcraft design.
+"""
 
 # ----------------------------------------------------------------------------------------------------------------------
 #  IMPORT

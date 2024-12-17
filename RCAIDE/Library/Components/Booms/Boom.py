@@ -14,120 +14,124 @@ from RCAIDE.Framework.Core     import Data, Container
 #  BOOM
 # ----------------------------------------------------------------------------------------------------------------------  
 class Boom(Component):
-    """This is a standard boom for a rotor. 
+    """
+    A structural boom component model for aircraft and rotorcraft applications.
 
     Attributes
     ----------
     tag : str
-        Identifier for the boom component, defaults to 'boom'.
+        Identifier for the boom component. Default is 'boom'.
 
     origin : list
-        3D coordinates of the boom origin, default [[0.0,0.0,0.0]].
+        3D coordinates of the boom origin [m]. Default is [[0.0,0.0,0.0]].
 
     aerodynamic_center : list
-        3D coordinates of the aerodynamic center, default [0.0,0.0,0.0].
+        3D coordinates of the aerodynamic center [m]. Default is [0.0,0.0,0.0].
 
     areas : Data
-        Collection of area measurements.
+        Collection of area measurements
 
-        front_projected : float
-            Front projected area.
-
-        side_projected : float
-            Side projected area.
-
-        wetted : float
-            Wetted area of the boom.
+        - front_projected : float
+            Front projected area [m²]. Default is 0.0.
+        - side_projected : float
+            Side projected area [m²]. Default is 0.0.
+        - wetted : float
+            Wetted area of the boom [m²]. Default is 0.0.
 
     effective_diameter : float
-        Effective diameter of the boom.
+        Effective diameter of the boom [m]. Default is 0.0.
 
     width : float
-        Width of the boom.
+        Width of the boom [m]. Default is 0.0.
 
     heights : Data
-        Collection of height measurements.
+        Collection of height measurements
 
-        maximum : float
-            Maximum height of the boom.
-
-        at_quarter_length : float
-            Height at 25% of boom length.
-
-        at_three_quarters_length : float
-            Height at 75% of boom length.
-
-        at_wing_root_quarter_chord : float
-            Height at wing root quarter chord.
-
-        at_vertical_root_quarter_chord : float
-            Height at vertical root quarter chord.
+        - maximum : float
+            Maximum height of the boom [m]. Default is 0.0.
+        - at_quarter_length : float
+            Height at 25% of boom length [m]. Default is 0.0.
+        - at_three_quarters_length : float
+            Height at 75% of boom length [m]. Default is 0.0.
+        - at_wing_root_quarter_chord : float
+            Height at wing root quarter chord [m]. Default is 0.0.
+        - at_vertical_root_quarter_chord : float
+            Height at vertical root quarter chord [m]. Default is 0.0.
 
     x_rotation : float
-        Rotation angle around x-axis.
+        Rotation angle around x-axis [rad]. Default is 0.0.
 
     y_rotation : float
-        Rotation angle around y-axis.
+        Rotation angle around y-axis [rad]. Default is 0.0.
 
     z_rotation : float
-        Rotation angle around z-axis.
+        Rotation angle around z-axis [rad]. Default is 0.0.
 
     lengths : Data
-        Collection of length measurements.
+        Collection of length measurements
 
-        nose : float
-            Length of the nose section.
-
-        total : float
-            Total length of the boom.
-
-        cabin : float
-            Length of the cabin section.
-
-        fore_space : float
-            Length of space in front.
-
-        aft_space : float
-            Length of space in rear.
+        - nose : float
+            Length of the nose section [m]. Default is 0.0.
+        - total : float
+            Total length of the boom [m]. Default is 0.0.
+        - cabin : float
+            Length of the cabin section [m]. Default is 0.0.
+        - fore_space : float
+            Length of space in front [m]. Default is 0.0.
+        - aft_space : float
+            Length of space in rear [m]. Default is 0.0.
 
     fineness : Data
-        Fineness ratios.
+        Fineness ratios
 
-        nose : float
-            Fineness ratio of nose.
-
-        tail : float
-            Fineness ratio of tail.
+        - nose : float
+            Fineness ratio of nose. Default is 0.0.
+        - tail : float
+            Fineness ratio of tail. Default is 0.0.
 
     differential_pressure : float
-        Pressure differential across the boom.
+        Pressure differential across the boom [Pa]. Default is 0.0.
 
     vsp_data : Data
-        Vehicle Sketch Pad related data.
+        Vehicle Sketch Pad related data
 
-        xsec_surf_id : str
-            VSP cross-section surface identifier.
+        - xsec_surf_id : str
+            VSP cross-section surface identifier. Default is ''.
+        - xsec_num : int
+            Number of cross-sections in boom geometry. Default is None.
 
-        xsec_num : int
-            Number of cross-sections in rotor boom geometry.
     Segments : Container
-        Container for boom segments.
-
-    Returns
-    -------
-    None
+        Container for boom segments. Default is empty container.
 
     Notes
     -----
-        The boom component is primarily used in rotor-based aircraft configurations
-        and serves as a structural element for mounting rotors and other components.
+    The Boom class provides a comprehensive framework for modeling structural
+    booms in aircraft and rotorcraft, including:
 
-        **Assumptions:**
-            None
+    * Geometric definition
+    * Cross-sectional properties
+    * Aerodynamic characteristics
+    * Structural interfaces
+    * VSP integration
+    * Segmentation capabilities
 
-        **Source:**
-            None    
+    **Major Assumptions**
 
+    * Rigid structure
+    * Linear elastic material behavior
+    * Small deflections
+    * Quasi-steady aerodynamics
+    * Uniform material properties
+    * No thermal effects
+
+    **Definitions**
+
+    'Fineness Ratio'
+        Ratio of length to maximum diameter
+    'Wetted Area'
+        Total surface area exposed to airflow
+    'Differential Pressure'
+        Pressure difference between inside and outside of boom
     """
     
     def __defaults__(self):

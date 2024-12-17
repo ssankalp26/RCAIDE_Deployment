@@ -53,9 +53,11 @@ class Electric_Rotor(Propulsor):
     - Hybrid helicopters
     
     **Definitions**
+
     'Rotor'
         A rotating assembly of airfoils (blades) that generates lift and thrust 
         through aerodynamic forces
+        
     'Electronic Speed Controller (ESC)'
         Device that controls the speed of the electric motor by regulating 
         power delivery based on input commands
