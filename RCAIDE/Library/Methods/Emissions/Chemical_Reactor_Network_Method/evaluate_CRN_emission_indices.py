@@ -55,7 +55,7 @@ def evaluate_CRN_emission_indices_no_surrogate(segment,settings,vehicle):
     -------
         Updates segment.state.conditions.emissions with:
         
-        - total : Data
+        total : Data
             Total emissions over segment
 
             - CO2 : float
@@ -64,7 +64,7 @@ def evaluate_CRN_emission_indices_no_surrogate(segment,settings,vehicle):
                 Total H2O emissions [kg]
             - NOx : float
                 Total NOx emissions [kg]
-        - index : Data
+        index : Data
             Emission indices
 
             - CO2 : ndarray
