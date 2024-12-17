@@ -71,10 +71,10 @@ RCAIDE currently possesses the ability to perform the following analyses, each a
     * Propeller analysis 
     * Takeoff Field Length Estimation
 * Weights Analysis
-    * Operating Empty Weight, Zero Fuel Weight estimation
+    * Operating empty weight, zero-fuel weight estimation
     * Component weight estimation 
-    * Center of Gravity estimation
-    * Moment of Intertia estimation 
+    * Center of gravity estimation
+    * Moment of intertia estimation 
 
   
 
