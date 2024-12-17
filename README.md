@@ -13,13 +13,13 @@
 [RCAIDE: Research Community Aircraft Interdisciplinary Design Environment]([link](https://www.rcaide.leadsresearchgroup.com/))
 =======
 
-The Research Community Aircraft Interdisciplinary Design Environment, or RCAIDE  (pronounced “arcade”) is a powerful open-source Python platform that revolutionizes aircraft design and analysis. From commercial airliners to UAVs and next-generation hybrid-electric aircraft, RCAIDE provides comprehensive multi-disciplinary analysis tools backed by validated engineering methods. Our streamlined workflow and modular architecture help aerospace engineers and researchers accelerate development cycles and explore innovative designs with confidence. RCAIDE-LEADS is a form from RCAIDE, developed and maintained by the [Lab for Electric Aircraft Design and Sustainability](https://www.leadsresearchgroup.com/)
+The Research Community Aircraft Interdisciplinary Design Environment, or RCAIDE  (pronounced “arcade”) is a powerful open-source Python platform that revolutionizes aircraft design and analysis. From commercial airliners to UAVs and next-generation hybrid-electric aircraft, RCAIDE provides comprehensive multi-disciplinary analysis tools backed by validated engineering methods. Our streamlined workflow and modular architecture help aerospace engineers and researchers accelerate development cycles and explore innovative designs with confidence. RCAIDE-LEADS is a fork of the main repository RCAIDE, developed and maintained by Aerospace Research Community, LLC. RCAIDE-LEADS is developed and maintained by the [Lab for Electric Aircraft Design and Sustainability](https://www.leadsresearchgroup.com/)
  
-## Transinitign from SUAVE Legacy 
-RCAIDE was built to allow users to transition their work to smoothly from SUAVE to RCAIDE. The organization of RCAIDE’s code structure was done such that a SUAVE user can understand it, but breaks free of some of the antiquated nomenclature. To maintain backwards compatibility for the first release, a frozen version of SUAVE is packaged as a library. This enables users to access the deprecated SUAVE features as RCAIDE’s abilities grow.
+## Transitioning from SUAVE 
+RCAIDE is the sucessor to [SUAVE](https://suave.stanford.edu/). RCAIDE was built to allow users to transition their work to smoothly from SUAVE to RCAIDE. RCAIDE’s code structure was architected so that a SUAVE user could understand it but break free of some of the antiquated nomenclature. To maintain backward compatibility for the first release, a frozen version of SUAVE is packaged as a library. This enables users to access the deprecated SUAVE features as RCAIDE’s abilities grow.
  
 ## Code Architecture 
-The code is arranged into repositories that house native data structures, functions, components, and subroutines for discipline analyses and support number-crunching operations. This allows for intuitive navigation by developers or avid users seeking to modify the source code. Solely written in Python, an RCAIDE installation
+The code is arranged into repositories that house native data structures, functions, components, and subroutines for discipline analyses and support number-crunching operations. This allows developers or avid users seeking to modify the source code to navigate intuitively. Solely written in Python, an RCAIDE installation
 appears in one repository that is itself organized into two secondary-level repositories: 
 * **RCAIDE** sub-directory, where their source code resides
 * **Regressions** sub-directory, where unit tests for verification and validation are performed.
@@ -85,10 +85,10 @@ RCAIDE is available on GNU/Linux, MacOS and Windows. We strongly recommend insta
 ## Tutorials
 [See Tutorials here](https://docs.rcaide.leadsresearchgroup.com/tutorials.html)
 
-## 📑 Citing RCAIDE
+## Citing RCAIDE
 (coming soon) 
 
-## 🛠️ Contributing to RCAIDE
+## Contributing to RCAIDE
 **Contributing Institutions** 
 * Aerospace Research Community, LLC
 * [University of Illinois Lab for Electric Aircraft Design and Sustainability](https://www.leadsresearchgroup.com/)
@@ -108,7 +108,7 @@ If you'd like to help us develop RCAIDE by adding new methods, writing documenta
 
 Submit improvements or new features with a [pull request](https://github.com/leadsgroup/RCAIDE_LEADS/pulls)
 
-## 📫 Get in touch
+## Get in touch
 
 Share feedback, report issues, and request features via or [Github Issues](https://github.com/leadsgroup/RCAIDE_LEADS/issues)
 
