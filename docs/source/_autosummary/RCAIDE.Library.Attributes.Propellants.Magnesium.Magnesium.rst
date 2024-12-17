@@ -1,11 +1,10 @@
-RCAIDE.Library.Attributes.Propellants.Magnesium.Magnesium
+﻿RCAIDE.Library.Attributes.Propellants.Magnesium.Magnesium
 =========================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Magnesium
 
 .. autoclass:: Magnesium
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__

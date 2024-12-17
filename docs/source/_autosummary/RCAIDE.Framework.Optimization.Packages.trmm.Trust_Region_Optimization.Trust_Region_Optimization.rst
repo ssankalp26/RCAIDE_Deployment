@@ -1,11 +1,10 @@
-RCAIDE.Framework.Optimization.Packages.trmm.Trust\_Region\_Optimization.Trust\_Region\_Optimization
+﻿RCAIDE.Framework.Optimization.Packages.trmm.Trust\_Region\_Optimization.Trust\_Region\_Optimization
 ===================================================================================================
 
 .. currentmodule:: RCAIDE.Framework.Optimization.Packages.trmm.Trust_Region_Optimization
 
 .. autoclass:: Trust_Region_Optimization
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__

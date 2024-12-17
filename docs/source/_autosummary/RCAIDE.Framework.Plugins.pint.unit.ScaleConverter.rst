@@ -1,11 +1,10 @@
-RCAIDE.Framework.Plugins.pint.unit.ScaleConverter
+﻿RCAIDE.Framework.Plugins.pint.unit.ScaleConverter
 =================================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.unit
 
 .. autoclass:: ScaleConverter
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Plugins.pint.unit.ScaleConverter
 
    .. autosummary::
    
+      ~ScaleConverter.__init__
       ~ScaleConverter.from_reference
       ~ScaleConverter.to_reference
    

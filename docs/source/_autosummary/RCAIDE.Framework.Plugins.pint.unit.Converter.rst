@@ -1,11 +1,10 @@
-RCAIDE.Framework.Plugins.pint.unit.Converter
+﻿RCAIDE.Framework.Plugins.pint.unit.Converter
 ============================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.unit
 
 .. autoclass:: Converter
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__

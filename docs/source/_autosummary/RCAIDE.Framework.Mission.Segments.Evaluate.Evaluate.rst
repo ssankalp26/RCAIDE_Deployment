@@ -1,11 +1,10 @@
-RCAIDE.Framework.Mission.Segments.Evaluate.Evaluate
+﻿RCAIDE.Framework.Mission.Segments.Evaluate.Evaluate
 ===================================================
 
 .. currentmodule:: RCAIDE.Framework.Mission.Segments.Evaluate
 
 .. autoclass:: Evaluate
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__

@@ -1,11 +1,10 @@
-RCAIDE.Framework.Plugins.pint.measurement.Measurement
+﻿RCAIDE.Framework.Plugins.pint.measurement.Measurement
 =====================================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.measurement
 
 .. autoclass:: Measurement
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Plugins.pint.measurement.Measurement
 
    .. autosummary::
    
+      ~Measurement.__init__
    
    
 

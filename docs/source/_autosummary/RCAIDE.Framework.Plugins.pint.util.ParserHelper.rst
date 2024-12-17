@@ -1,11 +1,10 @@
-RCAIDE.Framework.Plugins.pint.util.ParserHelper
+﻿RCAIDE.Framework.Plugins.pint.util.ParserHelper
 ===============================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.util
 
 .. autoclass:: ParserHelper
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Plugins.pint.util.ParserHelper
 
    .. autosummary::
    
+      ~ParserHelper.__init__
       ~ParserHelper.add
       ~ParserHelper.from_string
       ~ParserHelper.from_word

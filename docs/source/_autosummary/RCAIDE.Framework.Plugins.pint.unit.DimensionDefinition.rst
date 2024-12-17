@@ -1,11 +1,10 @@
-RCAIDE.Framework.Plugins.pint.unit.DimensionDefinition
+﻿RCAIDE.Framework.Plugins.pint.unit.DimensionDefinition
 ======================================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.unit
 
 .. autoclass:: DimensionDefinition
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Plugins.pint.unit.DimensionDefinition
 
    .. autosummary::
    
+      ~DimensionDefinition.__init__
    
    
 

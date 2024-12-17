@@ -1,11 +1,10 @@
-RCAIDE.Framework.Plugins.pint.context.Context
+﻿RCAIDE.Framework.Plugins.pint.context.Context
 =============================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.context
 
 .. autoclass:: Context
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Plugins.pint.context.Context
 
    .. autosummary::
    
+      ~Context.__init__
       ~Context.add_transformation
       ~Context.from_context
       ~Context.from_lines

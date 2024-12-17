@@ -3,8 +3,7 @@
 .. currentmodule:: {{ module }}
 
 .. autoclass:: {{ objname }}
-   :members:
-   :show-inheritance:
+   :members: 
 
    {% block methods %}
    .. automethod:: __init__
@@ -14,7 +13,7 @@
 
    .. autosummary::
    {% for item in methods %}
-   {%- if item not in inherited_members and item != "__init__" %}
+   {%- if item not in inherited_members %}
       ~{{ name }}.{{ item }}
    {%- endif %}
    {%- endfor %}

@@ -1,11 +1,10 @@
-RCAIDE.Library.Attributes.Propellants.Nickel.Nickel
+﻿RCAIDE.Library.Attributes.Propellants.Nickel.Nickel
 ===================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Nickel
 
 .. autoclass:: Nickel
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__

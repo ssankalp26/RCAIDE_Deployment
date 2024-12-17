@@ -1,11 +1,10 @@
-RCAIDE.Framework.Plugins.pint.unit.PrefixDefinition
+﻿RCAIDE.Framework.Plugins.pint.unit.PrefixDefinition
 ===================================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.unit
 
 .. autoclass:: PrefixDefinition
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Plugins.pint.unit.PrefixDefinition
 
    .. autosummary::
    
+      ~PrefixDefinition.__init__
    
    
 

@@ -1,11 +1,10 @@
-RCAIDE.Framework.Plugins.pint.compat.ChainMap
+﻿RCAIDE.Framework.Plugins.pint.compat.ChainMap
 =============================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.compat
 
 .. autoclass:: ChainMap
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Plugins.pint.compat.ChainMap
 
    .. autosummary::
    
+      ~ChainMap.__init__
       ~ChainMap.clear
       ~ChainMap.copy
       ~ChainMap.fromkeys

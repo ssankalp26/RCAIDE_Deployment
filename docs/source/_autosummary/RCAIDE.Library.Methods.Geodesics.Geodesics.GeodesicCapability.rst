@@ -1,11 +1,10 @@
-RCAIDE.Library.Methods.Geodesics.Geodesics.GeodesicCapability
+﻿RCAIDE.Library.Methods.Geodesics.Geodesics.GeodesicCapability
 =============================================================
 
 .. currentmodule:: RCAIDE.Library.Methods.Geodesics.Geodesics
 
 .. autoclass:: GeodesicCapability
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__

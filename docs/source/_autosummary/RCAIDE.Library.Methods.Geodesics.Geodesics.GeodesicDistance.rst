@@ -1,11 +1,10 @@
-RCAIDE.Library.Methods.Geodesics.Geodesics.GeodesicDistance
+﻿RCAIDE.Library.Methods.Geodesics.Geodesics.GeodesicDistance
 ===========================================================
 
 .. currentmodule:: RCAIDE.Library.Methods.Geodesics.Geodesics
 
 .. autoclass:: GeodesicDistance
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Library.Methods.Geodesics.Geodesics.GeodesicDistance
 
    .. autosummary::
    
+      ~GeodesicDistance.__init__
       ~GeodesicDistance.measure
       ~GeodesicDistance.set_ellipsoid
    

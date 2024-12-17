@@ -1,11 +1,10 @@
-RCAIDE.Library.Methods.Geodesics.Geodesics.Geodesic
+﻿RCAIDE.Library.Methods.Geodesics.Geodesics.Geodesic
 ===================================================
 
 .. currentmodule:: RCAIDE.Library.Methods.Geodesics.Geodesics
 
 .. autoclass:: Geodesic
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -23,6 +22,7 @@ RCAIDE.Library.Methods.Geodesics.Geodesics.Geodesic
       ~Geodesic.InverseLine
       ~Geodesic.Line
       ~Geodesic.Polygon
+      ~Geodesic.__init__
    
    
 

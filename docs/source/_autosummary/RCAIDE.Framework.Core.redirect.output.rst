@@ -1,11 +1,10 @@
-RCAIDE.Framework.Core.redirect.output
+﻿RCAIDE.Framework.Core.redirect.output
 =====================================
 
 .. currentmodule:: RCAIDE.Framework.Core.redirect
 
 .. autoclass:: output
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Core.redirect.output
 
    .. autosummary::
    
+      ~output.__init__
    
    
 

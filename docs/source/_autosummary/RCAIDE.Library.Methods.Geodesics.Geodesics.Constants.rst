@@ -1,11 +1,10 @@
-RCAIDE.Library.Methods.Geodesics.Geodesics.Constants
+﻿RCAIDE.Library.Methods.Geodesics.Geodesics.Constants
 ====================================================
 
 .. currentmodule:: RCAIDE.Library.Methods.Geodesics.Geodesics
 
 .. autoclass:: Constants
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__

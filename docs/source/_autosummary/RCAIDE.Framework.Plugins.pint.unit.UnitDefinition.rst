@@ -1,11 +1,10 @@
-RCAIDE.Framework.Plugins.pint.unit.UnitDefinition
+﻿RCAIDE.Framework.Plugins.pint.unit.UnitDefinition
 =================================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.unit
 
 .. autoclass:: UnitDefinition
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Plugins.pint.unit.UnitDefinition
 
    .. autosummary::
    
+      ~UnitDefinition.__init__
    
    
 

@@ -1,11 +1,10 @@
-RCAIDE.Framework.Plugins.pint.unit.UnitRegistry
+﻿RCAIDE.Framework.Plugins.pint.unit.UnitRegistry
 ===============================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.unit
 
 .. autoclass:: UnitRegistry
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Plugins.pint.unit.UnitRegistry
 
    .. autosummary::
    
+      ~UnitRegistry.__init__
       ~UnitRegistry.add_context
       ~UnitRegistry.context
       ~UnitRegistry.convert

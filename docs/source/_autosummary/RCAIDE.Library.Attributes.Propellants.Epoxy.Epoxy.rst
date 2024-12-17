@@ -1,11 +1,10 @@
-RCAIDE.Library.Attributes.Propellants.Epoxy.Epoxy
+﻿RCAIDE.Library.Attributes.Propellants.Epoxy.Epoxy
 =================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Epoxy
 
 .. autoclass:: Epoxy
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__

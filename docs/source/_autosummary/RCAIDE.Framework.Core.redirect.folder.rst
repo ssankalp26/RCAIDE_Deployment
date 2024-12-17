@@ -1,11 +1,10 @@
-RCAIDE.Framework.Core.redirect.folder
+﻿RCAIDE.Framework.Core.redirect.folder
 =====================================
 
 .. currentmodule:: RCAIDE.Framework.Core.redirect
 
 .. autoclass:: folder
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Core.redirect.folder
 
    .. autosummary::
    
+      ~folder.__init__
    
    
 

@@ -1,11 +1,10 @@
-RCAIDE.Library.Methods.Geodesics.Geodesics.Geodesic\_Calculate
+﻿RCAIDE.Library.Methods.Geodesics.Geodesics.Geodesic\_Calculate
 ==============================================================
 
 .. currentmodule:: RCAIDE.Library.Methods.Geodesics.Geodesics
 
 .. autoclass:: Geodesic_Calculate
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Library.Methods.Geodesics.Geodesics.Geodesic\_Calculate
 
    .. autosummary::
    
+      ~Geodesic_Calculate.__init__
       ~Geodesic_Calculate.measure
       ~Geodesic_Calculate.set_ellipsoid
    

@@ -1,11 +1,10 @@
-RCAIDE.Library.Attributes.Propellants.Paint.Paint
+﻿RCAIDE.Library.Attributes.Propellants.Paint.Paint
 =================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Paint
 
 .. autoclass:: Paint
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__

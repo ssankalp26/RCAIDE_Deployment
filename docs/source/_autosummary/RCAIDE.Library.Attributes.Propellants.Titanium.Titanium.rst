@@ -1,11 +1,10 @@
-RCAIDE.Library.Attributes.Propellants.Titanium.Titanium
+﻿RCAIDE.Library.Attributes.Propellants.Titanium.Titanium
 =======================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Titanium
 
 .. autoclass:: Titanium
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__

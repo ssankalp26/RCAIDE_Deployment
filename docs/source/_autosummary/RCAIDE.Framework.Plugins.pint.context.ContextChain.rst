@@ -1,11 +1,10 @@
-RCAIDE.Framework.Plugins.pint.context.ContextChain
+﻿RCAIDE.Framework.Plugins.pint.context.ContextChain
 ==================================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.context
 
 .. autoclass:: ContextChain
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@ RCAIDE.Framework.Plugins.pint.context.ContextChain
 
    .. autosummary::
    
+      ~ContextChain.__init__
       ~ContextChain.insert_contexts
       ~ContextChain.remove_contexts
       ~ContextChain.transform

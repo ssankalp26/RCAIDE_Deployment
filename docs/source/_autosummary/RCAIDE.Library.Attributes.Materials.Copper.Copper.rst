@@ -1,11 +1,10 @@
-RCAIDE.Library.Attributes.Materials.Copper.Copper
+﻿RCAIDE.Library.Attributes.Materials.Copper.Copper
 =================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Materials.Copper
 
 .. autoclass:: Copper
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__

@@ -4,8 +4,7 @@
 .. currentmodule:: RCAIDE.Library.Methods.Geodesics.Geodesics
 
 .. autoclass:: distance
-   :members:
-   :show-inheritance:
+   :members: 
 
    
    .. automethod:: __init__
@@ -15,6 +14,7 @@
 
    .. autosummary::
    
+      ~distance.__init__
       ~distance.measure
       ~distance.set_ellipsoid
    
