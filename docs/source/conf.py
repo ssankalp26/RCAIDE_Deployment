@@ -91,7 +91,6 @@ html_theme_options = {
     "show_toc_level": 2,
     "navigation_depth": 3,
     'logo_only': True,
-    'display_version': False,
     "icon_links": [
         {
             "name": "GitHub",
@@ -103,12 +102,14 @@ html_theme_options = {
     # Add these logo-related options
     "logo": {
         "image_dark": "_static/leads_logo.png",  
+        "image_light": "_static/leads_logo.png",
+        "image_dark_alt": "_static/leads_logo.png",
+        "image_light_alt": "_static/leads_logo.png",
         "text": "RCAIDE",  # Optional: text to appear next to the logo
     },
     "default_mode": "light",
     "switcher": {
         "json_url": "_static/switcher.json",
-        "version_match": "v1.0.0",
     },
 }
 
