@@ -1,8 +1,3 @@
-.. _section1:
-
-Section 1 - Mission Simulation
-==============================
-
 Tutorial 1 - How to Run a Model
 -------------------------------
 .. raw:: html
@@ -13,3 +8,4 @@ Tutorial 1 - How to Run a Model
 
 Alternatively, you can embed it here:
 .. notebook:: https://raw.githubusercontent.com/leadsgroup/RCAIDE_TUTORIALS/main/Mission_Simulation/tutorial_1.ipynb
+

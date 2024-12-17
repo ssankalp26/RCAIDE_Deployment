@@ -81,7 +81,7 @@ html_theme = 'pydata_sphinx_theme'
 html_theme_options = {
     "navbar_start": ["navbar-logo"],
     "navbar_center": ["navbar-nav"],
-    "navbar_end": ["navbar-icon-links"],
+    "navbar_end": ["theme-switcher", "navbar-icon-links"],
     "navbar_persistent": ["search-button"],
     "primary_sidebar_end": ["sidebar-ethical-ads"],
     "navigation_with_keys": False,
@@ -102,6 +102,11 @@ html_theme_options = {
     "logo": {
         "image_dark": "_static/leads_logo.png",  
         "text": "RCAIDE",  # Optional: text to appear next to the logo
+    },
+    "default_mode": "light",
+    "switcher": {
+        "json_url": "_static/switcher.json",
+        "version_match": "v1.0.0",
     },
 }
 
