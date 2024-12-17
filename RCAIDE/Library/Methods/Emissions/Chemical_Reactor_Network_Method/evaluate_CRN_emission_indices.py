@@ -17,7 +17,7 @@ import  numpy as np
 # ---------------------------------------------------------------------------------------------------------------------- 
 def evaluate_CRN_emission_indices_no_surrogate(segment,settings,vehicle):
 
-"""
+    """
     Computes emission indices directly using Chemical Reactor Network without surrogate models.
 
     Parameters
@@ -27,8 +27,10 @@ def evaluate_CRN_emission_indices_no_surrogate(segment,settings,vehicle):
         
         - state : Data
             Current state 
+
             - numerics : Data
                 Numerical integration parameters
+
                 - time : Data
                     Time integration settings
             - conditions : Data
@@ -41,18 +43,21 @@ def evaluate_CRN_emission_indices_no_surrogate(segment,settings,vehicle):
         
     vehicle : Data
         Vehicle configuration data
+
         - networks : list
             List of propulsion system networks
+
             - fuel_lines : list
                 Fuel distribution systems
             - propulsors : list
                 Propulsion units 
     Returns
     -------
-    Updates segment.state.conditions.emissions with:
+        Updates segment.state.conditions.emissions with:
         
         - total : Data
             Total emissions over segment
+
             - CO2 : float
                 Total CO2 emissions [kg]
             - H2O : float
@@ -61,6 +66,7 @@ def evaluate_CRN_emission_indices_no_surrogate(segment,settings,vehicle):
                 Total NOx emissions [kg]
         - index : Data
             Emission indices
+
             - CO2 : ndarray
                 CO2 emission index [kg_CO2/kg_fuel]
             - CO : ndarray
@@ -78,6 +84,7 @@ def evaluate_CRN_emission_indices_no_surrogate(segment,settings,vehicle):
     using Cantera. 
 
     **Extra modules required**
+
     * numpy
     * Cantera (through evaluate_cantera function)
 
@@ -87,10 +94,7 @@ def evaluate_CRN_emission_indices_no_surrogate(segment,settings,vehicle):
 
     References
     ----------
-    [1] Goodwin, D. G., Speth, R. L., Moffat, H. K., & Weber, B. W. (2023). 
-        Cantera: An object-oriented software toolkit for chemical kinetics, 
-        thermodynamics, and transport processes (Version 3.0.0) [Computer software]. 
-        https://www.cantera.org
+    [1] Goodwin, D. G., Speth, R. L., Moffat, H. K., & Weber, B. W. (2023). Cantera: An object-oriented software toolkit for chemical kinetics, thermodynamics, and transport processes (Version 3.0.0) [Computer software]. https://www.cantera.org
     """
   
     # unpack
@@ -179,7 +183,7 @@ def evaluate_CRN_emission_indices_no_surrogate(segment,settings,vehicle):
 
 def evaluate_CRN_emission_indices_surrogate(segment,settings,vehicle): 
 
-   """
+    """
     Computes emission indices using pre-trained Chemical Reactor Network surrogate models.
 
     Parameters
@@ -189,14 +193,17 @@ def evaluate_CRN_emission_indices_surrogate(segment,settings,vehicle):
         
         - state : Data
             Current state of the system
+
             - numerics : Data
                 Numerical integration parameters
             - conditions : Data
                 Flight conditions and component states
         - analyses : Data
             Analysis settings and models
+
             - emissions : Data
                 Emissions analysis settings
+
                 - surrogates : Data
                     Trained surrogate models for each species
                 
@@ -205,45 +212,50 @@ def evaluate_CRN_emission_indices_surrogate(segment,settings,vehicle):
         
     vehicle : Data
         Vehicle configuration data
+
         - networks : list
             List of propulsion system networks
+
             - propulsors : list
                 Propulsion units 
 
     Returns
     -------
-    None
-        Updates segment.state.conditions.emissions with:
+    Updates segment.state.conditions.emissions with:
         
-        - total : Data
-            Total emissions over segment
-            - CO2 : float
-                Total CO2 emissions [kg]
-            - H2O : float
-                Total H2O emissions [kg]
-            - NOx : float
-                Total NOx emissions [kg]
-        - index : Data
-            Emission indices
-            - CO2 : ndarray
-                CO2 emission index [kg_CO2/kg_fuel]
-            - CO : ndarray
-                CO emission index [kg_CO/kg_fuel]
-            - H2O : ndarray
-                H2O emission index [kg_H2O/kg_fuel]
-            - NO : ndarray
-                NO emission index [kg_NO/kg_fuel]
-            - NO2 : ndarray
-                NO2 emission index [kg_NO2/kg_fuel]
+    total : Data
+        Total emissions over segment
+
+        - CO2 : float
+            Total CO2 emissions [kg]
+        - H2O : float
+            Total H2O emissions [kg]
+        - NOx : float
+            Total NOx emissions [kg]
+    index : Data
+        Emission indices
+
+        - CO2 : ndarray
+            CO2 emission index [kg_CO2/kg_fuel]
+        - CO : ndarray
+            CO emission index [kg_CO/kg_fuel]
+        - H2O : ndarray
+            H2O emission index [kg_H2O/kg_fuel]
+        - NO : ndarray
+            NO emission index [kg_NO/kg_fuel]
+        - NO2 : ndarray
+            NO2 emission index [kg_NO2/kg_fuel]
 
     Notes
     -----
     Uses pre-trained surrogate models to estimate emission indices.
 
     **Extra modules required**
+
     * numpy
 
     **Major Assumptions**
+
     * Operating conditions fall within the training data range
     * Linear interpolation can be employed between training points
 
@@ -255,10 +267,7 @@ def evaluate_CRN_emission_indices_surrogate(segment,settings,vehicle):
 
     References
     ----------
-    [1] Goodwin, D. G., Speth, R. L., Moffat, H. K., & Weber, B. W. (2023). 
-        Cantera: An object-oriented software toolkit for chemical kinetics, 
-        thermodynamics, and transport processes (Version 3.0.0) [Computer software]. 
-        https://www.cantera.org
+    [1] Goodwin, D. G., Speth, R. L., Moffat, H. K., & Weber, B. W. (2023). Cantera: An object-oriented software toolkit for chemical kinetics, thermodynamics, and transport processes (Version 3.0.0) [Computer software]. https://www.cantera.org
     """
   
     I          = segment.state.numerics.time.integrate

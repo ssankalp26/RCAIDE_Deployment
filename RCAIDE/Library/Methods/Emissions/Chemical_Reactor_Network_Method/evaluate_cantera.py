@@ -16,9 +16,10 @@ import os
 #  evaluate_cantera
 # ----------------------------------------------------------------------------------------------------------------------   
 def evaluate_cantera(combustor,T,P,mdot,FAR): 
+
     """
     Evaluates emission indices using Chemical Reactor Network (CRN) built in Cantera.
-
+    
     Parameters
     ----------
     combustor : Data
@@ -87,55 +88,23 @@ def evaluate_cantera(combustor,T,P,mdot,FAR):
     Plug Flow Reactors (PFRs) in the Secondary Zone.
 
     **Extra modules required**
+
     * Cantera
     * pandas
     * numpy
 
     **Major Assumptions**
+
     * PSRs represent the Primary Zone
     * Air is added between different PFRs in Secondary Zone
     * Primary Zone has a normal Equivalence Ratio distribution
 
     **Theory**
     The model uses a network of reactors to simulate combustion:
+    
     1. Primary Zone: Multiple PSRs with varying equivalence ratios
     2. Mixing Zones: Ideal mixing between reactor outputs
     3. Secondary Zone: PFRs with dilution air addition
-
-    The reactor network models combustion through sequential stages with the following key equations:
-    
-    Mass Flow Rates:
-    .. math::
-        \dot{m}_{fuel,tot} = \dot{m}_{air,tot} \cdot FAR
-        \dot{m}_{air} = \frac{\dot{m}_{air,tot}}{N_{comb}}
-        \dot{m}_{fuel} = \frac{\dot{m}_{fuel,tot}}{N_{comb}}
-        \dot{m}_{air,PSR} = f_{air,PZ} \cdot \dot{m}_{air}
-        \dot{m}_{fuel,PSR} = \dot{m}_{fuel}
-        \dot{m}_{air,SZ} = \frac{f_{air,SZ} \cdot \dot{m}_{air}}{N_{SZ}}
-        \dot{m}_{air,PSR,local} = \dot{m}_{air,PSR} \cdot f_{PZ,1}
-        \dot{m}_{fuel,PSR,local} = \dot{m}_{fuel,PSR} \cdot f_{PZ,1}
-
-    Primary and Secondary Zone Parameters:
-    .. math::
-        \phi_{sign} = \frac{\dot{m}_{fuel,tot} \cdot F_{SC}}{\dot{m}_{air,tot} \cdot f_{air,PZ} \cdot FAR_{st}}
-        \sigma_{\phi} = \phi_{sign} \cdot S_{PZ}
-        \phi_{PSR} = \text{linspace}(0.001, 2\phi_{sign}, N_{PZ})
-        \Delta_{\phi} = |\phi_{PSR,1} - \phi_{PSR,0}|
-        V_{PZ,PSR} = \frac{A_{PZ} \cdot L_{PZ}}{N_{PZ}}
-        f_{air,SZ} = 1 - f_{air,PZ}
-        f_{PZ,1} = \frac{1}{\sqrt{2\pi}\sigma_{\phi}} \exp\left(-\frac{(\phi_{PSR} - \phi_{sign})^2}{2\sigma_{\phi}^2}\right) \Delta_{\phi}
-        t_{res,PSR} = \frac{\rho \cdot V_{PZ,PSR}}{\dot{m}_{total,PSR}}
-
-    Where:
-    * :math:`\dot{m}` = Mass flow rate
-    * :math:`\phi` = Equivalence ratio
-    * :math:`f_{air}` = Air fraction
-    * :math:`V` = Volume
-    * :math:`\rho` = Density
-    * :math:`t_{res}` = Residence time
-    * Subscript PSR = Perfectly Stirred Reactor
-    * Subscript PZ = Primary Zone
-    * Subscript SZ = Secondary Zone
 
     See Also
     --------
@@ -144,10 +113,7 @@ def evaluate_cantera(combustor,T,P,mdot,FAR):
 
     References
     ----------
-    [1] Goodwin, D. G., Speth, R. L., Moffat, H. K., & Weber, B. W. (2023). 
-        Cantera: An object-oriented software toolkit for chemical kinetics, 
-        thermodynamics, and transport processes (Version 3.0.0) [Computer software]. 
-        https://www.cantera.org
+    [1] Goodwin, D. G., Speth, R. L., Moffat, H. K., & Weber, B. W. (2023). Cantera: An object-oriented software toolkit for chemical kinetics, thermodynamics, and transport processes (Version 3.0.0) [Computer software]. https://www.cantera.org
     """   
 
     # ------------------------------------------------------------------------------              

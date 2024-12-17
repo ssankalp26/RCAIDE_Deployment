@@ -11,6 +11,7 @@ as for direct computation of emission indices using Chemical Reactor Networks.
 Notes
 -----
 The Chemical Reactor Network Method package contains tools for:
+
 - Training CRN emission index surrogate models
 - Building CRN emission index surrogate models
 - Evaluating chemical reactions using Cantera

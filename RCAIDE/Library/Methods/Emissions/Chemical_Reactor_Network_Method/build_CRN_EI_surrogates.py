@@ -22,7 +22,7 @@ def build_CRN_EI_surrogates(emissions):
 
     Parameters
     ----------
-    emissions : Data
+    emissions : Data 
         Container of emission data and surrogate models
         
         - surrogates : Data
@@ -52,8 +52,7 @@ def build_CRN_EI_surrogates(emissions):
 
     Returns
     -------
-    None
-        Updates the emissions.surrogates Data structure with interpolation functions
+    Updates the emissions.surrogates Data structure with interpolation functions
 
     Notes
     -----
@@ -61,15 +60,18 @@ def build_CRN_EI_surrogates(emissions):
     The interpolators are stored in the emissions.surrogates Data structure.
 
     The surrogate models interpolate emission indices based on:
+
     - Pressure
     - Temperature 
     - Air mass flow rate
     - Fuel-to-air ratio
 
     **Extra modules required**
+
     * scipy.interpolate
 
     **Major Assumptions**
+
     * Linear interpolation is sufficient between training points
 
     See Also
