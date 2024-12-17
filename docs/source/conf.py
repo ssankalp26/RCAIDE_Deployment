@@ -30,7 +30,7 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
     'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon'  # Add support for Google/NumPy style docstrings
+    'sphinx.ext.napoleon'  ,
 ]
 
 templates_path = ['_templates']
@@ -111,6 +111,8 @@ html_theme_options = {
     "twitter_url": "https://twitter.com/your-handle",  # Replace with your Twitter handle (optional)
     "navbar_end": ["search-field.html", "theme-switcher"],  # Add a theme switcher
     "show_toc_level": 2,  # Control levels of table of contents
+    "navigation_depth": 3,  # Depth of the left-side navigation
+
 }
 
 html_context = {
@@ -123,6 +125,3 @@ html_css_files = ['custom.css']  # Add custom styles (optional)
 
 # Mock load_plugin to avoid runtime errors
 sys.modules['RCAIDE.Framework.Plugins.load_plugin'] = Mock()
-
-use_opensearch = 'https://docs.rcaide.leadsresearchgroup.com'
-

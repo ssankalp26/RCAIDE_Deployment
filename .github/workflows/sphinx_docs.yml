@@ -28,6 +28,8 @@ jobs:
           pip install sphinx-rtd-theme
           pip install sphinx-autobuild
           pip install sphinx-autoapi
+          pip install nbsphinx
+          pip install sphinx-copybutton
 
       - name: Generate API Documentation
         run: |

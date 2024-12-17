@@ -1,10 +1,7 @@
 API Reference
-============
+==============
 
-Core Modules
-===========
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: RCAIDE
-   :members:
-   :undoc-members:
-   :show-inheritance: 
+   RCAIDE
