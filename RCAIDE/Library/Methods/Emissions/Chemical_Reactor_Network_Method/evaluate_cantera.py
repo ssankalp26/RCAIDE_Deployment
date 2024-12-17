@@ -70,15 +70,15 @@ def evaluate_cantera(combustor,T,P,mdot,FAR):
         Container for emission indices
         
         - EI_CO2 : float
-            CO2 emission index [kg/kg_fuel]
+            CO2 emission index [kg_CO2/kg_fuel]
         - EI_CO : float
-            CO emission index [kg/kg_fuel]
+            CO emission index [kg_CO/kg_fuel]
         - EI_H2O : float
-            H2O emission index [kg/kg_fuel]
+            H2O emission index [kg_H2O/kg_fuel]
         - EI_NO : float
-            NO emission index [kg/kg_fuel]
+            NO emission index [kg_NO/kg_fuel]
         - EI_NO2 : float
-            NO2 emission index [kg/kg_fuel]
+            NO2 emission index [kg_NO2/kg_fuel]
 
     Notes
     -----
