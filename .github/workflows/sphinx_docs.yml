@@ -31,6 +31,7 @@ jobs:
           pip install nbsphinx
           pip install sphinx-copybutton
           pip install myst-nb
+          pip install pandoc
           
 
       - name: Generate API Documentation
