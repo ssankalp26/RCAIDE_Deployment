@@ -1,15 +1,6 @@
-![RCAIDE_Logo](link)
-
- #
-
-<div align="center">
- 
-[![readthedocs](https://readthedocs.org/projects/pybamm/badge/?version=latest)](https://docs.pybamm.org/en/latest/?badge=latest) 
-[![DOI](https://zenodo.org/badge/DOI/10.5334/jors.309.svg)](https://doi.org/10.5334/jors.309) 
-
-</div>
-
-
+<p align="center">
+  <img src="https://github.com/leadsgroup/RCAIDE_Website/blob/main/assets/img/RCAIDE_Logo_No_Background.png" width=25% height=25%> 
+</p> 
 
 [RCAIDE: Research Community Aircraft Interdisciplinary Design Environment]([link](https://www.rcaide.leadsresearchgroup.com/))
 =======
@@ -56,8 +47,7 @@ flowchart LR
     style Libraries fill:#0fcf99,color:#fff
 ```
 ## Capabilities of RCAIDE
-RCAIDE currently possesses the ability to perform the following analyses, each at varying levels of fidelity. Here, we define fidelity as a level of accuracy to the actual physical value. As the level of fidelity increases, so does accuracy. However, this comes with the penalty of computational time and memory.  Having multi-fidelity capability allows RCAIDE to perform energy network analysis, complete flight  vehicle mission analysis, multi-fidelity optimization, design space exploration, artificial intelligence, and model-based systems engineering. Here are some notable use cases of RCAIDE: 
- (link to tutorials)
+RCAIDE currently possesses the ability to perform the following analyses, each at varying levels of fidelity. Here, we define fidelity as a level of accuracy to the actual physical value. As the level of fidelity increases, so does accuracy. However, this comes with the penalty of computational time and memory.  Having multi-fidelity capability allows RCAIDE to perform energy network analysis, complete flight  vehicle mission analysis, multi-fidelity optimization, design space exploration, artificial intelligence, and model-based systems engineering. Here are some notable use cases of RCAIDE:
 
 * Mission Analysis   
 * Optimization 
@@ -74,72 +64,46 @@ RCAIDE currently possesses the ability to perform the following analyses, each a
     * Operating empty weight, zero-fuel weight estimation
     * Component weight estimation 
     * Center of gravity estimation
-    * Moment of intertia estimation 
+    * Moment of inertia estimation 
 
-  
 
 ## Installing RCAIDE 
-
 RCAIDE is available on GNU/Linux, MacOS and Windows. We strongly recommend installing RCAIDE within a Python virtual environment to avoid altering any distribution of Python files. Please review the documentation for instructions on creating a virtual environment for RCAIDE.
 
-Requirements
-------------
-
-numpy, scipy, matplotlib, pip, scikit-learn, plotly
-
-
-Simple Setup
-------------
-
-```
-git clone https://github.com/suavecode/SUAVE.git
-cd SUAVE/trunk
-python setup.py install
-``` 
-
-Developer Install 
------------------
-* See [develop](http://suave.stanford.edu/download/develop_install.html).
-
-
+* [See Installation Instructions](https://www.docs.rcaide.leadsresearchgroup.com/install.html)
 * Using pip (coming soon) 
 * Using conda (coming soon) 
 
+## Tutorials RCAIDE 
+(coming soon) 
 
 ## 📑 Citing RCAIDE
-While we do not have 
+(coming soon) 
 
 ## 🛠️ Contributing to RCAIDE
-Contributing Institutions
--------------------------
+**Contributing Institutions** 
 * Aerospace Research Community, LLC
-* University of Illinois Lab for Electric Aircraft Design and Sustainability ([leadsresearchgroup.com](https://www.leadsresearchgroup.com/)) 
-* Stanford University Aerospace Design Lab ([adl.stanford.edu](http://adl.stanford.edu))
+* [University of Illinois Lab for Electric Aircraft Design and Sustainability](https://www.leadsresearchgroup.com/)
+* [Stanford University Aerospace Design Lab](http://adl.stanford.edu)
   
-Contributing Developers
------------------------ 
+**Contributing Developers**  
+* Matthew Clarke 
 * Emilio Botero 
 * Jordan Smart 
-* Matthew Clarke 
 * Racheal Erhard
-* Lab for Electric Aircraft Design and Sustainability ([leadsresearchgroup.com]
+* [University of Illinois Lab for Electric Aircraft Design and Sustainability](https://www.leadsresearchgroup.com/)) 
+* [Stanford University Aerospace Design Lab](http://adl.stanford.edu)
 
-Getting Involved 
------------------------ 
+**Getting Involved**   
 
 If you'd like to help us develop RCAIDE by adding new methods, writing documentation, or fixing embarrassing bugs, please look at these [guidelines](link) first.
-Submit improvements or new features with a [pull request] (link)
+
+Submit improvements or new features with a [pull request](https://github.com/leadsgroup/RCAIDE_LEADS/pulls)
 
 ## 📫 Get in touch
 
 Share feedback, report issues, and request features via or [Github Issues](link)
-Engage with peers and maintainers in [Discussions] (link)
 
-For any questions, comments, suggestions or bug reports, please see the
-[contact page](link).
-
-## 📃 License
-
-RCAIDE-LEADS  is fully open-source. For more information about its license, see [LICENSE](link).
+Engage with peers and maintainers in [Discussions](https://github.com/leadsgroup/RCAIDE_LEADS/discussions)
 
 
