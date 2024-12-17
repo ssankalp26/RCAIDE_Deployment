@@ -13,6 +13,7 @@ evaluate_correlation_emissions_indices
     Computes emission indices using empirical correlations 
 
 **Major Assumptions**
+
 * Correlations are valid within the operating range
 
 See Also

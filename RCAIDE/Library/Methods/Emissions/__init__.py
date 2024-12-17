@@ -38,14 +38,9 @@ RCAIDE.Library.Methods.Emissions.Chemical_Reactor_Network_Method
 
 References
 ----------
-[1] Goodwin, D. G., Speth, R. L., Moffat, H. K., & Weber, B. W. (2023). 
-    Cantera: An object-oriented software toolkit for chemical kinetics, 
-    thermodynamics, and transport processes (Version 3.0.0) [Computer software]. 
-    https://www.cantera.org
+[1] Goodwin, D. G., Speth, R. L., Moffat, H. K., & Weber, B. W. (2023). Cantera: An object-oriented software toolkit for chemical kinetics, thermodynamics, and transport processes (Version 3.0.0) [Computer software]. https://www.cantera.org
 
-[2] Lee, D. S., et al. (2021). The contribution of global aviation to 
-    anthropogenic climate forcing for 2000 to 2018. Atmospheric Environment, 
-    244, 117834.
+[2] Lee, D. S., et al. (2021). The contribution of global aviation to anthropogenic climate forcing for 2000 to 2018. Atmospheric Environment, 244, 117834.
 """
 
 # ----------------------------------------------------------------------------------------------------------------------

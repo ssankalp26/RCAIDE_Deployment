@@ -25,8 +25,10 @@ def evaluate_correlation_emissions_indices(segment,settings,vehicle):
         
         - state : Data
             Current state of the system
+
             - numerics : Data
                 Numerical integration parameters
+
                 - time : Data
                     Time integration settings
             - conditions : Data
@@ -39,20 +41,26 @@ def evaluate_correlation_emissions_indices(segment,settings,vehicle):
         
     vehicle : Data
         Vehicle configuration data
+
         - networks : list
             List of propulsion system networks
+
             - fuel_lines : list
                 Fuel distribution systems
+
                 - active : bool
                     Flag indicating if fuel line is in use
                 - fuel_tanks : list
                     Fuel storage units
+
                     - tag : str
                         Identifier for the fuel tank
                     - fuel : Data
                         Fuel properties
+
                         - emission_indices : Data
                             Empirical emission indices
+
                             - NOx : float
                                 NOx emission index [kg_NOx/kg_fuel]
                             - CO2 : float
@@ -75,6 +83,7 @@ def evaluate_correlation_emissions_indices(segment,settings,vehicle):
         
         - total : Data
             Total emissions over segment
+
             - NOx : float
                 Total NOx emissions [kg]
             - CO2 : float
@@ -89,6 +98,7 @@ def evaluate_correlation_emissions_indices(segment,settings,vehicle):
                 Total contrail effect [kg CO2 equivalent]
         - index : Data
             Emission indices
+
             - NOx : ndarray
                 NOx emission index [kg_NOx/kg_fuel]
             - CO2 : ndarray
@@ -106,6 +116,7 @@ def evaluate_correlation_emissions_indices(segment,settings,vehicle):
     them over the mission segment based on fuel flow rates.
 
     **Major Assumptions**
+
     * Emission indices are constant for each fuel type
     * Indices are independent of operating conditions
     * Linear scaling with fuel flow rate
@@ -117,6 +128,7 @@ def evaluate_correlation_emissions_indices(segment,settings,vehicle):
         E_{i,total} = \int \dot{m}_{fuel}(t) \cdot EI_i \cdot GWP_i \, dt
 
     Where:
+
     * :math:`E_{i,total}` = Total emissions for species i
     * :math:`\dot{m}_{fuel}` = Fuel mass flow rate
     * :math:`EI_i` = Emission index for species i
@@ -128,10 +140,12 @@ def evaluate_correlation_emissions_indices(segment,settings,vehicle):
         E_{contrails} = \Delta R \cdot GWP_{contrails}
 
     Where:
+
     * :math:`\Delta R` = Flight range [km]
     * :math:`GWP_{contrails}` = Contrail global warming potential
 
     **Extra modules required**
+
     * numpy
 
     See Also
@@ -140,9 +154,7 @@ def evaluate_correlation_emissions_indices(segment,settings,vehicle):
 
     References
     ----------
-    [1] Lee, D. S., et al. (2021). The contribution of global aviation to 
-        anthropogenic climate forcing for 2000 to 2018. Atmospheric Environment, 
-        244, 117834.
+    [1] Lee, D. S., et al. (2021). The contribution of global aviation to anthropogenic climate forcing for 2000 to 2018. Atmospheric Environment, 244, 117834.
     """  
     # unpack
     state      = segment.state
