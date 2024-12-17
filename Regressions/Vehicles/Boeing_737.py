@@ -10,7 +10,8 @@
 import RCAIDE
 from RCAIDE.Framework.Core import Units       
 from RCAIDE.Library.Methods.Geometry.Planform               import segment_properties    
-from RCAIDE.Library.Methods.Propulsors.Turbofan_Propulsor   import design_turbofan    
+from RCAIDE.Library.Methods.Propulsors.Turbofan_Propulsor   import design_turbofan   
+from RCAIDE.Library.Methods.Weights.Center_of_Gravity     import compute_component_centers_of_gravity
 from RCAIDE.Library.Plots                                   import *     
  
 # python imports 
@@ -36,7 +37,7 @@ def vehicle_setup():
     vehicle.mass_properties.cargo                     = 10000.  * Units.kilogram  
     vehicle.mass_properties.center_of_gravity         = [[21,0, 0, 0]]
     vehicle.flight_envelope.ultimate_load             = 3.75
-    vehicle.flight_envelope.positive_limit_load       = 2.5 
+    vehicle.flight_envelope.limit_load                = 2.5 
     vehicle.flight_envelope.design_mach_number        = 0.78 
     vehicle.flight_envelope.design_cruise_altitude    = 35000*Units.feet
     vehicle.flight_envelope.design_range              = 3500 * Units.nmi
@@ -484,7 +485,12 @@ def vehicle_setup():
     vehicle.append_component(fuselage)
      
 
-    # ################################################# Energy Network #######################################################          
+    # ################################################# Energy Network #######################################################         
+    # Step 1: Define network
+    # Step 2: Define Distribution Type
+    # Step 3: Define Propulsors 
+    # Step 4: Define Enegy Source 
+
     #------------------------------------------------------------------------------------------------------------------------- 
     #  Turbofan Network
     #-------------------------------------------------------------------------------------------------------------------------   
@@ -724,19 +730,6 @@ def configs_setup(vehicle):
     config.landing_gears.main_gear.gear_extended    = True
     config.landing_gears.nose_gear.gear_extended    = True  
     config.V2_VS_ratio = 1.21 
-    configs.append(config)
-    
-    # ------------------------------------------------------------------
-    #   Short Field Takeoff Configuration
-    # ------------------------------------------------------------------  
-
-    config = RCAIDE.Library.Components.Configs.Config(base_config)
-    config.tag = 'reverse_thrust'
-    config.wings['main_wing'].control_surfaces.flap.deflection  = 30. * Units.deg
-    config.wings['main_wing'].control_surfaces.slat.deflection  = 25. * Units.deg 
-    config.landing_gears.main_gear.gear_extended    = True
-    config.landing_gears.nose_gear.gear_extended    = True  
     configs.append(config)    
-    
 
     return configs  

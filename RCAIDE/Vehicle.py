@@ -50,26 +50,23 @@ class Vehicle(Data):
         self.flight_envelope.design_mach_number                            = None  
         self.flight_envelope.design_cruise_altitude                        = None
         self.flight_envelope.design_range                                  = None 
-        self.flight_envelope.ultimate_load                                 = 5.7  
-        self.flight_envelope.positive_limit_load                           = 3.8
-        self.flight_envelope.negative_limit_load                           = -1.5    
+        self.flight_envelope.ultimate_load                                 = 5.7 
+        self.flight_envelope.limit_load                                    = 3.8   
         self.flight_envelope.alpha_maximum                                 = 0.0
-        self.flight_envelope.category                                      = None 
-        self.flight_envelope.FAR_part_number                               = None
         self.flight_envelope.alt_vc                                        = 0.0
         self.flight_envelope.alt_gust                                      = 0.0
         self.flight_envelope.max_ceiling                                   = 0.0
         self.flight_envelope.maximum_dynamic_pressure                      = 0.0
         self.flight_envelope.maximum_mach_operational                      = 0.0
-        self.flight_envelope.maximum_lift_coefficient                      = None
-        self.flight_envelope.minimum_lift_coefficient                      = None
 
         self.flight_envelope.maneuver                                      = Data()
-        self.flight_envelope.maneuver.load_alleviation_factor              = 0.0 
+        self.flight_envelope.maneuver.load_alleviation_factor              = 0.0
+        
         self.flight_envelope.maneuver.equivalent_speed                     = Data()
         self.flight_envelope.maneuver.equivalent_speed.velocity_max_gust   = 0
         self.flight_envelope.maneuver.equivalent_speed.velocity_max_cruise = 0
-        self.flight_envelope.maneuver.equivalent_speed.velocity_max_dive   = 0 
+        self.flight_envelope.maneuver.equivalent_speed.velocity_max_dive   = 0
+        
         self.flight_envelope.maneuver.load_factor                          = Data()
         self.flight_envelope.maneuver.load_factor.velocity_max_gust        = 0
         self.flight_envelope.maneuver.load_factor.velocity_max_cruise      = 0

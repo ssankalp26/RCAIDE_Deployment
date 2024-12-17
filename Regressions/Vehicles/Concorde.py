@@ -652,7 +652,7 @@ def configs_setup(vehicle):
     config.tag                            = 'landing' 
     config.wings['main_wing'].flaps_angle = 0. * Units.deg
     config.wings['main_wing'].slats_angle = 0. * Units.deg  
-    config.maximum_lift_coefficient       = 2. 
+    config.maximum_lift_coefficient       = 2.
     
     configs.append(config)
     
