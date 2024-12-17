@@ -91,6 +91,7 @@ html_theme_options = {
     "show_toc_level": 2,
     "navigation_depth": 3,
     'logo_only': True,
+    'display_version': False,
     "icon_links": [
         {
             "name": "GitHub",
@@ -110,6 +111,7 @@ html_theme_options = {
     "default_mode": "light",
     "switcher": {
         "json_url": "_static/switcher.json",
+        "version_match": "v1.0.0",
     },
 }
 

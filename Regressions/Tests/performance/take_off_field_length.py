@@ -1,6 +1,8 @@
 # test_take_off_field_length.py
 #
-# Created: Dec 2024, M Clarke   
+# Created:  Jun 2014, Tarik, Carlos, Celso
+# Modified: Feb 2017, M. Vegh
+#           Jan 2018, W. Maier
 
 # ----------------------------------------------------------------------
 #  Imports
