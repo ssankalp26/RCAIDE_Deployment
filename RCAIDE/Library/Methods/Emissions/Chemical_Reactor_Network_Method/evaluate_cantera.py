@@ -1,4 +1,6 @@
 # RCAIDE/Library/Methods/Emissions/Chemical_Reactor_Network_Method/evaluate_cantera.py
+
+# Created: June 2024, M. Clarke, M. Guidotti 
  
 # ----------------------------------------------------------------------------------------------------------------------
 #  IMPORT
@@ -14,21 +16,139 @@ import os
 #  evaluate_cantera
 # ----------------------------------------------------------------------------------------------------------------------   
 def evaluate_cantera(combustor,T,P,mdot,FAR): 
-    '''
-    This model estimates the Emission Index of various species deriving 
-    from the combustion of fuel. The model is based on a Chemical Reactor 
-    Network (CRN) built using Cantera.
+    """
+    Evaluates emission indices using Chemical Reactor Network (CRN) built in Cantera.
+
+    Parameters
+    ----------
+    combustor : Data
+        Combustor configuration data
+        
+        - f_air_PZ : float
+            Fraction of total air entering Primary Zone [-]
+        - FAR_st : float
+            Stoichiometric Fuel to Air ratio [-]
+        - N_comb : int
+            Number of can-annular combustors [-]
+        - N_PZ : int
+            Number of PSR (Perfectly Stirred Reactors) [-]
+        - A_PZ : float
+            Primary Zone cross-sectional area [m^2]
+        - L_PZ : float
+            Primary Zone length [m]
+        - N_SZ : int
+            Number of dilution air inlets [-]
+        - A_SZ : float
+            Secondary Zone cross-sectional area [m^2]
+        - L_SZ : float
+            Secondary Zone length [m]
+        - phi_SZ : float
+            Equivalence Ratio in the Secondary Zone [-]
+        - S_PZ : float
+            Mixing parameter for Primary Zone [-]
+        - F_SC : float
+            Fuel scaler [-]
+        - number_of_assigned_PSR_1st_mixers : int
+            Number of PSR assigned to first row of mixers [-]
+        - number_of_assigned_PSR_2nd_mixers : int
+            Number of PSR assigned to second row of mixers [-]
+        - fuel_data : Data
+            Fuel chemical properties and kinetics data
+
+    T : float
+        Stagnation Temperature entering combustors [K]
+    P : float
+        Stagnation Pressure entering combustors [Pa]
+    mdot : float
+        Air mass flow enetring the combustor [kg/s]
+    FAR : float
+        Fuel-to-Air ratio [-]
+
+    Returns
+    -------
+    results : Data
+        Container for emission indices
+        
+        - EI_CO2 : float
+            CO2 emission index [kg/kg_fuel]
+        - EI_CO : float
+            CO emission index [kg/kg_fuel]
+        - EI_H2O : float
+            H2O emission index [kg/kg_fuel]
+        - EI_NO : float
+            NO emission index [kg/kg_fuel]
+        - EI_NO2 : float
+            NO2 emission index [kg/kg_fuel]
+
+    Notes
+    -----
+    This model estimates emission indices using a Chemical Reactor Network built with Cantera.
+    The network consists of Perfectly Stirred Reactors (PSRs) in the Primary Zone and 
+    Plug Flow Reactors (PFRs) in the Secondary Zone.
+
+    **Extra modules required**
+    * Cantera
+    * pandas
+    * numpy
+
+    **Major Assumptions**
+    * PSRs represent the Primary Zone
+    * Air is added between different PFRs in Secondary Zone
+    * Primary Zone has a normal Equivalence Ratio distribution
+
+    **Theory**
+    The model uses a network of reactors to simulate combustion:
+    1. Primary Zone: Multiple PSRs with varying equivalence ratios
+    2. Mixing Zones: Ideal mixing between reactor outputs
+    3. Secondary Zone: PFRs with dilution air addition
+
+    The reactor network models combustion through sequential stages with the following key equations:
     
-    Assumptions: PSRs represent the Primary Zone, while In the Secondary 
-    Zone Air is added between different PFRs.
-    
-    Improvements required:
-    - Comparison of resulting NO, NO2 and CO with literature
-    - Equivalence Ratio value in the Primary Zone
-    - Automate the code to mix all PSRs in one mixer and freely choose 
-      the number of PSRs and PFRs.    
-    
-    '''    
+    Mass Flow Rates:
+    .. math::
+        \dot{m}_{fuel,tot} = \dot{m}_{air,tot} \cdot FAR
+        \dot{m}_{air} = \frac{\dot{m}_{air,tot}}{N_{comb}}
+        \dot{m}_{fuel} = \frac{\dot{m}_{fuel,tot}}{N_{comb}}
+        \dot{m}_{air,PSR} = f_{air,PZ} \cdot \dot{m}_{air}
+        \dot{m}_{fuel,PSR} = \dot{m}_{fuel}
+        \dot{m}_{air,SZ} = \frac{f_{air,SZ} \cdot \dot{m}_{air}}{N_{SZ}}
+        \dot{m}_{air,PSR,local} = \dot{m}_{air,PSR} \cdot f_{PZ,1}
+        \dot{m}_{fuel,PSR,local} = \dot{m}_{fuel,PSR} \cdot f_{PZ,1}
+
+    Primary and Secondary Zone Parameters:
+    .. math::
+        \phi_{sign} = \frac{\dot{m}_{fuel,tot} \cdot F_{SC}}{\dot{m}_{air,tot} \cdot f_{air,PZ} \cdot FAR_{st}}
+        \sigma_{\phi} = \phi_{sign} \cdot S_{PZ}
+        \phi_{PSR} = \text{linspace}(0.001, 2\phi_{sign}, N_{PZ})
+        \Delta_{\phi} = |\phi_{PSR,1} - \phi_{PSR,0}|
+        V_{PZ,PSR} = \frac{A_{PZ} \cdot L_{PZ}}{N_{PZ}}
+        f_{air,SZ} = 1 - f_{air,PZ}
+        f_{PZ,1} = \frac{1}{\sqrt{2\pi}\sigma_{\phi}} \exp\left(-\frac{(\phi_{PSR} - \phi_{sign})^2}{2\sigma_{\phi}^2}\right) \Delta_{\phi}
+        t_{res,PSR} = \frac{\rho \cdot V_{PZ,PSR}}{\dot{m}_{total,PSR}}
+
+    Where:
+    * :math:`\dot{m}` = Mass flow rate
+    * :math:`\phi` = Equivalence ratio
+    * :math:`f_{air}` = Air fraction
+    * :math:`V` = Volume
+    * :math:`\rho` = Density
+    * :math:`t_{res}` = Residence time
+    * Subscript PSR = Perfectly Stirred Reactor
+    * Subscript PZ = Primary Zone
+    * Subscript SZ = Secondary Zone
+
+    See Also
+    --------
+    RCAIDE.Library.Methods.Emissions.Chemical_Reactor_Network_Method.evaluate_CRN_emission_indices
+    RCAIDE.Library.Components.Propulsors.Converters.Combustor
+
+    References
+    ----------
+    [1] Goodwin, D. G., Speth, R. L., Moffat, H. K., & Weber, B. W. (2023). 
+        Cantera: An object-oriented software toolkit for chemical kinetics, 
+        thermodynamics, and transport processes (Version 3.0.0) [Computer software]. 
+        https://www.cantera.org
+    """   
 
     # ------------------------------------------------------------------------------              
     # ------------------------------ Combustor Inputs ------------------------------              
