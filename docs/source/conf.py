@@ -108,11 +108,7 @@ html_theme_options = {
         "image_light_alt": "_static/leads_logo.png",
         "text": "RCAIDE",  # Optional: text to appear next to the logo
     },
-    "default_mode": "light",
-    "switcher": {
-        "json_url": "_static/switcher.json",
-        "version_match": "v1.0.0",
-    },
+    "default_mode": "dark",
 }
 
 html_baseurl = "https://docs.rcaide.leadsresearchgroup.com"
