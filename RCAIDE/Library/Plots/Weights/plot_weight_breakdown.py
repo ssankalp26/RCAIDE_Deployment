@@ -43,7 +43,7 @@ def plot_weight_breakdown(vehicle,
     N/A
     """
 
-    breakdown =  vehicle.weight_breakdown     
+    breakdown =  vehicle.mass_properties.weight_breakdown     
     
     level_1 = []
     level_2 = []
