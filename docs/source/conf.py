@@ -19,8 +19,13 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath('.'))))  # Pa
 
 project = 'RCAIDE'
 copyright = '2024, Laboratory of Electric Aircraft Design and Sustainavility'
-author = ' Laboratory of Electric Aircraft Design and Sustainavility'
+author = 'Laboratory of Electric Aircraft Design and Sustainavility'
 release = '1.0.0'
+
+# Add these lines for the logo
+html_logo = '_static/leads_logo.png'  # Add your logo file to the _static directory
+html_title = "RCAIDE"
+
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -81,15 +86,23 @@ html_theme_options = {
     "primary_sidebar_end": ["sidebar-ethical-ads"],
     "navigation_with_keys": False,
     "navbar_align": "left",
+    "show_toc_level": 2,
+    "navigation_depth": 3,
+    'logo_only': True,
+    'display_version': False,
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/RCAIDE/RCAIDE",
+            "url": "https://github.com/leadsgroup/RCAIDE_LEADS",
             "icon": "fab fa-github-square",
             "type": "fontawesome",
         }
     ],
-    "navigation_depth": 2,
+    # Add these logo-related options
+    "logo": {
+        "image_dark": "_static/leads_logo.png",  
+        "text": "RCAIDE",  # Optional: text to appear next to the logo
+    },
 }
 
 html_baseurl = "https://docs.rcaide.leadsresearchgroup.com"
@@ -97,23 +110,11 @@ html_baseurl = "https://docs.rcaide.leadsresearchgroup.com"
 html_context = {
     "default_mode": "light",
     "header_links": [
-        ("Home", "index"),
-        ("Tutorials", "tutorials"),
-        ("API", "api"),
         ("GitHub", "https://github.com/RCAIDE/RCAIDE", True),
     ]
 }
 
 html_theme = 'pydata_sphinx_theme'
-
-html_theme_options = {
-    "github_url": "https://github.com/your-repo",  # Replace with your GitHub repo
-    "twitter_url": "https://twitter.com/your-handle",  # Replace with your Twitter handle (optional)
-    "navbar_end": ["search-field.html", "theme-switcher"],  # Add a theme switcher
-    "show_toc_level": 2,  # Control levels of table of contents
-    "navigation_depth": 3,  # Depth of the left-side navigation
-
-}
 
 html_context = {
     "default_mode": "auto",  # Default to light/dark mode based on user preference

@@ -1,7 +1,7 @@
 .. _install:
 
 ##############
-Installation
+Install
 ##############
 
 This section provides instructions to install RCAIDE and its dependencies.
@@ -64,7 +64,4 @@ To confirm that RCAIDE has been successfully installed, run the following comman
    python -c "import RCAIDE; print(RCAIDE.__version__)"
 
 If RCAIDE is installed correctly, it will print the installed version number.
-
-
-
 

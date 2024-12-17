@@ -1,7 +1,12 @@
 API Reference
 ==============
 
+:doc:`RCAIDE API Documentation <RCAIDE>`
+
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
+   :caption: Contents:
+   :hidden:
 
    RCAIDE
+
