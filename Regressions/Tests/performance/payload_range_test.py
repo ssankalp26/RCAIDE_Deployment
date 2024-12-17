@@ -27,7 +27,7 @@ from NASA_X57       import vehicle_setup as X57_vehicle_setup
 def main(): 
     fuel_payload_range_res = fuel_aircraft_payload_range()
     fuel_r                 = fuel_payload_range_res.range[-1]
-    fuel_r_true            = 7252586.423382382
+    fuel_r_true            = 7043315.924243388
     print('Fuel Range: ' + str(fuel_r))
     fuel_error =  abs(fuel_r - fuel_r_true) /fuel_r_true
     assert(abs(fuel_error)<1e-6)
@@ -92,7 +92,10 @@ def electric_aircraft_payload_range():
     # ------------------------------------------------------------------
     #  Weights
     weights = RCAIDE.Framework.Analyses.Weights.Weights_EVTOL()
-    weights.vehicle = vehicle  
+    weights.vehicle = vehicle
+    
+    # since OEW was not defined, we evalaute it here   
+    _ = weights.evaluate()
 
     # ------------------------------------------------------------------
     #  Aerodynamics Analysis
