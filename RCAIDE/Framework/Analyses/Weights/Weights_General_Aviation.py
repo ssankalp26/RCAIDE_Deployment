@@ -66,7 +66,7 @@ class Weights_General_Aviation(Weights):
         results = RCAIDE.Library.Methods.Weights.Correlation_Buildups.General_Aviation.compute_operating_empty_weight(vehicle, settings=self.settings)
 
         # storing weigth breakdown into vehicle
-        vehicle.weight_breakdown = results
+        vehicle.mass_properties.weight_breakdown = results
 
         # updating empty weight
         vehicle.mass_properties.operating_empty = results.empty.total

@@ -38,10 +38,6 @@ def compute_payload_range_diagram(vehicle,assigned_propulsors,weights_analysis,a
             payload_range       data structure of payload range properties   [m/s]
     """ 
 
-    # Set up vehicle configs  
-    weight  = weights_analysis.evaluate()
-    vehicle.mass_properties.operating_empty =  weight.empty.total  
-        
     configs  =  configs_setup(vehicle)
 
     # create analyses
@@ -92,30 +88,27 @@ def conventional_payload_range_diagram(vehicle,mission,cruise_segment_tag,reserv
     #unpack
     mass = vehicle.mass_properties
     if not mass.operating_empty:
-        print("Error calculating Payload Range Diagram: Vehicle Operating Empty not defined")
-        return True
+        raise AttributeError("Error calculating Payload Range Diagram: Vehicle Operating Empty not defined") 
     else:
         OEW = mass.operating_empty
 
     if not mass.max_zero_fuel:
-        print("Error calculating Payload Range Diagram: Vehicle MZFW not defined")
-        return True
+        raise AttributeError("Error calculating Payload Range Diagram: Vehicle MZFW not defined") 
     else:
         MZFW = vehicle.mass_properties.max_zero_fuel
 
     if not mass.max_takeoff:
-        print("Error calculating Payload Range Diagram: Vehicle MTOW not defined")
-        return True
+        raise AttributeError("Error calculating Payload Range Diagram: Vehicle MTOW not defined") 
     else:
         MTOW = vehicle.mass_properties.max_takeoff
 
-    if not mass.max_payload:
-        MaxPLD = MZFW - OEW  # If payload max not defined, calculate based in design weights
+    if mass.max_payload == 0:
+        MaxPLD = MZFW - OEW  
     else:
         MaxPLD = vehicle.mass_properties.max_payload
         MaxPLD = min(MaxPLD , MZFW - OEW) #limit in structural capability
 
-    if not mass.max_fuel:
+    if mass.max_fuel == 0:
         MaxFuel = MTOW - OEW # If not defined, calculate based in design weights
     else:
         MaxFuel = vehicle.mass_properties.max_fuel  # If max fuel capacity not defined
@@ -126,7 +119,8 @@ def conventional_payload_range_diagram(vehicle,mission,cruise_segment_tag,reserv
     #Point  = [ RANGE WITH MAX. PLD   , RANGE WITH MAX. FUEL , FERRY RANGE   ]
     TOW     = [ MTOW                               , MTOW                   , OEW + MaxFuel ]
     FUEL    = [ min(TOW[1] - OEW - MaxPLD,MaxFuel) , MaxFuel                , MaxFuel       ]
-    PLD     = [ MaxPLD                             , min(MTOW - MaxFuel - OEW, MaxPLD)   , 0.            ]
+    PLD     = [ MaxPLD                             , min(MTOW - MaxFuel - OEW, MaxPLD)   , 0.   ]
+    
     # allocating Range array
     R       = [0,0,0]
 

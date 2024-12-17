@@ -1,22 +1,42 @@
-# Regressions/Vehicles/Embraer_E190.py
-# 
-# 
-# Created:  Jul 2023, M. Clarke 
+'''
 
-# ----------------------------------------------------------------------------------------------------------------------
-#  IMPORT
-# ---------------------------------------------------------------------------------------------------------------------- 
-# RCAIDE imports 
+The script below documents how to set up and plot the results of polar analysis of full aircraft configuration 
+
+''' 
+
+# ----------------------------------------------------------------------
+#   Imports
+# ---------------------------------------------------------------------- 
 import RCAIDE
-from RCAIDE.Framework.Core import Units       
-from RCAIDE.Library.Methods.Geometry.Planform               import segment_properties    
-from RCAIDE.Library.Methods.Propulsors.Turbofan_Propulsor   import design_turbofan    
-from RCAIDE.Library.Plots                                   import *     
- 
-# python imports 
-import numpy as np  
-from copy import deepcopy 
+from RCAIDE.Framework.Core import Units , Data   
+from RCAIDE.Library.Methods.Propulsors.Turbofan_Propulsor          import design_turbofan
+from RCAIDE.Library.Methods.Performance                            import aircraft_aerodynamic_analysis 
+from RCAIDE.Library.Methods.Geometry.Planform                      import segment_properties 
+from RCAIDE.Library.Plots                                          import *        
+
+import matplotlib.cm as cm   
+import numpy as np
+from copy import deepcopy
+import matplotlib.pyplot  as plt
 import os
+
+# ----------------------------------------------------------------------
+#   Main
+# ---------------------------------------------------------------------- 
+def main(): 
+
+    vehicle                           = vehicle_setup()  
+    Mach_number_range                 = np.atleast_2d(np.linspace(0.1, 0.9, 10)).T
+    angle_of_attack_range             = np.atleast_2d(np.linspace(-5, 12, 18)).T*Units.degrees 
+    control_surface_deflection_range  = np.atleast_2d(np.linspace(0,30,7)).T*Units.degrees 
+    results                           = aircraft_aerodynamic_analysis(vehicle, angle_of_attack_range, Mach_number_range,control_surface_deflection_range, altitude = 0,delta_ISA=0,use_surrogate = True,  model_fuselage = True)
+  
+    plot_aircraft_aerodynamics(results) 
+    
+    return 
+# ----------------------------------------------------------------------
+#   Define the Vehicle
+# ----------------------------------------------------------------------
 
 def vehicle_setup(): 
     
@@ -642,101 +662,7 @@ def vehicle_setup():
     #------------------------------------------------------------------------------------------------------------------------- 
       
     return vehicle
- 
-# ----------------------------------------------------------------------
-#   Define the Configurations
-# ---------------------------------------------------------------------
-
-def configs_setup(vehicle):
-    """This function sets up vehicle configurations for use in different parts of the mission.
-    Here, this is mostly in terms of high lift settings."""
-    
-    # ------------------------------------------------------------------
-    #   Initialize Configurations
-    # ------------------------------------------------------------------
-
-    configs     = RCAIDE.Library.Components.Configs.Config.Container() 
-    base_config = RCAIDE.Library.Components.Configs.Config(vehicle)
-    base_config.tag = 'base' 
-    configs.append(base_config)
-
-    # ------------------------------------------------------------------
-    #   Cruise Configuration
-    # ------------------------------------------------------------------
-
-    config = RCAIDE.Library.Components.Configs.Config(base_config)
-    config.tag = 'cruise'
-    configs.append(config) 
-
-    # ------------------------------------------------------------------
-    #   Takeoff Configuration
-    # ------------------------------------------------------------------
-
-    config = RCAIDE.Library.Components.Configs.Config(base_config)
-    config.tag = 'takeoff'
-    config.wings['main_wing'].control_surfaces.flap.deflection  = 20. * Units.deg
-    config.wings['main_wing'].control_surfaces.slat.deflection  = 25. * Units.deg 
-    config.networks.fuel.propulsors['starboard_propulsor'].fan.angular_velocity =  3470. * Units.rpm
-    config.networks.fuel.propulsors['port_propulsor'].fan.angular_velocity      =  3470. * Units.rpm 
-    config.V2_VS_ratio = 1.21
-    configs.append(config)
-
-    
-    # ------------------------------------------------------------------
-    #   Cutback Configuration
-    # ------------------------------------------------------------------
-
-    config = RCAIDE.Library.Components.Configs.Config(base_config)
-    config.tag = 'cutback'
-    config.wings['main_wing'].control_surfaces.flap.deflection  = 20. * Units.deg
-    config.wings['main_wing'].control_surfaces.slat.deflection  = 20. * Units.deg
-    config.networks.fuel.propulsors['starboard_propulsor'].fan.angular_velocity =  2780. * Units.rpm
-    config.networks.fuel.propulsors['port_propulsor'].fan.angular_velocity      =  2780. * Units.rpm 
-    configs.append(config)   
-    
-        
-    
-    # ------------------------------------------------------------------
-    #   Landing Configuration
-    # ------------------------------------------------------------------
-
-    config = RCAIDE.Library.Components.Configs.Config(base_config)
-    config.tag = 'landing'
-    config.wings['main_wing'].control_surfaces.flap.deflection  = 30. * Units.deg
-    config.wings['main_wing'].control_surfaces.slat.deflection  = 25. * Units.deg
-    config.networks.fuel.propulsors['starboard_propulsor'].fan.angular_velocity =  2030. * Units.rpm
-    config.networks.fuel.propulsors['port_propulsor'].fan.angular_velocity      =  2030. * Units.rpm
-    config.landing_gears.main_gear.gear_extended    = True
-    config.landing_gears.nose_gear.gear_extended    = True  
-    config.Vref_VS_ratio = 1.23
-    configs.append(config)   
-     
-    # ------------------------------------------------------------------
-    #   Short Field Takeoff Configuration
-    # ------------------------------------------------------------------ 
-
-    config = RCAIDE.Library.Components.Configs.Config(base_config)
-    config.tag = 'short_field_takeoff'    
-    config.wings['main_wing'].control_surfaces.flap.deflection  = 20. * Units.deg
-    config.wings['main_wing'].control_surfaces.slat.deflection  = 25. * Units.deg
-    config.networks.fuel.propulsors['starboard_propulsor'].fan.angular_velocity =  3470. * Units.rpm
-    config.networks.fuel.propulsors['port_propulsor'].fan.angular_velocity      =  3470. * Units.rpm 
-    config.landing_gears.main_gear.gear_extended    = True
-    config.landing_gears.nose_gear.gear_extended    = True  
-    config.V2_VS_ratio = 1.21 
-    configs.append(config)
-    
-    # ------------------------------------------------------------------
-    #   Short Field Takeoff Configuration
-    # ------------------------------------------------------------------  
-
-    config = RCAIDE.Library.Components.Configs.Config(base_config)
-    config.tag = 'reverse_thrust'
-    config.wings['main_wing'].control_surfaces.flap.deflection  = 30. * Units.deg
-    config.wings['main_wing'].control_surfaces.slat.deflection  = 25. * Units.deg 
-    config.landing_gears.main_gear.gear_extended    = True
-    config.landing_gears.nose_gear.gear_extended    = True  
-    configs.append(config)    
-    
-
-    return configs  
+  
+if __name__ == '__main__': 
+    main()    
+    plt.show()

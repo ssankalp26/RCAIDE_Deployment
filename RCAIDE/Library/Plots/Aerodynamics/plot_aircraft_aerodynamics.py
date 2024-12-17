@@ -41,12 +41,12 @@ def plot_aircraft_aerodynamics(results,
     axis_1 = fig.add_subplot(1, 2, 1, projection='3d')
     axis_2 = fig.add_subplot(1, 2, 2, projection='3d') 
  
-    X, Y = np.meshgrid(results.Mach_number_range, results.angle_of_attack_range)
-    fig.set_title('$C_L$ Surrogate') 
-    fig.set_title('$C_L$ No Surrogate')     
+    X, Y = np.meshgrid(results.Mach, results.alpha)
     surf = axis_1.plot_surface(X, Y/Units.degree, results.lift_coefficient   , cmap=cm.jet,linewidth=0, antialiased=False) 
     surf = axis_2.plot_surface(X, Y/Units.degree, results.drag_coefficient   , cmap=cm.jet,linewidth=0, antialiased=False) 
-       
+
+    axis_1.set_title('$C_L$') 
+    axis_2.set_title('$C_L$')            
     axis_1.set_ylabel('AoA') 
     axis_2.set_ylabel('AoA')  
     axis_1.set_xlabel('Mach') 
