@@ -103,6 +103,9 @@ html_theme_options = {
     # Add these logo-related options
     "logo": {
         "image_dark": "_static/leads_logo.png",  
+        "image_light": "_static/leads_logo.png",
+        "image_dark_alt": "_static/leads_logo.png",
+        "image_light_alt": "_static/leads_logo.png",
         "text": "RCAIDE",  # Optional: text to appear next to the logo
     },
     "default_mode": "light",
