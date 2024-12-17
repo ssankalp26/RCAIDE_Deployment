@@ -41,7 +41,7 @@
             <div style="font-size: 2em; margin-bottom: 15px;">📚</div>
             <h3 style="margin: 0 0 10px 0; color: #7dd3fc;">Tutorials</h3>
             <p style="margin: 0; opacity: 0.9;">Step-by-step guides to help you master RCAIDE's features.</p>
-            <a href="tutorials.html" style="color: #7dd3fc; text-decoration: none; display: inline-block; margin-top: 15px;">View Tutorials →</a>
+            <a href="tutorials/tutorials.html" style="color: #7dd3fc; text-decoration: none; display: inline-block; margin-top: 15px;">View Tutorials →</a>
         </div>
     </div>
 

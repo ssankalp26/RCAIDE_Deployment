@@ -12,17 +12,17 @@ These tutorials are designed to help you get started with RCAIDE. Set up basic a
       <div class="tutorial-container" style="padding: 25px; background: linear-gradient(145deg, #1a1f36, #2d3555); color: white; border-radius: 12px; transition: transform 0.2s;">
         <h3 style="margin-top:0; font-family:sans-serif;">Available Tutorials</h3>
         <p style="font-family:sans-serif; font-size:0.9em;">
-          Click on a tutorial to get started. Add more tutorial files and links as needed.
+          Click on a tutorial to get started.
         </p>
         <div class="tutorial-links" style="margin-top: 15px;">
           <!-- Just add a new line for each new tutorial. Make sure the filename matches the pattern section1_tutorial_X.rst -->
-          <a href="section1_tutorial_1.html" class="tutorial-link" style="display:inline-block; margin: 10px; color:white; text-decoration:none; font-size:1.1em; padding: 8px 16px; border: 1px solid white; border-radius:8px; transition: background 0.2s;">
-            Tutorial 1 - Turbofan Model
+          <a href="tutorial_01_turbofan_aircraft.html" class="tutorial-link" style="display:inline-block; margin: 10px; color:white; text-decoration:none; font-size:1.1em; padding: 8px 16px; border: 1px solid white; border-radius:8px; transition: background 0.2s;">
+            Tutorial 1 - Boeing 737-800 (Turbofan Aircraft)
           </a>
 
           <!-- Future tutorials can be added like this:
           <a href="section1_tutorial_2.html" class="tutorial-link" style="display:inline-block; margin: 10px; color:white; text-decoration:none; font-size:1.1em; padding: 8px 16px; border: 1px solid white; border-radius:8px; transition: background 0.2s;">
-            Tutorial 2 - Another Example
+            Tutorial 2 - Another Exampleasss
           </a>
           -->
         </div>
@@ -33,4 +33,4 @@ These tutorials are designed to help you get started with RCAIDE. Set up basic a
    :hidden:
    :glob:
 
-   section1_tutorial_*
+   tutorial_01_turbofan_aircraft
