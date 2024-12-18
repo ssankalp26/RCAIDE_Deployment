@@ -51,10 +51,10 @@ modules = [
     #'Tests/network_internal_combustion_engine/ICE_constant_speed_test.py',
     #'Tests/optimization/optimization_packages.py',
     'Tests/performance/aircraft_aerodynamic_analysis_test.py', 
-    #'Tests/performance/landing_field_length_test.py',
+    'Tests/performance/landing_field_length_test.py',
     'Tests/performance/payload_range_test.py', 
-    #'Tests/performance/take_off_field_length_test.py',
-    #'Tests/performance/take_off_weight_from_tofl_test.py',
+    'Tests/performance/take_off_field_length_test.py',
+    'Tests/performance/take_off_weight_from_tofl_test.py',
     'Tests/performance/V_n_diagram_test.py', 
     'Tests/propulsion/propeller_test.py',
 ]

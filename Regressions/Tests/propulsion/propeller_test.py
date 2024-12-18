@@ -60,12 +60,11 @@ def main():
     assert diff_thrust  < 1e-6
     
     # plot propeller 
-    plot_3d_rotor(propeller) 
+    plot_3d_rotor(propeller, save_figure=False, show_figure  = False) 
         
     return
 
 
 
 if __name__ == '__main__':
-    main()
-    plt.show()
+    main() 
