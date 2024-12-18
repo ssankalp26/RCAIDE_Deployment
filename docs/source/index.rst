@@ -82,6 +82,4 @@ Key Features
    tutorials/tutorials
    contributing
    api
-   _autosummary/RCAIDE.Framework
-   _autosummary/RCAIDE.Library
 
