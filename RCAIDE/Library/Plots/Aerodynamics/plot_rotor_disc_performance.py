@@ -60,7 +60,7 @@ def plot_rotor_disc_performance(prop,outputs,i=0,title=None,save_figure=False):
     cm  = 'jet'
     
     # plot the grid point velocities
-    fig  = plt.figure(figsize=(12,8))
+    fig  = plt.figure(figsize=(4,4))
     ax0  = fig.add_subplot(231, polar=True)
     p0   = ax0.contourf(psi, r, T,lev,cmap=cm)
     ax0.set_title('Thrust Distribution',pad=15)      
@@ -84,16 +84,16 @@ def plot_rotor_disc_performance(prop,outputs,i=0,title=None,save_figure=False):
  
     ax3  = fig.add_subplot(234, polar=True)       
     p3   = ax3.contourf(psi, r, va,lev,cmap=cm) 
-    ax3.set_title('Axial Velocity',pad=15) 
+    ax3.set_title('Va',pad=15) 
     ax3.set_rorigin(0)
     ax3.set_yticklabels([])
     plt.colorbar(p3, ax=ax3)    
      
     ax4  = fig.add_subplot(235, polar=True)       
     p4   = ax4.contourf(psi, r, vt,lev,cmap=cm) 
-    ax4.set_title('Tangential Velocity',pad=15) 
+    ax4.set_title('Vt',pad=15) 
     ax4.set_rorigin(0)
     ax4.set_yticklabels([])
-    plt.colorbar(p4, ax=ax4)    
-  
+    plt.colorbar(p4, ax=ax4)   
+ 
     return fig 

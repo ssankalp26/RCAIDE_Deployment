@@ -60,14 +60,16 @@ def vehicle_setup():
     vehicle.mass_properties.max_payload               =   118364 # kg
     vehicle.mass_properties.max_fuel                  =   150800 # kg
     vehicle.mass_properties.cargo                     =   99770 # kg
-     
-    # envelope properties
-    vehicle.flight_envelope.ultimate_load          = 3.5
-    vehicle.flight_envelope.positive_limit_load    = 1.5
     
-    vehicle.flight_envelope.design_range           = 3700 * Units.mile
+    fuel_percentage = 1.0
+
+    # envelope properties
+    vehicle.flight_envelope.ultimate_load = 3.5
+    vehicle.flight_envelope.limit_load    = 1.5
+    
+    vehicle.flight_envelope.design_range = 3700 * Units.mile
     vehicle.flight_envelope.design_cruise_altitude = 35000 * Units.feet
-    vehicle.flight_envelope.design_mach_number     = 0.75
+    vehicle.flight_envelope.design_mach_number  = 0.75
     
 
     # basic parameters
@@ -539,7 +541,7 @@ def vehicle_setup():
     
     # fuel 
     fuel                                        = RCAIDE.Library.Attributes.Propellants.Jet_A1()   
-    fuel.mass_properties.mass                   = vehicle.mass_properties.max_fuel
+    fuel.mass_properties.mass                   = fuel_percentage * vehicle.mass_properties.max_fuel
     fuel.origin                                 = [[23.0,0,3.913]]# vehicle.wings.main_wing.origin    
     fuel.mass_properties.center_of_gravity      = [[23.0,0,3.913]] #vehicle.wings.main_wing.mass_properties.center_of_gravity
     fuel.internal_volume                        = fuel.mass_properties.mass/fuel.density  

@@ -34,19 +34,19 @@ def vehicle_setup(regression_flag):
     #   Vehicle-level Properties
     # ------------------------------------------------------------------    
     # mass properties
-    vehicle.mass_properties.max_takeoff          = 227  
-    vehicle.mass_properties.takeoff              = 227  
-    vehicle.mass_properties.max_zero_fuel        = 227 
-    vehicle.mass_properties.cargo                = 0.0 
-       
-    # envelope properties       
-    vehicle.flight_envelope.ultimate_load        = 2.5
-    vehicle.flight_envelope.positive_limit_load  = 1.5
+    vehicle.mass_properties.max_takeoff   = 227  
+    vehicle.mass_properties.takeoff       = 227  
+    vehicle.mass_properties.max_zero_fuel = 227 
+    vehicle.mass_properties.cargo         = 0.0 
+
+    # envelope properties
+    vehicle.flight_envelope.ultimate_load = 2.5
+    vehicle.flight_envelope.limit_load    = 1.5
 
     # basic parameters
-    vehicle.reference_area                       = 9.34 
-    vehicle.systems.control                      = "fully powered" 
-    vehicle.systems.accessories                  = "medium range"
+    vehicle.reference_area                = 9.34 
+    vehicle.systems.control               = "fully powered" 
+    vehicle.systems.accessories           = "medium range"
 
 
     # ------------------------------------------------------------------        
