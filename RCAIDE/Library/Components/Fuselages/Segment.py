@@ -14,6 +14,41 @@ from RCAIDE.Library.Components import Component
 #  Segment
 # ----------------------------------------------------------------------------------------------------------------------   
 class Segment(Component):
+    """
+    A component representing a single cross-sectional segment of a fuselage
+    Attributes
+    ----------
+    tag : str
+        Identifier for the segment, defaults to 'segment'
+    prev : Component
+        Link to the previous segment in the fuselage chain
+    next : Component
+        Link to the next segment in the fuselage chain
+    percent_x_location : float
+        Longitudinal position as percentage of fuselage length
+    percent_y_location : float
+        Lateral position as percentage of fuselage width
+    percent_z_location : float
+        Vertical position as percentage of fuselage height
+    height : float
+        Vertical dimension of the segment cross-section
+    width : float
+        Lateral dimension of the segment cross-section
+    curvature : float
+        Shape parameter controlling cross-section corner rounding, defaults to 2
+
+    Notes
+    -----
+    Segments are the building blocks of a fuselage, defining its shape through
+    a series of connected cross-sections. Each segment's position is defined
+    relative to the overall fuselage dimensions.
+
+    **Definitions**
+    'Curvature'
+        Parameter controlling the smoothness of transition between vertical
+        and horizontal surfaces at the corners of the cross-section
+    """
+
     def __defaults__(self): 
         """This sets the default for fuselage segments in RCAIDE.
 

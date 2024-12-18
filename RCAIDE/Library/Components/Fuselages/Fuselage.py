@@ -17,13 +17,68 @@ from RCAIDE.Library.Methods.Weights.Moment_of_Inertia.compute_fuselage_moment_of
 #  Fuselage
 # ---------------------------------------------------------------------------------------------------------------------- 
 class Fuselage(Component):
-    """ This is a standard fuselage for a tube and wing aircraft.
-    
-    Assumptions:
-    Conventional fuselage
-    
-    Source:
-    N/A
+    """
+    A standard fuselage component for tube and wing aircraft configurations.
+
+    Attributes
+    ----------
+    tag : str
+        Identifier for the fuselage component, defaults to 'fuselage'
+    origin : list
+        Origin coordinates of the fuselage, defaults to [[0.0,0.0,0.0]]
+    aerodynamic_center : list
+        Location of the aerodynamic center, defaults to [0.0,0.0,0.0]
+    differential_pressure : float
+        Pressure differential between cabin and external atmosphere, defaults to 0.0
+    seats_abreast : float
+        Number of seats side by side in the cabin, defaults to 0.0
+    seat_pitch : float
+        Distance between seats, defaults to 0.0
+    number_coach_seats : float
+        Total number of coach seats, defaults to 0.0
+    areas : Data
+        Container for area-related parameters including front_projected, side_projected, and wetted areas
+    effective_diameter : float
+        Effective diameter of the fuselage, defaults to 0.0
+    width : float
+        Width of the fuselage, defaults to 0.0
+    heights : Data
+        Container for height measurements at maximum, quarter length, three quarters length, 
+        wing root quarter chord, and vertical root quarter chord
+    lengths : Data
+        Container for length measurements including nose, tail, total, cabin, fore_space, and aft_space
+    x_rotation : float
+        Rotation angle around x-axis, defaults to 0.0
+    y_rotation : float
+        Rotation angle around y-axis, defaults to 0.0
+    z_rotation : float
+        Rotation angle around z-axis, defaults to 0.0
+    fineness : Data
+        Container for fineness ratios of nose and tail
+    nose_curvature : float
+        Curvature parameter for the nose section, defaults to 1.5
+    tail_curvature : float
+        Curvature parameter for the tail section, defaults to 1.5
+    fuel_tanks : Container
+        Container for fuel tank components
+    vsp_data : Data
+        Container for OpenVSP-related parameters including xsec_surf_id and xsec_num
+    Segments : Container
+        Container for fuselage segments
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    This class represents a conventional tube and wing aircraft fuselage component.
+    It provides functionality for defining the geometry, structural properties, and
+    configuration of an aircraft fuselage.
+
+    **Assumptions:**
+        Conventional fuselage configuration
+
     """
     
     def __defaults__(self):

@@ -14,13 +14,28 @@ from RCAIDE.Library.Methods.Weights.Moment_of_Inertia.compute_fuselage_moment_of
 #  Tube_Fuselage
 # ----------------------------------------------------------------------------------------------------------------------  
 class Tube_Fuselage(Fuselage):
-    """ This is a standard fuselage for a tube and wing aircraft.
-    
-    Assumptions:
-    Conventional fuselage
-    
-    Source:
-    N/A
+    """
+    A conventional tube-shaped fuselage component for standard aircraft configurations
+
+    Attributes
+    ----------
+    tag : str
+        Identifier for the fuselage component, defaults to 'tube_fuselage'
+
+    Notes
+    -----
+    This class represents a conventional tube and wing aircraft fuselage.
+    Implementation inherits all base geometric and structural properties from
+    the parent Fuselage class.
+
+    **Definitions**
+    'Tube Fuselage'
+        Standard cylindrical fuselage configuration with tapered ends,
+        commonly used in commercial and general aviation aircraft
+
+    References
+    ----------
+    None
     """
     
     def __defaults__(self):

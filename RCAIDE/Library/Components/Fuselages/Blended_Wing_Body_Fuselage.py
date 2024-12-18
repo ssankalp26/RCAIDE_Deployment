@@ -16,12 +16,29 @@ import numpy as np
 #  Blended_Wing_Body_Fuselage
 # ----------------------------------------------------------------------------------------------------------------------  
 class Blended_Wing_Body_Fuselage(Fuselage):
-    """ This is a blended wing body fuselage class 
-    
-    Assumptions: 
-    
-    Source:
-    N/A
+    """
+    A blended wing body fuselage component that inherits from the base Fuselage class.
+
+    Attributes
+    ----------
+    tag : str
+        Identifier for the fuselage component, defaults to 'bwb_fuselage'
+    aft_centerbody_area : float
+        Area of the aft centerbody section, defaults to 0.0
+    aft_centerbody_taper : float
+        Taper ratio of the aft centerbody section, defaults to 0.0
+    cabin_area : float
+        Total cabin area, defaults to 0.0
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    This class extends the base Fuselage class to represent a blended wing body configuration,
+    where the fuselage smoothly transitions into the wing structure.
+
     """
     
     def __defaults__(self):
