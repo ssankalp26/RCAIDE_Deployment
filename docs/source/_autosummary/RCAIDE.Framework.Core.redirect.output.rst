@@ -1,4 +1,4 @@
-﻿RCAIDE.Framework.Core.redirect.output
+RCAIDE.Framework.Core.redirect.output
 =====================================
 
 .. currentmodule:: RCAIDE.Framework.Core.redirect

@@ -1,4 +1,4 @@
-﻿RCAIDE.Library.Attributes.Propellants.Nickel.Nickel
+RCAIDE.Library.Attributes.Propellants.Nickel.Nickel
 ===================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Nickel

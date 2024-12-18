@@ -1,4 +1,4 @@
-﻿RCAIDE.Framework.Optimization.Packages.additive.additive\_setup.Additive\_Solver
+RCAIDE.Framework.Optimization.Packages.additive.additive\_setup.Additive\_Solver
 ================================================================================
 
 .. currentmodule:: RCAIDE.Framework.Optimization.Packages.additive.additive_setup

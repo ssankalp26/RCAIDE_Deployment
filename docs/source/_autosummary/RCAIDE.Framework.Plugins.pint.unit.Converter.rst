@@ -1,4 +1,4 @@
-﻿RCAIDE.Framework.Plugins.pint.unit.Converter
+RCAIDE.Framework.Plugins.pint.unit.Converter
 ============================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.unit

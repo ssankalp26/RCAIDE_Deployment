@@ -1,4 +1,4 @@
-﻿RCAIDE.Library.Attributes.Propellants.Epoxy.Epoxy
+RCAIDE.Library.Attributes.Propellants.Epoxy.Epoxy
 =================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Epoxy

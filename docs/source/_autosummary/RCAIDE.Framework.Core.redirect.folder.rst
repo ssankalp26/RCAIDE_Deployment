@@ -1,4 +1,4 @@
-﻿RCAIDE.Framework.Core.redirect.folder
+RCAIDE.Framework.Core.redirect.folder
 =====================================
 
 .. currentmodule:: RCAIDE.Framework.Core.redirect

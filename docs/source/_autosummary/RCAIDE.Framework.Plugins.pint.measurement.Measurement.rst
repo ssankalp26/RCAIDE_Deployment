@@ -1,4 +1,4 @@
-﻿RCAIDE.Framework.Plugins.pint.measurement.Measurement
+RCAIDE.Framework.Plugins.pint.measurement.Measurement
 =====================================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.measurement

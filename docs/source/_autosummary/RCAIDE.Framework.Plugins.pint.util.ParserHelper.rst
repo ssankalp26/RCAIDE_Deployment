@@ -1,4 +1,4 @@
-﻿RCAIDE.Framework.Plugins.pint.util.ParserHelper
+RCAIDE.Framework.Plugins.pint.util.ParserHelper
 ===============================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.util

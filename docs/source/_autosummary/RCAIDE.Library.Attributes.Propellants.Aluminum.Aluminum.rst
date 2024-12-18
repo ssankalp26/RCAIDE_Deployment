@@ -1,4 +1,4 @@
-﻿RCAIDE.Library.Attributes.Propellants.Aluminum.Aluminum
+RCAIDE.Library.Attributes.Propellants.Aluminum.Aluminum
 =======================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Aluminum

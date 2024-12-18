@@ -1,4 +1,4 @@
-﻿RCAIDE.Framework.Plugins.pint.unit.UnitsContainer
+RCAIDE.Framework.Plugins.pint.unit.UnitsContainer
 =================================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.unit

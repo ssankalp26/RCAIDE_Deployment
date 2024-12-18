@@ -1,4 +1,4 @@
-﻿RCAIDE.Library.Attributes.Propellants.Bidirectional\_Carbon\_Fiber.Bidirectional\_Carbon\_Fiber
+RCAIDE.Library.Attributes.Propellants.Bidirectional\_Carbon\_Fiber.Bidirectional\_Carbon\_Fiber
 ===============================================================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Bidirectional_Carbon_Fiber

@@ -1,4 +1,4 @@
-﻿RCAIDE.Framework.Optimization.Packages.trmm.Trust\_Region.Trust\_Region
+RCAIDE.Framework.Optimization.Packages.trmm.Trust\_Region.Trust\_Region
 =======================================================================
 
 .. currentmodule:: RCAIDE.Framework.Optimization.Packages.trmm.Trust_Region

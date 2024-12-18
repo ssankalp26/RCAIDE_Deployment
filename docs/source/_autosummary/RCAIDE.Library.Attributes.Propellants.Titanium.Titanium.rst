@@ -1,4 +1,4 @@
-﻿RCAIDE.Library.Attributes.Propellants.Titanium.Titanium
+RCAIDE.Library.Attributes.Propellants.Titanium.Titanium
 =======================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Titanium

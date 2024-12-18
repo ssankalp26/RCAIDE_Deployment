@@ -1,4 +1,4 @@
-﻿RCAIDE.Framework.Plugins.pint.context.Context
+RCAIDE.Framework.Plugins.pint.context.Context
 =============================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.context

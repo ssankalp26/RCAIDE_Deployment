@@ -1,4 +1,4 @@
-﻿RCAIDE.Framework.Plugins.pint.unit.PrefixDefinition
+RCAIDE.Framework.Plugins.pint.unit.PrefixDefinition
 ===================================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.unit

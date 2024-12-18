@@ -1,4 +1,4 @@
-﻿RCAIDE.Library.Attributes.Propellants.Solid.Solid
+RCAIDE.Library.Attributes.Propellants.Solid.Solid
 =================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Solid

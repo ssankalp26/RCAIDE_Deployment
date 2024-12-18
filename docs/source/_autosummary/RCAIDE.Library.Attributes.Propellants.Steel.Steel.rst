@@ -1,4 +1,4 @@
-﻿RCAIDE.Library.Attributes.Propellants.Steel.Steel
+RCAIDE.Library.Attributes.Propellants.Steel.Steel
 =================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Steel

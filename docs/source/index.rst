@@ -72,17 +72,16 @@ Key Features
 - **Cross-platform**: Works on Windows, macOS, and Linux
 
 
-.. autosummary::
-   :toctree: generated/
-   :recursive:
-      :maxdepth: 2
+.. toctree::
+   :maxdepth: 4
    :caption: Contents:
    :hidden:
-   :caption: Contents:
 
    install
    quick_start
    tutorials/tutorials
    contributing
    api
+   _autosummary/RCAIDE.Framework
+   _autosummary/RCAIDE.Library
 

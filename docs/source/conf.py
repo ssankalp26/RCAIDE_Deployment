@@ -35,8 +35,7 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
     'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon' , # Add support for Google/NumPy style docstrings
-    'sphinx.ext.autosectionlabel' 
+    'sphinx.ext.napoleon'  ,
     'nbsphinx',
     'sphinx.ext.mathjax',
 ]
@@ -78,10 +77,6 @@ autodoc_default_options = {
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
-
-add_module_names = False
-
-navigation_depth = 2
 
 html_static_path = ['_static']
 html_theme = 'pydata_sphinx_theme'
@@ -137,5 +132,3 @@ html_css_files = ['custom.css']  # Add custom styles (optional)
 
 # Mock load_plugin to avoid runtime errors
 sys.modules['RCAIDE.Framework.Plugins.load_plugin'] = Mock()
-
-autosectionlabel_prefix_document = False

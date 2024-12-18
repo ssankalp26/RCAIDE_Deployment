@@ -1,4 +1,4 @@
-﻿RCAIDE.Framework.Plugins.pint.compat.ChainMap
+RCAIDE.Framework.Plugins.pint.compat.ChainMap
 =============================================
 
 .. currentmodule:: RCAIDE.Framework.Plugins.pint.compat
