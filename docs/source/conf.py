@@ -23,7 +23,7 @@ author = 'Laboratory of Electric Aircraft Design and Sustainavility'
 release = '1.0.0'
 
 # Add these lines for the logo
-html_logo = '_static/leads_logo.png'  # Add your logo file to the _static directory
+html_logo = '../../source/_static/leads_logo.png'  # Add your logo file to the _static directory
 html_title = "RCAIDE"
 
 
@@ -76,7 +76,6 @@ napoleon_type_aliases = None
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
 html_static_path = ['_static']
 html_theme = 'pydata_sphinx_theme'
 
@@ -116,7 +115,7 @@ html_baseurl = "https://docs.rcaide.leadsresearchgroup.com"
 html_context = {
     "default_mode": "light",
     "header_links": [
-        ("GitHub", "https://github.com/RCAIDE/RCAIDE", True),
+        ("GitHub", "https://github.com/leadsgroup/RCAIDE_LEADS", True),
     ]
 }
 
