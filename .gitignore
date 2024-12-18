@@ -71,7 +71,6 @@ nosetests.xml
 
 # Images
 *.pdf
-*.png
  
 /doc/html
 /doc/latex

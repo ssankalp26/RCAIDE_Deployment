@@ -1,6 +1,7 @@
-===
-API
-===
+API Reference
+==============
+
+:doc:`RCAIDE API Documentation <RCAIDE>`
 
 .. autosummary::
    :toctree: _autosummary
@@ -9,3 +10,7 @@ API
 
     RCAIDE.Library
     RCAIDE.Framework
+
+
+
+
