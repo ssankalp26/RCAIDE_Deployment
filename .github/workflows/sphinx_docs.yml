@@ -39,6 +39,7 @@ jobs:
           pip install -r requirements.txt
           pip install setuptools
           pip install pandoc
+          pip install Pint
 
       - name: Generate API Documentation
         run: |
