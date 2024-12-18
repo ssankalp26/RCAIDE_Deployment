@@ -23,7 +23,7 @@ author = 'Laboratory of Electric Aircraft Design and Sustainavility'
 release = '1.0.0'
 
 # Add these lines for the logo
-html_logo = '../../source/_static/leads_logo.png'  # Add your logo file to the _static directory
+html_logo = 'source/_static/leads_logo.png'  # Add your logo file to the _static directory
 html_title = "RCAIDE"
 
 
