@@ -1,5 +1,5 @@
 ## @ingroup Methods-Performance
-# generate_V_n_diagram.py
+# V_n_diagram.py
 #
 # Created:  Nov 2018, S. Karpuk
 # Modified:
@@ -12,7 +12,8 @@
 import RCAIDE
 from RCAIDE.Framework.Core import Data
 from RCAIDE.Framework.Core import Units 
-from RCAIDE.Framework.Mission.Common  import Results  
+from RCAIDE.Framework.Mission.Common  import Results 
+from RCAIDE.Library.Methods.Aerodynamics.Common.Lift import compute_max_lift_coeff 
 
 # package imports
 import numpy as np
@@ -23,7 +24,7 @@ import matplotlib.pyplot as plt
 # ----------------------------------------------------------------------
 
 ## @ingroup Methods-Performance
-def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
+def V_n_diagram(vehicle,analyses,weight,altitude,delta_ISA):
     
     """ Computes a V-n diagram for a given aircraft and given regulations for ISA conditions
 
@@ -40,8 +41,8 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
       minimum_lift_coefficient             [Unitless]
       chords.mean_aerodynamic              [m]
       envelope.FARpart_number              [Unitless]
-        positive_limit_load               [Unitless]
-        negative_limit_load               [Unitless]
+        limit_loads.positive               [Unitless]
+        limit_loads.negative               [Unitless]
         cruise_mach                        [Unitless]
     weight                                 [kg]
     altitude                               [m]
@@ -56,22 +57,34 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
     Description:
     The script creates an aircraft V-n diagram based on the input parameters specified by the user.
     Depending on the certification flag, an appropriate diagram, output and log files are created.
-    """
+    """        
+
+    #------------------------
+    # Create a log - file
+    #------------------------
+    flog = open("V_n_diagram_" + vehicle.tag + ".log","w")
     
-    weight =  vehicle.mass_properties.max_takeoff
- 
+    print('Running the V-n diagram calculation...')
+    flog.write('Running the V-n diagram calculation...\n')
+    flog.write('Aircraft: ' + vehicle.tag + '\n')
+    flog.write('Category: ' + vehicle.flight_envelope.category + '\n')
+    flog.write('FAR certification: Part ' + str(vehicle.flight_envelope.FAR_part_number) + '\n\n')
+    
     # ----------------------------------------------
     # Unpack
-    # ---------------------------------------------- 
+    # ----------------------------------------------
+    flog.write('Unpacking the input and calculating required inputs...\n')
     FAR_part_number = vehicle.flight_envelope.FAR_part_number
     atmo            = analyses.atmosphere
-    Mc              = vehicle.flight_envelope.design_mach_number
+    Mc              = vehicle.flight_envelope.cruise_mach
 
     for wing in vehicle.wings: 
         reference_area  = vehicle.reference_area 
-        Cmac            = wing.chords.mean_aerodynamic 
-        pos_limit_load  = vehicle.flight_envelope.positive_limit_load
-        neg_limit_load  = vehicle.flight_envelope.positive_limit_load
+        Cmac            = wing.chords.mean_aerodynamic
+
+    for envelope in vehicle:
+        pos_limit_load  = vehicle.flight_envelope.limit_loads.positive
+        neg_limit_load  = vehicle.flight_envelope.limit_loads.negative
 
     category_tag = vehicle.flight_envelope.category
     
@@ -91,20 +104,32 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
     # Computing lift-curve slope
     # ------------------------------ 
     results =  evalaute_aircraft(vehicle,altitude,Vc) 
-    CLa     =  results.segments.cruise.conditions.static_stability.derivatives.Clift_alpha[0, 0] 
+    CLa     =  results.segments.cruise.conditions.static_stability.derivatives.CLift_alpha[0, 0] 
 
     # -----------------------------------------------------------
     # Determining vehicle minimum and maximum lift coefficients
     # -----------------------------------------------------------
-    if vehicle.flight_envelope.maximum_lift_coefficient != None:
-        maximum_lift_coefficient = vehicle.flight_envelope.maximum_lift_coefficient
-    else:
-        raise ValueError("Maximum lift coefficient not specified.")
-
-    if vehicle.flight_envelope.minimum_lift_coefficient != None:
-        minimum_lift_coefficient = vehicle.flight_envelope.minimum_lift_coefficient
-    else: 
-        raise ValueError("Minimum lift coefficient not specified.")
+    try:   # aircraft maximum lift informed by user
+        maximum_lift_coefficient = vehicle.maximum_lift_coefficient
+    except:
+        # Condition to CLmax calculation: 0.333 * Vc @ specified altitude, ISA
+        conditions.freestream                   = Data()
+        conditions.freestream.density           = atmo_values.density
+        conditions.freestream.dynamic_viscosity = atmo_values.dynamic_viscosity
+        conditions.freestream.velocity          = 0.333 * Vc
+        try:
+            max_lift_coefficient, induced_drag_high_lift \
+                                             = compute_max_lift_coeff(vehicle,conditions)
+            maximum_lift_coefficient         = max_lift_coefficient[0][0]
+            vehicle.maximum_lift_coefficient = maximum_lift_coefficient
+            
+        except:
+            raise ValueError("Maximum lift coefficient calculation error. Please, check inputs")
+        
+    try:    # aircraft minimum lift informed by user
+        minimum_lift_coefficient = vehicle.minimum_lift_coefficient 
+    except:
+        raise ValueError("The value not found. Specify minimum lift coefficient")
              
     # -----------------------------------------------------------------------------
     # Convert all terms to English (Used for FAR) and remove elements from arrays
@@ -129,51 +154,65 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
         
     # --------------------------------------------------
     # Establish limit maneuver load factors n+ and n- 
-    # -------------------------------------------------- 
+    # --------------------------------------------------
+    flog.write('Establish limit maneuver load factors n+ and n-...\n')
     # CFR Part 25
     # Positive and negative limits
-    if FAR_part_number == '25':
-        # Positive limit 
+    if FAR_part_number == 25:
+        # Positive limit
+        flog.write('    Estimating n+...\n')
         load_factors_pos[2] = 2.1 + 24000 / (weight + 10000)
-        if load_factors_pos[2] < 2.5: 
+        if load_factors_pos[2] < 2.5:
+            flog.write('        Defined positive limit load factor < 2.5. Setting 2.5...\n')
             load_factors_pos[2] = 2.5
         elif load_factors_pos[2] < pos_limit_load:
             load_factors_pos[2] = pos_limit_load
-        elif load_factors_pos[2] > 3.8: 
+        elif load_factors_pos[2] > 3.8:
+            flog.write('        Defined positive limit load factor > 3.8. Setting 3.8...\n')
             load_factors_pos[2] = 3.8
 
-        # Negative limit 
+        # Negative limit
+        flog.write('    Estimating n-...\n')
         load_factors_neg[2] = neg_limit_load
-        if load_factors_neg[2] > -1: 
+        if load_factors_neg[2] > -1:
+            flog.write('        Negative limit load factor magnitude is too small. Setting to -1...\n')
             load_factors_neg[2] = -1
 
-    elif FAR_part_number == '23':
+    elif FAR_part_number == 23:
         if category_tag == 'normal' or category_tag == 'commuter':
-            # Positive limit 
+            # Positive limit
+            flog.write('    Estimating n+...\n')
             load_factors_pos[2] = 2.1 + 24000 / (weight + 10000)
-            if load_factors_pos[2] < 2.5: 
+            if load_factors_pos[2] < 2.5:
+                flog.write('        Defined positive limit load factor < 2.5. Setting 2.5...\n')
                 load_factors_pos[2] = 2.5
             elif load_factors_pos[2] < pos_limit_load:
                 load_factors_pos[2] = pos_limit_load
-            elif load_factors_pos[2] > 3.8: 
+            elif load_factors_pos[2] > 3.8:
+                flog.write('        Defined positive limit load factor > 3.8. Setting 3.8...\n')
                 load_factors_pos[2] = 3.8
 
-            # Negative limit 
+            # Negative limit
+            flog.write('    Estimating n-...\n')
             load_factors_neg[2] = -0.4 * load_factors_pos[2]
             
         elif category_tag == 'utility':
-            # Positive limit 
+            # Positive limit
+            flog.write('    Estimating n+...\n')
             load_factors_pos[2] =  pos_limit_load
-            if load_factors_pos[2] < 4.4: 
-                load_factors_pos[2] = 4.4
+            if load_factors_pos[2] < 4.4:
+                 flog.write('        Defined positive limit load factor < 4.4. Setting 4.4...\n')
+                 load_factors_pos[2] = 4.4
                  
-            # Negative limit 
+            # Negative limit
+            flog.write('    Estimating n-...\n')
             load_factors_neg[2] = -0.4 * load_factors_pos[2]
             
         elif category_tag == 'acrobatic':
             # Positive limit
             load_factors_pos[2] = pos_limit_load
-            if load_factors_pos[2] < 6.0: 
+            if load_factors_pos[2] < 6.0:
+                flog.write('        Defined positive limit load factor < 6.0. Setting 6.0...\n')
                 load_factors_pos[2] = 6.0
 
             # Negative limit    
@@ -187,7 +226,7 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
 
     # Check input of the limit load
     if abs(neg_limit_load) > abs(load_factors_neg[2]):
-        load_factors_neg[2] = -neg_limit_load
+        load_factors_neg[2] = neg_limit_load
 
     #----------------------------------------
     # Generate a V-n diagram data structure
@@ -215,14 +254,16 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
     V_n_data.reference_area           = reference_area
     V_n_data.maximum_lift_coefficient = maximum_lift_coefficient
     V_n_data.minimum_lift_coefficient = minimum_lift_coefficient
-    V_n_data.positive_limit_load      = load_factors_pos[2]
-    V_n_data.negative_limit_load      = load_factors_neg[2]
+    V_n_data.limit_loads.positive     = load_factors_pos[2]
+    V_n_data.limit_loads.negative     = load_factors_neg[2]
     
     # --------------------------------------------------
     # Computing critical speeds (Va, Vc, Vb, Vd, Vs1)
-    # -------------------------------------------------- 
+    # --------------------------------------------------
+    flog.write('Computing critical speeds (Va, Vc, Vb, Vd, Vs1)...\n')
     
-    # Calculate Stall and Maneuver speeds 
+    # Calculate Stall and Maneuver speeds
+    flog.write('    Computing Vs1 and Va...\n')
     stall_maneuver_speeds(V_n_data)  
         
     # convert speeds to KEAS for future calculations 
@@ -236,17 +277,20 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
     Va_neg        = V_n_data.Va.negative
     Va_pos        = V_n_data.Va.positive 
     Va_neg        = V_n_data.Va.negative 
- 
-    if Va_neg > Vc and Va_neg > Va_pos: 
+
+    flog.write('    Checking Vc wrt Va...\n')
+    if Va_neg > Vc and Va_neg > Va_pos:
+        flog.write('        Negative Va > Vc. Setting Vc = 1.15 * Va...\n')
         Vc = 1.15 * Va_neg
-    elif Va_pos > Vc and Va_neg < Va_pos: 
+    elif Va_pos > Vc and Va_neg < Va_pos:
+        flog.write('        Positive Va > Vc. Setting Vc = 1.15 * Va...\n')
         Vc = 1.15 * Va_pos
     
     # Gust speeds between Vb and Vc (EAS) and minimum Vc
     miu = 2 * wing_loading / (rho * Cmac * CLa * sea_level_gravity)
     Kg  = 0.88 * miu / (5.3 + miu)
           
-    if FAR_part_number == '25':
+    if FAR_part_number == 25:
         if altitude < 15000:
             Uref_cruise = (-0.0008 * altitude + 56)
             Uref_rough  = Uref_cruise
@@ -260,7 +304,7 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
         coefs = [1, -Uref_cruise * (2.64 + (Kg * CLa * airspeeds_pos[1]**2)/(498 * wing_loading)), 1.72424 * Uref_cruise**2 - airspeeds_pos[1]**2]
         Vc1   = max(np.roots(coefs))
         
-    elif FAR_part_number == '23':           
+    elif FAR_part_number == 23:           
         if altitude < 20000:
             Uref_cruise = 50;
             Uref_dive   = 25;
@@ -286,14 +330,17 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
             if wing_loading >= 20:       
                 Vc1 = (-0.055 * wing_loading + 34.1) * wing_loading **0.5
 
-    # checking input Cruise speed 
-    if Vc1 > Vc: 
+    # checking input Cruise speed
+    flog.write('    Checking Vc wrt Vcmin... \n')
+    if Vc1 > Vc:
+        flog.write('        Specified cruise speed is less than the minimum required. Setting th minimum required value...\n')
         Vc = Vc1
 
-    # Dive speed 
-    if FAR_part_number == '25':        
+    # Dive speed
+    flog.write('    Computing Vd...\n')
+    if FAR_part_number == 25:        
         airspeeds_pos[4] = 1.25 * Vc
-    elif FAR_part_number == '23':
+    elif FAR_part_number == 23:
         if category_tag == 'acrobatic':
             airspeeds_pos[4] = 1.55 * Vc1
             if wing_loading > 20:
@@ -305,8 +352,10 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
         else:
             airspeeds_pos[4] = 1.4 * Vc1
             if wing_loading > 20:
-                airspeeds_pos[4] = (-0.000625 * wing_loading + 1.4125) * Vc1 
-        if airspeeds_pos[4] < 1.15 * Vc: 
+                airspeeds_pos[4] = (-0.000625 * wing_loading + 1.4125) * Vc1
+            
+        if airspeeds_pos[4] < 1.15 * Vc:
+            flog.write('        Based on min Vc, Vd is too close Vc. Setting Vd = 1.15 Vc...\n')
             airspeeds_pos[4] = 1.15 * Vc
    
     Vd               = airspeeds_pos[4]
@@ -333,7 +382,8 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
 
     #------------------------
     # Create Stall lines
-    #------------------------ 
+    #------------------------
+    flog.write('Creating stall lines...\n')
     Num_of_points = 20                                            # number of points for the stall line
     upper_bound = 2;
     lower_bound = 1;
@@ -342,7 +392,8 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
 
     # ----------------------------------------------
     # Determine Gust loads
-    # ---------------------------------------------- 
+    # ----------------------------------------------
+    flog.write('Calculating gust loads...\n')
     V_n_data.gust_data           = Data()
     V_n_data.gust_data.airspeeds = Data()
     
@@ -362,10 +413,17 @@ def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
 
     # ----------------------------------------------
     # Post-processing the V-n diagram
-    # ---------------------------------------------- 
-    V_n_data.positive_limit_load = max(V_n_data.load_factors.positive)
-    V_n_data.negative_limit_load = min(V_n_data.load_factors.negative) 
-    post_processing(category_tag, Uref_rough, Uref_cruise, Uref_dive, V_n_data, vehicle) 
+    # ----------------------------------------------
+    flog.write('Post-Processing...\n')
+    V_n_data.limit_loads.positive = max(V_n_data.load_factors.positive)
+    V_n_data.limit_loads.negative = min(V_n_data.load_factors.negative)
+    
+    post_processing(category_tag, Uref_rough, Uref_cruise, Uref_dive, V_n_data, vehicle)
+
+    print('Calculation complete...')
+    flog.write('Calculation complete\n')
+    flog.close()
+  
     return V_n_data
 
       
@@ -659,7 +717,7 @@ def gust_loads(category_tag, V_n_data, Kg, CLa, Num_of_points, FAR_part_number, 
             negative                            [kts]
         load_factors.positive                   [Unitless]
             negative                            [Unitless]
-        positive_limit_load                    [Unitless]
+        limit_loads.positive                    [Unitless]
             negative                            [Unitless]
         weight                                  [lb]
         wing_loading                            [lb/ft**2]
@@ -707,7 +765,7 @@ def gust_loads(category_tag, V_n_data, Kg, CLa, Num_of_points, FAR_part_number, 
         airspeeds        = V_n_data.airspeeds.positive
         load_factors     = V_n_data.load_factors.positive
         lift_coefficient = V_n_data.maximum_lift_coefficient
-        limit_load       = V_n_data.positive_limit_load
+        limit_load       = V_n_data.limit_loads.positive
         Uref_rough       = V_n_data.gust_data.airspeeds.rough_gust
         Uref_cruise      = V_n_data.gust_data.airspeeds.cruise_gust
         Uref_dive        = V_n_data.gust_data.airspeeds.dive_gust
@@ -716,7 +774,7 @@ def gust_loads(category_tag, V_n_data, Kg, CLa, Num_of_points, FAR_part_number, 
         airspeeds        = V_n_data.airspeeds.negative
         load_factors     = V_n_data.load_factors.negative
         lift_coefficient = V_n_data.minimum_lift_coefficient
-        limit_load       = V_n_data.negative_limit_load
+        limit_load       = V_n_data.limit_loads.negative
         Uref_rough       = -V_n_data.gust_data.airspeeds.rough_gust
         Uref_cruise      = -V_n_data.gust_data.airspeeds.cruise_gust
         Uref_dive        = -V_n_data.gust_data.airspeeds.dive_gust
@@ -975,7 +1033,8 @@ def post_processing(category_tag, Uref_rough, Uref_cruise, Uref_dive, V_n_data, 
     ax.set_ylabel('Load Factor')
     ax.set_title(vehicle.tag + '  Weight=' + str(round(weight)) + 'lb  ' + ' Altitude=' + str(round(altitude)) + 'ft ')
     ax.legend()
-    ax.grid() 
+    ax.grid()
+    plt.savefig('Vn_diagram_'+ vehicle.tag + '.png')
 
     #---------------------------------
     # Creating results output file
@@ -985,7 +1044,7 @@ def post_processing(category_tag, Uref_rough, Uref_cruise, Uref_dive, V_n_data, 
     fres.write('-------------------\n')
     fres.write('Aircraft: ' + vehicle.tag + '\n')
     fres.write('category: ' + vehicle.flight_envelope.category + '\n')
-    fres.write('FAR certification: Part ' +  vehicle.flight_envelope.FAR_part_number  + '\n')
+    fres.write('FAR certification: Part ' + str(vehicle.flight_envelope.FAR_part_number) + '\n')
     fres.write('Weight = ' + str(round(weight)) + ' lb\n')
     fres.write('Altitude = ' + str(round(altitude)) + ' ft\n')
     fres.write('---------------------------------------------------------------\n\n')
@@ -1068,4 +1127,3 @@ def convert_keas(V_n_data):
     V_n_data.Vs1.positive       = Vs1_pos
     
     
-    return

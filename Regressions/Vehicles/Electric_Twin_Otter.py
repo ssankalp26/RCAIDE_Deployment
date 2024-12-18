@@ -36,25 +36,25 @@ def vehicle_setup(cell_chemistry, btms_type):
     # ################################################# Vehicle-level Properties ########################################################  
 
     # mass properties
-    vehicle.mass_properties.max_takeoff         = 5670  # kg 
-    vehicle.mass_properties.takeoff             = 5670  # kg 
-    vehicle.mass_properties.max_zero_fuel       = 5670  # kg 
-      
-    vehicle.flight_envelope.ultimate_load       = 5.7
-    vehicle.flight_envelope.positive_limit_load = 3.8 
-    vehicle.reference_area                      = 39 
-    vehicle.passengers                          = 19
-    vehicle.systems.control                     = "fully powered"
-    vehicle.systems.accessories                 = "commuter"    
-          
-    cruise_speed                                = 130 * Units.kts
-    altitude                                    = 5000 * Units.feet
-    atmo                                        = RCAIDE.Framework.Analyses.Atmospheric.US_Standard_1976()
-    freestream                                  = atmo.compute_values (0.)
-    freestream0                                 = atmo.compute_values (altitude)
-    mach_number                                 = (cruise_speed/freestream.speed_of_sound)[0][0] 
-    vehicle.design_dynamic_pressure             = ( .5 *freestream0.density*(cruise_speed*cruise_speed))[0][0]
-    vehicle.design_mach_number                  =  mach_number
+    vehicle.mass_properties.max_takeoff   = 5670  # kg 
+    vehicle.mass_properties.takeoff       = 5670  # kg 
+    vehicle.mass_properties.max_zero_fuel = 5670  # kg 
+
+    vehicle.flight_envelope.ultimate_load = 5.7
+    vehicle.flight_envelope.limit_load    = 3.8 
+    vehicle.reference_area                = 39 
+    vehicle.passengers                    = 19
+    vehicle.systems.control               = "fully powered"
+    vehicle.systems.accessories           = "commuter"    
+    
+    cruise_speed                          = 130 * Units.kts
+    altitude                              = 5000 * Units.feet
+    atmo                                  = RCAIDE.Framework.Analyses.Atmospheric.US_Standard_1976()
+    freestream                            = atmo.compute_values (0.)
+    freestream0                           = atmo.compute_values (altitude)
+    mach_number                           = (cruise_speed/freestream.speed_of_sound)[0][0] 
+    vehicle.design_dynamic_pressure       = ( .5 *freestream0.density*(cruise_speed*cruise_speed))[0][0]
+    vehicle.design_mach_number            =  mach_number
 
          
     # ##########################################################  Wings ################################################################    
