@@ -194,7 +194,7 @@ class Units:
     kms_to_ms = length_conversions['km']  # km/s (just scale length)
 
     speed_conversions = {
-        'meter_per_second': 1.0,
+        'm/s': 1.0,
         'kilometer_per_second': kms_to_ms,
         'knots': knot_to_ms,
         'mile_per_hour': mph_to_ms,
