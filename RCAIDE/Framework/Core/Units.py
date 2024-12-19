@@ -302,6 +302,8 @@ class Units:
         "millilitre": "milliliter",
 
         "lbm": "pound",  # sometimes used, map to pound (mass)
+        "lbs": "pound",
+        "lb": "pound",
     }
 
     @staticmethod
