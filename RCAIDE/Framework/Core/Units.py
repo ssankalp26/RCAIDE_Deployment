@@ -189,8 +189,8 @@ class Units:
     # fpm = foot / minute
     knot_to_ms = length_conversions['nautical_mile'] / time_conversions['hour']
     mph_to_ms = length_conversions['mile'] / time_conversions['hour']
-    fps_to_ms = length_conversions['foot']
-    fpm_to_ms = length_conversions['foot'] / time_conversions['minute']
+    fps_to_ms = length_conversions['ft']
+    fpm_to_ms = length_conversions['ft'] / time_conversions['minute']
     kms_to_ms = length_conversions['km']  # km/s (just scale length)
 
     speed_conversions = {
