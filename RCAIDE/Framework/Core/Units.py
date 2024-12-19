@@ -358,6 +358,10 @@ class Units():
     
     @classmethod
     @property
+    def lb(cls): return cls(cls._POUND_TO_KG)
+    
+    @classmethod
+    @property
     def ounce(cls): return cls(cls._OUNCE_TO_KG)
     
     @classmethod
