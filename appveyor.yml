@@ -28,6 +28,7 @@ install:
     - PATH=$PATH:/home/appveyor/.local/bin
     - python3 setup.py develop --user 
     - cd RCAIDE
+    - PATH=$PATH:/home/appveyor/.local/bin/RCAIDE
     - python3 -m pip install coveralls==3.2.0
     - cd ..
     - cd Regressions
