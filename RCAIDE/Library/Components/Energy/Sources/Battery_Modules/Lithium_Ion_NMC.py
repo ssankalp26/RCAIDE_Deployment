@@ -1,4 +1,4 @@
-# RCAIDE/Library/Components/Energy/Sources/Battery_Modules/Lithium_Ion_NMC.py
+# RCAIDE/Library/Compoments/Energy/Sources/Batteries/Lithium_Ion_LiNiMnCoO2_18650.py
 # 
 # 
 # Created:  Mar 2024, M. Clarke
@@ -333,7 +333,7 @@ def create_discharge_performance_map(raw_data):
     battery_data.Voltage     = RegularGridInterpolator((amps, temp, SOC), processed_data.Voltage,bounds_error=False,fill_value=None)
     battery_data.Temperature = RegularGridInterpolator((amps, temp, SOC), processed_data.Temperature,bounds_error=False,fill_value=None) 
      
-    return battery_data
+    return battery_data  
 
 def load_battery_results(): 
     '''Load experimental raw data of NMC cells 
