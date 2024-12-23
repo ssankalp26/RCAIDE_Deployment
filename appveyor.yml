@@ -12,29 +12,26 @@ environment:
   COVERALLS_REPO_TOKEN: gTsNEOQHWMPIKEvTRBW6KPn6xUuAIZcof
 
 init:
-    - sudo apt-get update -y --allow-releaseinfo-change
-    - sudo apt-get install -qq python3-pip
-    
-install: 
-    - python3 -m pip install --upgrade pip
-    - python3 -m pip install --upgrade numpy
-    - python3 -m pip install --upgrade scipy
-    - python3 -m pip install --upgrade scikit-learn
-    - python3 -m pip install --upgrade importlib_metadata 
-    - python3 -m pip install --upgrade matplotlib
-    - python3 -m pip install --upgrade plotly
-    - python3 -m pip install --upgrade kaleido
-    - python3 -m pip install --upgrade pandas
-    - PATH=$PATH:/home/appveyor/.local/bin
-    - python3 setup.py develop --user 
-    - cd RCAIDE
-    - PATH=$PATH:/home/appveyor/.local/bin/RCAIDE
-    - python3 -m pip install coveralls==3.2.0
-    - cd ..
-    - cd Regressions
-    
+  - sudo apt-get update -y --allow-releaseinfo-change
+  - sudo apt-get install -qq python3-pip
+
+install:
+  - python3 -m pip install --upgrade pip
+  - python3 -m pip install --upgrade numpy
+  - python3 -m pip install --upgrade scipy
+  - python3 -m pip install --upgrade scikit-learn
+  - python3 -m pip install --upgrade importlib_metadata 
+  - python3 -m pip install --upgrade matplotlib
+  - python3 -m pip install --upgrade plotly
+  - python3 -m pip install --upgrade kaleido
+  - python3 -m pip install --upgrade pandas
+  - PATH=$PATH:/home/appveyor/.local/bin
+  - python3 -m pip install coveralls==3.2.0
+  - python3 setup.py develop --user
+
 test_script:
-  coverage run automatic_regression.py test
-     
+  - cd Regressions
+  - coverage run --rcfile=../.coveragerc automatic_regression.py test
+
 on_success:
-  coveralls
+  - coveralls
