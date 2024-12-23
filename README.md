@@ -42,17 +42,44 @@ The RCAIDE subdirectory is arranged into frameworks and methods modules. Its pre
 
 ```mermaid
 %%{init: {'flowchart': {'curve': 'linear', 'nodeSpacing': 50, 'rankSpacing': 50}}}%%
-flowchart LR
-    RCADIE[RCADIE]
-    Framework[Framework]
-    Libraries[Libraries]
+flowchart TB
+    RCADIE[RCADIE] --> Framework
+    RCADIE --> Libraries
     
-    RCADIE ---> Framework
-    RCADIE ---> Libraries
-
+    %% Framework components
+    Framework --> Mission
+    Framework --> Analyses
+    Framework --> Optimization
+    Framework --> Data
+    
+    %% Library components
+    Libraries --> Aerodynamics
+    Libraries --> Noise
+    Libraries --> Costs
+    Libraries --> Stability
+    Libraries --> Energy
+    Libraries --> FlightPerf[Flight Performance]
+    Libraries --> Weights
+    
+    %% Styling
     style RCADIE fill:#09d0d9,color:#fff
     style Framework fill:#0fcf99,color:#fff
     style Libraries fill:#0fcf99,color:#fff
+    
+    %% Framework children styling - Burgundy
+    style Mission fill:#800020,color:#fff
+    style Analyses fill:#800020,color:#fff
+    style Optimization fill:#800020,color:#fff
+    style Data fill:#800020,color:#fff
+    
+    %% Libraries children styling - Purple
+    style Aerodynamics fill:#5D3FD3,color:#fff
+    style Noise fill:#5D3FD3,color:#fff
+    style Costs fill:#5D3FD3,color:#fff
+    style Stability fill:#5D3FD3,color:#fff
+    style Energy fill:#5D3FD3,color:#fff
+    style FlightPerf fill:#5D3FD3,color:#fff
+    style Weights fill:#5D3FD3,color:#fff
 ```
 ## Capabilities of RCAIDE
 RCAIDE currently possesses the ability to perform the following analyses, each at varying levels of fidelity. Here, we define fidelity as a level of accuracy to the actual physical value. As the level of fidelity increases, so does accuracy. However, this comes with the penalty of computational time and memory.  Having multi-fidelity capability allows RCAIDE to perform energy network analysis, complete flight  vehicle mission analysis, multi-fidelity optimization, design space exploration, artificial intelligence, and model-based systems engineering. Here are some notable use cases of RCAIDE:
