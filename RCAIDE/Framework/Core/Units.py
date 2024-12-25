@@ -168,6 +168,9 @@ class _Units:
         "knots":            0.514444,
         "ft/min":           0.3048 / 60.0,
         "ft/s":             0.3048,
+        "kilometer_per_hour": 0.277778,    # 1 km/h = 0.277778 m/s
+        "km/hr":             0.277778,
+        "km/h":             0.277778,      # common alternative notation
 
         # Rotational speed -> rad/s
         "rpm": 2.0 * math.pi / 60.0,  # 1 revolution/min = 2π rad / 60 s
