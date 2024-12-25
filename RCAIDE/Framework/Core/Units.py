@@ -49,6 +49,7 @@ class _Units:
         "N":                1.0,
         "pound_force":      4.448221615,      # 1 lbf = 4.448221615 N
         "lbf":              4.448221615,
+        "force_pound":      4.448221615,
 
         # ------------------------------------------------
         # LENGTH -> meters (m)
@@ -57,6 +58,7 @@ class _Units:
         "meters":            1.0,
         "m":                1.0,
         "kilometer":        1000.0,
+        "kilometers":       1000.0,
         "km":               1000.0,
         "centimeter":       0.01,
         "cm":               0.01,
@@ -149,6 +151,8 @@ class _Units:
         "knot":             0.514444,
         "kts":             0.514444,
         "knots":            0.514444,
+        "ft/min":           0.3048 / 60.0,
+        "ft/s":             0.3048,
 
         # Rotational speed -> rad/s
         "rpm": 2.0 * math.pi / 60.0,  # 1 revolution/min = 2π rad / 60 s
@@ -171,11 +175,12 @@ class _Units:
         # PRESSURE -> pascals (Pa)
         # ------------------------------------------------
         "pascal":           1.0,
-        "pa":               1.0,
+        "pascals":          1.0,
+        "Pa":               1.0,
         "kilopascal":       1e3,
-        "kpa":              1e3,
+        "kPa":              1e3,
         "megapascal":       1e6,
-        "mpa":              1e6,
+        "MPa":              1e6,
         "bar":              1e5,
         "millibar":         1e2,
         "mbar":             1e2,
