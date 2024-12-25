@@ -32,8 +32,6 @@ class _Units:
         "ton":              1000.0,
         "pound_mass":       0.45359237,       # 1 lbm = 0.45359237 kg
         "lbm":              0.45359237,
-        # Commonly, "lb" or "lbs" is used ambiguously between mass/force;
-        # here we'll treat "lbs" as pound-mass for convenience:
         "pound":            0.45359237,
         "pounds":           0.45359237,
         "lb":               0.45359237,
