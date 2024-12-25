@@ -10,8 +10,7 @@
 # ---------------------------------------------------------------------------------------------------------------------- 
 # RCAIDE imports 
 import RCAIDE
-from RCAIDE.Framework.Core                                  import Units , Data    
-from RCAIDE.Library.Methods.Geometry.Planform               import wing_segmented_planform
+from RCAIDE.Framework.Core                                  import Units , Data     
 from RCAIDE.Library.Plots     import *     
 
 from   RCAIDE.Library.Methods.Propulsors.Turboprop_Propulsor   import design_turboprop
@@ -50,7 +49,7 @@ def vehicle_setup():
 
     # envelope properties
     vehicle.flight_envelope.ultimate_load             = 3.75
-    vehicle.flight_envelope.limit_load                = 1.5
+    vehicle.flight_envelope.positive_limit_load       = 1.5
               
     # basic parameters              
     vehicle.reference_area                            = 61.0  
