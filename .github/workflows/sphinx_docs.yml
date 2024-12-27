@@ -1,9 +1,12 @@
-name: Build and Deploy Sphinx Docs
+name: Documentation
 
 on:
     push:
       branches:
         - develop  
+    pull_request:
+      branches:
+        - develop
 jobs:
   build:
     runs-on: ubuntu-latest
