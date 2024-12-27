@@ -42,6 +42,13 @@ def vehicle_setup():
     vehicle.reference_area                            = 17.112 
     vehicle.passengers                                = 2
     vehicle.design_dynamic_pressure                   = 1929.16080736607
+
+    cruise_speed                                      = 124. * Units.kts 
+    atmo                                              = RCAIDE.Framework.Analyses.Atmospheric.US_Standard_1976()
+    freestream                                        = atmo.compute_values(altitude =  8500. * Units.ft) 
+    mach_number                                       = (cruise_speed/freestream.speed_of_sound)[0][0]  
+    vehicle.flight_envelope.design_mach_number        =  mach_number
+    
     # ------------------------------------------------------------------        
     #   Main Wing
     # ------------------------------------------------------------------   
