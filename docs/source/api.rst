@@ -1,7 +1,7 @@
 
 API Reference
 =============
-   
+
 .. autosummary::
    :toctree: _autosummary
    :maxdepth: 10
