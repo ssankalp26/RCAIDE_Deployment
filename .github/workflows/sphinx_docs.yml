@@ -53,10 +53,6 @@ jobs:
         run: |
              cp -r Tutorials/* docs/source/tutorials/
    
-      - name: Generate new API documentation
-        run: |
-             sphinx-apidoc -f -o docs/source/generated RCAIDE
-   
       - name: Build the documentation
         run: |
              make -C docs clean html
