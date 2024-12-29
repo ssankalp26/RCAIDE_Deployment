@@ -1,5 +1,7 @@
 RCAIDE.Library.Attributes.Propellants.Acrylic.Acrylic
-=====================================================
+
+Acrylic
+=======
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Acrylic
 

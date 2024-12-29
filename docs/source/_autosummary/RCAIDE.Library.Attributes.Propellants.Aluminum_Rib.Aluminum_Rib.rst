@@ -1,5 +1,7 @@
-RCAIDE.Library.Attributes.Propellants.Aluminum\_Rib.Aluminum\_Rib
-=================================================================
+RCAIDE.Library.Attributes.Propellants.Aluminum_Rib.Aluminum_Rib
+
+Aluminum\_Rib
+=============
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Aluminum_Rib
 

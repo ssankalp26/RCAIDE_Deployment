@@ -1,5 +1,7 @@
 RCAIDE.Library.Attributes.Propellants.Paint.Paint
-=================================================
+
+Paint
+=====
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Paint
 

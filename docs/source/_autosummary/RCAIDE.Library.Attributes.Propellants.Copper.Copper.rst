@@ -1,5 +1,7 @@
 RCAIDE.Library.Attributes.Propellants.Copper.Copper
-===================================================
+
+Copper
+======
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Copper
 

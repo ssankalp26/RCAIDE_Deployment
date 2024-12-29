@@ -1,5 +1,7 @@
 RCAIDE.Library.Attributes.Propellants.Magnesium.Magnesium
-=========================================================
+
+Magnesium
+=========
 
 .. currentmodule:: RCAIDE.Library.Attributes.Propellants.Magnesium
 

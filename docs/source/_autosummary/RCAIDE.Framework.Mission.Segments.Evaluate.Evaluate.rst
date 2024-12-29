@@ -1,5 +1,7 @@
 RCAIDE.Framework.Mission.Segments.Evaluate.Evaluate
-===================================================
+
+Evaluate
+========
 
 .. currentmodule:: RCAIDE.Framework.Mission.Segments.Evaluate
 
