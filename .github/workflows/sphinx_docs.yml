@@ -34,8 +34,6 @@ jobs:
            python3 -m pip install --upgrade pip
            python3 -m pip install -e .
            python3 -m pip install sphinx sphinx_rtd_theme
-           python3 -m pip install sphinx
-           python3 -m pip install sphinx-rtd-theme
            python3 -m pip install sphinx-autobuild
            python3 -m pip install sphinx-autoapi
            python3 -m pip install nbsphinx
