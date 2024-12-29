@@ -8,7 +8,7 @@ joblib
 kaleido
 kiwisolver
 matplotlib
-numpy
+numpy == 1.24.4
 packaging
 pandas
 pillow
@@ -18,8 +18,10 @@ python-dateutil
 pytz
 scikit-learn
 scipy
+setuptools
 six
 tenacity
 threadpoolctl
 tzdata
+wheel
 zipp

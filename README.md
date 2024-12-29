@@ -4,9 +4,11 @@
 
 # 
 <div align="center">
-  
-[![Build status](https://ci.appveyor.com/api/projects/status/17mgaohuuexb301j?svg=true)](https://ci.appveyor.com/project/mclarke2/rcaide-leads)
-[![Coverage Status](https://coveralls.io/repos/github/leadsgroup/RCAIDE_LEADS/badge.svg)](https://coveralls.io/github/leadsgroup/RCAIDE_LEADS)
+
+[![CI](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/CI.yml/badge.svg)](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/CI.yml)  
+[![Documentation](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/sphinx_docs.yml/badge.svg)](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/sphinx_docs.yml)
+[![codecov](https://codecov.io/gh/leadsgroup/RCAIDE_LEADS/graph/badge.svg?token=WZOFW5EKWJ)](https://codecov.io/gh/leadsgroup/RCAIDE_LEADS)
+
 
 </div>
 
