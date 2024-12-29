@@ -1,7 +1,5 @@
 RCAIDE.Library.Methods.Geodesics.Geodesics.GeodesicCapability
-
-GeodesicCapability
-==================
+=============================================================
 
 .. currentmodule:: RCAIDE.Library.Methods.Geodesics.Geodesics
 

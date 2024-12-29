@@ -1,7 +1,5 @@
-RCAIDE.Library.Methods.Geodesics.Geodesics.Geodesic_Calculate
-
-Geodesic\_Calculate
-===================
+RCAIDE.Library.Methods.Geodesics.Geodesics.Geodesic\_Calculate
+==============================================================
 
 .. currentmodule:: RCAIDE.Library.Methods.Geodesics.Geodesics
 

@@ -1,7 +1,5 @@
 RCAIDE.Library.Attributes.Materials.Copper.Copper
-
-Copper
-======
+=================================================
 
 .. currentmodule:: RCAIDE.Library.Attributes.Materials.Copper
 

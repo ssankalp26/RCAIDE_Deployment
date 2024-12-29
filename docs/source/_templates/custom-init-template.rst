@@ -1,6 +1,4 @@
-{{ fullname }}
-
-{{ objname | escape | underline}}
+{{ fullname | escape | underline}}
 
 =============================================
 (:mod:`actual_module_name`)
