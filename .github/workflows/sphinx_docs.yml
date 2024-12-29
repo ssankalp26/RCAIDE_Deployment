@@ -42,18 +42,17 @@ jobs:
           python3 -m pip install myst-nb
           python3 -m pip install pandoc
 
-      - name: Clean Old Documentation
+      - name: Clean Old Docs
         run: |
              # Clean old build files
-             rm -rf docs/source/generated docs/source/_autosummary
+             rm -rf docs/source/_autosummary
              rm -rf docs/source/tutorials/Optimization docs/source/tutorials/Missions docs/source/tutorials/Performance
-             rm -rf docs/build/html
-   
-      - name:  Copy tutorials
+  
+      - name:  Copy tutorials to Docs
         run: |
              cp -r Tutorials/* docs/source/tutorials/
    
-      - name: Build the documentation
+      - name: Build Docs
         run: |
              make -C docs clean html
 

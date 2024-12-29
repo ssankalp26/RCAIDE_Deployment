@@ -42,14 +42,11 @@ extensions = [
 
 templates_path = ['_templates']
 exclude_patterns = []
-
+toctree_maxdepth = 40
 # Autosummary settings
 autosummary_generate = True  # Generate stub pages for autosummary directives
 add_module_names = False     # Remove module names from generated documentation
 
-# Mock imports if needed
-autodoc_mock_imports = ['Components', # Add this line to mock the Components module
-    'RCAIDE.Framework.Plugins.pint']
 # Autodoc settings
 autodoc_default_options = {
     'members': True,

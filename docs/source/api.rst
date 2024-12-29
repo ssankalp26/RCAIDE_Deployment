@@ -6,8 +6,8 @@ API Reference
    :template: custom-module-template.rst
    :recursive:
 
-    RCAIDE.Library
     RCAIDE.Framework
+    RCAIDE.Library
     RCAIDE.load
     RCAIDE.save
     RCAIDE.Vehicle
