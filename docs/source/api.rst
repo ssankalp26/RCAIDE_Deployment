@@ -1,9 +1,6 @@
+
 API Reference
-==============
-
-RCAIDE API Documentation
-
-
+=============
    
 .. autosummary::
    :toctree: _autosummary
