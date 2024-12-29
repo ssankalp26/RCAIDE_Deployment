@@ -76,7 +76,7 @@ def vehicle_setup():
     wing.high_lift               = True
     wing.dynamic_pressure_ratio  = 1.0
 
-    segment = RCAIDE.Library.Components.Wings.Segment()
+    segment = RCAIDE.Library.Components.Wings.Segments.Segment()
 
     segment.tag                   = 'section_1'
     segment.percent_span_location = 0.0
@@ -92,7 +92,7 @@ def vehicle_setup():
     segment.vsp_mesh.outer_length    = .14   
     wing.append_segment(segment)
     
-    segment = RCAIDE.Library.Components.Wings.Segment()
+    segment = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                      = 'section_2'
     segment.percent_span_location    = 0.052
     segment.twist                    = 0. * Units.deg
@@ -107,7 +107,7 @@ def vehicle_setup():
     segment.vsp_mesh.outer_length    = .14
     wing.append_segment(segment)
 
-    segment = RCAIDE.Library.Components.Wings.Segment()
+    segment = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                      = 'section_3'
     segment.percent_span_location    = 0.138
     segment.twist                    = 0. * Units.deg
@@ -122,7 +122,7 @@ def vehicle_setup():
     segment.vsp_mesh.outer_length    = .14   
     wing.append_segment(segment)
     
-    segment = RCAIDE.Library.Components.Wings.Segment()
+    segment = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                      = 'section_4'
     segment.percent_span_location    = 0.221
     segment.twist                    = 0. * Units.deg
@@ -137,7 +137,7 @@ def vehicle_setup():
     segment.vsp_mesh.outer_length    = .14 
     wing.append_segment(segment)
     
-    segment = RCAIDE.Library.Components.Wings.Segment()
+    segment = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                   = 'section_5'
     segment.percent_span_location = 0.457
     segment.twist                 = 0. * Units.deg
@@ -147,7 +147,7 @@ def vehicle_setup():
     segment.thickness_to_chord    = 0.118
     wing.append_segment(segment)
     
-    segment = RCAIDE.Library.Components.Wings.Segment()
+    segment = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                   = 'section_6'
     segment.percent_span_location = 0.568
     segment.twist                 = 0. * Units.deg
@@ -157,7 +157,7 @@ def vehicle_setup():
     segment.thickness_to_chord    = 0.10
     wing.append_segment(segment)
     
-    segment = RCAIDE.Library.Components.Wings.Segment()
+    segment = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                   = 'section_7'
     segment.percent_span_location = 0.97
     segment.twist                 = 0. * Units.deg
@@ -167,7 +167,7 @@ def vehicle_setup():
     segment.thickness_to_chord    = 0.10
     wing.append_segment(segment)
 
-    segment = RCAIDE.Library.Components.Wings.Segment()
+    segment = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                   = 'tip'
     segment.percent_span_location = 1
     segment.twist                 = 0. * Units.deg
@@ -213,7 +213,7 @@ def vehicle_setup():
     turbofan                                    = RCAIDE.Library.Components.Propulsors.Turbofan() 
     turbofan.tag                                = 'center_propulsor'
     turbofan.active_fuel_tanks                  = ['fuel_tank']   
-    turbofan.origin                             = [[145.0 *Units.feet, 0.0*Units.feet, 6.5*Units.feet]] 
+    turbofan.origin                             = [[120.0 *Units.feet, 0.0*Units.feet, 6.5*Units.feet]] 
     turbofan.engine_length                      = 2.71     
     turbofan.bypass_ratio                       = 8.4
     turbofan.design_altitude                    = 0. * Units.km
@@ -301,7 +301,7 @@ def vehicle_setup():
     nacelle.length                              = 289. * Units.inches
     nacelle.tag                                 = 'nacelle_1'
     nacelle.inlet_diameter                      = 2.0
-    nacelle.origin                              = [[145.0 *Units.feet, 0.0*Units.feet, 6.5*Units.feet]] 
+    nacelle.origin                              = [[120.0 *Units.feet, 0.0*Units.feet, 6.5*Units.feet]] 
     nacelle.areas.wetted                        = 1.1*np.pi*nacelle.diameter*nacelle.length 
     nacelle_airfoil                             = RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil()
     nacelle_airfoil.NACA_4_Series_code          = '2410'
@@ -314,11 +314,11 @@ def vehicle_setup():
     #------------------------------------------------------------------------------------------------------------------------------------   
     right_turbofan                     = deepcopy(turbofan) 
     right_turbofan.tag                 = 'right_propulsor' 
-    right_turbofan.origin              = [[133.0 *Units.feet, 25.0*Units.feet, 6.5*Units.feet]]
+    right_turbofan.origin              = [[120.0 *Units.feet, 25.0*Units.feet, 6.5*Units.feet]]
     right_turbofan.active_fuel_tanks   = ['tank_6_and_7','tank_5A_and_7A','tank_2_and_3','tank_11']  
     right_nacelle                      = deepcopy(nacelle)
     right_nacelle.tag                  = 'right_nacelle'
-    right_nacelle.origin               = [[145.0 *Units.feet, 0.0*Units.feet, 6.5*Units.feet]]
+    right_nacelle.origin               = [[120.0 *Units.feet, 25.0*Units.feet, 6.5*Units.feet]]
     right_turbofan.nacelle = right_nacelle
     net.propulsors.append(right_turbofan) 
     
@@ -327,11 +327,11 @@ def vehicle_setup():
     #------------------------------------------------------------------------------------------------------------------------------------    
     left_turbofan                    = deepcopy(turbofan) 
     left_turbofan.tag                 = 'left_propulsor' 
-    left_turbofan.origin              = [[133.0 *Units.feet, -25.0*Units.feet, 6.5*Units.feet]] 
+    left_turbofan.origin              = [[120.0 *Units.feet, -25.0*Units.feet, 6.5*Units.feet]] 
     left_turbofan.active_fuel_tanks   = ['tank_9','tank_10','tank_1_and_4','tank_5_and_8'] 
     left_nacelle                      = deepcopy(nacelle)
     left_nacelle.tag                  = 'left_nacelle'
-    left_nacelle.origin               = [[133.0 *Units.feet, -25.0*Units.feet, 6.5*Units.feet]]
+    left_nacelle.origin               = [[120.0 *Units.feet, -25.0*Units.feet, 6.5*Units.feet]]
     left_turbofan.nacelle = left_nacelle
     net.propulsors.append(left_turbofan)
        

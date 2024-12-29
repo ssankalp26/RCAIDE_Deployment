@@ -284,7 +284,7 @@ def generate_wing_stations(fuselage_width, wing):
     num_seg     = len(wing.Segments.keys())
 
     if num_seg == 0:
-        segment                         = RCAIDE.Library.Components.Wings.Segment()
+        segment                         = RCAIDE.Library.Components.Wings.Segments.Segment()
         segment.tag                     = 'root'
         segment.percent_span_location   = 0.
         segment.twist                   = wing.twists.root
@@ -294,7 +294,7 @@ def generate_wing_stations(fuselage_width, wing):
         segment.thickness_to_chord      = wing.thickness_to_chord
         wing.Segments.append(segment)
 
-        segment                         = RCAIDE.Library.Components.Wings.Segment()
+        segment                         = RCAIDE.Library.Components.Wings.Segments.Segment()
         segment.tag                     = 'tip'
         segment.percent_span_location   = 1.
         segment.twist                   = wing.twists.tip

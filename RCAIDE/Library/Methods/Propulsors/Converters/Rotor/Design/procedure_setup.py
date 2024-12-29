@@ -75,7 +75,7 @@ def modify_blade_geometry(nexus):
         vehicle_cruise    = nexus.vehicle_configurations.cruise 
         rotor_cruise      = vehicle_cruise.networks.electric.propulsors.electric_rotor.rotor 
         
-    airfoils = rotor_hover.Airfoils      
+    airfoils = rotor_hover.airfoils      
     a_loc    = rotor_hover.airfoil_polar_stations   
         
     # Update geometry of blade

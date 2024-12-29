@@ -88,7 +88,7 @@ def vehicle_setup():
     root_airfoil.coordinate_file          = rel_path + 'Airfoils' + separator + 'NACA_4415.txt' 
     
     # Wing Segments 
-    segment                               = RCAIDE.Library.Components.Wings.Segment()
+    segment                               = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                           = 'root_segment'
     segment.percent_span_location         = 0.0
     segment.twist                         = 2 * Units.degrees  
@@ -98,7 +98,7 @@ def vehicle_setup():
     segment.thickness_to_chord            = .15 
     wing.append_segment(segment)  
          
-    segment                               = RCAIDE.Library.Components.Wings.Segment()
+    segment                               = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                           = 'tip'
     segment.percent_span_location         = 1.0
     segment.twist                         = -1.0 * Units.degrees
@@ -223,7 +223,7 @@ def vehicle_setup():
     fuselage.effective_diameter                 = 1.22028016 
 
     # Segment
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_0'
     segment.percent_x_location                  = 0
     segment.percent_z_location                  = 0
@@ -232,7 +232,7 @@ def vehicle_setup():
     fuselage.Segments.append(segment)
 
     # Segment
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_1'
     segment.percent_x_location                  =  0.028527593
     segment.percent_z_location                  =  0
@@ -241,7 +241,7 @@ def vehicle_setup():
     fuselage.Segments.append(segment)
 
     # Segment
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_2'
     segment.percent_x_location                  = 0.187342754 
     segment.percent_z_location                  = 0 
@@ -250,7 +250,7 @@ def vehicle_setup():
     fuselage.Segments.append(segment)
 
     # Segment
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_3'
     segment.percent_x_location                  = 0.242034847 
     segment.percent_z_location                  = 0.011503528 
@@ -259,7 +259,7 @@ def vehicle_setup():
     fuselage.Segments.append(segment)
 
     # Segment
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_4'
     segment.percent_x_location                  = 0.296715183 
     segment.percent_z_location                  = 0.015984303 
@@ -268,7 +268,7 @@ def vehicle_setup():
     fuselage.Segments.append(segment)
 
     # Segment
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_5'
     segment.percent_x_location                  = 0.510275342 
     segment.percent_z_location                  = -0.005
@@ -277,7 +277,7 @@ def vehicle_setup():
     fuselage.Segments.append(segment)
 
     # Segment
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_6'
     segment.percent_x_location                  = 0.833284347 
     segment.percent_z_location                  = 0.014138855 
@@ -286,7 +286,7 @@ def vehicle_setup():
     fuselage.Segments.append(segment)
  
     # Segment
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_7'
     segment.percent_x_location                  = 1
     segment.percent_z_location                  = 0.018978667 

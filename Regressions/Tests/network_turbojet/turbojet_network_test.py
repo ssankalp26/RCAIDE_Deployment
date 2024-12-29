@@ -9,7 +9,9 @@
 # RCAIDE imports  
 import RCAIDE
 from RCAIDE.Framework.Core                          import Units , Data 
-from RCAIDE.Library.Plots                           import *        
+from RCAIDE.Library.Plots                           import *   
+from RCAIDE.load    import load 
+from RCAIDE.save    import save     
 
 # python imports     
 import numpy as np  
@@ -50,7 +52,7 @@ def main():
     # Extract sample values from computation  
     thrust     = results.segments.climb_1.conditions.energy['inner_right_turbojet'].thrust[3][0]
     throttle   = results.segments.level_cruise.conditions.energy['inner_right_turbojet'].throttle[3][0] 
-    CL        = results.segments.descent_1.conditions.aerodynamics.coefficients.lift.total[2][0] 
+    CL         = results.segments.descent_1.conditions.aerodynamics.coefficients.lift.total[2][0] 
     
     #print values for resetting regression
     show_vals = True
@@ -68,7 +70,11 @@ def main():
     error = Data()
     error.thrust    = np.max(np.abs(thrust - thrust_truth )/thrust_truth) 
     error.throttle  = np.max(np.abs(throttle  - throttle_truth  )/throttle_truth) 
-    error.CL        = np.max(np.abs(CL - CL_truth   )/CL_truth)      
+    error.CL        = np.max(np.abs(CL - CL_truth   )/CL_truth)
+    
+    # Save and Load Test 
+    save(error, 'turbojet_network_errors.res')
+    old_errors = load('turbojet_network_errors.res')  
      
     print('Errors:')
     print(error)

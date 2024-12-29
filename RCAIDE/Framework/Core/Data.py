@@ -14,7 +14,7 @@
 # ----------------------------------------------------------------------
 
 import numpy as np
-from .Arrays import atleast_2d_col, array_type, matrix_type, append_array
+from .Arrays import atleast_2d_col, array_type, matrix_type 
 
 from copy import copy
 
@@ -451,42 +451,7 @@ class Data(dict):
                 self[k].update(v)
             except:
                 self[k] = v
-        return
-    
-    def append_or_update(self,other):
-        """ Appends an array or updates the internal values of a dictionary with given data
-    
-            Assumptions:
-            N/A
-    
-            Source:
-            N/A
-    
-            Inputs:
-            other
-    
-            Outputs:
-            N/A
-    
-            Properties Used:
-            N/A    
-        """           
-        if not isinstance(other,dict):
-            raise TypeError('input is not a dictionary type')
-        for k,v in other.items():
-            # recurse only if self's value is a Dict()
-            if k.startswith('_'):
-                continue
-            
-            # Check if v is an array and if k is a key in self
-            if isinstance(v,array_type) and hasattr(self,k):
-                self[k] = append_array(self[k],v)
-            else:
-                try:
-                    self[k].append_or_update(v)
-                except:
-                    self[k] = copy(v)
-        return          
+        return 
     
     def get_bases(self):
         """ Finds the higher classes that may be built off of data

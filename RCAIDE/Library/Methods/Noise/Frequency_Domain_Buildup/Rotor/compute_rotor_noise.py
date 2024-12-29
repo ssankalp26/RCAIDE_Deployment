@@ -107,7 +107,7 @@ def compute_rotor_noise(microphone_locations,propulsor,rotor,segment,settings, r
             AOA_sec           = aeroacoustic_data.disc_effective_angle_of_attack  
             a_loc             = rotor.airfoil_polar_stations
             num_az            = aeroacoustic_data.number_azimuthal_stations     
-            airfoils          = rotor.Airfoils         
+            airfoils          = rotor.airfoils         
             for jj,airfoil in enumerate(airfoils):
                 airfoil_points      = airfoil.number_of_points 
             chord_coord             = int(np.floor(airfoil_points/2))       

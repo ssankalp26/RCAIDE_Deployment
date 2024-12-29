@@ -115,15 +115,15 @@ def main():
     cruise_CL_2_truth        = 0.6686241746393166
     cruise_CL_3_truth        = 0.45025703356067937
     descent_throttle_1_truth = 0.11727849456204754
-    curved_cruise_CL_truth   = 1.2889303439703923
+    curved_cruise_CL_truth   = 1.2889478757967596
     descent_throttle_2_truth = 0.5
-    single_pt_CL_1_truth     = 0.0005711272589290973
+    single_pt_CL_1_truth     = 0.0005711272589290616
     single_pt_CL_2_truth     = 0.000661628495326631
-    loiter_1_CL_truth        = 0.4798713995024052
-    loiter_2_CL_truth        = 0.4798652974789855
-    reserve_1_CL_truth       = 0.3238646103153576
-    reserve_2_CL_truth       = 0.3155983842504228
-    descent_throttle_3_truth = 0.15179588480047676
+    loiter_1_CL_truth        = 0.47987168897708904
+    loiter_2_CL_truth        = 0.47986558694994014
+    reserve_1_CL_truth       = 0.32386480839522064
+    reserve_2_CL_truth       = 0.3155985800619528
+    descent_throttle_3_truth = 0.15179606805705192
     landing_thrust_truth     = 10914.920312664697
     
     # Store errors 
@@ -158,7 +158,7 @@ def main():
     print(error)
      
     for k,v in list(error.items()): 
-        assert(np.abs(v)<1e-3)
+        assert(np.abs(v)<1e-6)
         
     plot_results(results)
     return 

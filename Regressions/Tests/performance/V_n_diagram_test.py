@@ -68,10 +68,10 @@ def main():
     actual.Va_neg                   = 104.71969101653109
     actual.Vc                       = 126.33085913848525
     actual.Vd                       = 176.86320279387934
-    actual.limit_load_pos           = 5.155487628489774
+    actual.limit_load_pos           = 5.192951925703255
     actual.limit_load_neg           = -3.8
-    actual.dive_limit_load_pos      = 3.9088413399428417
-    actual.dive_limit_load_neg      = -1.9088413399428417
+    actual.dive_limit_load_pos      = 3.935066347992278
+    actual.dive_limit_load_neg      = -1.935066347992278
     
     # error calculations
     error                         = Data()

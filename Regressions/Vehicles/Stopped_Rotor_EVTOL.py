@@ -77,7 +77,7 @@ def vehicle_setup(new_regression=True) :
     airfoil.coordinate_file       = rel_path + 'Airfoils' + separator + 'NACA_63_412.txt'
     
     # Segment                                  
-    segment                       = RCAIDE.Library.Components.Wings.Segment()
+    segment                       = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                   = 'Section_1'   
     segment.percent_span_location = 0.0
     segment.twist                 = 4. * Units.degrees 
@@ -89,7 +89,7 @@ def vehicle_setup(new_regression=True) :
     wing.Segments.append(segment)               
     
     # Segment                                   
-    segment                       = RCAIDE.Library.Components.Wings.Segment()
+    segment                       = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                   = 'Section_2'    
     segment.percent_span_location = 3.5/wing.spans.projected
     segment.twist                 = 3. * Units.degrees 
@@ -101,7 +101,7 @@ def vehicle_setup(new_regression=True) :
     wing.Segments.append(segment)               
      
     # Segment                                  
-    segment                       = RCAIDE.Library.Components.Wings.Segment()
+    segment                       = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                   = 'Section_3'   
     segment.percent_span_location = 11.3/wing.spans.projected 
     segment.twist                 = 2.0 * Units.degrees 
@@ -113,7 +113,7 @@ def vehicle_setup(new_regression=True) :
     wing.Segments.append(segment)     
     
     # Segment                                  
-    segment                       = RCAIDE.Library.Components.Wings.Segment()
+    segment                       = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                   = 'Section_4'   
     segment.percent_span_location = 11.6/wing.spans.projected 
     segment.twist                 = 0.0 * Units.degrees 
@@ -125,7 +125,7 @@ def vehicle_setup(new_regression=True) :
     wing.Segments.append(segment)  
     
     # Segment                                  
-    segment                       = RCAIDE.Library.Components.Wings.Segment()
+    segment                       = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                   = 'Section_5'   
     segment.percent_span_location = 1.0
     segment.twist                 = 0.0 * Units.degrees 
@@ -200,7 +200,7 @@ def vehicle_setup(new_regression=True) :
     fuselage.differential_pressure              = 0. 
     
     # Segment  
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment() 
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment() 
     segment.tag                                 = 'segment_0'    
     segment.percent_x_location                  = 0.0 
     segment.percent_z_location                  = 0.     # change  
@@ -209,7 +209,7 @@ def vehicle_setup(new_regression=True) :
     fuselage.Segments.append(segment)                     
                                                 
     # Segment                                             
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_1'   
     segment.percent_x_location                  = 0.10912/fuselage.lengths.total 
     segment.percent_z_location                  = 0.00849
@@ -218,7 +218,7 @@ def vehicle_setup(new_regression=True) :
     fuselage.Segments.append(segment)           
                                                 
     # Segment                                             
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_2'   
     segment.percent_x_location                  = 0.47804/fuselage.lengths.total
     segment.percent_z_location                  = 0.02874
@@ -227,7 +227,7 @@ def vehicle_setup(new_regression=True) :
     fuselage.Segments.append(segment)                     
                                                 
     # Segment                                            
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_3'   
     segment.percent_x_location                  = 0.161  
     segment.percent_z_location                  = 0.04348  
@@ -236,7 +236,7 @@ def vehicle_setup(new_regression=True) :
     fuselage.Segments.append(segment)                     
                                                 
     # Segment                                             
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_4'   
     segment.percent_x_location                  = 0.284 
     segment.percent_z_location                  = 0.05435 
@@ -245,7 +245,7 @@ def vehicle_setup(new_regression=True) :
     fuselage.Segments.append(segment)              
                                                 
     # Segment                                             
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_5'   
     segment.percent_x_location                  = 3.43026/fuselage.lengths.total
     segment.percent_z_location                  = 0.31483/fuselage.lengths.total 
@@ -254,7 +254,7 @@ def vehicle_setup(new_regression=True) :
     fuselage.Segments.append(segment)                     
                                                 
     # Segment                                             
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_6'   
     segment.percent_x_location                  = 4.20546/fuselage.lengths.total
     segment.percent_z_location                  = 0.32216/fuselage.lengths.total
@@ -263,7 +263,7 @@ def vehicle_setup(new_regression=True) :
     fuselage.Segments.append(segment)                  
                                                 
     # Segment                                             
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_7'   
     segment.percent_x_location                  = 4.99358/fuselage.lengths.total
     segment.percent_z_location                  = 0.37815/fuselage.lengths.total
@@ -272,7 +272,7 @@ def vehicle_setup(new_regression=True) :
     fuselage.Segments.append(segment)                  
                                                 
     # Segment                                             
-    segment                                     = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                                 = 'segment_8'   
     segment.percent_x_location                  = 1.
     segment.percent_z_location                  = 0.55/fuselage.lengths.total
@@ -310,7 +310,7 @@ def vehicle_setup(new_regression=True) :
     boom.index                              = 1
     
     # Segment  
-    segment                           = RCAIDE.Library.Components.Fuselages.Segment() 
+    segment                           = RCAIDE.Library.Components.Fuselages.Segments.Segment() 
     segment.tag                       = 'segment_1'   
     segment.percent_x_location        = 0.
     segment.percent_z_location        = 0.0 
@@ -319,7 +319,7 @@ def vehicle_setup(new_regression=True) :
     boom.Segments.append(segment)           
     
     # Segment                                   
-    segment                           = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                           = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                       = 'segment_2'   
     segment.percent_x_location        = 0.03
     segment.percent_z_location        = 0. 
@@ -328,7 +328,7 @@ def vehicle_setup(new_regression=True) :
     boom.Segments.append(segment) 
     
     # Segment                                   
-    segment                           = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                           = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                       = 'segment_3'    
     segment.percent_x_location        = 0.97
     segment.percent_z_location        = 0. 
@@ -337,7 +337,7 @@ def vehicle_setup(new_regression=True) :
     boom.Segments.append(segment)           
     
     # Segment                                  
-    segment                           = RCAIDE.Library.Components.Fuselages.Segment()
+    segment                           = RCAIDE.Library.Components.Fuselages.Segments.Segment()
     segment.tag                       = 'segment_4'   
     segment.percent_x_location        = 1.   
     segment.percent_z_location        = 0.   
@@ -472,21 +472,21 @@ def vehicle_setup(new_regression=True) :
     propeller_nacelle.origin        = [[5.583,  1.300 ,    1.092]]
     propeller_nacelle.flow_through   = False  
     
-    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segment()
+    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segments.Segment()
     nac_segment.tag                = 'segment_1'
     nac_segment.percent_x_location = 0.0  
     nac_segment.height             = 0.0
     nac_segment.width              = 0.0
     propeller_nacelle.append_segment(nac_segment)    
     
-    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segment()
+    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segments.Segment()
     nac_segment.tag                = 'segment_2'
     nac_segment.percent_x_location = 0.10/propeller_nacelle.length
     nac_segment.height             = 0.2
     nac_segment.width              = 0.2
     propeller_nacelle.append_segment(nac_segment)    
     
-    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segment()
+    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segments.Segment()
     nac_segment.tag                = 'segment_2'
     nac_segment.percent_x_location = 0.15 /propeller_nacelle.length 
     nac_segment.height             = 0.25
@@ -494,7 +494,7 @@ def vehicle_setup(new_regression=True) :
     propeller_nacelle.append_segment(nac_segment)    
     
     
-    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segment()
+    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segments.Segment()
     nac_segment.tag                = 'segment_4'
     nac_segment.percent_x_location = 0.2/propeller_nacelle.length  
     nac_segment.height             = 0.3
@@ -502,35 +502,35 @@ def vehicle_setup(new_regression=True) :
     propeller_nacelle.append_segment(nac_segment)    
     
     
-    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segment()
+    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segments.Segment()
     nac_segment.tag                = 'segment_5'
     nac_segment.percent_x_location = 0.25/propeller_nacelle.length  
     nac_segment.height             = 0.35
     nac_segment.width              = 0.35
     propeller_nacelle.append_segment(nac_segment)    
     
-    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segment()
+    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segments.Segment()
     nac_segment.tag                = 'segment_6'
     nac_segment.percent_x_location = 0.5/propeller_nacelle.length 
     nac_segment.height             = 0.4
     nac_segment.width              = 0.4
     propeller_nacelle.append_segment(nac_segment)    
     
-    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segment()
+    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segments.Segment()
     nac_segment.tag                = 'segment_7'
     nac_segment.percent_x_location = 0.75/propeller_nacelle.length
     nac_segment.height             = 0.35
     nac_segment.width              = 0.35
     propeller_nacelle.append_segment(nac_segment)        
     
-    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segment()
+    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segments.Segment()
     nac_segment.tag                = 'segment_8'
     nac_segment.percent_x_location = 0.98/propeller_nacelle.length
     nac_segment.height             = 0.3
     nac_segment.width              = 0.3
     propeller_nacelle.append_segment(nac_segment)    
     
-    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segment()
+    nac_segment                    = RCAIDE.Library.Components.Nacelles.Segments.Segment()
     nac_segment.tag                = 'segment_9'
     nac_segment.percent_x_location = 1.0  
     nac_segment.height             = 0.0
@@ -687,7 +687,7 @@ def vehicle_setup(new_regression=True) :
     # make and append copy of lift propulsor (efficient coding)    
     lift_propulsor_2                                       = deepcopy(lift_propulsor_1)
     lift_propulsor_2.tag                                   = 'lift_propulsor_2' 
-    lift_propulsor_2.rotor.origin                          = [[-0.073  , -1.950  , 1.2]]  
+    lift_propulsor_2.rotor.tag                             = 'lift_rotor_2'  
     lift_propulsor_2.rotor.orientation_euler_angle         = [-10.0* Units.degrees,np.pi/2.,0.]
     lift_propulsor_2.motor.origin                          = [[-0.073  , -1.950  , 1.2]] 
     lift_propulsor_2.rotor.origin                          = [[-0.073  , -1.950  , 1.2]] 
@@ -699,8 +699,8 @@ def vehicle_setup(new_regression=True) :
         
 
     lift_propulsor_3                                       = deepcopy(lift_propulsor_1)
-    lift_propulsor_3.tag                                   = 'lift_propulsor_3' 
-    lift_propulsor_3.rotor.origin                          = [[ 4.440 ,  1.950 , 1.2]]  
+    lift_propulsor_3.tag                                   = 'lift_propulsor_3'  
+    lift_propulsor_3.rotor.tag                             = 'lift_rotor_3'  
     lift_propulsor_3.rotor.orientation_euler_angle         = [10.0* Units.degrees,np.pi/2.,0.]
     lift_propulsor_3.motor.origin                          = [[ 4.440 ,  1.950 , 1.2]] 
     lift_propulsor_3.rotor.origin                          = [[ 4.440 ,  1.950 , 1.2]] 
@@ -712,7 +712,8 @@ def vehicle_setup(new_regression=True) :
     
 
     lift_propulsor_4                                       = deepcopy(lift_propulsor_1)
-    lift_propulsor_4.tag                                   = 'lift_propulsor_4' 
+    lift_propulsor_4.tag                                   = 'lift_propulsor_4'  
+    lift_propulsor_4.rotor.tag                             = 'lift_rotor_4' 
     lift_propulsor_4.rotor.origin                          = [[ 4.440  , -1.950  , 1.2]]  
     lift_propulsor_4.rotor.orientation_euler_angle         = [-10.0* Units.degrees,np.pi/2.,0.]
     lift_propulsor_4.motor.origin                          = [[ 4.440  , -1.950  , 1.2]] 
@@ -725,7 +726,8 @@ def vehicle_setup(new_regression=True) :
     
 
     lift_propulsor_5                                       = deepcopy(lift_propulsor_1)
-    lift_propulsor_5.tag                                   = 'lift_propulsor_5' 
+    lift_propulsor_5.tag                                   = 'lift_propulsor_5'  
+    lift_propulsor_5.rotor.tag                             = 'lift_rotor_5' 
     lift_propulsor_5.rotor.origin                          = [[ 0.219 ,  4.891 , 1.2]]  
     lift_propulsor_5.rotor.orientation_euler_angle         = [10.0* Units.degrees,np.pi/2.,0.]
     lift_propulsor_5.motor.origin                          = [[ 0.219 ,  4.891 , 1.2]] 
@@ -738,8 +740,8 @@ def vehicle_setup(new_regression=True) :
     
 
     lift_propulsor_6                                       = deepcopy(lift_propulsor_1)
-    lift_propulsor_6.tag                                   = 'lift_propulsor_6' 
-    lift_propulsor_6.rotor.origin                          = [[ 0.219  , - 4.891 , 1.2]]  
+    lift_propulsor_6.tag                                   = 'lift_propulsor_6'  
+    lift_propulsor_6.rotor.tag                             = 'lift_rotor_2'  
     lift_propulsor_6.rotor.orientation_euler_angle         = [-10.0* Units.degrees,np.pi/2.,0.]
     lift_propulsor_6.motor.origin                          = [[ 0.219  , - 4.891 , 1.2]] 
     lift_propulsor_6.rotor.origin                          = [[ 0.219  , - 4.891 , 1.2]] 
@@ -752,8 +754,8 @@ def vehicle_setup(new_regression=True) :
     
 
     lift_propulsor_7                                       = deepcopy(lift_propulsor_1)
-    lift_propulsor_7.tag                                   = 'lift_propulsor_7' 
-    lift_propulsor_7.rotor.origin                          = [[ 4.196 ,  4.891 , 1.2]]  
+    lift_propulsor_7.tag                                   = 'lift_propulsor_7'  
+    lift_propulsor_7.rotor.tag                             = 'lift_rotor_7'  
     lift_propulsor_7.rotor.orientation_euler_angle         = [10.0* Units.degrees,np.pi/2.,0.]
     lift_propulsor_7.motor.origin                          = [[ 4.196 ,  4.891 , 1.2]] 
     lift_propulsor_7.rotor.origin                          = [[ 4.196 ,  4.891 , 1.2]]   
@@ -765,8 +767,8 @@ def vehicle_setup(new_regression=True) :
     
 
     lift_propulsor_8                                       = deepcopy(lift_propulsor_1)
-    lift_propulsor_8.tag                                   = 'lift_propulsor_8' 
-    lift_propulsor_8.rotor.origin                          = [[ 4.196  , - 4.891 , 1.2]]  
+    lift_propulsor_8.tag                                   = 'lift_propulsor_8'  
+    lift_propulsor_8.rotor.tag                             = 'lift_rotor_8'  
     lift_propulsor_8.rotor.orientation_euler_angle         = [-10.0* Units.degrees,np.pi/2.,0.]
     lift_propulsor_8.motor.origin                          = [[ 4.196  , - 4.891 , 1.2]] 
     lift_propulsor_8.rotor.origin                          = [[ 4.196  , - 4.891 , 1.2]]  

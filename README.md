@@ -15,7 +15,7 @@
 
 The Research Community Aircraft Interdisciplinary Design Environment, or RCAIDE  (pronounced “arcade”) is a powerful open-source Python platform that revolutionizes aircraft design and analysis. From commercial airliners to UAVs and next-generation hybrid-electric aircraft, RCAIDE provides comprehensive multi-disciplinary analysis tools backed by validated engineering methods. Our streamlined workflow and modular architecture help aerospace engineers and researchers accelerate development cycles and explore innovative designs with confidence. RCAIDE-LEADS is a form from RCAIDE, developed and maintained by the [Lab for Electric Aircraft Design and Sustainability](https://www.leadsresearchgroup.com/)
  
-## Transinitign from SUAVE Legacy 
+## Transitioning from SUAVE Legacy 
 RCAIDE was built to allow users to transition their work to smoothly from SUAVE to RCAIDE. RCAIDE's code is architected in such a way that a native SUAVE user can understand it, but breaks free of some of the antiquated nomenclature. 
  
 ## Code Architecture 
