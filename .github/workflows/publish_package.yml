@@ -7,7 +7,7 @@ on:
       - master
 
 permissions:
-  contents: write  # Allows the workflow to push changes
+  contents: write
 
 jobs:
   bump-version:
@@ -26,6 +26,7 @@ jobs:
           fi
           old_version=$(cat version.txt)
           echo "old_version=$old_version" >> "$GITHUB_ENV"
+
       - name: Bump Version
         id: bump_version
         run: |
@@ -51,20 +52,20 @@ jobs:
           # Export new version for use in subsequent steps
           echo "new_version=$new_version" >> "$GITHUB_ENV"
 
-      - name: Commit and Push Updated VERSION
+      - name: Commit and Push Updated Version
         if: steps.bump_version.outcome == 'success'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add VERSION
+          git add version.txt
           git commit -m "Bump version to ${{ env.new_version }} [skip ci]"
           git push origin HEAD:${{ github.ref_name }}
 
   publish-pypi:
     needs: bump-version
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'  # Only run on master branch
+    if: github.ref == 'refs/heads/master'
 
     steps:
       - name: Check Out Code
