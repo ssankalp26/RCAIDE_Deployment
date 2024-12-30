@@ -13,8 +13,8 @@ where = ["."]
 include = ["RCAIDE*"]
 
 [project]
-name = "RCAIDE_LEADS"
-version = "1.0.0"
+name = "RCAIDE_TEST"
+version = "0.0.0"
 description = "RCAIDE: Research Community Aerospace Interdisciplinary Design Environment"
 authors = [
     {name = "Laboratory for Electric Aircraft Design and Sustainability"}
@@ -34,7 +34,6 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering"
 ]
 dependencies = [
