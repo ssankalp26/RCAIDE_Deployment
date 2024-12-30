@@ -3,12 +3,10 @@ name: Docs
 on:
   pull_request:
     branches:
-      - develop
-      - master
+    - main
   push:
     branches:
-      - develop
-      - master
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
