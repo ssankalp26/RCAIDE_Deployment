@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - master
+      - develop
 
 jobs:
   check-version:
@@ -14,12 +15,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Current Branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Ensure full history is fetched
 
-      - name: Fetch Develop Branch
-        run: git fetch origin develop:develop
+      - name: Determine Base Branch
+        id: determine_base
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "base_branch=${{ github.event.pull_request.base.ref }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "push" ]]; then
+            # For push events, assume base_branch is develop
+            echo "base_branch=develop" >> $GITHUB_OUTPUT
+          else
+            echo "base_branch=unknown" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Fetch Base Branch
+        run: |
+          git fetch origin "${{ steps.determine_base.outputs.base_branch }}":"${{ steps.determine_base.outputs.base_branch }}"
 
       - name: Read Version from Current Branch
         id: current_version
@@ -29,64 +43,124 @@ jobs:
             exit 1
           fi
           VERSION=$(cat VERSION)
-          echo "::set-output name=version::$VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Check if Develop VERSION Exists
-        id: develop_version_exists
+      - name: Check if Base VERSION Exists
+        id: base_version_exists
         run: |
-          if [ -f develop/VERSION ]; then
-            echo "true" > develop_version_exists.txt
+          BASE_VERSION_FILE="VERSION"
+          if [[ "${{ steps.determine_base.outputs.base_branch }}" != "unknown" ]]; then
+            git show "${{ steps.determine_base.outputs.base_branch }}:${BASE_VERSION_FILE}" &> /dev/null
+            if [ $? -eq 0 ]; then
+              echo "exists=true" >> $GITHUB_OUTPUT
+            else
+              echo "exists=false" >> $GITHUB_OUTPUT
+            fi
           else
-            echo "false" > develop_version_exists.txt
+            echo "exists=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Read Version from Develop Branch (if exists)
-        id: develop_version
-        if: steps.develop_version_exists.outputs.exists == 'true'
+      - name: Read Version from Base Branch (if exists)
+        id: base_version
+        if: steps.base_version_exists.outputs.exists == 'true'
         run: |
-          DEVELOP_VERSION=$(cat develop/VERSION)
-          echo "::set-output name=version::$DEVELOP_VERSION"
+          BASE_VERSION=$(git show "${{ steps.determine_base.outputs.base_branch }}:VERSION")
+          echo "version=$BASE_VERSION" >> $GITHUB_OUTPUT
 
-      - name: Compare Versions (if Develop VERSION exists)
-        if: steps.develop_version_exists.outputs.exists == 'true'
+      - name: Compare Versions Based on Target Branch
+        if: steps.base_version_exists.outputs.exists == 'true'
         run: |
           CURRENT_VERSION=${{ steps.current_version.outputs.version }}
-          DEVELOP_VERSION=${{ steps.develop_version.outputs.version }}
-
+          BASE_VERSION=${{ steps.base_version.outputs.version }}
+          TARGET_BRANCH=${{ github.event.pull_request.base.ref }}
+        
+          echo "Current Version: $CURRENT_VERSION"
+          echo "Base Version: $BASE_VERSION"
+          echo "Target Branch: $TARGET_BRANCH"
+        
           # Function to split version into components
           split_version() {
             IFS='.' read -r -a VERSION_PARTS <<< "$1"
-            echo "${VERSION_PARTS[0]}" "${VERSION_PARTS[1]}"
+            echo "${VERSION_PARTS[0]}" "${VERSION_PARTS[1]}" "${VERSION_PARTS[2]}"
           }
-
-          read -r CURRENT_MAJOR CURRENT_MINOR <<< $(split_version "$CURRENT_VERSION")
-          read -r DEVELOP_MAJOR DEVELOP_MINOR <<< $(split_version "$DEVELOP_VERSION")
-
-          # Compare major versions
-          if [ "$CURRENT_MAJOR" -lt "$DEVELOP_MAJOR" ]; then
-            echo "Current major version ($CURRENT_MAJOR) is less than develop's ($DEVELOP_MAJOR)."
-            exit 1
-          elif [ "$CURRENT_MAJOR" -eq "$DEVELOP_MAJOR" ]; then
-            # Compare minor versions
-            if [ "$CURRENT_MINOR" -le "$DEVELOP_MINOR" ]; then
-              echo "Current minor version ($CURRENT_MINOR) is not greater than develop's ($DEVELOP_MINOR)."
+        
+          read -r CURRENT_MAJOR CURRENT_MINOR CURRENT_PATCH <<< $(split_version "$CURRENT_VERSION")
+          read -r BASE_MAJOR BASE_MINOR BASE_PATCH <<< $(split_version "$BASE_VERSION")
+        
+          # Function to compare versions
+          compare_versions() {
+            local current=$1
+            local base=$2
+            if [ "$current" -lt "$base" ]; then
+              return 1
+            else
+              return 0
+            fi
+          }
+        
+          if [ "$TARGET_BRANCH" == "develop" ]; then
+            echo "PR is targeting 'develop' branch. Checking patch version increment."
+        
+            # Ensure major and minor versions are the same
+            if [ "$CURRENT_MAJOR" -ne "$BASE_MAJOR" ] || [ "$CURRENT_MINOR" -ne "$BASE_MINOR" ]; then
+              echo "For 'develop' branch, major and minor versions must remain the same."
               exit 1
             fi
+        
+            # Check if patch version is incremented by 1
+            EXPECTED_PATCH=$((BASE_PATCH + 1))
+            if [ "$CURRENT_PATCH" -ne "$EXPECTED_PATCH" ]; then
+              echo "Patch version must be incremented by 1. Expected: $EXPECTED_PATCH, Found: $CURRENT_PATCH."
+              exit 1
+            fi
+        
+            echo "Patch version check passed: $CURRENT_VERSION > $BASE_VERSION"
+        
+          elif [ "$TARGET_BRANCH" == "master" ]; then
+            echo "PR is targeting 'master' branch. Checking major.minor and minor version alignment with 'develop'."
+        
+            # For master, patch should be 0
+            if [ "$CURRENT_PATCH" -ne 0 ]; then
+              echo "Master branch version patch number must be 0."
+              exit 1
+            fi
+        
+            # Check if major.minor matches or is properly incremented
+            if [ "$CURRENT_MAJOR" -ne "$BASE_MAJOR" ]; then
+              echo "Major version mismatch between master and base."
+              exit 1
+            fi
+        
+            # Ensure that develop has the next minor version
+            DEVELOP_VERSION=$(git show origin/develop:VERSION_FILE_PATH) # Replace VERSION_FILE_PATH accordingly
+            read -r DEV_MAJOR DEV_MINOR DEV_PATCH <<< $(split_version "$DEVELOP_VERSION")
+        
+            EXPECTED_DEV_MINOR=$((BASE_MINOR + 1))
+            EXPECTED_DEV_PATCH=0
+        
+            if [ "$DEV_minor" -ne "$EXPECTED_DEV_MINOR" ] || [ "$DEV_PATCH" -ne "$EXPECTED_DEV_PATCH" ]; then
+              echo "Develop branch should have version ${DEV_MAJOR}.${EXPECTED_DEV_MINOR}.${EXPECTED_DEV_PATCH}."
+              exit 1
+            fi
+        
+            echo "Master version check passed: $CURRENT_VERSION aligns with develop's version."
+        
+          else
+            echo "Target branch '$TARGET_BRANCH' is not 'develop' or 'master'. No version checks performed."
+            exit 1
           fi
-
-          echo "Version check passed: $CURRENT_VERSION > $DEVELOP_VERSION"
 
   publish:
     name: Publish Package to PyPI
     needs: check-version
     runs-on: ubuntu-latest
-
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set Up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.x"
 
