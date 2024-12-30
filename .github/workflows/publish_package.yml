@@ -7,20 +7,24 @@ on:
       - master
 
 permissions:
-  contents: write
+  contents: write  # Allows the workflow to push changes
 
 jobs:
   bump-version:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check Out Code
         uses: actions/checkout@v3
 
-      - name: Get Old Version
+      - name: Get Current Version
         id: get_version
         run: |
-          # Look for a line like `version = "0.0.1"` in pyproject.toml
-          old_version=$(grep '^version *= *' pyproject.toml | sed 's/version *= *"//; s/"//')
+          if [ ! -f VERSION ]; then
+            echo "VERSION file not found!"
+            exit 1
+          fi
+          old_version=$(cat VERSION)
           echo "old_version=$old_version" >> "$GITHUB_ENV"
 
       - name: Bump Version
@@ -29,43 +33,40 @@ jobs:
           old_version="${{ env.old_version }}"
           IFS='.' read -r major minor patch <<< "$old_version"
 
-          if [ "${{ github.ref_name }}" = "develop" ]; then
-            # Bump the patch version
+          if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+            # Bump patch version
             patch=$((patch + 1))
-          elif [ "${{ github.ref_name }}" = "master" ]; then
-            # Bump the minor version, reset patch
+          elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
+            # Bump minor version and reset patch
             minor=$((minor + 1))
             patch=0
           fi
 
           new_version="$major.$minor.$patch"
-
-          # Update the version in pyproject.toml
-          sed -i "s/version = \"$old_version\"/version = \"$new_version\"/" pyproject.toml
-
+          echo "$new_version" > VERSION
           echo "new_version=$new_version" >> "$GITHUB_ENV"
 
-      - name: Commit and Push Updated Version
+      - name: Commit and Push Updated VERSION
         if: steps.bump_version.outcome == 'success'
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add pyproject.toml
-          # Including [skip ci] avoids a loop in case you have other CI triggers
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add VERSION
           git commit -m "Bump version to ${{ env.new_version }} [skip ci]"
           git push origin HEAD:${{ github.ref_name }}
 
   publish-pypi:
-    runs-on: ubuntu-latest
     needs: bump-version
-    # Only run this job if the push/merge happened on the master branch
-    if: github.ref_name == 'master'
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'  # Only run on master branch
+
     steps:
       - name: Check Out Code
         uses: actions/checkout@v3
 
       - name: Set Up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.x"
 
