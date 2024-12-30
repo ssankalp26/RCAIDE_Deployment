@@ -7,7 +7,7 @@
 # ---------------------------------------------------------------------------------------------------------------------- 
 # RCAIDE imports
 import RCAIDE
-from RCAIDE.Framework.Core      import Data,Container
+from RCAIDE.Framework.Core      import Data,Container 
 from RCAIDE.Library.Components  import Mass_Properties, Component   
 from RCAIDE.Library.Methods.Weights.Moment_of_Inertia.compute_wing_moment_of_inertia import  compute_wing_moment_of_inertia
 
@@ -136,7 +136,7 @@ class Wing(Component):
     Airfoil : Container
         Collection of airfoil definitions, initialized empty
         
-    Segments : Container
+    segments : Container
         Collection of wing segments, initialized empty
         
     control_surfaces : Container
@@ -222,7 +222,7 @@ class Wing(Component):
                                                
         self.airfoil                           = None 
         
-        self.Segments                          = Container()
+        self.segments                          = Container()
         self.control_surfaces                  = Container()
         self.fuel_tanks                        = Container()
 
@@ -236,11 +236,11 @@ class Wing(Component):
             Wing segment to be added
         """
         # Assert database type
-        if not isinstance(segment,Data):
-            raise Exception('input component must be of type Data()')
+        if not isinstance(segment,RCAIDE.Library.Components.Wings.Segments.Segment):
+            raise Exception('input component must be of type Segment')
 
         # Store data
-        self.Segments.append(segment)
+        self.segments.append(segment)
 
         return
     

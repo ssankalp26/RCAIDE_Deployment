@@ -195,7 +195,7 @@ def vehicle_setup():
     segment.tag                                 = 'segment_0'    
     segment.percent_x_location                  = 0.0000
     segment.percent_z_location                  = 0.0000 
-    fuselage.Segments.append(segment)   
+    fuselage.segments.append(segment)   
     
     # Segment  
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Super_Ellipse_Segment() 
@@ -204,7 +204,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.0 
     segment.height                              = 0.31619 
     segment.width                               = 0.33071 
-    fuselage.Segments.append(segment)   
+    fuselage.segments.append(segment)   
     
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Rounded_Rectangle_Segment()
@@ -213,7 +213,7 @@ def vehicle_setup():
     segment.percent_z_location                  = -0.02000
     segment.height                              = 0.73441 
     segment.width                               = 0.40654 
-    fuselage.Segments.append(segment)      
+    fuselage.segments.append(segment)      
     
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Rounded_Rectangle_Segment()
@@ -223,7 +223,7 @@ def vehicle_setup():
     segment.height                              = 1.00366 
     segment.width                               = 0.90341
     segment.radius                              = 0.29143
-    fuselage.Segments.append(segment)   
+    fuselage.segments.append(segment)   
 
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Rounded_Rectangle_Segment()
@@ -233,7 +233,7 @@ def vehicle_setup():
     segment.height                              = 1.52704 
     segment.width                               = 1.06680
     segment.radius                              = 0.43714
-    fuselage.Segments.append(segment)   
+    fuselage.segments.append(segment)   
     
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Rounded_Rectangle_Segment()
@@ -243,7 +243,7 @@ def vehicle_setup():
     segment.height                              = 1.50557  
     segment.width                               = 1.06680
     segment.radius                              = 0.4007
-    fuselage.Segments.append(segment)     
+    fuselage.segments.append(segment)     
     
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Rounded_Rectangle_Segment()
@@ -253,7 +253,7 @@ def vehicle_setup():
     segment.height                              = 0.97386
     segment.width                               = 0.73776
     segment.radius                              = 0.29143
-    fuselage.Segments.append(segment)             
+    fuselage.segments.append(segment)             
      
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Ellipse_Segment()
@@ -262,7 +262,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0
     segment.height                              = 0.55067  
     segment.width                               = 0.4517  
-    fuselage.Segments.append(segment)
+    fuselage.segments.append(segment)
 
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -271,7 +271,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0  
     segment.height                              = 0.17226  
     segment.width                               = 0.18068 
-    fuselage.Segments.append(segment)    
+    fuselage.segments.append(segment)    
         
     
     # Segment                                   
@@ -279,7 +279,7 @@ def vehicle_setup():
     segment.tag                                 = 'segment_9'     
     segment.percent_x_location                  = 1.0 
     segment.percent_z_location                  = 0.00189   
-    fuselage.Segments.append(segment)     
+    fuselage.segments.append(segment)     
 
     # add to vehicle
     vehicle.append_component(fuselage)
