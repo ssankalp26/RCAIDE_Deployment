@@ -1,4 +1,4 @@
-name: Documentation
+name: Docs
 
 on:
   pull_request:
@@ -31,26 +31,30 @@ jobs:
 
       - name: Install Dependencies
         run: |
-           python3 -m pip install --upgrade pip
-           python3 -m pip install -e .
-           python3 -m pip install sphinx sphinx_rtd_theme
-           python3 -m pip install sphinx
-           python3 -m pip install sphinx-rtd-theme
-           python3 -m pip install sphinx-autobuild
-           python3 -m pip install sphinx-autoapi
-           python3 -m pip install nbsphinx
-           python3 -m pip install sphinx-copybutton
-           python3 -m pip install myst-nb
-           python3 -m pip install pandoc
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -e .
+          python3 -m pip install sphinx
+          python3 -m pip install sphinx_rtd_theme
+          python3 -m pip install sphinx-autobuild
+          python3 -m pip install sphinx-autoapi
+          python3 -m pip install nbsphinx
+          python3 -m pip install sphinx-copybutton
+          python3 -m pip install myst-nb
+          python3 -m pip install pandoc
 
-
-      - name: Generate API Documentation
+      - name: Clean Old Docs
         run: |
-          sphinx-apidoc -f -o source/ RCAIDE
-      - name: Build HTML
+             # Clean old build files
+             rm -rf docs/source/_autosummary
+             rm -rf docs/source/tutorials/Optimization docs/source/tutorials/Missions docs/source/tutorials/Performance
+  
+      - name:  Copy tutorials to Docs
         run: |
-          cd docs
-          make html
+             cp -r Tutorials/* docs/source/tutorials/
+   
+      - name: Build Docs
+        run: |
+             make -C docs clean html
 
       - name: Add Custom Domain
         if: github.event_name == 'push' && (github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master')
