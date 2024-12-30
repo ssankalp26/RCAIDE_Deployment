@@ -34,6 +34,7 @@ jobs:
           python -m pip install pytest pytest-cov coverage
           python -m pip install -e .
 
+
       - name: Run tests with coverage
         run: |
           pytest --cov=RCAIDE --cov-report=xml -v
