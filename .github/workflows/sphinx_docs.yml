@@ -68,11 +68,10 @@ jobs:
               # Clean up
               rm -rf "$tmp_dir"
             else
-              echo "Notebook $notebook not found, skipping."
+              echo "Notebook $notebook not found."
             fi
           done
         
-
       - name: Clean Old Docs
         run: |
              # Clean old build files

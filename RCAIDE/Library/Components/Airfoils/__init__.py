@@ -27,3 +27,4 @@ RCAIDE.Framework.Analyses.Aerodynamics
 
 from .Airfoil               import Airfoil
 from .NACA_4_Series_Airfoil import NACA_4_Series_Airfoil
+from .Biconvex_Airfoil      import Biconvex_Airfoil

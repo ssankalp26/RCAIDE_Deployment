@@ -186,7 +186,7 @@ class Rotor(Component):
         self.flap_angle                        = 0.0
         self.number_azimuthal_stations         = 16 
         self.vtk_airfoil_points                = 40        
-        self.Airfoils                          = Airfoil_Container()
+        self.airfoils                          = Airfoil_Container()
         self.airfoil_polar_stations            = None 
         
         # design flight conditions 
@@ -266,7 +266,7 @@ class Rotor(Component):
             airfoil.tag = airfoil.tag + str(n_comps+1)    
             
         # store data
-        self.Airfoils.append(airfoil)
+        self.airfoils.append(airfoil)
     
     def vec_to_vel(self):
         """

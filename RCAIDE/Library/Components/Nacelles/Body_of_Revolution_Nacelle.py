@@ -5,9 +5,10 @@
 # ----------------------------------------------------------------------------------------------------------------------
 #  IMPORT
 # ---------------------------------------------------------------------------------------------------------------------- 
-# RCAIDE imports    
+# RCAIDE imports
+import RCAIDE
 from RCAIDE.Framework.Core     import Data  
-from .Nacelle                  import Nacelle
+from .Nacelle                  import Nacelle 
  
 # ---------------------------------------------------------------------------------------------------------------------- 
 #  Body_of_Revolution_Nacelle
@@ -63,7 +64,7 @@ class Body_of_Revolution_Nacelle(Nacelle):
         Sets default values for the body of revolution nacelle attributes.
         """      
         self.tag     = 'body_of_revolution_nacelle' 
-        self.Airfoil = Data()
+        self.Airfoil = None
     
     def append_airfoil(self, airfoil):
         """
@@ -75,10 +76,10 @@ class Body_of_Revolution_Nacelle(Nacelle):
             Airfoil profile data to be used in generating the nacelle shape
         """
         # Assert database type
-        if not isinstance(airfoil,Data):
-            raise Exception('input component must be of type Data()')
+        if not isinstance(airfoil,RCAIDE.Library.Components.Airfoils.Airfoil):
+            raise Exception('input component must be of type Airfoil')
 
         # Store data
-        self.Airfoil.append(airfoil)
+        self.airfoil = airfoil
 
         return            

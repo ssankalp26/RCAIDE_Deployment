@@ -70,7 +70,7 @@ class Airfoil(Component):
             None
         """         
         
-        self.tag                        = 'Airfoil' 
+        self.tag                        = 'airfoil' 
         self.coordinate_file            = None     
         self.geometry                   = None
         self.polar_files                = None

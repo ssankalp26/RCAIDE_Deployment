@@ -8,8 +8,8 @@
 # ---------------------------------------------------------------------------------------------------------------------- 
 # RCAIDE imports
 import RCAIDE
-from RCAIDE.Framework.Core     import Data
-from RCAIDE.Library.Components import Component
+from RCAIDE.Framework.Core              import Data
+from RCAIDE.Library.Components          import Component 
 from RCAIDE.Library.Methods.Propulsors.Converters.Ducted_Fan.append_ducted_fan_conditions import  append_ducted_fan_conditions
 import numpy as np
 import scipy as sp
@@ -178,8 +178,8 @@ class Ducted_Fan(Component):
         self.cruise.design_reference_velocity  = None 
         self.cruise.design_freestream_mach     = None
         self.cruise.design_reference_mach      = None 
-        self.duct_airfoil                      = Data()
-        self.hub_airfoil                       = Data() 
+        self.duct_airfoil                      = None
+        self.hub_airfoil                       = None
       
     
     def append_duct_airfoil(self, airfoil):
@@ -209,11 +209,11 @@ class Ducted_Fan(Component):
         """
 
         # Assert database type
-        if not isinstance(airfoil,Data):
-            raise Exception('input component must be of type Data()')
+        if not isinstance(airfoil,RCAIDE.Library.Components.Airfoils.Airfoil):
+            raise Exception('input component must be of type Airfoil') 
 
         # Store data
-        self.duct_airfoil.append(airfoil)
+        self.duct_airfoil =  airfoil
 
         return
     
@@ -245,11 +245,11 @@ class Ducted_Fan(Component):
         """
 
         # Assert database type
-        if not isinstance(airfoil,Data):
-            raise Exception('input component must be of type Data()')
+        if not isinstance(airfoil,RCAIDE.Library.Components.Airfoils.Airfoil):
+            raise Exception('input component must be of type Airfoil') 
 
         # Store data
-        self.hub_airfoil.append(airfoil)
+        self.hub_airfoil =  airfoil
 
         return 
 
