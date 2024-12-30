@@ -4,10 +4,81 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
+  check-version:
+    name: Version Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Current Branch
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Ensure full history is fetched
+
+      - name: Fetch Develop Branch
+        run: git fetch origin develop:develop
+
+      - name: Read Version from Current Branch
+        id: current_version
+        run: |
+          if [ ! -f VERSION ]; then
+            echo "VERSION file not found in the current branch."
+            exit 1
+          fi
+          VERSION=$(cat VERSION)
+          echo "::set-output name=version::$VERSION"
+
+      - name: Check if Develop VERSION Exists
+        id: develop_version_exists
+        run: |
+          if [ -f develop/VERSION ]; then
+            echo "true" > develop_version_exists.txt
+          else
+            echo "false" > develop_version_exists.txt
+          fi
+
+      - name: Read Version from Develop Branch (if exists)
+        id: develop_version
+        if: steps.develop_version_exists.outputs.exists == 'true'
+        run: |
+          DEVELOP_VERSION=$(cat develop/VERSION)
+          echo "::set-output name=version::$DEVELOP_VERSION"
+
+      - name: Compare Versions (if Develop VERSION exists)
+        if: steps.develop_version_exists.outputs.exists == 'true'
+        run: |
+          CURRENT_VERSION=${{ steps.current_version.outputs.version }}
+          DEVELOP_VERSION=${{ steps.develop_version.outputs.version }}
+
+          # Function to split version into components
+          split_version() {
+            IFS='.' read -r -a VERSION_PARTS <<< "$1"
+            echo "${VERSION_PARTS[0]}" "${VERSION_PARTS[1]}"
+          }
+
+          read -r CURRENT_MAJOR CURRENT_MINOR <<< $(split_version "$CURRENT_VERSION")
+          read -r DEVELOP_MAJOR DEVELOP_MINOR <<< $(split_version "$DEVELOP_VERSION")
+
+          # Compare major versions
+          if [ "$CURRENT_MAJOR" -lt "$DEVELOP_MAJOR" ]; then
+            echo "Current major version ($CURRENT_MAJOR) is less than develop's ($DEVELOP_MAJOR)."
+            exit 1
+          elif [ "$CURRENT_MAJOR" -eq "$DEVELOP_MAJOR" ]; then
+            # Compare minor versions
+            if [ "$CURRENT_MINOR" -le "$DEVELOP_MINOR" ]; then
+              echo "Current minor version ($CURRENT_MINOR) is not greater than develop's ($DEVELOP_MINOR)."
+              exit 1
+            fi
+          fi
+
+          echo "Version check passed: $CURRENT_VERSION > $DEVELOP_VERSION"
+
   publish:
     name: Publish Package to PyPI
+    needs: check-version
     runs-on: ubuntu-latest
 
     steps:
