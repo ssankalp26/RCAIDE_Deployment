@@ -5,9 +5,10 @@
 # ----------------------------------------------------------------------------------------------------------------------
 #  IMPORT
 # ---------------------------------------------------------------------------------------------------------------------- 
-# RCAIDE imports    
-from RCAIDE.Framework.Core import Data,Container
-from RCAIDE.Library.Components import Mass_Properties, Component  
+# RCAIDE imports
+import RCAIDE
+from RCAIDE.Framework.Core      import Data,Container
+from RCAIDE.Library.Components  import Mass_Properties, Component   
 from RCAIDE.Library.Methods.Weights.Moment_of_Inertia.compute_wing_moment_of_inertia import  compute_wing_moment_of_inertia
 
 import numpy as np
@@ -219,7 +220,7 @@ class Wing(Component):
                                                
         self.dynamic_pressure_ratio            = 0.0
                                                
-        self.Airfoil                           = Container()  
+        self.airfoil                           = None 
         
         self.Segments                          = Container()
         self.control_surfaces                  = Container()
@@ -253,11 +254,11 @@ class Wing(Component):
             Airfoil data to be added
         """
         # Assert database type
-        if not isinstance(airfoil,Data):
-            raise Exception('input component must be of type Data()')
+        if not isinstance(airfoil,RCAIDE.Library.Components.Airfoils.Airfoil):
+            raise Exception('input component must be of type Airfoil')
 
         # Store data
-        self.Airfoil.append(airfoil)
+        self.airfoil = airfoil
 
         return        
 
@@ -293,7 +294,7 @@ class Wing(Component):
             raise Exception('input component must be of type Data()')
 
         # Store data
-        self.Fuel_Tanks.append(fuel_tank)
+        self.fuel_tanks.append(fuel_tank)
 
         return
  

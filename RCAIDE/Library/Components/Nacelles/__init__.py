@@ -19,7 +19,8 @@ RCAIDE.Library.Components.Airfoils
 #  IMPORT
 # ----------------------------------------------------------------------------------------------------------------------
 
-from .Nacelle                    import Nacelle
-from .Segment                    import Segment
+from .Nacelle                    import Nacelle 
 from .Stack_Nacelle              import Stack_Nacelle
 from .Body_of_Revolution_Nacelle import Body_of_Revolution_Nacelle
+
+from . import Segments

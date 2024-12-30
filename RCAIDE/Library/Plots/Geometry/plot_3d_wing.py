@@ -123,14 +123,12 @@ def generate_3d_wing_points(wing,n_points,dim):
         
         for i in range(n_segments):
             current_seg = list(segments.keys())[i]
-            airfoil = wing.Segments[current_seg].Airfoil 
-            if len(list(airfoil.keys())) > 0:
-                af_tag =  list(airfoil.keys())[0]
-                
-                if type(airfoil[af_tag]) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
-                    geometry = compute_naca_4series(airfoil[af_tag].NACA_4_Series_code,n_points)
-                elif type(airfoil[af_tag]) == RCAIDE.Library.Components.Airfoils.Airfoil: 
-                    geometry     = import_airfoil_geometry(airfoil[af_tag].coordinate_file,n_points)
+            airfoil = wing.Segments[current_seg].airfoil 
+            if  airfoil !=  None:                 
+                if type(airfoil) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
+                    geometry = compute_naca_4series(airfoil.NACA_4_Series_code,n_points)
+                elif type(airfoil) == RCAIDE.Library.Components.Airfoils.Airfoil: 
+                    geometry     = import_airfoil_geometry(airfoil.coordinate_file,n_points)
             else:
                 geometry = compute_naca_4series('0012',n_points)  
             
@@ -198,14 +196,12 @@ def generate_3d_wing_points(wing,n_points,dim):
         section_twist[:, :, 2, 2] = 1
         translation      = np.zeros((dim,n_points, 3,1))
         
-        airfoil = wing.Airfoil 
-        if len(list(airfoil.keys())) > 0:
-            af_tag =  list(airfoil.keys())[0]
-            
-            if type(airfoil[af_tag]) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
-                geometry = compute_naca_4series(airfoil[af_tag].NACA_4_Series_code,n_points)
-            elif type(airfoil[af_tag]) == RCAIDE.Library.Components.Airfoils.Airfoil: 
-                geometry     = import_airfoil_geometry(airfoil[af_tag].coordinate_file,n_points)
+        airfoil = wing.airfoil 
+        if wing.airfoil != None: 
+            if type(airfoil) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
+                geometry = compute_naca_4series(airfoil.NACA_4_Series_code,n_points)
+            elif type(airfoil) == RCAIDE.Library.Components.Airfoils.Airfoil: 
+                geometry     = import_airfoil_geometry(airfoil.coordinate_file,n_points)
         else:
             geometry = compute_naca_4series('0012',n_points)
             

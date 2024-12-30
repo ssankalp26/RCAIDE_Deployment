@@ -82,7 +82,7 @@ def harmonic_noise_plane(harmonics_blade,harmonics_load,conditions,propulsor_con
     num_cpt                 = len(angle_of_attack) 
     num_mic                 = len(coordinates.X_hub[0,:,0,0,0]) 
     phi_0                   = np.array([rotor.phase_offset_angle])  # phase angle offset  
-    airfoils                = rotor.Airfoils 
+    airfoils                = rotor.airfoils 
     num_sec                 = len(rotor.radius_distribution) 
     orientation             = np.array(rotor.orientation_euler_angles) * 1 
     body2thrust             = sp.spatial.transform.Rotation.from_rotvec(orientation).as_matrix() 

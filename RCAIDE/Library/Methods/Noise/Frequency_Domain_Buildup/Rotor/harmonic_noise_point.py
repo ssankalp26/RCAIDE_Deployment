@@ -76,7 +76,7 @@ def harmonic_noise_point(harmonics_blade,harmonics_load,conditions,propulsor_con
     num_cpt              = 1
     num_mic              = len(coordinates.X_hub[0,:,0,0,0]) 
     phi_0                = np.array([rotor.phase_offset_angle])  # phase angle offset  
-    airfoils             = rotor.Airfoils 
+    airfoils             = rotor.airfoils 
     num_sec              = len(rotor.radius_distribution)
     num_az               = aeroacoustic_data.number_azimuthal_stations
     orientation          = np.array(rotor.orientation_euler_angles) * 1 

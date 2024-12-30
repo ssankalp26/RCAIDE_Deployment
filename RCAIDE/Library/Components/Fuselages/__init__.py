@@ -3,7 +3,7 @@
 """
 Module containing fuselage components for aircraft design and analysis. This module provides 
 different fuselage configurations including traditional tube fuselages, blended wing body 
-designs, and basic fuselage segments.
+designs.
 
 See Also
 --------
@@ -17,7 +17,8 @@ RCAIDE.Library.Components.Booms
 #  IMPORT
 # ----------------------------------------------------------------------------------------------------------------------
 
-from .Segment                    import Segment
 from .Fuselage                   import Fuselage
 from .Blended_Wing_Body_Fuselage import Blended_Wing_Body_Fuselage 
 from .Tube_Fuselage              import Tube_Fuselage
+
+from . import Segments

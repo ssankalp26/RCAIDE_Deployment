@@ -7,6 +7,10 @@
 #           Jan 2019, T. MacDonald
 #           Jan 2020, T. MacDonald
 
+# ----------------------------------------------------------------------------------------------------------------------
+#  IMPORT
+# ----------------------------------------------------------------------------------------------------------------------  
+# RCAIDE imports 
 try:
     import vsp as vsp
 except ImportError:
@@ -19,7 +23,9 @@ import numpy as np
 import time
 import fileinput
 
-## @ingroup Input_Output-OpenVSP
+# ---------------------------------------------------------------------------------------------------------------------- 
+# write_vsp_mesh
+# ---------------------------------------------------------------------------------------------------------------------- 
 def write_vsp_mesh(geometry,tag,half_mesh_flag,growth_ratio,growth_limiting_flag):
     """This create an .stl surface mesh based on a vehicle stored in a .vsp3 file.
     
@@ -114,7 +120,9 @@ def write_vsp_mesh(geometry,tag,half_mesh_flag,growth_ratio,growth_limiting_flag
     dt = tf-ti
     print('VSP meshing for ' + tag + ' completed in ' + str(dt) + ' s')
     
-## @ingroup Input_Output-OpenVSP
+# ----------------------------------------------------------------------------------------------------------------------     
+# set_sources
+# ---------------------------------------------------------------------------------------------------------------------- 
 def set_sources(geometry):
     """This sets meshing sources in a way similar to the OpenVSP default. Some source values can
     also be optionally specified as below.
@@ -292,8 +300,10 @@ def set_sources(geometry):
             #vsp.AddCFDSource(vsp.POINT_SOURCE,comp,0,len1,rad1,uloc,wloc) 
             #pass        
     
-        
-## @ingroup Input_Output-OpenVSP
+            
+# ----------------------------------------------------------------------------------------------------------------------         
+# add_segment_sources
+# ---------------------------------------------------------------------------------------------------------------------- 
 def add_segment_sources(comp,cr,ct,ii,u_start,num_secs,custom_flag,wingtip_flag,seg):
     """This sets meshing sources for the wing segments according to their size and position.
     
