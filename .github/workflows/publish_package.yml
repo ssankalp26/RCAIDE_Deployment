@@ -20,13 +20,12 @@ jobs:
       - name: Get Current Version
         id: get_version
         run: |
-          if [ ! -f version ]; then
-            echo "version file not found!"
+          if [ ! -f version.txt ]; then
+            echo "version.txt file not found!"
             exit 1
           fi
-          old_version=$(cat VERSION)
+          old_version=$(cat version.txt)
           echo "old_version=$old_version" >> "$GITHUB_ENV"
-
       - name: Bump Version
         id: bump_version
         run: |
