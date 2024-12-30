@@ -1,21 +1,71 @@
-name: Publish to PyPI
+name: Release Workflow
 
 on:
   push:
     branches:
+      - develop
       - master
 
+permissions:
+  contents: write  # Allows the workflow to push changes
+
 jobs:
-  publish:
-    name: Publish Package to PyPI
+  bump-version:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+      - name: Check Out Code
+        uses: actions/checkout@v3
+
+      - name: Get Current Version
+        id: get_version
+        run: |
+          if [ ! -f version.txt ]; then
+            echo "version.txt file not found!"
+            exit 1
+          fi
+          old_version=$(cat version.txt)
+          echo "old_version=$old_version" >> "$GITHUB_ENV"
+      - name: Bump Version
+        id: bump_version
+        run: |
+          old_version="${{ env.old_version }}"
+          IFS='.' read -r major minor patch <<< "$old_version"
+
+          if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+            # Bump patch version
+            patch=$((patch + 1))
+          elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
+            # Bump minor version and reset patch
+            minor=$((minor + 1))
+            patch=0
+          fi
+
+          new_version="$major.$minor.$patch"
+          echo "$new_version" > VERSION
+          echo "new_version=$new_version" >> "$GITHUB_ENV"
+
+      - name: Commit and Push Updated VERSION
+        if: steps.bump_version.outcome == 'success'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add VERSION
+          git commit -m "Bump version to ${{ env.new_version }} [skip ci]"
+          git push origin HEAD:${{ github.ref_name }}
+
+  publish-pypi:
+    needs: bump-version
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'  # Only run on master branch
+
+    steps:
+      - name: Check Out Code
+        uses: actions/checkout@v3
 
       - name: Set Up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.x"
 

@@ -14,7 +14,6 @@ include = ["RCAIDE*"]
 
 [project]
 name = "RCAIDE_TEST"
-version = "0.1.0"
 description = "RCAIDE: Research Community Aerospace Interdisciplinary Design Environment"
 authors = [
     {name = "Laboratory for Electric Aircraft Design and Sustainability"}
