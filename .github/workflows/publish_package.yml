@@ -29,20 +29,26 @@ jobs:
       - name: Bump Version
         id: bump_version
         run: |
-          old_version="${{ env.old_version }}"
+          oold_version=$(cat version.txt)
+
+          # Split the version into major, minor, and patch
           IFS='.' read -r major minor patch <<< "$old_version"
 
-          if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
-            # Bump patch version
+          # Decide whether to increment patch (develop) or minor (master)
+          if [ "${GITHUB_REF}" = "refs/heads/develop" ]; then
             patch=$((patch + 1))
-          elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
-            # Bump minor version and reset patch
+          elif [ "${GITHUB_REF}" = "refs/heads/master" ]; then
             minor=$((minor + 1))
             patch=0
           fi
 
+          # Construct new version
           new_version="$major.$minor.$patch"
-          echo "$new_version" > VERSION
+
+          # Update version in version.txt
+          echo "$new_version" > version.txt
+
+          # Export new version for use in subsequent steps
           echo "new_version=$new_version" >> "$GITHUB_ENV"
 
       - name: Commit and Push Updated VERSION
