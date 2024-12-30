@@ -1,0 +1,64 @@
+name: Publish Python Package
+on:
+  push:
+    branches:
+      - develop
+      - master
+
+jobs:
+  version-bump-and-publish:
+    name: Version Bump and Publish
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Check out the code
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+      # 4. Decide whether to bump patch or minor
+      - name: Bump version
+        id: bump_step
+        run: |
+          BRANCH="${GITHUB_REF##*/}"
+          echo "Current branch: $BRANCH"
+          if [ "$BRANCH" = "develop" ]; then
+            echo "Bumping patch..."
+            bump2version patch
+          elif [ "$BRANCH" = "master" ]; then
+            echo "Bumping minor..."
+            bump2version minor
+          else
+            echo "Not on develop or master — skipping version bump."
+          fi
+
+      # 5. Push the bumped version back to the branch
+      - name: Push version bump
+        # We use a community action that can push changes made by the workflow
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+
+      # 6. Build the package
+      - name: Build package
+        run: |
+          python -m build
+
+      # 7. Publish to PyPI (only if we actually bumped a version)
+      - name: Publish to PyPI
+        if: steps.bump_step.outcome == 'success'
+        env:
+          TWINE_USERNAME: "__token__"
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          python -m twine upload dist/*
