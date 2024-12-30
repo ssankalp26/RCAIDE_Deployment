@@ -1,16 +1,14 @@
 '''
 
-The script below documents how to set up and plot the results of an isolaed/static propeller analysis  
+The script below documents how to set up and plot the results of an isolated/static propeller analysis  
 
 ''' 
-#----------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------
 #   Imports
-# ----------------------------------------------------------------------
-
-import RCAIDE
+# -------------------------------------------------------------------------------------------
+ 
 from RCAIDE.Framework.Core                              import Units
-from RCAIDE.Library.Plots                               import *    
-from RCAIDE.Library.Methods.Propulsors.Converters.Rotor import design_propeller 
+from RCAIDE.Library.Plots                               import *     
 from RCAIDE.Library.Methods.Performance                 import propeller_aerodynamic_analysis
 
 import os
@@ -50,7 +48,8 @@ def main():
     
      
     plot_rotor_disc_performance(propeller,results,i=0,title=None,save_figure=False) 
-
+    plot_rotor_performance(propeller,results,title=None,save_figure=False, show_figure=False) 
+    
     thrust      = results.thrust[0][0]
     thrust_true = 9055.113684358737
 

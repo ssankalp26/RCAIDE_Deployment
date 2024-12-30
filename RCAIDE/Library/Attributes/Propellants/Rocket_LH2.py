@@ -11,9 +11,9 @@ from .Propellant import Propellant
 from RCAIDE.Framework.Core import Units
 
 # ----------------------------------------------------------------------------------------------------------------------
-#  LH2
+#  Rocket_LH2
 # ----------------------------------------------------------------------------------------------------------------------  
-class LH2(Propellant):
+class Rocket_LH2(Propellant):
     """LH2 Rocket Fuel Class
     """
 
@@ -26,7 +26,7 @@ class LH2(Propellant):
         Source:
             Sutton, Rocket Propulsion Elements Using CEA
         """    
-        self.tag                         = 'LOX_RP1'
+        self.tag                         = 'Rocket_LH2'
         self.molecular_weight            = 12.644                             # [kg/kmol]
         self.isentropic_expansion_factor = 1.145
         self.combustion_temperature      = 3331.0*Units.kelvin                # [K]                      

@@ -151,11 +151,12 @@ def populate_wing_sections(avl_wing,rcaide_wing):
             section.tag    = segments[current_seg].tag
             section.chord  = root_chord*segments[current_seg].root_chord_percent 
             section.twist  = segments[current_seg].twist/Units.degrees    
-            section.origin = origin # first origin in wing root, overwritten by section origin 
-            if type(segments[current_seg].airfoil) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
-                section.naca_airfoil         = segments[current_seg].airfoil.NACA_4_Series_code
-            else:
-                section.airfoil_coord_file   = write_avl_airfoil_file(segments[current_seg].airfoil.coordinate_file)
+            section.origin = origin # first origin in wing root, overwritten by section origin
+            if isinstance(segments[current_seg].airfoil, RCAIDE.Library.Components.Airfoils.Airfoil):
+                if type(segments[current_seg].airfoil) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
+                    section.naca_airfoil         = segments[current_seg].airfoil.NACA_4_Series_code
+                else:
+                    section.airfoil_coord_file   = write_avl_airfoil_file(segments[current_seg].airfoil.coordinate_file)
                     
             # append section to wing
             avl_wing.append_section(section)   
@@ -393,12 +394,11 @@ def append_avl_wing_control_surfaces(rcaide_wing,avl_wing,semispan,root_chord_pe
                     raise AttributeError("Define control surface function as 'slat', 'flap', 'elevator' , 'aileron' or 'rudder'")
                 section.append_control_surface(c)                                                  
 
-        if len(tip_airfoil) != 0: 
-            airfoil_tag  = list(tip_airfoil.keys())[0]  
-            if type(tip_airfoil[airfoil_tag]) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
-                section.naca_airfoil         = tip_airfoil[airfoil_tag].NACA_4_Series_code 
+        if isinstance(tip_airfoil,RCAIDE.Library.Components.Airfoils.Airfoil):  
+            if type(tip_airfoil) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
+                section.naca_airfoil         = tip_airfoil.NACA_4_Series_code 
             else:
-                section.airfoil_coord_file   = write_avl_airfoil_file(tip_airfoil[airfoil_tag].coordinate_file) 
+                section.airfoil_coord_file   = write_avl_airfoil_file(tip_airfoil.coordinate_file) 
 
         avl_wing.append_section(section)  
                         

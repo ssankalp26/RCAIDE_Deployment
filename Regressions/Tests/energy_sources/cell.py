@@ -244,7 +244,7 @@ def test_mass_gain(battery,power):
     return
 
 def test_size_module_from_energy_and_power(battery,energy,power):
-    size_module_from_energy_and_power(battery, energy, power)
+    size_module_from_energy_and_power(battery, energy, power) 
     print(battery)
     return
 

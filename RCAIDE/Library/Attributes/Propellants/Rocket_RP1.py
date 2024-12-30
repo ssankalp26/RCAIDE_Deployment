@@ -13,8 +13,8 @@ from RCAIDE.Framework.Core import Units
 # ----------------------------------------------------------------------------------------------------------------------
 #  RP1
 # ---------------------------------------------------------------------------------------------------------------------- 
-class RP1(Propellant):
-    """RP1 Rocket Fuel Class
+class Rocket_RP1(Propellant):
+    """Rocket_RP1 Rocket Fuel Class
     """
 
     def __defaults__(self):
@@ -26,7 +26,7 @@ class RP1(Propellant):
         Source:
             Sutton, Rocket Propulsion Elements
         """    
-        self.tag                         = 'LOX_RP1'
+        self.tag                         = 'Rocket_RP1'
         self.molecular_weight            = 22.193 # [kg/kmol]
         self.isentropic_expansion_factor = 1.1505
         self.combustion_temperature      = 3545.69*Units.kelvin             #[k]

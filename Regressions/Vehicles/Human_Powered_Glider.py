@@ -182,7 +182,7 @@ def vehicle_setup():
     # append bus   
     net.busses.append(bus)
     
-    vehicle.append_energy_network(net) 
+    vehicle.append_energy_network(net)
     
     return vehicle
 

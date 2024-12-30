@@ -165,9 +165,11 @@ class Results(Conditions):
                                                                                
         # aerodynamic coefficients                                             
         self.aerodynamics.coefficients                                         = Conditions()
+        self.aerodynamics.coefficients.surface_pressure                        = None
         self.aerodynamics.coefficients.lift                                    = Conditions()
         self.aerodynamics.coefficients.lift.total                              = None
-        self.aerodynamics.coefficients.lift.inviscid_wings                     = Conditions()
+        self.aerodynamics.coefficients.lift.induced                            = Conditions()
+        self.aerodynamics.coefficients.lift.induced.inviscid_wings             = Conditions()
         self.aerodynamics.coefficients.lift.compressible_wings                 = Conditions() 
         self.aerodynamics.coefficients.drag                                    = Conditions()  
         self.aerodynamics.coefficients.drag.total                              = ones_1col * 0   
