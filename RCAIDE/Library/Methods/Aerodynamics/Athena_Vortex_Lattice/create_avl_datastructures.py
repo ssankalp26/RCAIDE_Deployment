@@ -101,11 +101,11 @@ def populate_wing_sections(avl_wing,rcaide_wing):
         rcaide_wing.spans.projected                 [meters]
         rcaide_wing.origin                          [meters]
         rcaide_wing.dihedral                        [radians]
-        rcaide_wing.Segments.sweeps.leading_edge    [radians]
-        rcaide_wing.Segments.root_chord_percent     [-]
-        rcaide_wing.Segments.percent_span_location  [-]
-        rcaide_wing.Segments.sweeps.quarter_chord   [radians]
-        rcaide_wing.Segment.twist                   [radians]
+        rcaide_wing.segments.sweeps.leading_edge    [radians]
+        rcaide_wing.segments.root_chord_percent     [-]
+        rcaide_wing.segments.percent_span_location  [-]
+        rcaide_wing.segments.sweeps.quarter_chord   [radians]
+        rcaide_wing.segment.twist                   [radians]
 
     Outputs:
         avl_wing - aircraft wing in AVL format     [data stucture] 
@@ -119,7 +119,7 @@ def populate_wing_sections(avl_wing,rcaide_wing):
     semispan             = rcaide_wing.spans.projected*0.5 * (2 - symm)
     avl_wing.semispan    = semispan   
     root_chord           = rcaide_wing.chords.root
-    segments             = rcaide_wing.Segments
+    segments             = rcaide_wing.segments
     segment_names        = list(segments.keys())
     n_segments           = len(segment_names) 
     origin               = rcaide_wing.origin  

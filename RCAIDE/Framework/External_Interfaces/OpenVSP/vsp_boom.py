@@ -157,7 +157,7 @@ def read_vsp_boom(b_id,fux_idx,sym_flag, units_type='SI', fineness=True, use_sca
         shape_dict = {0:'point',1:'circle',2:'ellipse',3:'super ellipse',4:'rounded rectangle',5:'general fuse',6:'fuse file'}
         segment.vsp_data.shape = shape_dict[shape]	
 
-        boom.Segments.append(segment)
+        boom.segments.append(segment)
 
     boom.heights.at_quarter_length          = get_boom_height(boom, .25)  # Calls get_boom_height function (below).
     boom.heights.at_three_quarters_length   = get_boom_height(boom, .75) 
@@ -228,7 +228,7 @@ def write_vsp_boom(boom,area_tags, OML_set_ind):
     N/A
     """     
 
-    num_segs           = len(boom.Segments)
+    num_segs           = len(boom.segments)
     length             = boom.lengths.total
     fuse_x             = boom.origin[0][0]    
     fuse_y             = boom.origin[0][1]
@@ -241,7 +241,7 @@ def write_vsp_boom(boom,area_tags, OML_set_ind):
     heights = []
     x_poses = []
     z_poses = []
-    segs = boom.Segments
+    segs = boom.segments
     for seg in segs:
         widths.append(seg.width)
         heights.append(seg.height)
@@ -454,14 +454,14 @@ def compute_boom_fineness(boom, x_locs, eff_diams, eff_diam_gradients_fwd):
     N/A
     """
 
-    segment_list       = list(boom.Segments.keys())
+    segment_list       = list(boom.segments.keys())
     
     # Compute nose fineness.    
     x_locs    = np.array(x_locs)					# Make numpy arrays.
     eff_diams = np.array(eff_diams)
     min_val   = np.min(eff_diam_gradients_fwd[x_locs[:-1]<=0.5])	# Computes smallest eff_diam gradient value in front 50% of boom.
     x_loc     = x_locs[:-1][eff_diam_gradients_fwd==min_val][0]		# Determines x-location of the first instance of that value (if gradient=0, Segments[segment_list[0]]ost x-loc).
-    boom.lengths.nose  = (x_loc-boom.Segments[segment_list[0]].percent_x_location)*boom.lengths.total	# Subtracts first segment x-loc in case not at global origin.
+    boom.lengths.nose  = (x_loc-boom.segments[segment_list[0]].percent_x_location)*boom.lengths.total	# Subtracts first segment x-loc in case not at global origin.
     boom.fineness.nose = boom.lengths.nose/(eff_diams[x_locs==x_loc][0])
 
     # Compute tail fineness.
@@ -498,14 +498,14 @@ def get_boom_height(boom, location):
     N/A
     """
 
-    segment_list   = list(boom.Segments.keys())       
+    segment_list   = list(boom.segments.keys())       
     for jj in range(1, boom.vsp_data.xsec_num):		# Begin at second section, working toward tail.
-        if boom.Segments[segment_list[jj]].percent_x_location>=location and boom.Segments[segment_list[jj-1]].percent_x_location<location:  
+        if boom.segments[segment_list[jj]].percent_x_location>=location and boom.segments[segment_list[jj-1]].percent_x_location<location:  
             # Find two sections on either side (or including) the desired boom length percentage.
-            a        = boom.Segments[segment_list[jj]].percent_x_location							
-            b        = boom.Segments[segment_list[jj-1]].percent_x_location
-            a_height = boom.Segments[segment_list[jj]].height		# Linear approximation.
-            b_height = boom.Segments[segment_list[jj-1]].height
+            a        = boom.segments[segment_list[jj]].percent_x_location							
+            b        = boom.segments[segment_list[jj-1]].percent_x_location
+            a_height = boom.segments[segment_list[jj]].height		# Linear approximation.
+            b_height = boom.segments[segment_list[jj-1]].height
             slope    = (a_height - b_height)/(a-b)
             height   = ((location-b)*(slope)) + (b_height)	
             break

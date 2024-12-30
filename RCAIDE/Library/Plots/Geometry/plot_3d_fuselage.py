@@ -65,11 +65,11 @@ def generate_3d_fuselage_points(fuselage ,tessellation = 24 ):
     Properties Used:
     N/A
     """
-    num_fus_segs = len(fuselage.Segments.keys())
+    num_fus_segs = len(fuselage.segments.keys())
     fuselage_points = np.zeros((num_fus_segs,tessellation ,3))
      
     if num_fus_segs > 0:
-        for i_seg, segment in enumerate(fuselage.Segments): 
+        for i_seg, segment in enumerate(fuselage.segments): 
             a = segment.width/2
             b = segment.height/2
             n = segment.curvature

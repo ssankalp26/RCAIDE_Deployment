@@ -5,7 +5,8 @@
 # ----------------------------------------------------------------------------------------------------------------------
 #  IMPORT
 # ---------------------------------------------------------------------------------------------------------------------- 
-# RCAIDE imports    
+# RCAIDE imports
+import RCAIDE
 from RCAIDE.Framework.Core              import Data, Container  
 from .Nacelle import Nacelle
   
@@ -22,7 +23,7 @@ class Stack_Nacelle(Nacelle):
     tag : str
         Unique identifier for the nacelle component, defaults to 'stack_nacelle'
         
-    Segments : Container
+    segments : Container
         Collection of cross-sectional segments defining the nacelle shape, 
         initialized empty
 
@@ -65,7 +66,7 @@ class Stack_Nacelle(Nacelle):
         Sets default values for the stack nacelle attributes.
         """      
         self.tag      = 'stack_nacelle'  
-        self.Segments = Container() 
+        self.segments = Container() 
         
     def append_segment(self, segment):
         """
@@ -77,10 +78,10 @@ class Stack_Nacelle(Nacelle):
             Cross-sectional segment to be added to the nacelle definition
         """
         # Assert database type
-        if not isinstance(segment,Data):
-            raise Exception('input component must be of type Data()')
+        if not isinstance(segment,RCAIDE.Library.Components.Nacelles.Segments.Segment):
+            raise Exception('input component must be of type Segment')
 
         # Store data
-        self.Segments.append(segment)
+        self.segments.append(segment)
 
         return  

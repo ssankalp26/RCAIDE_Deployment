@@ -135,7 +135,7 @@ def read_vsp_fuselage(fuselage_id,fux_idx,sym_flag, units_type='SI', fineness=Tr
         elif vsp_section_index == 4:
             segment                   = RCAIDE.Library.Components.Fuselages.Segments.Rounded_Rectangle_Segment() 
         else:
-            segment                   = RCAIDE.Library.Components.Fuselages.Segments.Segment()  
+            segment               = RCAIDE.Library.Components.Fuselages.Segments.Segment()  
         segment                   = RCAIDE.Library.Components.Fuselages.Segments.Segment()
         segment.vsp_data.xsec_id  = x_sec 
         segment.tag               = 'segment_' + str(ii)
@@ -168,7 +168,7 @@ def read_vsp_fuselage(fuselage_id,fux_idx,sym_flag, units_type='SI', fineness=Tr
         shape_dict = {0:'point',1:'circle',2:'ellipse',3:'super ellipse',4:'rounded rectangle',5:'general fuse',6:'fuse file'}
         segment.vsp_data.shape = shape_dict[shape]	
 
-        fuselage.Segments.append(segment)
+        fuselage.segments.append(segment)
 
     fuselage.heights.at_quarter_length          = get_fuselage_height(fuselage, .25)  # Calls get_fuselage_height function (below).
     fuselage.heights.at_three_quarters_length   = get_fuselage_height(fuselage, .75) 
@@ -239,7 +239,7 @@ def write_vsp_fuselage(fuselage,area_tags, main_wing, fuel_tank_set_ind, OML_set
     N/A
     """     
 
-    segment_list       = list(fuselage.Segments.keys())
+    segment_list       = list(fuselage.segments.keys())
     num_segs           = len(segment_list)
     length             = fuselage.lengths.total
     fuse_x             = fuselage.origin[0][0]    
@@ -283,7 +283,7 @@ def write_vsp_fuselage(fuselage,area_tags, main_wing, fuel_tank_set_ind, OML_set
         radii   = []
         x_poses = []
         z_poses = []
-        segs = fuselage.Segments
+        segs = fuselage.segments
         for seg in segs:
             widths.append(seg.width)
             heights.append(seg.height)
@@ -548,14 +548,14 @@ def compute_fuselage_fineness(fuselage, x_locs, eff_diams, eff_diam_gradients_fw
     N/A
     """
 
-    segment_list       = list(fuselage.Segments.keys())
+    segment_list       = list(fuselage.segments.keys())
     
     # Compute nose fineness.    
     x_locs                 = np.array(x_locs)					# Make numpy arrays.
     eff_diams              = np.array(eff_diams)
     min_val                = np.min(eff_diam_gradients_fwd[x_locs[:-1]<=0.5])	# Computes smallest eff_diam gradient value in front 50% of fuselage.
     x_loc                  = x_locs[:-1][eff_diam_gradients_fwd==min_val][0]		# Determines x-location of the first instance of that value (if gradient=0, gets frontmost x-loc).
-    fuselage.lengths.nose  = (x_loc-fuselage.Segments[segment_list[0]].percent_x_location)*fuselage.lengths.total	# Subtracts first segment x-loc in case not at global origin.
+    fuselage.lengths.nose  = (x_loc-fuselage.segments[segment_list[0]].percent_x_location)*fuselage.lengths.total	# Subtracts first segment x-loc in case not at global origin.
     fuselage.fineness.nose = fuselage.lengths.nose/(eff_diams[x_locs==x_loc][0])
 
     # Compute tail fineness.
@@ -592,14 +592,14 @@ def get_fuselage_height(fuselage, location):
     N/A
     """
 
-    segment_list       = list(fuselage.Segments.keys())    
+    segment_list       = list(fuselage.segments.keys())    
     for jj in range(1, fuselage.vsp_data.xsec_num):		# Begin at second section, working toward tail.
-        if fuselage.Segments[segment_list[jj]].percent_x_location>=location and fuselage.Segments[segment_list[jj-1]].percent_x_location<location:  
+        if fuselage.segments[segment_list[jj]].percent_x_location>=location and fuselage.segments[segment_list[jj-1]].percent_x_location<location:  
             # Find two sections on either side (or including) the desired fuselage length percentage.
-            a        = fuselage.Segments[segment_list[jj]].percent_x_location							
-            b        = fuselage.Segments[segment_list[jj-1]].percent_x_location
-            a_height = fuselage.Segments[segment_list[jj]].height		# Linear approximation.
-            b_height = fuselage.Segments[segment_list[jj-1]].height
+            a        = fuselage.segments[segment_list[jj]].percent_x_location							
+            b        = fuselage.segments[segment_list[jj-1]].percent_x_location
+            a_height = fuselage.segments[segment_list[jj]].height		# Linear approximation.
+            b_height = fuselage.segments[segment_list[jj-1]].height
             slope    = (a_height - b_height)/(a-b)
             height   = ((location-b)*(slope)) + (b_height)	
             break
