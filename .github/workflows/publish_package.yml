@@ -3,12 +3,13 @@ name: Release Workflow
 on:
   push:
     branches:
-      - develop
       - master
+      - develop
 
 permissions:
   contents: write
   pull-requests: write
+  packages: write
 
 jobs:
   bump-version:
@@ -34,6 +35,7 @@ jobs:
           old_version=$(cat version.txt)
           IFS='.' read -r major minor patch <<< "$old_version"
 
+          # Increment based on branch
           if [ "${GITHUB_REF}" = "refs/heads/develop" ]; then
             patch=$((patch + 1))
           elif [ "${GITHUB_REF}" = "refs/heads/master" ]; then
@@ -46,7 +48,7 @@ jobs:
           echo "new_version=$new_version" >> "$GITHUB_ENV"
 
       - name: Commit and Push Updated Version
-        if: steps.bump_version.outcome == 'success'
+        if: steps.bump-version.outcome == 'success'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -54,23 +56,48 @@ jobs:
           git commit -m "Bump version to ${{ env.new_version }} [skip ci]"
           git push origin HEAD:${{ github.ref_name }}
 
-  publish-pypi:
+  create-release:
     needs: bump-version
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Get New Version
+        run: |
+          echo "New version is ${{ needs.bump-version.outputs.new_version }}"
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: v${{ env.new_version }}
+          release_name: Release ${{ env.new_version }}
+          body: |
+            ## Changelog
+            - Incremented version to ${{ env.new_version }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-pypi:
+    needs: create-release
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
 
     steps:
       - name: Check Out Code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Verify Updated Version
+      - name: Verify Release Version
         run: |
           if [ ! -f version.txt ]; then
             echo "version.txt not found!"
             exit 1
           fi
-          new_version=$(cat version.txt)
-          echo "Version to publish: $new_version"
+          release_version=$(cat version.txt)
+          echo "Release version: $release_version"
 
       - name: Set Up Python
         uses: actions/setup-python@v4
