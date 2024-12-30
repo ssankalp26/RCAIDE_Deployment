@@ -13,7 +13,7 @@ import numpy as np
 # ----------------------------------------------------------------------------------------------------------------------
 #  PLOTS
 # ----------------------------------------------------------------------------------------------------------------------   
-def plot_lift_distribution(results,vehicle,
+def plot_lift_distribution(results,
                            save_figure = False,
                            save_filename = "Lift_Distribution",
                            file_type = ".png",
@@ -49,8 +49,8 @@ def plot_lift_distribution(results,vehicle,
                   'ytick.labelsize': ps.axis_font_size,
                   'axes.titlesize': ps.title_font_size}
     plt.rcParams.update(parameters)
-
-    VD         = vehicle.vortex_distribution	 	
+    
+    VD         = results.segments[0].analyses.aerodynamics.vehicle.vortex_distribution	 	
     n_w        = VD.n_w
     b_sw       = np.concatenate(([0],np.cumsum(VD.n_sw)))
 
@@ -59,7 +59,7 @@ def plot_lift_distribution(results,vehicle,
     for segment in results.segments.values():   	
         num_ctrl_pts = len(segment.conditions.frames.inertial.time)	
         for ti in range(num_ctrl_pts):  
-            cl_y = segment.conditions.aerodynamics.coefficients.lift.inviscid_wings_sectional[ti] 
+            cl_y = segment.conditions.aerodynamics.coefficients.lift.induced.spanwise[ti] 
             line = ['-b','-b','-r','-r','-k']
             fig  = plt.figure(save_filename + '_' + str(img_idx))
             fig.set_size_inches(8,8)  

@@ -23,7 +23,7 @@ class Main_Wing(Wing):
     tag : str
         Unique identifier for the main wing, defaults to 'main_wing'
         
-    Segments : Segment_Container
+    segments : Segment_Container
         Collection of wing segments defining the wing geometry, initialized empty
 
     Notes
@@ -47,7 +47,7 @@ class Main_Wing(Wing):
         Sets default values for the main wing attributes.
         """
         self.tag      = 'main_wing'
-        self.Segments = Segment_Container()
+        self.segments = Segment_Container()
          
     def moment_of_inertia(wing, center_of_gravity):
         """

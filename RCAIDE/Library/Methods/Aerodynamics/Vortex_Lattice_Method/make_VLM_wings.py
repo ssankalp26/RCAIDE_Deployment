@@ -72,7 +72,7 @@ def make_VLM_wings(geometry, settings):
     # ------------------------------------------------------------------    
     for wing in wings:
         wing.is_a_control_surface = False
-        n_segments           = len(wing.Segments.keys())
+        n_segments           = len(wing.segments.keys())
         if n_segments==0:
             # convert to preferred format for the panelization loop
             wing       = convert_to_segmented_wing(wing)
@@ -84,7 +84,7 @@ def make_VLM_wings(geometry, settings):
                     raise ValueError("A hinge_vector is specified, but the surface is set to use a constant hinge fraction")
                 if len(wing.control_surfaces) > 0:
                     raise ValueError('Input: control surfaces are not supported on all-moving surfaces at this time')
-            for segment in wing.Segments: #unsupported by convention
+            for segment in wing.segments: #unsupported by convention
                 if 'control_surfaces' in segment.keys() and len(segment.control_surfaces) > 0:
                     raise ValueError('Input: control surfaces should be appended to the wing, not its segments. ' + 
                                      'This function will move the control surfaces to wing segments itself.')  
@@ -94,10 +94,11 @@ def make_VLM_wings(geometry, settings):
         
         #ensure wing has attributes that will be needed later
         wing_halfspan = wing.spans.projected * 0.5 if wing.symmetric else wing.spans.projected
+        segment_list  = list(wing.segments.keys())
         for i in range(n_segments):   
             (ia, ib)       = (0, 0) if i==0 else (i-1, i)
-            seg_a          = wing.Segments[ia]
-            seg_b          = wing.Segments[ib]            
+            seg_a          = wing.segments[segment_list[ia]]
+            seg_b          = wing.segments[segment_list[ib]]            
             seg_b.chord    = seg_b.root_chord_percent *wing.chords.root  ##may be worth implementing a self-calculating .chord attribute    
             
             #guarantee that all segments have leading edge sweep
@@ -110,7 +111,7 @@ def make_VLM_wings(geometry, settings):
             section_span     = (seg_b.percent_span_location - seg_a.percent_span_location) * wing_halfspan
             seg_b.x_offset   = 0. if i==0 else seg_a.x_offset   + section_span*np.tan(seg_a.sweeps.leading_edge)
             seg_b.dih_offset = 0. if i==0 else seg_a.dih_offset + section_span*np.tan(seg_a.dihedral_outboard)
-        wing.Segments[-1].sweeps.leading_edge = 1e-8
+        wing.segments[segment_list[-1]].sweeps.leading_edge = 1e-8
     
     # each control_surface-turned-wing will have its own unique ID number
     cs_ID = 0
@@ -126,13 +127,14 @@ def make_VLM_wings(geometry, settings):
         seg_breaks  = RCAIDE.Framework.Core.ContainerOrdered()
         LE_breaks   = RCAIDE.Framework.Core.ContainerOrdered()
         TE_breaks   = RCAIDE.Framework.Core.ContainerOrdered()
-        n_segments  = len(wing.Segments.keys())
+        n_segments  = len(wing.segments.keys())
 
         #process all control surfaces in each segment-------------------------------------
+        segment_list  = list(wing.segments.keys())
         for i in range(n_segments):   
             (ia, ib)    = (0, 0) if i==0 else (i-1, i)
-            seg_a       = wing.Segments[ia]
-            seg_b       = wing.Segments[ib]            
+            seg_a       = wing.segments[segment_list[ia]]
+            seg_b       = wing.segments[segment_list[ib]]            
             
             control_surfaces = seg_b.control_surfaces if 'control_surfaces' in seg_b.keys() else Data()
             for cs in control_surfaces: #should be no control surfaces on root segment
@@ -218,12 +220,13 @@ def make_VLM_wings(geometry, settings):
     # Give cs_wings span_breaks arrays
     # ------------------------------------------------------------------   
     for cs_wing in wings:
+        cs_w_segs = list(cs_wing.segments.keys())
         if cs_wing.is_a_control_surface == False: #skip if this wing isn't actually a control surface
             continue  
         span_breaks = RCAIDE.Framework.Core.ContainerOrdered()
-        span_break  = make_span_break_from_segment(cs_wing.Segments[0])
+        span_break  = make_span_break_from_segment(cs_wing.segments[cs_w_segs[0]])
         span_breaks.append(span_break)
-        span_break  = make_span_break_from_segment(cs_wing.Segments[1])
+        span_break  = make_span_break_from_segment(cs_wing.segments[cs_w_segs[1]])
         span_breaks.append(span_break) 
         cs_wing.span_breaks = span_breaks
     
@@ -295,7 +298,7 @@ def recursive_set(data_obj, path, val):
     intermediate Data() objects for keys that do not yet exist. Special
     copy cases are made for paths that lead to large class objects
     """
-    special_case_keys = ['control_surfaces', 'Segments']
+    special_case_keys = ['control_surfaces', 'segments']
     keys = path.split('.')
     key  = keys[0]
     if len(keys) == 1:
@@ -341,7 +344,7 @@ def get_paths(type_str):
                 'twists.tip',
                 'vortex_lift',
                 'airfoil',
-                'Segments',
+                'segments',
                 'control_surfaces',
                 ]
     elif type_str == 'control_surfaces':
@@ -356,7 +359,7 @@ def get_paths(type_str):
                  'configuration_type',      
                  'gain',      
                  ]
-    elif type_str == 'Segments':
+    elif type_str == 'segments':
         paths = ['tag',               
                  'percent_span_location',               
                  'twist',
@@ -474,15 +477,16 @@ def make_cs_wing_from_cs(cs, seg_a, seg_b, wing, cs_ID):
     #convert to segmented wing-------------------------------------------------------------------------------------
     cs_wing = convert_to_segmented_wing(cs_wing)
     
-    # give segments offsets (in coordinates relative to the cs_wing)
-    cs_wing.Segments[0].x_offset   = 0.
-    cs_wing.Segments[0].dih_offset = 0.  
-    cs_wing.Segments[1].x_offset   = wing_halfspan * span_fraction_tot *np.tan(cs_wing.Segments[0].sweeps.leading_edge)
-    cs_wing.Segments[1].dih_offset = wing_halfspan * span_fraction_tot *np.tan(cs_wing.Segments[0].dihedral_outboard)    
+    # give segments offsets (in coordinates relative to the cs_wing) 
+    cs_w_segs = list(cs_wing.segments.keys())    
+    cs_wing.segments[cs_w_segs[0]].x_offset   = 0.
+    cs_wing.segments[cs_w_segs[0]].dih_offset = 0.  
+    cs_wing.segments[cs_w_segs[1]].x_offset   = wing_halfspan * span_fraction_tot *np.tan(cs_wing.segments[cs_w_segs[0]].sweeps.leading_edge)
+    cs_wing.segments[cs_w_segs[1]].dih_offset = wing_halfspan * span_fraction_tot *np.tan(cs_wing.segments[cs_w_segs[0]].dihedral_outboard)    
     
     #add airfoil
-    cs_wing.Segments[0].airfoil     = seg_a.airfoil
-    cs_wing.Segments[1].airfoil     = seg_b.airfoil if cs.span_fraction_end==span_b else seg_a.airfoil
+    cs_wing.segments[cs_w_segs[0]].airfoil     = seg_a.airfoil
+    cs_wing.segments[cs_w_segs[1]].airfoil     = seg_b.airfoil if cs.span_fraction_end==span_b else seg_a.airfoil
     
     return cs_wing
 
@@ -511,7 +515,7 @@ def convert_to_segmented_wing(wing):
     Properties Used:
     N/A
     """     
-    if len(wing.Segments.keys()) > 0:
+    if len(wing.segments.keys()) > 0:
         return wing   
     # root segment 
     segment                               = RCAIDE.Library.Components.Wings.Segments.Segment()
@@ -526,7 +530,7 @@ def convert_to_segmented_wing(wing):
     segment.thickness_to_chord            = wing.thickness_to_chord
     if wing.airfoil: 
         segment.append_airfoil(wing.airfoil)              
-    wing.Segments.append(segment) 
+    wing.segments.append(segment) 
     
     # tip segment 
     if wing.taper==0:
@@ -546,7 +550,7 @@ def convert_to_segmented_wing(wing):
     segment.thickness_to_chord            = wing.thickness_to_chord
     if wing.airfoil: 
         segment.append_airfoil(wing.airfoil)             
-    wing.Segments.append(segment) 
+    wing.segments.append(segment) 
     
     return wing
 

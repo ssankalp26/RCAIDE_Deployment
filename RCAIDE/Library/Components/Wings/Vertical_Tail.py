@@ -81,7 +81,7 @@ class Vertical_Tail(Wing):
         wing.dihedral     *= -1
         wing.origin[0][1] *= -1
         
-        for segment in wing.Segments:
+        for segment in wing.segments:
             segment.dihedral_outboard *= -1
             
         for cs in wing.control_surfaces:
