@@ -6,60 +6,73 @@ on:
       - master
 
 jobs:
-  version-bump-and-publish:
-    name: Version Bump and Publish
+  test-and-publish:
+    name: Test and Publish
     runs-on: ubuntu-latest
     steps:
-      # 1. Check out the code
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Important for bump2version to work
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 2. Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
+          cache: 'pip'  # Added caching for faster builds
 
-      # 3. Install dependencies
       - name: Install dependencies
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install bump2version
+          python -m pip install --upgrade pip
+          # Install the package in editable mode with dev dependencies
+          pip install -e ".[dev]"
 
-      # 4. Decide whether to bump patch or minor
+      - name: Run tests
+        run: pytest
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
       - name: Bump version
         id: bump_step
         run: |
           BRANCH="${GITHUB_REF##*/}"
           echo "Current branch: $BRANCH"
           if [ "$BRANCH" = "develop" ]; then
-            echo "Bumping patch..."
-            bump2version patch
+            echo "Bumping patch version..."
+            bump2version patch --allow-dirty
           elif [ "$BRANCH" = "master" ]; then
-            echo "Bumping minor..."
-            bump2version minor
+            echo "Bumping minor version..."
+            bump2version minor --allow-dirty
           else
             echo "Not on develop or master — skipping version bump."
+            exit 1
           fi
+          # Extract new version for use in tag
+          NEW_VERSION=$(grep "version = " pyproject.toml | cut -d'"' -f2)
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
-      # 5. Push the bumped version back to the branch
-      - name: Push version bump
-        # We use a community action that can push changes made by the workflow
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-
-      # 6. Build the package
       - name: Build package
-        run: |
-          python -m build
+        run: python -m build
 
-      # 7. Publish to PyPI (only if we actually bumped a version)
+      - name: Create Release
+        if: success() && steps.bump_step.outcome == 'success'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.bump_step.outputs.new_version }}
+          name: Release v${{ steps.bump_step.outputs.new_version }}
+          draft: false
+          prerelease: ${{ github.ref == 'refs/heads/develop' }}
+          generate_release_notes: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish to PyPI
-        if: steps.bump_step.outcome == 'success'
+        if: success() && github.ref == 'refs/heads/master'
         env:
-          TWINE_USERNAME: "__token__"
+          TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: |
-          python -m twine upload dist/*
+          twine upload dist/*
