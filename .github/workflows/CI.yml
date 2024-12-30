@@ -37,7 +37,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest --cov=RCAIDE --cov-report=xml -v
+          pytest --cov=RCAIDE --cov-report=xml -v --cov-config=.coveragerc
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5

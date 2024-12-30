@@ -1,0 +1,3 @@
+[run]
+omit = 
+    */RCAIDE/Frameworks/External_Interfaces/*
