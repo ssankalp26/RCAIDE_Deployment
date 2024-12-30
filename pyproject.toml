@@ -7,6 +7,10 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 package-dir = {"" = "."}
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = {file = "VERSION"}
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -14,7 +18,7 @@ include = ["RCAIDE*"]
 
 [project]
 name = "RCAIDE_LEADS"
-version = "1.0.0"
+# version is now dynamic
 description = "RCAIDE: Research Community Aerospace Interdisciplinary Design Environment"
 authors = [
     {name = "Laboratory for Electric Aircraft Design and Sustainability"}

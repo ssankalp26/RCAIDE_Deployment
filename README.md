@@ -8,6 +8,7 @@
 [![CI](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/CI.yml/badge.svg)](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/CI.yml)  
 [![Documentation](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/sphinx_docs.yml/badge.svg)](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/sphinx_docs.yml)
 [![codecov](https://codecov.io/gh/leadsgroup/RCAIDE_LEADS/graph/badge.svg?token=WZOFW5EKWJ)](https://codecov.io/gh/leadsgroup/RCAIDE_LEADS)
+[![Version](https://img.shields.io/badge/dynamic/raw?color=blue&label=version&query=.&url=https://raw.githubusercontent.com/leadsgroup/RCAIDE_LEADS/master/VERSION)](https://github.com/leadsgroup/RCAIDE_LEADS)
 
 
 </div>
