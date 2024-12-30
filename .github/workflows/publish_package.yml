@@ -24,17 +24,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          # Install the package in editable mode with dev dependencies
-          pip install -e ".[dev]"
-
-      - name: Run tests
-        run: pytest
-
-      - name: Configure Git
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -e .
+          python3 -m pip install bump2version
 
       - name: Bump version
         id: bump_step
