@@ -3,7 +3,6 @@ name: Release Workflow
 on:
   push:
     branches:
-      - develop
       - master
 
 permissions:
@@ -32,11 +31,8 @@ jobs:
         id: bump_version
         run: |
           old_version=$(cat version.txt)
-
-          # Split the version into major, minor, and patch
           IFS='.' read -r major minor patch <<< "$old_version"
 
-          # Decide whether to increment patch (develop) or minor (master)
           if [ "${GITHUB_REF}" = "refs/heads/develop" ]; then
             patch=$((patch + 1))
           elif [ "${GITHUB_REF}" = "refs/heads/master" ]; then
@@ -44,13 +40,8 @@ jobs:
             patch=0
           fi
 
-          # Construct new version
           new_version="$major.$minor.$patch"
-
-          # Update version in version.txt
           echo "$new_version" > version.txt
-
-          # Export new version for use in subsequent steps
           echo "new_version=$new_version" >> "$GITHUB_ENV"
 
       - name: Commit and Push Updated Version
@@ -58,7 +49,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
           git add version.txt
           git commit -m "Bump version to ${{ env.new_version }} [skip ci]"
           git push origin HEAD:${{ github.ref_name }}
@@ -78,7 +68,8 @@ jobs:
             echo "version.txt not found!"
             exit 1
           fi
-          echo "Version to publish: $(cat version.txt)"
+          new_version=$(cat version.txt)
+          echo "Version to publish: $new_version"
 
       - name: Set Up Python
         uses: actions/setup-python@v4
@@ -118,6 +109,5 @@ jobs:
         run: |
           git fetch origin
           git checkout develop
-          git pull origin develop
-          git merge origin/master -m "Auto-merge master into develop"
+          git merge origin/master --allow-unrelated-histories -m "Auto-merge master into develop"
           git push origin develop
