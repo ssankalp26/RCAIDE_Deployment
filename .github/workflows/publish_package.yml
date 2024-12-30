@@ -1,70 +1,69 @@
-name: Publish Python Package
+name: Bump and Publish
+
 on:
+  # Automatically triggers when pushing to develop or master
   push:
     branches:
       - develop
       - master
 
+  # Allows manual dispatch with a choice of bump type
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: "Select the type of version bump."
+        required: true
+        default: "major"
+        type: choice
+        options:
+          - "major"
+          - "minor"
+          - "patch"
+
 jobs:
-  test-and-publish:
-    name: Test and Publish
+  bump-and-publish:
+    if: ${{ !contains(github.event.head_commit.message, 'Bump version') }}
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Important for bump2version to work
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-          cache: 'pip'  # Added caching for faster builds
-
-      - name: Install dependencies
+      - name: Determine Bump Type
+        id: bump-version
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install -e .
-          python3 -m pip install bump2version
-
-      - name: Bump version
-        id: bump_step
-        run: |
-          BRANCH="${GITHUB_REF##*/}"
-          echo "Current branch: $BRANCH"
-          if [ "$BRANCH" = "develop" ]; then
-            echo "Bumping patch version..."
-            bump2version patch --allow-dirty
-          elif [ "$BRANCH" = "master" ]; then
-            echo "Bumping minor version..."
-            bump2version minor --allow-dirty
+          # If this was triggered manually, use the chosen bump_type input
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "bump_type=${{ github.event.inputs.bump_type }}" >> $GITHUB_OUTPUT
           else
-            echo "Not on develop or master — skipping version bump."
-            exit 1
+            # Otherwise (push event), determine based on branch
+            if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+              echo "bump_type=patch" >> $GITHUB_OUTPUT
+            elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
+              echo "bump_type=minor" >> $GITHUB_OUTPUT
+            fi
           fi
-          # Extract new version for use in tag
-          NEW_VERSION=$(grep "version = " pyproject.toml | cut -d'"' -f2)
-          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
-      - name: Build package
-        run: python -m build
-
-      - name: Create Release
-        if: success() && steps.bump_step.outcome == 'success'
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ steps.bump_step.outputs.new_version }}
-          name: Release v${{ steps.bump_step.outputs.new_version }}
-          draft: false
-          prerelease: ${{ github.ref == 'refs/heads/develop' }}
-          generate_release_notes: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish to PyPI
-        if: success() && github.ref == 'refs/heads/master'
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+      - name: Get Current Version
+        id: current-version
         run: |
-          twine upload dist/*
+          version=$(grep '# version' version.md | cut -d ' ' -f3)
+          echo "current_version=$version" >> $GITHUB_OUTPUT
+
+      - name: Bump Version
+        uses: FragileTech/bump-version@main
+        with:
+          current_version: ${{ steps.current-version.outputs.current_version }}
+          files: version.md
+          part: ${{ steps.bump-version.outputs.bump_type }}
+          commit_name: "Your Company Bot"
+          commit_email: "bot@your-company.com"
+          login: "your-bot-login"
+          token: ${{ secrets.BOT_TOKEN }}
+
+      - name: Publish to PyPI (only on master)
+        if: github.ref == 'refs/heads/master'
+        run: |
+          python -m pip install --upgrade build twine
+          python -m build
+          twine upload dist/* -u __token__ -p "${{ secrets.PYPI_PASSWORD }}"
