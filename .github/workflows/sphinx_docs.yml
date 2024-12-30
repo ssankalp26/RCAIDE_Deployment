@@ -41,6 +41,24 @@ jobs:
           python3 -m pip install sphinx-copybutton
           python3 -m pip install myst-nb
           python3 -m pip install pandoc
+          python3 -m pip install nbconvert nbformat jupyter
+       
+          
+      - name: Execute Notebooks
+        run: |
+            for notebook in Tutorials/*/*.ipynb; do
+              echo "Running $notebook"
+              if [ -f "$notebook" ]; then
+                # Add error handling and timeout
+                jupyter nbconvert --to notebook --execute "$notebook" \
+                  --output "$notebook" \
+                  --ExecutePreprocessor.timeout=600 \
+                  || { echo "Error in notebook $notebook"; exit 1; }
+              else
+                echo "Notebook $notebook not found, skipping."
+              fi
+            done
+        
 
       - name: Clean Old Docs
         run: |
