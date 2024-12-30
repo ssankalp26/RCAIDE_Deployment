@@ -1,11 +1,11 @@
-# RCAIDE/Library/Plots/Thermal_Management/plot_thermal_management_components.py
+# RCAIDE/Library/Plots/Thermal_Management/plot_thermal_management_performance.py
 # 
 # 
 # Created:  Sep 2024, S. Shekar
 # ----------------------------------------------------------------------------------------------------------------------
-#   plot_thermal_management_component
+#   plot_thermal_management_performance
 # ----------------------------------------------------------------------------------------------------------------------   
-def plot_thermal_management_component(results,
+def plot_thermal_management_performance(results,
                         save_figure   = False,
                         show_legend   = True,
                         file_type     =".png",

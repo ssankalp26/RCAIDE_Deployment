@@ -234,7 +234,7 @@ def compute_rotor_performance(propulsor,state,center_of_gravity= [[0.0, 0.0,0.0]
             # control variable is the blade pitch, repeat around azimuth
             beta = np.repeat(total_blade_pitch[:,:,None], Na, axis=2)
         else:
-            beta = np.tile(total_blade_pitch[None,:,None],(ctrl_pts,1,Na ))
+            beta = np.tile(total_blade_pitch[:,:,None],(ctrl_pts,1,Na ))
 
         r    = np.tile(r_1d[None,:,None], (ctrl_pts, 1, Na))
         c    = np.tile(c[None,:,None], (ctrl_pts, 1, Na))

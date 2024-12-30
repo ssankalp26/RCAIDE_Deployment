@@ -88,7 +88,7 @@ def vehicle_setup():
     segment.thickness_to_chord    = .11
     segment.dihedral_outboard     = 5. * Units.degrees
     segment.sweeps.quarter_chord  = 20.6 * Units.degrees
-    wing.Segments.append(segment)    
+    wing.segments.append(segment)    
     
     segment = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                   = 'yehudi'
@@ -98,7 +98,7 @@ def vehicle_setup():
     segment.thickness_to_chord    = .11
     segment.dihedral_outboard     = 4 * Units.degrees
     segment.sweeps.quarter_chord  = 24.1 * Units.degrees
-    wing.Segments.append(segment)
+    wing.segments.append(segment)
     
     segment = RCAIDE.Library.Components.Wings.Segments.Segment()
     segment.tag                   = 'section_2'
@@ -108,7 +108,7 @@ def vehicle_setup():
     segment.thickness_to_chord    = .11
     segment.dihedral_outboard     = 70. * Units.degrees
     segment.sweeps.quarter_chord  = 40. * Units.degrees
-    wing.Segments.append(segment)
+    wing.segments.append(segment)
 
     segment = RCAIDE.Library.Components.Wings.Segments.Segment() 
     segment.tag                   = 'Tip'
@@ -118,7 +118,7 @@ def vehicle_setup():
     segment.thickness_to_chord    = .11
     segment.dihedral_outboard     = 0.
     segment.sweeps.quarter_chord  = 0.
-    wing.Segments.append(segment)       
+    wing.segments.append(segment)       
     
     # Fill out more segment properties automatically
     wing = segment_properties(wing)        
@@ -244,7 +244,7 @@ def vehicle_setup():
     segment.percent_z_location                  = -0.00144 
     segment.height                              = 0.0100 
     segment.width                               = 0.0100  
-    fuselage.Segments.append(segment)   
+    fuselage.segments.append(segment)   
     
     # Segment  
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment() 
@@ -253,7 +253,7 @@ def vehicle_setup():
     segment.percent_z_location                  = -0.00144 
     segment.height                              = 0.7500
     segment.width                               = 0.6500
-    fuselage.Segments.append(segment)   
+    fuselage.segments.append(segment)   
     
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -262,7 +262,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.00000 
     segment.height                              = 1.52783 
     segment.width                               = 1.20043 
-    fuselage.Segments.append(segment)      
+    fuselage.segments.append(segment)      
     
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -271,7 +271,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.00000 
     segment.height                              = 1.96435 
     segment.width                               = 1.52783 
-    fuselage.Segments.append(segment)   
+    fuselage.segments.append(segment)   
 
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -280,7 +280,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.00431 
     segment.height                              = 2.72826 
     segment.width                               = 1.96435 
-    fuselage.Segments.append(segment)   
+    fuselage.segments.append(segment)   
     
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -289,7 +289,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.00861 
     segment.height                              = 3.49217 
     segment.width                               = 2.61913 
-    fuselage.Segments.append(segment)     
+    fuselage.segments.append(segment)     
     
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -298,7 +298,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.01005 
     segment.height                              = 3.70130 
     segment.width                               = 3.05565 
-    fuselage.Segments.append(segment)             
+    fuselage.segments.append(segment)             
      
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -307,7 +307,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.01148 
     segment.height                              = 3.92870 
     segment.width                               = 3.71043 
-    fuselage.Segments.append(segment)    
+    fuselage.segments.append(segment)    
     
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -316,7 +316,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.01148 
     segment.height                              = 3.92870 
     segment.width                               = 3.92870 
-    fuselage.Segments.append(segment)   
+    fuselage.segments.append(segment)   
     
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -325,7 +325,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.01292
     segment.height                              = 3.81957
     segment.width                               = 3.81957
-    fuselage.Segments.append(segment)     
+    fuselage.segments.append(segment)     
         
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -334,7 +334,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.01292
     segment.height                              = 3.81957
     segment.width                               = 3.81957
-    fuselage.Segments.append(segment)   
+    fuselage.segments.append(segment)   
         
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -343,7 +343,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.01722
     segment.height                              = 3.49217
     segment.width                               = 3.71043
-    fuselage.Segments.append(segment)    
+    fuselage.segments.append(segment)    
         
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -352,7 +352,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.02296
     segment.height                              = 3.05565
     segment.width                               = 3.16478
-    fuselage.Segments.append(segment)             
+    fuselage.segments.append(segment)             
         
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -361,7 +361,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.03157
     segment.height                              = 2.40087
     segment.width                               = 1.96435
-    fuselage.Segments.append(segment)               
+    fuselage.segments.append(segment)               
         
     # Segment                                   
     segment                                     = RCAIDE.Library.Components.Fuselages.Segments.Segment()
@@ -370,7 +370,7 @@ def vehicle_setup():
     segment.percent_z_location                  = 0.04593
     segment.height                              = 1.09130
     segment.width                               = 0.21826
-    fuselage.Segments.append(segment)       
+    fuselage.segments.append(segment)       
 
     # add to vehicle
     vehicle.append_component(fuselage) 
@@ -408,28 +408,14 @@ def vehicle_setup():
     #  Fuel Tank & Fuel
     #------------------------------------------------------------------------------------------------------------------------------------   
     fuel_tank                                   = RCAIDE.Library.Components.Energy.Sources.Fuel_Tanks.Fuel_Tank()
-    fuel_tank.origin                            = [[13.0,0,-1.]]
-    
-    # for purposes of the regression, initialize all fuels
-    fuel_1                                      = RCAIDE.Library.Attributes.Propellants.Aviation_Gasoline() 
-    fuel_2                                      = RCAIDE.Library.Attributes.Propellants.Ethane() 
-    fuel_3                                      = RCAIDE.Library.Attributes.Propellants.Ethanol() 
-    fuel_4                                      = RCAIDE.Library.Attributes.Propellants.Propanol() 
-    fuel_5                                      = RCAIDE.Library.Attributes.Propellants.Propane()
-    fuel_6                                      = RCAIDE.Library.Attributes.Propellants.Alcohol_Mixture()
-    fuel_7                                      = RCAIDE.Library.Attributes.Propellants.Alkane_Mixture()
-    fuel_8                                      = RCAIDE.Library.Attributes.Propellants.Liquid_Natural_Gas()
-    fuel_9                                      = RCAIDE.Library.Attributes.Propellants.Butanol()
-    fuel_10                                     = RCAIDE.Library.Attributes.Propellants.Liquid_Petroleum_Gas()
-    fuel_11                                     = RCAIDE.Library.Attributes.Propellants.Jet_A1()
-    
+    fuel_tank.origin                            = [[13.0,0,-1.]] 
     # append correct fuel
-    fuel_12                                     = RCAIDE.Library.Attributes.Propellants.Jet_A()  
-    fuel_12.mass_properties.mass                = vehicle.mass_properties.max_takeoff-vehicle.mass_properties.max_fuel
-    fuel_12.origin                              = [[13.0,0,-1.]]      
-    fuel_12.mass_properties.center_of_gravity   = [[13.0,0,-1.]]
-    fuel_12.internal_volume                     = fuel_12.mass_properties.mass/fuel_12.density  
-    fuel_tank.fuel                              = fuel_12
+    fuel                                        = RCAIDE.Library.Attributes.Propellants.Jet_A()  
+    fuel.mass_properties.mass                   = vehicle.mass_properties.max_takeoff-vehicle.mass_properties.max_fuel
+    fuel.origin                                 = [[13.0,0,-1.]]      
+    fuel.mass_properties.center_of_gravity      = [[13.0,0,-1.]]
+    fuel.internal_volume                        = fuel.mass_properties.mass/fuel.density  
+    fuel_tank.fuel                              = fuel
     fuel_line.fuel_tanks.append(fuel_tank) 
     
 

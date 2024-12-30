@@ -1,9 +1,9 @@
-RCAIDE.Library.Plots.Thermal_Management.plot_thermal_management_components
+RCAIDE.Library.Plots.Thermal_Management.plot_thermal_management_performance
 
 plot\_thermal\_management\_components
 =====================================
 
-.. automodule:: RCAIDE.Library.Plots.Thermal_Management.plot_thermal_management_components
+.. automodule:: RCAIDE.Library.Plots.Thermal_Management.plot_thermal_management_performance
 
    
    
@@ -16,7 +16,7 @@ plot\_thermal\_management\_components
    .. autosummary::
       :toctree:
    
-      plot_thermal_management_component
+      plot_thermal_management_performance
    
    
 
