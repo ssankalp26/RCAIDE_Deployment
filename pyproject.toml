@@ -5,6 +5,13 @@ requires = [
 ]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["RCAIDE*"]
+
 [project]
 name = "RCAIDE_LEADS"
 version = "0.0.0"
@@ -57,17 +64,11 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://rcaide.leadsresearch.com"
-Repository = "https://github.com/yourusername/RCAIDE_LEADS"
-Documentation = "https://rcaide.leadsresearch.com/docs"
-"Bug Tracker" = "https://github.com/yourusername/RCAIDE_LEADS/issues"
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0.0",
-    "pytest-cov>=4.0.0",
-    "flake8>=6.0.0",
-    "black>=23.0.0",
-    "bump2version>=1.0.0",
-    "build>=1.0.0",
-    "twine>=4.0.0"
+    "pytest",
+    "pytest-cov",
+    "flake8",
+    "black"
 ]
