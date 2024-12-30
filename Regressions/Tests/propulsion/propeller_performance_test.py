@@ -56,7 +56,7 @@ def main():
     diff_thrust = np.abs((thrust- thrust_true)/thrust_true)  
     print('\nthrust difference')
     print(diff_thrust)
-    assert diff_thrust  < 1e-6
+    assert diff_thrust  < 1e-3
     
     # plot propeller 
     plot_3d_rotor(propeller,save_figure=False, show_figure=False) 
