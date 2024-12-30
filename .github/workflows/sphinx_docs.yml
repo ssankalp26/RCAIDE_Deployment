@@ -46,18 +46,31 @@ jobs:
           
       - name: Execute Notebooks
         run: |
-            for notebook in Tutorials/*/*.ipynb; do
-              echo "Running $notebook"
-              if [ -f "$notebook" ]; then
-                # Add error handling and timeout
-                jupyter nbconvert --to notebook --execute "$notebook" \
-                  --output "$notebook" \
-                  --ExecutePreprocessor.timeout=600 \
-                  || { echo "Error in notebook $notebook"; exit 1; }
-              else
-                echo "Notebook $notebook not found, skipping."
-              fi
-            done
+          for notebook in Tutorials/*/*.ipynb; do
+            echo "Running $notebook"
+            if [ -f "$notebook" ]; then
+              # Create temporary directory for execution
+              tmp_dir=$(mktemp -d)
+              
+              # Get the notebook name without path
+              notebook_name=$(basename "$notebook")
+              
+              # Execute notebook and save to temporary location
+              jupyter nbconvert --to notebook --execute "$notebook" \
+                --output "$tmp_dir/$notebook_name" \
+                --ExecutePreprocessor.timeout=600 \
+                || { echo "Error executing notebook $notebook"; exit 1; }
+              
+              # If execution succeeded, move the executed notebook back
+              mv "$tmp_dir/$notebook_name" "$notebook" \
+                || { echo "Error moving executed notebook $notebook"; exit 1; }
+              
+              # Clean up
+              rm -rf "$tmp_dir"
+            else
+              echo "Notebook $notebook not found, skipping."
+            fi
+          done
         
 
       - name: Clean Old Docs
