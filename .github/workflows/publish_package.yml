@@ -46,6 +46,7 @@ jobs:
           new_version="$major.$minor.$patch"
           echo "$new_version" > version.txt
           echo "new_version=$new_version" >> "$GITHUB_ENV"
+          echo "new_version=$new_version" >> "$GITHUB_OUTPUT"
 
       - name: Commit and Push Updated Version
         if: steps.bump-version.outcome == 'success'
@@ -64,7 +65,7 @@ jobs:
     steps:
       - name: Get New Version
         run: |
-          echo "New version is ${{ needs.bump-version.outputs.new_version }}"
+          echo "new_version=${{ needs.bump-version.outputs.new_version }}" >> "$GITHUB_ENV"
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
