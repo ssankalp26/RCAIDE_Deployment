@@ -20,8 +20,8 @@ jobs:
       - name: Get Current Version
         id: get_version
         run: |
-          if [ ! -f VERSION ]; then
-            echo "VERSION file not found!"
+          if [ ! -f version ]; then
+            echo "version file not found!"
             exit 1
           fi
           old_version=$(cat VERSION)
