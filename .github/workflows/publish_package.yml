@@ -50,8 +50,12 @@ jobs:
         run: |
           BASE_VERSION_FILE="VERSION"
           if [[ "${{ steps.determine_base.outputs.base_branch }}" != "unknown" ]]; then
-            git show "${{ steps.determine_base.outputs.base_branch }}:${BASE_VERSION_FILE}" &> /dev/null
-            if [ $? -eq 0 ]; then
+            # Try to fetch the branch first
+            git fetch origin "${{ steps.determine_base.outputs.base_branch }}" || true
+            
+            # Check if the VERSION file exists in the base branch
+            if git rev-parse "origin/${{ steps.determine_base.outputs.base_branch }}" &>/dev/null && \
+               git cat-file -e "origin/${{ steps.determine_base.outputs.base_branch }}:${BASE_VERSION_FILE}" 2>/dev/null; then
               echo "exists=true" >> $GITHUB_OUTPUT
             else
               echo "exists=false" >> $GITHUB_OUTPUT
