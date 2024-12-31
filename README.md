@@ -70,19 +70,19 @@ flowchart TB
     style Libraries fill:#0fcf99,color:#fff
     
     %% Framework children styling - Burgundy
-    style Mission fill:#800020,color:#fff
-    style Analyses fill:#800020,color:#fff
-    style Optimization fill:#800020,color:#fff
-    style Data fill:#800020,color:#fff
+    style Mission fill:#ffaf33,color:#fff
+    style Analyses fill:#ffaf33,color:#fff
+    style Optimization fill:#ffaf33,color:#fff
+    style Data fill:#ffaf33,color:#fff
     
     %% Libraries children styling - Purple
-    style Aerodynamics fill:#5D3FD3,color:#fff
-    style Noise fill:#5D3FD3,color:#fff
-    style Costs fill:#5D3FD3,color:#fff
-    style Stability fill:#5D3FD3,color:#fff
-    style Energy fill:#5D3FD3,color:#fff
-    style FlightPerf fill:#5D3FD3,color:#fff
-    style Weights fill:#5D3FD3,color:#fff
+    style Aerodynamics fill:#ffaf33,color:#fff
+    style Noise fill:#ffaf33,color:#fff
+    style Costs fill:#ffaf33,color:#fff
+    style Stability fill:#ffaf33,color:#fff
+    style Energy fill:#ffaf33,color:#fff
+    style FlightPerf fill:#ffaf33,color:#fff
+    style Weights fill:#ffaf33,color:#fff
 ```
 ## Capabilities of RCAIDE
 RCAIDE currently possesses the ability to perform the following analyses, each at varying levels of fidelity. Here, we define fidelity as a level of accuracy to the actual physical value. As the level of fidelity increases, so does accuracy. However, this comes with the penalty of computational time and memory.  Having multi-fidelity capability allows RCAIDE to perform energy network analysis, complete flight  vehicle mission analysis, multi-fidelity optimization, design space exploration, artificial intelligence, and model-based systems engineering. Here are some notable use cases of RCAIDE:
