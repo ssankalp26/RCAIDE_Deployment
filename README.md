@@ -109,7 +109,7 @@ RCAIDE currently possesses the ability to perform the following analyses, each a
 RCAIDE is available on GNU/Linux, MacOS and Windows. We strongly recommend installing RCAIDE within a Python virtual environment to avoid altering any distribution of Python files. Please review the documentation for instructions on creating a virtual environment for RCAIDE.
 
 * [See Installation Instructions](https://www.docs.rcaide.leadsresearchgroup.com/install.html)
-* Using pip (coming soon) 
+* Using pip : `pip install RCAIDE-LEADS`
 * Using conda (coming soon) 
 
 ## Tutorials
