@@ -40,7 +40,7 @@ jobs:
         run: |
           echo "[run]" > .coveragerc
           echo "omit = */RCAIDE/Framework/External_Interfaces/*" >> .coveragerc
-          pytest --cov=RCAIDE --cov-report=xml --cov-omit="*/RCAIDE/Framework/External_Interfaces/*" -v
+          pytest --cov=RCAIDE --cov-report=xml -v
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
@@ -78,7 +78,7 @@ jobs:
         run: |
           echo "[run]" > .coveragerc
           echo "omit = */RCAIDE/Framework/External_Interfaces/*" >> .coveragerc
-          pytest --cov=RCAIDE --cov-report=xml --cov-omit="*/RCAIDE/Framework/External_Interfaces/*" -v
+          pytest --cov=RCAIDE --cov-report=xml -v
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
