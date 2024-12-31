@@ -92,7 +92,6 @@ jobs:
               exit 1
             fi
           fi
-          
           echo "Version check passed: $CURRENT_VERSION"
 
   publish:
