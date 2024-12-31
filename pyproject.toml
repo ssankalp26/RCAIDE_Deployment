@@ -9,10 +9,7 @@ build-backend = "setuptools.build_meta"
 name = "RCAIDE_LEADS"
 dynamic = ["version"]
 description = "RCAIDE: Research Community Aerospace Interdisciplinary Design Environment"
-authors = [
-    {name = "Laboratory for Electric Aircraft Design and Sustainability"}
-]
-readme = "README.md"
+readme = "README_PyPI.md"  # Updated to use PyPI-compatible README
 requires-python = ">=3.8"
 license = {text = "GNU Affero General Public License v3.0"}
 classifiers = [
