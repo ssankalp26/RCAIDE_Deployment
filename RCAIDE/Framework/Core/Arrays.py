@@ -1,19 +1,17 @@
-## @ingroup Core
-# RCAIDE/Core/Arrays.py
-# 
-# 
-# Created:  Jul 2023, M. Clarke 
+# RCAIDE/Framework/Core/Arrays.py
 
-# ----------------------------------------------------------------------------------------------------------------------
-#  IMPORT
-# ----------------------------------------------------------------------------------------------------------------------      
-
+# ----------------------------------------------------------------------
+#   Imports
+# ----------------------------------------------------------------------
 import numpy as np
 
-# ----------------------------------------------------------------------------------------------------------------------
-#  atleast_2d_col
-# ----------------------------------------------------------------------------------------------------------------------        
-## @ingroup Core
+# ----------------------------------------------------------------------
+#   Array
+# ----------------------------------------------------------------------       
+
+array_type  = np.ndarray
+matrix_type = np.matrixlib.defmatrix.matrix
+ 
 def atleast_2d_col(A):
     """Makes a 2D array in column format
 
@@ -35,10 +33,6 @@ def atleast_2d_col(A):
     return atleast_2d(A,'col')
 
 
-# ----------------------------------------------------------------------------------------------------------------------
-#  atleast_2d_row
-# ----------------------------------------------------------------------------------------------------------------------        
-## @ingroup Core
 def atleast_2d_row(A):
     """Makes a 2D array in row format
 
@@ -60,10 +54,6 @@ def atleast_2d_row(A):
     return atleast_2d(A,'row')
 
 
-# ----------------------------------------------------------------------------------------------------------------------
-#  atleast_2d
-# ----------------------------------------------------------------------------------------------------------------------        
-## @ingroup Core
 def atleast_2d(A,oned_as='row'):
     """ensures A is an array and at least of rank 2
 
@@ -84,7 +74,7 @@ def atleast_2d(A,oned_as='row'):
     """       
     
     # not an array yet
-    if not isinstance(A,(np.ndarray,np.matrixlib.defmatrix.matrix)):
+    if not isinstance(A,(array_type,matrix_type)):
         if not isinstance(A,(list,tuple)):
             A = [A]
         A = np.array(A)
@@ -100,29 +90,3 @@ def atleast_2d(A,oned_as='row'):
             raise Exception("oned_as must be 'row' or 'col' ")
             
     return A
-
-
-## @ingroup Core
-def append_array(A=None,B=None):
-    """ A stacking operation used by merged to put together data structures
-
-        Assumptions:
-        None
-
-        Source:
-        N/A
-
-        Inputs:
-        A [array]
-        B [array]
-
-        Outputs:
-        array
-
-        Properties Used:
-        None
-    """       
-    if isinstance(A,np.ndarray) and isinstance(B,np.ndarray):
-        return np.vstack([A,B])
-    else:
-        return None

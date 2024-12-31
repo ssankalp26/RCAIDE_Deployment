@@ -1,4 +1,3 @@
-## @ingroup Library-Plots-Geometry
 # RCAIDE/Library/Plots/Geometry/plot_3d_nacelle.py
 # 
 # 
@@ -16,8 +15,7 @@ import numpy as np
 
 # ----------------------------------------------------------------------------------------------------------------------
 #  PLOTS
-# ----------------------------------------------------------------------------------------------------------------------  
-## @ingroup Library-Plots-Geometry 
+# ----------------------------------------------------------------------------------------------------------------------   
 def plot_3d_nacelle(plot_data,nacelle,tessellation = 24,number_of_airfoil_points = 21,color_map= 'darkmint'):
     """ This plots a 3D surface of a nacelle  
 
@@ -62,8 +60,7 @@ def plot_3d_nacelle(plot_data,nacelle,tessellation = 24,number_of_airfoil_points
             plot_data.append(verts)    
 
     return plot_data
-
-## @ingroup Library-Plots-Geometry 
+ 
 def generate_3d_stack_nacelle_points(nac,tessellation = 24 ,number_of_airfoil_points = 21):
     """ This generates the coordinate points on the surface of the stack nacelle
 
@@ -82,11 +79,11 @@ def generate_3d_stack_nacelle_points(nac,tessellation = 24 ,number_of_airfoil_po
     N/A 
     """ 
     
-    num_nac_segs = len(nac.Segments.keys())   
+    num_nac_segs = len(nac.segments.keys())   
     theta        = np.linspace(0,2*np.pi,tessellation)  
  
     nac_pts = np.zeros((num_nac_segs,tessellation,3))  
-    for i_seg, segment in enumerate(nac.Segments): 
+    for i_seg, segment in enumerate(nac.segments): 
         a = segment.width/2
         b = segment.height/2
         n = segment.curvature
@@ -140,8 +137,7 @@ def generate_3d_stack_nacelle_points(nac,tessellation = 24 ,number_of_airfoil_po
     return G     
 
 
-
-## @ingroup Library-Plots-Geometry 
+ 
 def generate_3d_BOR_nacelle_points(nac,tessellation = 24 ,number_of_airfoil_points = 21):
     """ This generates the coordinate points on the surface of the body of revolution nacelle
 
@@ -162,9 +158,8 @@ def generate_3d_BOR_nacelle_points(nac,tessellation = 24 ,number_of_airfoil_poin
      
     theta        = np.linspace(0,2*np.pi,tessellation)  
     num_nac_segs = int(np.ceil(number_of_airfoil_points/2))
-    nac_pts      = np.zeros((num_nac_segs,tessellation,3))
-    af_tag       = list(nac.Airfoil.keys())[0]
-    naf          =  nac.Airfoil[af_tag]
+    nac_pts      = np.zeros((num_nac_segs,tessellation,3)) 
+    naf          = nac.airfoil 
     
     if type(naf) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil: 
         a_geo        = compute_naca_4series(naf.NACA_4_Series_code,num_nac_segs)

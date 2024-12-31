@@ -1,4 +1,3 @@
-## @ingroup Methods-Aerodynamics-Airfoil_Panel_Method
 # RCAIDE/Methods/Aerodynamics/Airfoil_Panel_Method/hess_smith.py
 # 
 # 
@@ -15,11 +14,11 @@ from .velocity_distribution import velocity_distribution
 
 # pacakge imports  
 import numpy as np  
+from scipy.linalg import solve
  
 # ----------------------------------------------------------------------------------------------------------------------
 # hess_smith
 # ---------------------------------------------------------------------------------------------------------------------- 
-## @ingroup Methods-Aerodynamics-Airfoil_Panel_Method
 def hess_smith(x_coord,y_coord,alpha,Re,npanel):
     """Computes the incompressible, inviscid flow over an airfoil of  arbitrary shape using the Hess-Smith panel method.  
 
@@ -64,10 +63,15 @@ def hess_smith(x_coord,y_coord,alpha,Re,npanel):
     b_2d          = np.zeros((npanel+1,ncases, ncpts))
     b_2d[:-1,:,:] = st*np.cos(alpha_2d) - np.sin(alpha_2d)*ct
     b_2d[-1,:,:]  = -(ct[0,:,:]*np.cos(alpha_2d[-1,:,:]) + st[0,:,:]*np.sin(alpha_2d[-1,:,:]))-(ct[-1,:,:]*np.cos(alpha_2d[-1,:,:]) +st[-1,:,:]*np.sin(alpha_2d[-1,:,:]))
-      
-    # solve matrix system for vector of q_i and gamma  
-    qg_T          = np.linalg.solve(ainfl,np.swapaxes(b_2d.T,0,1))
-    qg            = np.swapaxes(qg_T.T,1,2) 
+    
+    qg = np.zeros((npanel+1, ncases, ncpts))  
+    for i in range(ncases):
+        for j in range(ncpts):
+            A = ainfl[i, j, :, :]     
+            B = b_2d[:, i, j]        
+            
+
+            qg[:, i, j] = solve(A, B)
     
     # compute the tangential velocity distribution at the midpoint of panels 
     vt            = velocity_distribution(qg,x_coord,y_coord,xbar,ybar,st,ct,alpha_2d,npanel,ncases,ncpts)

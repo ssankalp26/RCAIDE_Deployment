@@ -1,5 +1,3 @@
-## @defgroup External_Interfaces-OpenVSP OpenVSP  
-# @ingroup External_Interfaces
 # RCAIDE/External_Interfaces/OpenVSP/__init__.py
 # 
 
@@ -10,7 +8,14 @@
 #  IMPORT
 # ----------------------------------------------------------------------------------------------------------------------
  
-from Legacy.trunk.S.Input_Output.OpenVSP.get_vsp_measurements import get_vsp_measurements
-from Legacy.trunk.S.Input_Output.OpenVSP.write_vsp_mesh       import write_vsp_mesh
-from Legacy.trunk.S.Input_Output.OpenVSP.vsp_write            import write
-from Legacy.trunk.S.Input_Output.OpenVSP.mach_slices          import mach_slices
+from .export_vsp_vehicle       import * 
+from .get_fuel_tank_properties import *
+from .get_vsp_measurements     import *
+from .import_vsp_vehicle       import * 
+from .mach_slices              import mach_slices
+from .vsp_boom                 import *
+from .vsp_fuselage             import *
+from .vsp_nacelle              import *
+from .vsp_wing                 import *
+from .vsp_rotor                import *
+from .write_vsp_mesh           import write_vsp_mesh

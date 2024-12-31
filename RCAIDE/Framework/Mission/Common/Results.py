@@ -1,4 +1,3 @@
-## @ingroup Analyses-Mission-Segments-Conditions
 # RCAIDE/Framework/Analyses/Mission/Segments/Conditions/Results.py
 # 
 # 
@@ -19,7 +18,6 @@ import numpy as np
 # Results
 # ---------------------------------------------------------------------------------------------------------------------- 
 
-## @ingroup Analyses-Mission-Segments-Conditions
 class Results(Conditions):
     """ This builds upon Basic, which itself builds on conditions, to add the data structure for aerodynamic mission analyses.
     
@@ -102,12 +100,15 @@ class Results(Conditions):
         self.frames.inertial.total_moment_vector                               = ones_3col * 0
         self.frames.inertial.time                                              = ones_1col * 0
         self.frames.inertial.aircraft_range                                    = ones_1col * 0
+
                                                                                
         # body conditions                                                      
         self.frames.body                                                       = Conditions()        
         self.frames.body.inertial_rotations                                    = ones_3col * 0
         self.frames.body.thrust_force_vector                                   = ones_3col * 0
         self.frames.body.moment_vector                                         = ones_3col * 0
+        self.frames.body.velocity_vector                                       = ones_3col * 0
+        self.frames.body.thrust_moment_vector                                  = ones_3col * 0 
         self.frames.body.transform_to_inertial                                 = np.empty([0,0,0])
                                                                                
         # wind frame conditions                                                
@@ -123,7 +124,8 @@ class Results(Conditions):
         self.frames.planet.start_time                                          = None
         self.frames.planet.latitude                                            = ones_1col * 0
         self.frames.planet.longitude                                           = ones_1col * 0
-        self.frames.planet.true_course                                         = np.empty([0,0,0])
+        self.frames.planet.true_course                                         = ones_1col * 0
+        self.frames.planet.true_heading                                        = ones_1col * 0
 
         # ----------------------------------------------------------------------------------------------------------------------         
         # Freestream 
@@ -163,17 +165,29 @@ class Results(Conditions):
                                                                                
         # aerodynamic coefficients                                             
         self.aerodynamics.coefficients                                         = Conditions()
+        self.aerodynamics.coefficients.surface_pressure                        = None
         self.aerodynamics.coefficients.lift                                    = Conditions()
-        self.aerodynamics.coefficients.lift.total                              = ones_1col * 0 
-        self.aerodynamics.coefficients.lift.inviscid_wings                     = Conditions()
+        self.aerodynamics.coefficients.lift.total                              = None
+        self.aerodynamics.coefficients.lift.induced                            = Conditions()
+        self.aerodynamics.coefficients.lift.induced.inviscid_wings             = Conditions()
         self.aerodynamics.coefficients.lift.compressible_wings                 = Conditions() 
         self.aerodynamics.coefficients.drag                                    = Conditions()  
         self.aerodynamics.coefficients.drag.total                              = ones_1col * 0   
         self.aerodynamics.coefficients.drag.parasite                           = Conditions()
         self.aerodynamics.coefficients.drag.compressible                       = Conditions()
         self.aerodynamics.coefficients.drag.induced                            = Conditions()
-        self.aerodynamics.coefficients.drag.induced.inviscid_wings             = Conditions()
         self.aerodynamics.coefficients.drag.induced.total                      = ones_1col * 0 
+        self.aerodynamics.coefficients.drag.induced.inviscid                   = ones_1col * 0 
+        self.aerodynamics.coefficients.drag.induced.inviscid_wings             = Conditions()
+        self.aerodynamics.coefficients.drag.cooling                            = Conditions()
+        self.aerodynamics.coefficients.drag.cooling.total                      = ones_1col * 0
+        self.aerodynamics.coefficients.drag.windmilling                        = Conditions()
+        self.aerodynamics.coefficients.drag.windmilling.total                  = ones_1col * 0
+        self.aerodynamics.coefficients.drag.asymmetry_trim                     = Conditions()
+        self.aerodynamics.coefficients.drag.asymmetry_trim.total               = ones_1col * 0 
+        
+        self.aerodynamics.coefficients.drag.induced.efficiency_factor          = ones_1col * 0 
+        self.aerodynamics.oswald_efficiency                                    = ones_1col * 0 
  
         # ----------------------------------------------------------------------------------------------------------------------
         # Control Surfaces 
@@ -283,7 +297,10 @@ class Results(Conditions):
         self.static_stability.coefficients.Z                                   = ones_1col * 0
         self.static_stability.coefficients.L                                   = ones_1col * 0
         self.static_stability.coefficients.M                                   = ones_1col * 0
-        self.static_stability.coefficients.N                                   = ones_1col * 0  
+        self.static_stability.coefficients.N                                   = ones_1col * 0 
+        self.static_stability.coefficients.roll                                = ones_1col * 0
+        self.static_stability.coefficients.pitch                               = ones_1col * 0
+        self.static_stability.coefficients.yaw                                 = ones_1col * 0  
                                                                                
         self.static_stability.derivatives                                      = Conditions()
                                                                                
@@ -369,8 +386,9 @@ class Results(Conditions):
         self.static_stability.derivatives.CM_w                                 = ones_1col * 0
         self.static_stability.derivatives.CN_u                                 = ones_1col * 0
         self.static_stability.derivatives.CN_v                                 = ones_1col * 0
-        self.static_stability.derivatives.CN_w                                 = ones_1col * 0
-        
+        self.static_stability.derivatives.CN_w                                 = ones_1col * 0 
+        self.static_stability.derivatives.CZ_alpha_dot                         = ones_1col * 0
+        self.static_stability.derivatives.CM_alpha_dot                         = ones_1col * 0 
         self.static_stability.derivatives.Clift_p                              = ones_1col * 0
         self.static_stability.derivatives.Clift_q                              = ones_1col * 0
         self.static_stability.derivatives.Clift_r                              = ones_1col * 0
@@ -407,9 +425,8 @@ class Results(Conditions):
         # ----------------------------------------------------------------------------------------------------------------------    
         self.emissions                                       = Conditions()         
         
-
         # ----------------------------------------------------------------------------------------------------------------------         
-        # Noise 
+        # Noise
         # ----------------------------------------------------------------------------------------------------------------------       
         self.noise                                            = Conditions() 
 
@@ -418,7 +435,13 @@ class Results(Conditions):
         # ---------------------------------------------------------------------------------------------------------------------- 
         self.energy                                           = Conditions()
         self.energy.throttle                                  = ones_1col * 0  
-        self.energy.thrust_breakdown                          = Conditions()     
+        self.energy.thrust_breakdown                          = Conditions()
+        self.energy.thrust_breakdown                          = Conditions()
+        self.energy.thrust_force_vector                       = ones_3col * 0
+        self.energy.thrust_moment_vector                      = ones_3col * 0
+        self.energy.power                                     = ones_1col * 0
+        self.energy.vehicle_mass_rate                         = ones_1col * 0
+        
         
         # ----------------------------------------------------------------------------------------------------------------------         
         # Weights 

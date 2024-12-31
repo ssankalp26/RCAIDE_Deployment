@@ -1,18 +1,20 @@
-## @defgroup Components-Propulsors-Modulators
-# RCAIDE/Library/Components/Propulsors/Modulators/__init__.py
+# RCAIDE/Library/Components/Energy/Modulators/__init__.py
 # 
 
-""" RCAIDE Package Setup
+"""
+Energy modulation components for controlling power flow in aircraft systems
+
+This module contains components that regulate and control energy flow, including
+electronic speed controllers for electric motors, fuel selectors for fuel systems,
+and solar power management logic.
 """
 
 # ----------------------------------------------------------------------------------------------------------------------
 #  IMPORT
 # ----------------------------------------------------------------------------------------------------------------------
-
-## @ingroup Energy
+ 
 from .Electronic_Speed_Controller                  import Electronic_Speed_Controller
 from .Fuel_Selector                                import Fuel_Selector
-from Legacy.trunk.S.Components.Energy.Distributors import HTS_DC_Dynamo_Basic
-from Legacy.trunk.S.Components.Energy.Distributors import HTS_DC_Supply 
+from .Solar_Logic                                  import Solar_Logic 
 
 

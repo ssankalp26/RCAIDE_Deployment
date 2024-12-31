@@ -1,4 +1,3 @@
-## @ingroup Library-Plots-Geometry
 # RCAIDE/Library/Plots/Geometry/plot_3d_wing.py
 # 
 # 
@@ -17,7 +16,6 @@ import numpy as np
 # ----------------------------------------------------------------------------------------------------------------------
 #  PLOTS
 # ----------------------------------------------------------------------------------------------------------------------  
-## @ingroup Library-Plots-Geometry
 def plot_3d_wing(plot_data,wing,number_of_airfoil_points = 21, color_map='greys',alpha=1):
     """ This plots the wings of a vehicle
 
@@ -37,7 +35,7 @@ def plot_3d_wing(plot_data,wing,number_of_airfoil_points = 21, color_map='greys'
     """
      
     af_pts    = number_of_airfoil_points-1 
-    n_segments = len(wing.Segments)  
+    n_segments = len(wing.segments)  
     if n_segments>0:
         dim =  n_segments
     else:
@@ -83,8 +81,7 @@ def plot_3d_wing(plot_data,wing,number_of_airfoil_points = 21, color_map='greys'
             
              
     return plot_data
-
-## @ingroup Library-Plots-Geometry 
+ 
 def generate_3d_wing_points(wing,n_points,dim):
     """ This generates the coordinates of the blade surface for plotting in the aircraft frame (x-back, z-up)
 
@@ -109,7 +106,7 @@ def generate_3d_wing_points(wing,n_points,dim):
     symm                 = wing.symmetric
     semispan             = wing.spans.projected*0.5 * (2 - symm) 
     root_chord           = wing.chords.root
-    segments             = wing.Segments
+    segments             = wing.segments
     n_segments           = len(segments.keys()) 
     origin               = wing.origin   
         
@@ -126,14 +123,12 @@ def generate_3d_wing_points(wing,n_points,dim):
         
         for i in range(n_segments):
             current_seg = list(segments.keys())[i]
-            airfoil = wing.Segments[current_seg].Airfoil 
-            if len(list(airfoil.keys())) > 0:
-                af_tag =  list(airfoil.keys())[0]
-                
-                if type(airfoil[af_tag]) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
-                    geometry = compute_naca_4series(airfoil[af_tag].NACA_4_Series_code,n_points)
-                elif type(airfoil[af_tag]) == RCAIDE.Library.Components.Airfoils.Airfoil: 
-                    geometry     = import_airfoil_geometry(airfoil[af_tag].coordinate_file,n_points)
+            airfoil = wing.segments[current_seg].airfoil 
+            if  airfoil !=  None:                 
+                if type(airfoil) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
+                    geometry = compute_naca_4series(airfoil.NACA_4_Series_code,n_points)
+                elif type(airfoil) == RCAIDE.Library.Components.Airfoils.Airfoil: 
+                    geometry     = import_airfoil_geometry(airfoil.coordinate_file,n_points)
             else:
                 geometry = compute_naca_4series('0012',n_points)  
             
@@ -141,23 +136,23 @@ def generate_3d_wing_points(wing,n_points,dim):
                 sweep = 0                                 
             else: 
                 next_seg = list(segments.keys())[i+1]                
-                if wing.Segments[current_seg].sweeps.leading_edge is not None: 
+                if wing.segments[current_seg].sweeps.leading_edge is not None: 
                     # If leading edge sweep is defined 
-                    sweep       = wing.Segments[current_seg].sweeps.leading_edge  
+                    sweep       = wing.segments[current_seg].sweeps.leading_edge  
                 else:   
                     # If quarter chord sweep is defined, convert it to leading edge sweep
-                    sweep_quarter_chord = wing.Segments[current_seg].sweeps.quarter_chord 
+                    sweep_quarter_chord = wing.segments[current_seg].sweeps.quarter_chord 
                     chord_fraction      = 0.25                          
-                    segment_root_chord  = root_chord*wing.Segments[current_seg].root_chord_percent
-                    segment_tip_chord   = root_chord*wing.Segments[next_seg].root_chord_percent
-                    segment_span        = semispan*(wing.Segments[next_seg].percent_span_location - wing.Segments[current_seg].percent_span_location )
+                    segment_root_chord  = root_chord*wing.segments[current_seg].root_chord_percent
+                    segment_tip_chord   = root_chord*wing.segments[next_seg].root_chord_percent
+                    segment_span        = semispan*(wing.segments[next_seg].percent_span_location - wing.segments[current_seg].percent_span_location )
                     sweep               = np.arctan(((segment_root_chord*chord_fraction) + (np.tan(sweep_quarter_chord )*segment_span - chord_fraction*segment_tip_chord)) /segment_span) 
-            dihedral = wing.Segments[current_seg].dihedral_outboard    
-            twist    = wing.Segments[current_seg].twist
+            dihedral = wing.segments[current_seg].dihedral_outboard    
+            twist    = wing.segments[current_seg].twist
             
             if wing.vertical: 
-                pts[i,:,0,0]   = geometry.x_coordinates * wing.Segments[current_seg].root_chord_percent * wing.chords.root 
-                pts[i,:,1,0]   = geometry.y_coordinates * wing.Segments[current_seg].root_chord_percent * wing.chords.root 
+                pts[i,:,0,0]   = geometry.x_coordinates * wing.segments[current_seg].root_chord_percent * wing.chords.root 
+                pts[i,:,1,0]   = geometry.y_coordinates * wing.segments[current_seg].root_chord_percent * wing.chords.root 
                 pts[i,:,2,0]   = np.zeros_like(geometry.y_coordinates) 
               
                 section_twist[i,:,0,0] = np.cos(twist) 
@@ -166,9 +161,9 @@ def generate_3d_wing_points(wing,n_points,dim):
                 section_twist[i,:,1,1] = np.cos(twist) 
             
             else: 
-                pts[i,:,0,0]   = geometry.x_coordinates * wing.Segments[current_seg].root_chord_percent * wing.chords.root
+                pts[i,:,0,0]   = geometry.x_coordinates * wing.segments[current_seg].root_chord_percent * wing.chords.root
                 pts[i,:,1,0]   = np.zeros_like(geometry.y_coordinates) 
-                pts[i,:,2,0]   = geometry.y_coordinates * wing.Segments[current_seg].root_chord_percent * wing.chords.root  
+                pts[i,:,2,0]   = geometry.y_coordinates * wing.segments[current_seg].root_chord_percent * wing.chords.root  
                                  
 
                 section_twist[i,:,0,0] = np.cos(twist) 
@@ -178,26 +173,20 @@ def generate_3d_wing_points(wing,n_points,dim):
              
             if (i != n_segments-1):
                 # update origin for next segment 
-                segment_percent_span =    wing.Segments[next_seg].percent_span_location - wing.Segments[current_seg].percent_span_location     
+                segment_percent_span =    wing.segments[next_seg].percent_span_location - wing.segments[current_seg].percent_span_location     
                 if wing.vertical:
-                    inverted_wing = -np.sign(abs(dihedral) - np.pi/2)
-                    if inverted_wing  == 0:
-                        inverted_wing  = 1
-                    dz = inverted_wing*semispan*segment_percent_span
+                    dz = semispan*segment_percent_span
                     dy = dz*np.tan(dihedral)
                     l  = dz/np.cos(dihedral)
                     dx = l*np.tan(sweep)
                 else:
-                    inverted_wing = np.sign(dihedral)
-                    if inverted_wing  == 0:
-                        inverted_wing  = 1
-                    dy = inverted_wing*semispan*segment_percent_span
+                    dy = semispan*segment_percent_span
                     dz = dy*np.tan(dihedral)
                     l  = dy/np.cos(dihedral)
                     dx = l*np.tan(sweep)
                 translation[i+1,:,0,:] = translation[i,:,0,:] + dx
                 translation[i+1,:,1,:] = translation[i,:,1,:] + dy
-                translation[i+1,:,2,:] = translation[i,:,2,:] + dz  
+                translation[i+1,:,2,:] = translation[i,:,2,:] + dz 
     else:
 
         pts              = np.zeros((dim,n_points, 3,1))  
@@ -207,14 +196,12 @@ def generate_3d_wing_points(wing,n_points,dim):
         section_twist[:, :, 2, 2] = 1
         translation      = np.zeros((dim,n_points, 3,1))
         
-        airfoil = wing.Airfoil 
-        if len(list(airfoil.keys())) > 0:
-            af_tag =  list(airfoil.keys())[0]
-            
-            if type(airfoil[af_tag]) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
-                geometry = compute_naca_4series(airfoil[af_tag].NACA_4_Series_code,n_points)
-            elif type(airfoil[af_tag]) == RCAIDE.Library.Components.Airfoils.Airfoil: 
-                geometry     = import_airfoil_geometry(airfoil[af_tag].coordinate_file,n_points)
+        airfoil = wing.airfoil 
+        if wing.airfoil != None: 
+            if type(airfoil) == RCAIDE.Library.Components.Airfoils.NACA_4_Series_Airfoil:
+                geometry = compute_naca_4series(airfoil.NACA_4_Series_code,n_points)
+            elif type(airfoil) == RCAIDE.Library.Components.Airfoils.Airfoil: 
+                geometry     = import_airfoil_geometry(airfoil.coordinate_file,n_points)
         else:
             geometry = compute_naca_4series('0012',n_points)
             

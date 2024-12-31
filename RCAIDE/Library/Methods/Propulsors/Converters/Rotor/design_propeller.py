@@ -1,4 +1,3 @@
-## @ingroup Methods-Energy-Propulsors
 # RCAIDE/Methods/Energy/Propulsors/design_propeller.py
 # 
 # 
@@ -18,8 +17,7 @@ from scipy.optimize import root
 
 # ----------------------------------------------------------------------------------------------------------------------  
 #  Design Propeller
-# ----------------------------------------------------------------------------------------------------------------------  
-## @ingroup Methods-Energy-Propulsors
+# ----------------------------------------------------------------------------------------------------------------------   
 def design_propeller(prop,number_of_stations=20):
     """ Optimizes propeller chord and twist given input parameters.
           
@@ -55,7 +53,7 @@ def design_propeller(prop,number_of_stations=20):
     alt          = prop.cruise.design_altitude
     Thrust       = prop.cruise.design_thrust
     Power        = prop.cruise.design_power
-    airfoils     = prop.Airfoils 
+    airfoils     = prop.airfoils 
     a_loc        = prop.airfoil_polar_stations
     
     if (Thrust == None) and (Power== None):
@@ -258,7 +256,7 @@ def design_propeller(prop,number_of_stations=20):
     
     # blade solidity
     r          = chi*R                     
-    blade_area = sp.integrate.cumtrapz(B*c, r-r[0])
+    blade_area = sp.integrate.cumulative_trapezoid(B*c, r-r[0])
     sigma      = blade_area[-1]/(np.pi*R**2)   
     
     prop.cruise.design_torque                   = Power[0]/omega

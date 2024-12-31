@@ -1,4 +1,3 @@
-## @ingroup Library-Attributes-Propellants
 # RCAIDE/Library/Attributes/Propellants/JP7.py
 # 
 #
@@ -11,9 +10,8 @@
 from .Propellant import Propellant 
 
 # ---------------------------------------------------------------------------------------------------------------------- 
-#  Jet_A1 Propellant Class
+#  JP7 Propellant Class
 # ----------------------------------------------------------------------------------------------------------------------  
-## @ingroup  Library-Attributes-Propellants
 class JP7(Propellant):
     """JP7 Jet fuel class
     """

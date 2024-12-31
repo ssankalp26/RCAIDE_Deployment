@@ -1,4 +1,3 @@
-## @ingroup Library-Plots-Performance-Aerodynamics
 # RCAIDE/Library/Plots/Performance/Aerodynamics/plot_rotor_performance.py
 # 
 # 
@@ -14,8 +13,7 @@ from plotly.subplots import make_subplots
 # ----------------------------------------------------------------------------------------------------------------------
 #  PLOTS
 # ----------------------------------------------------------------------------------------------------------------------      
-## @ingroup Library-Plots-Performance-Aerodynamics
-def plot_rotor_performance(rotor, title=None, show_figure = True,save_figure=False, save_filename='Rotor_Performance', file_type=".png"):
+def plot_rotor_performance(rotor,outputs, title=None, show_figure = True,save_figure=False, save_filename='Rotor_Performance', file_type=".png"):
     """Plots a summary of rotor performance 
     
     Assumptions:
@@ -33,8 +31,7 @@ def plot_rotor_performance(rotor, title=None, show_figure = True,save_figure=Fal
     Properties Used:
     N/A
     """
-    # unpack
-    outputs = rotor.outputs
+    # unpack 
     r_distribution = outputs.disc_radial_distribution[0, :, 0]
     
     # 2d plots
