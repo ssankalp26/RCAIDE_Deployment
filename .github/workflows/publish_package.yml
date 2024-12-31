@@ -71,14 +71,6 @@ jobs:
           BASE_VERSION=$(git show "${{ steps.determine_base.outputs.base_branch }}:VERSION")
           echo "version=$BASE_VERSION" >> $GITHUB_OUTPUT
 
-      - name: Set Up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.x"
-
-      - name: Install semver
-        run: pip install semver
-
       - name: Compare Versions Based on Target Branch
         run: |
           CURRENT_VERSION=${{ steps.current_version.outputs.version }}
@@ -91,18 +83,17 @@ jobs:
             BASE_VERSION=${{ steps.base_version.outputs.version }}
             echo "Base Version: $BASE_VERSION"
             
-            # Use Python to compare semantic versions
-            python3 -c "
-            import semver
-            current = semver.VersionInfo.parse('${CURRENT_VERSION}')
-            base = semver.VersionInfo.parse('${BASE_VERSION}')
-            if not current > base:
-                print('Error: New version must be greater than base version')
-                exit(1)
-                        "
-                    fi
-                    
-                    echo "Version check passed: $CURRENT_VERSION"
+            # Remove dots and convert to integer for simple comparison
+            CURRENT_NUM=$(echo $CURRENT_VERSION | tr -d '.')
+            BASE_NUM=$(echo $BASE_VERSION | tr -d '.')
+            
+            if [ $CURRENT_NUM -le $BASE_NUM ]; then
+              echo "Error: New version must be greater than base version"
+              exit 1
+            fi
+          fi
+          
+          echo "Version check passed: $CURRENT_VERSION"
 
   publish:
     name: Publish Package to PyPI
