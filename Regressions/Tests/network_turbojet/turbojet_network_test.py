@@ -73,9 +73,9 @@ def main():
             print(val)
     
     # Truth values
-    thrust_truth     = 182566.0177458797
-    throttle_truth   = 1.0733674394507737
-    CL_truth         = 0.27062783947514396
+    thrust_truth     = 182566.01800494973
+    throttle_truth   = 1.073367439687721
+    CL_truth         = 0.2737121142244215
     
     # Store errors 
     error = Data()
@@ -387,7 +387,7 @@ def mission_setup(analyses):
     #   First Descent Segment: decceleration
     # ------------------------------------------------------------------    
     segment     = Segments.Cruise.Constant_Acceleration_Constant_Altitude(base_segment)
-    segment.tag = "decel_1" 
+    segment.tag = "cruise" 
     segment.analyses.extend( analyses.cruise )
     segment.acceleration                                  = -.5  * Units['m/s/s']
     segment.air_speed_end                                 = 1.5*573.  * Units.kts 
@@ -409,8 +409,8 @@ def mission_setup(analyses):
     segment     = Segments.Descent.Linear_Mach_Constant_Rate(base_segment)
     segment.tag = "descent_1" 
     segment.analyses.extend( analyses.cruise )
-    segment.altitude_end      = 41000. * Units.ft
-    segment.mach_number_end   = 1.3
+    segment.altitude_end      = 50000. * Units.ft
+    segment.mach_number_end   = 1.4
     segment.descent_rate      = 2000. * Units['ft/min']  
     
     # define flight dynamics to model 
@@ -423,6 +423,28 @@ def mission_setup(analyses):
     segment.assigned_control_variables.body_angle.active             = True                
     
     mission.append_segment(segment)     
+    
+
+    # ------------------------------------------------------------------
+    #   First Descent Segment
+    # ------------------------------------------------------------------  
+    segment     = Segments.Descent.Linear_Speed_Constant_Rate(base_segment)
+    segment.tag = "descent_2" 
+    segment.analyses.extend( analyses.cruise )
+    segment.altitude_end      = 41000. * Units.ft
+    segment.air_speed_end     = 383.591
+    segment.descent_rate      = 2000. * Units['ft/min']  
+    
+    # define flight dynamics to model 
+    segment.flight_dynamics.force_x                      = True  
+    segment.flight_dynamics.force_z                      = True     
+    
+    # define flight controls 
+    segment.assigned_control_variables.throttle.active               = True           
+    segment.assigned_control_variables.throttle.assigned_propulsors  = [['inner_right_turbojet','outer_right_turbojet','outer_left_turbojet','inner_left_turbojet']] 
+    segment.assigned_control_variables.body_angle.active             = True                
+    
+    mission.append_segment(segment)
     
     # ------------------------------------------------------------------
     #   First Descent Segment: decceleration

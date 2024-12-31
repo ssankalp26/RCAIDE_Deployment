@@ -2,8 +2,7 @@
 
 """
 Module containing heat exchanger components for thermal management systems. This module 
-provides classes for different heat exchanger configurations including cross-flow and 
-cryogenic designs.
+provides classes for different heat exchanger configurations including cross-flow.
 
 See Also
 --------
@@ -17,4 +16,3 @@ RCAIDE.Library.Components.Thermal_Management.Accessories
 #  IMPORT
 # ---------------------------------------------------------------------------------------------------------------------- 
 from .Cross_Flow_Heat_Exchanger  import Cross_Flow_Heat_Exchanger
-from .Cryogenic_Heat_Exchanger   import Cryogenic_Heat_Exchanger

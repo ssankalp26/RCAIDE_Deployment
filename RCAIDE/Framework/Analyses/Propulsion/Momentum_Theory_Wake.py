@@ -1,4 +1,3 @@
-## @ingroup Analyses-Propulsion
 # Momentum_Theory_Wake.py
 #
 # Created:  Jan 2022, R. Erhard
@@ -18,7 +17,6 @@ import numpy as np
 # ----------------------------------------------------------------------
 #  Generalized Rotor Class
 # ----------------------------------------------------------------------
-## @ingroup Analyses-Propulsion
 class Momentum_Theory_Wake(Component):
     """This is a general rotor wake component. 
 

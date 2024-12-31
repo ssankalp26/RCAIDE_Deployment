@@ -1,12 +1,11 @@
-## @ingroup Methods-Performance
-# generate_V_n_diagram.py
+ # generate_V_n_diagram.py
 #
 # Created:  Nov 2018, S. Karpuk
 # Modified:
 
-# ----------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------- 
 #  Imports
-# ----------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------- 
 
 # RCAIDE Imports
 import RCAIDE
@@ -18,11 +17,9 @@ from RCAIDE.Framework.Mission.Common  import Results
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ----------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------- 
 #  Compute a V-n diagram
-# ----------------------------------------------------------------------
-
-## @ingroup Methods-Performance
+# ---------------------------------------------------------------------------------------------------------------------- 
 def generate_V_n_diagram(vehicle,analyses,altitude,delta_ISA):
     
     """ Computes a V-n diagram for a given aircraft and given regulations for ISA conditions
