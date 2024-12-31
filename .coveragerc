@@ -1,6 +1,7 @@
 [run]
 omit = 
     */RCAIDE/Framework/External_Interfaces/*
+    */RCAIDE/Library/Methods/Aerodynamics/Athena_Vortex_Lattice/*
 
 [report]
 exclude_lines =
