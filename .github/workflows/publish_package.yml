@@ -112,9 +112,18 @@ jobs:
         run: |
           python -m pip install --upgrade build twine
 
+      - name: Prepare PyPI-Compatible README
+        run: |
+          cp README.md README_GitHub.md
+          cp README_PyPI.md README.md
+
       - name: Build Package
         run: |
           python -m build
+
+      - name: Restore GitHub README
+        run: |
+          mv README_GitHub.md README.md
 
       - name: Publish to PyPI
         env:

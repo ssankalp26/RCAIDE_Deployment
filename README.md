@@ -8,7 +8,7 @@
 [![CI](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/CI.yml)
 [![Documentation](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/sphinx_docs.yml/badge.svg)](https://github.com/leadsgroup/RCAIDE_LEADS/actions/workflows/sphinx_docs.yml)
 [![codecov](https://codecov.io/gh/leadsgroup/RCAIDE_LEADS/graph/badge.svg?token=WZOFW5EKWJ)](https://codecov.io/gh/leadsgroup/RCAIDE_LEADS)
-[![Version](https://img.shields.io/badge/dynamic/raw?color=blue&label=version&query=.&url=https://raw.githubusercontent.com/leadsgroup/RCAIDE_LEADS/master/VERSION)](https://github.com/leadsgroup/RCAIDE_LEADS)
+
 
 
 </div>
@@ -109,7 +109,7 @@ RCAIDE currently possesses the ability to perform the following analyses, each a
 RCAIDE is available on GNU/Linux, MacOS and Windows. We strongly recommend installing RCAIDE within a Python virtual environment to avoid altering any distribution of Python files. Please review the documentation for instructions on creating a virtual environment for RCAIDE.
 
 * [See Installation Instructions](https://www.docs.rcaide.leadsresearchgroup.com/install.html)
-* Using pip (coming soon) 
+* Using pip : `pip install RCAIDE-LEADS`
 * Using conda (coming soon) 
 
 ## Tutorials

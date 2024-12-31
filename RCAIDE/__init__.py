@@ -53,3 +53,16 @@ from .save     import save
 
 from warnings import simplefilter
 simplefilter('ignore')
+
+# Read version from VERSION file
+from pathlib import Path
+import os
+
+def read_version():
+    version_file = Path(__file__).parent.parent / 'VERSION'
+    if version_file.exists():
+        with open(version_file, 'r') as f:
+            return f.read().strip()
+    return '0.0.0'  # fallback version
+
+__version__ = read_version()
