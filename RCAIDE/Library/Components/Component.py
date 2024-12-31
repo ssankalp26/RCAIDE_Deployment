@@ -79,57 +79,6 @@ class Container(ContainerBase):
         Parent class providing base container functionality
     """
     pass 
- 
-    def sum_mass(self):
-        """
-        Recursively calculates total mass of all contained components.
-
-        Returns
-        -------
-        float
-            Total mass in kg
-
-        Notes
-        -----
-        Traverses the component tree and sums mass_properties.mass values from:
-        
-        * Individual components
-        * Nested component containers (recursive)
-        """   
-        total = 0.0
-        for key,Comp in self.items():
-            if isinstance(Comp,Component.Container):
-                total += Comp.sum_mass() # recursive!
-            elif isinstance(Comp,Component):
-                total += Comp.mass_properties.mass
-                
-        return total
-    
-    def total_moment(self):
-        """
-        Recursively calculates total moment of all contained components.
-
-        Returns
-        -------
-        ndarray
-            Total moment vector [kg*m] about the origin
-
-        Notes
-        -----
-        Calculates moments considering:
-        * Component masses
-        * Component origins
-        * Component centers of gravity
-        * Nested containers (recursive)
-        """   
-        total = np.array([[0.0,0.0,0.0]])
-        for key,Comp in self.items():
-            if isinstance(Comp,Component.Container):
-                total += Comp.total_moment()  
-            elif isinstance(Comp,Component):
-                total += Comp.mass_properties.mass*(np.sum(np.array(Comp.origin),axis=0)/len(Comp.origin)+Comp.mass_properties.center_of_gravity)
-
-        return total  
     
 # ------------------------------------------------------------
 #  Handle Linking

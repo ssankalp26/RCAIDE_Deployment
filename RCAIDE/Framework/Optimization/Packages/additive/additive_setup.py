@@ -1,4 +1,4 @@
-## @ingroup Optimization-Package_Setups
+
 # additive_setup.py
 #
 # Created:  Apr 2017, T. MacDonald
@@ -39,7 +39,7 @@ class Additive_Solver():
         self.global_optimizer = 'SHGO'
         return
 
-    ## @ingroup Optimization-Package_Setups
+    
     def Additive_Solve(self,problem,num_fidelity_levels=2,num_samples=10,max_iterations=10,
                        tolerance=1e-6,opt_type='basic',num_starts=3,print_output=True):
         """Solves a multifidelity problem using an additive corrections
@@ -321,7 +321,7 @@ class Additive_Solver():
         
         return (FOpt,xOpt)
         
-    ## @ingroup Optimization-Package_Setups    
+        
     def evaluate_model(self,problem,x,cons):
         """Solves the optimization problem to get the objective and constraints
     
@@ -351,7 +351,7 @@ class Additive_Solver():
         
         return f,g
     
-    ## @ingroup Optimization-Package_Setups    
+        
     def evaluate_corrected_model(self,x,problem=None,obj_surrogate=None,cons_surrogate=None):
         """Evaluates the corrected model with the low fidelity plus the corrections
     
@@ -404,7 +404,7 @@ class Additive_Solver():
         else:
             raise NotImplementedError('Selected local optimizer is not implemented.')
     
-    ## @ingroup Optimization-Package_Setups
+    
     def evaluate_expected_improvement(self,x,problem=None,obj_surrogate=None,cons_surrogate=None,fstar=np.inf,cons=None):
         """Evaluates the expected improvement of the point x
     
@@ -477,7 +477,7 @@ class Additive_Solver():
         elif self.global_optimizer == 'SHGO':
             return -EI
     
-    ## @ingroup Optimization-Package_Setups    
+        
     def scale_vals(self,inp,con,ini,bnd,scl):
         """Scales values to help setup the problem
     
@@ -542,7 +542,7 @@ class Additive_Solver():
     
         return (x,scaled_constraints,x_low_bound,x_up_bound,con_up_edge,con_low_edge)    
     
-    ## @ingroup Optimization-Package_Setups
+    
     def initialize_opt_vals(self,opt_prob,obj,inp,x_low_bound,x_up_bound,con_low_edge,con_up_edge,nam,con,x_eval):
         """Sets up the optimization values 
     
@@ -650,7 +650,7 @@ class Additive_Solver():
         
         return bound_list,slsqp_con_list    
     
-    ## @ingroup Optimization-Package_Setups
+    
     def run_objective_optimization(self,opt_prob,problem,f_additive_surrogate,g_additive_surrogate):
         """Runs SNOPT to optimize
     

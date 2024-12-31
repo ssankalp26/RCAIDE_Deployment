@@ -1,4 +1,3 @@
-## @ingroup Core
 # DiffedData.py
 #
 # Created:  Feb 2015, T. Lukacyzk
@@ -19,7 +18,6 @@ import numpy as np
 #  Config
 # ----------------------------------------------------------------------
 
-## @ingroup Core
 class Diffed_Data(Data):
     """ This is for creating a data new class where a different copy is saved.
         This is useful for creating a new configuration of a vehicle.
@@ -134,28 +132,6 @@ class Container(ContainerBase):
         try: value.store_diff()
         except AttributeError: pass
         ContainerBase.append(self,value)
-        
-    def pull_base(self):
-        """ Updates the differences
-    
-            Assumptions:
-            N/A
-    
-            Source:
-            N/A
-    
-            Inputs:
-            N/A
-    
-            Outputs:
-            N/A
-    
-            Properties Used:
-            N/A    
-        """          
-        for config in self:
-            try: config.pull_base()
-            except AttributeError: pass
 
     def store_diff(self):
         """ Finds the differences and saves them
@@ -177,29 +153,7 @@ class Container(ContainerBase):
         """          
         for config in self:
             try: config.store_diff()
-            except AttributeError: pass
-    
-    def finalize(self):
-        """ This just does a pull_base()
-    
-            Assumptions:
-            N/A
-    
-            Source:
-            N/A
-    
-            Inputs:
-            N/A
-    
-            Outputs:
-            N/A
-    
-            Properties Used:
-            N/A    
-        """        
-        for config in self:
-            try: config.finalize()
-            except AttributeError: pass
+            except AttributeError: pass 
 
 
 # ------------------------------------------------------------

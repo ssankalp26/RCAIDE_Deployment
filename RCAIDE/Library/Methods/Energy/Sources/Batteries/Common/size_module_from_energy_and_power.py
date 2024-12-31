@@ -40,7 +40,7 @@ def size_module_from_energy_and_power(battery, energy, power):
     
     energy_mass = energy/battery.cell.specific_energy
     power_mass  = power/battery.cell.specific_power 
-    mass=np.maximum(energy_mass, power_mass)
+    mass        = np.maximum(energy_mass, power_mass)
 
     battery.mass_properties.mass   = mass
     battery.maximum_energy         = battery.cell.specific_energy*mass
