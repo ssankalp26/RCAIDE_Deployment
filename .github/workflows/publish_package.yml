@@ -97,7 +97,6 @@ jobs:
 
   publish:
     name: Publish Package to PyPI
-    needs: check-version
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     steps:
