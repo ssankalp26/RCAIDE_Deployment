@@ -1,0 +1,146 @@
+name: Publish to PyPI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  check-version:
+    name: Version Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Current Branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Ensure full history is fetched
+
+      - name: Determine Base Branch
+        id: determine_base
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "base_branch=${{ github.event.pull_request.base.ref }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "push" ]]; then
+            # For push events, assume base_branch is develop
+            echo "base_branch=develop" >> $GITHUB_OUTPUT
+          else
+            echo "base_branch=unknown" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Fetch Base Branch
+        run: |
+          git fetch origin "${{ steps.determine_base.outputs.base_branch }}":"${{ steps.determine_base.outputs.base_branch }}"
+
+      - name: Read Version from Current Branch
+        id: current_version
+        run: |
+          if [ ! -f VERSION ]; then
+            echo "VERSION file not found in the current branch."
+            exit 1
+          fi
+          VERSION=$(cat VERSION)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check if Base VERSION Exists
+        id: base_version_exists
+        run: |
+          BASE_VERSION_FILE="VERSION"
+          if [[ "${{ steps.determine_base.outputs.base_branch }}" != "unknown" ]]; then
+            # Try to fetch the branch first
+            git fetch origin "${{ steps.determine_base.outputs.base_branch }}" || true
+            
+            # Check if the VERSION file exists in the base branch
+            if git rev-parse "origin/${{ steps.determine_base.outputs.base_branch }}" &>/dev/null && \
+               git cat-file -e "origin/${{ steps.determine_base.outputs.base_branch }}:${BASE_VERSION_FILE}" 2>/dev/null; then
+              echo "exists=true" >> $GITHUB_OUTPUT
+            else
+              echo "exists=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Read Version from Base Branch (if exists)
+        id: base_version
+        if: steps.base_version_exists.outputs.exists == 'true'
+        run: |
+          BASE_VERSION=$(git show "${{ steps.determine_base.outputs.base_branch }}:VERSION")
+          echo "version=$BASE_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Compare Versions Based on Target Branch
+        run: |
+          CURRENT_VERSION=${{ steps.current_version.outputs.version }}
+          TARGET_BRANCH=${{ github.event.pull_request.base.ref }}
+          
+          echo "Current Version: $CURRENT_VERSION"
+          echo "Target Branch: $TARGET_BRANCH"
+          
+          # Split version into components
+          IFS='.' read -r CURRENT_MAJOR CURRENT_MINOR CURRENT_PATCH <<< "$CURRENT_VERSION"
+          
+          if [ "${{ steps.base_version_exists.outputs.exists }}" == "true" ]; then
+            BASE_VERSION=${{ steps.base_version.outputs.version }}
+            echo "Base Version: $BASE_VERSION"
+            IFS='.' read -r BASE_MAJOR BASE_MINOR BASE_PATCH <<< "$BASE_VERSION"
+          fi
+          
+          if [ "$TARGET_BRANCH" == "develop" ]; then
+            if [ "${{ steps.base_version_exists.outputs.exists }}" == "true" ]; then
+              # For develop: only patch version can increment by 1
+              if [ "$CURRENT_MAJOR" != "$BASE_MAJOR" ] || [ "$CURRENT_MINOR" != "$BASE_MINOR" ]; then
+                echo "Error: On develop, major.minor must stay the same ($BASE_MAJOR.$BASE_MINOR)"
+                exit 1
+              fi
+              if [ "$CURRENT_PATCH" != "$((BASE_PATCH + 1))" ]; then
+                echo "Error: Patch must increment by 1 (expected: $((BASE_PATCH + 1)), got: $CURRENT_PATCH)"
+                exit 1
+              fi
+            fi
+            
+          elif [ "$TARGET_BRANCH" == "master" ]; then
+            # For master: patch must be 0
+            if [ "$CURRENT_PATCH" != "0" ]; then
+              echo "Error: On master, patch version must be 0"
+              exit 1
+            fi
+            
+          else
+            echo "Error: Target branch must be 'develop' or 'master'"
+            exit 1
+          fi
+          
+          echo "Version check passed: $CURRENT_VERSION"
+
+  publish:
+    name: Publish Package to PyPI
+    needs: check-version
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade build twine
+
+      - name: Build Package
+        run: |
+          python -m build
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          twine upload dist/*
+
