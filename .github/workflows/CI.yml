@@ -40,6 +40,7 @@ jobs:
         run: |
           echo "[run]" > .coveragerc
           echo "omit = */RCAIDE/Framework/External_Interfaces/*" >> .coveragerc
+          echo "       */RCAIDE/Library/Methods/Aerodynamics/Athena_Vortex_Lattice/*" >> .coveragerc
           pytest --cov=RCAIDE --cov-report=xml -v
 
       - name: Upload coverage reports to Codecov
@@ -78,6 +79,7 @@ jobs:
         run: |
           echo "[run]" > .coveragerc
           echo "omit = */RCAIDE/Framework/External_Interfaces/*" >> .coveragerc
+          echo "       */RCAIDE/Library/Methods/Aerodynamics/Athena_Vortex_Lattice/*" >> .coveragerc
           pytest --cov=RCAIDE --cov-report=xml -v
 
       - name: Upload coverage reports to Codecov
