@@ -13,6 +13,7 @@ jobs:
   check-version:
     name: Version Validation
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
     steps:
       - name: Checkout Current Branch
         uses: actions/checkout@v3
