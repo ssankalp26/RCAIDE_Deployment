@@ -71,6 +71,14 @@ jobs:
           BASE_VERSION=$(git show "${{ steps.determine_base.outputs.base_branch }}:VERSION")
           echo "version=$BASE_VERSION" >> $GITHUB_OUTPUT
 
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install semver
+        run: pip install semver
+
       - name: Compare Versions Based on Target Branch
         run: |
           CURRENT_VERSION=${{ steps.current_version.outputs.version }}
@@ -79,41 +87,22 @@ jobs:
           echo "Current Version: $CURRENT_VERSION"
           echo "Target Branch: $TARGET_BRANCH"
           
-          # Split version into components
-          IFS='.' read -r CURRENT_MAJOR CURRENT_MINOR CURRENT_PATCH <<< "$CURRENT_VERSION"
-          
           if [ "${{ steps.base_version_exists.outputs.exists }}" == "true" ]; then
             BASE_VERSION=${{ steps.base_version.outputs.version }}
             echo "Base Version: $BASE_VERSION"
-            IFS='.' read -r BASE_MAJOR BASE_MINOR BASE_PATCH <<< "$BASE_VERSION"
-          fi
-          
-          if [ "$TARGET_BRANCH" == "develop" ]; then
-            if [ "${{ steps.base_version_exists.outputs.exists }}" == "true" ]; then
-              # For develop: only patch version can increment by 1
-              if [ "$CURRENT_MAJOR" != "$BASE_MAJOR" ] || [ "$CURRENT_MINOR" != "$BASE_MINOR" ]; then
-                echo "Error: On develop, major.minor must stay the same ($BASE_MAJOR.$BASE_MINOR)"
-                exit 1
-              fi
-              if [ "$CURRENT_PATCH" != "$((BASE_PATCH + 1))" ]; then
-                echo "Error: Patch must increment by 1 (expected: $((BASE_PATCH + 1)), got: $CURRENT_PATCH)"
-                exit 1
-              fi
-            fi
             
-          elif [ "$TARGET_BRANCH" == "master" ]; then
-            # For master: patch must be 0
-            if [ "$CURRENT_PATCH" != "0" ]; then
-              echo "Error: On master, patch version must be 0"
-              exit 1
-            fi
-            
-          else
-            echo "Error: Target branch must be 'develop' or 'master'"
-            exit 1
-          fi
-          
-          echo "Version check passed: $CURRENT_VERSION"
+            # Use Python to compare semantic versions
+            python3 -c "
+            import semver
+            current = semver.VersionInfo.parse('${CURRENT_VERSION}')
+            base = semver.VersionInfo.parse('${BASE_VERSION}')
+            if not current > base:
+                print('Error: New version must be greater than base version')
+                exit(1)
+                        "
+                    fi
+                    
+                    echo "Version check passed: $CURRENT_VERSION"
 
   publish:
     name: Publish Package to PyPI
