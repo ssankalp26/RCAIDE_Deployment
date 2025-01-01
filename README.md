@@ -90,6 +90,7 @@ flowchart TB
 ## Capabilities of RCAIDE
 RCAIDE currently possesses the ability to perform the following analyses, each at varying levels of fidelity. Here, we define fidelity as a level of accuracy to the actual physical value. As the level of fidelity increases, so does accuracy. However, this comes with the penalty of computational time and memory.  Having multi-fidelity capability allows RCAIDE to perform energy network analysis, complete flight  vehicle mission analysis, multi-fidelity optimization, design space exploration, artificial intelligence, and model-based systems engineering. Here are some notable use cases of RCAIDE:
 
+* Geometry Parameterization and Visualization
 * Mission Analysis   
 * Optimization 
     * Gradient-based optimization
