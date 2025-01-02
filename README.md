@@ -19,7 +19,10 @@
 The Research Community Aircraft Interdisciplinary Design Environment, or RCAIDE  (pronounced “arcade”) is a powerful open-source Python platform that revolutionizes aircraft design and analysis. From commercial airliners to UAVs and next-generation hybrid-electric aircraft, RCAIDE provides comprehensive multi-disciplinary analysis tools backed by validated engineering methods. Our streamlined workflow and modular architecture help aerospace engineers and researchers accelerate development cycles and explore innovative designs with confidence. RCAIDE-LEADS is a form from RCAIDE, developed and maintained by the [Lab for Electric Aircraft Design and Sustainability](https://www.leadsresearchgroup.com/)
  
 ## Transitioning from SUAVE Legacy 
-RCAIDE was built to allow users to transition their work to smoothly from SUAVE to RCAIDE. RCAIDE's code is architected in such a way that a native SUAVE user can understand it, but breaks free of some of the antiquated nomenclature. 
+RCAIDE was built to allow users to transition their work to smoothly from SUAVE to RCAIDE. RCAIDE's code is architected in such a way that a native SUAVE user can understand it but breaks free of some of the antiquated nomenclature. Shown below, the widespread adoption of SUAVE signifies the communities our codebase to provide validated and verified results. Notable users include: 
+* **Industry and Government:** NASA, Boeing,  AFRL, Embraer, Joby, Vahana, Argonne National Labs, Bombardier, Raytheon,  BAE, Google,
+* **Academia:**  MIT, Purdue, Embry Riddle, Carnegie Mellon,  Princeton, Virginia Tech, Georgia Tech, Michigan Stanford University,  Cranfield University, University of Sydney, TU Delft,  IIT,  University of Toronto, Concordia University, ISAE
+
  
 ## Code Architecture 
 The code is arranged into repositories that house native data structures, functions, components, and subroutines for discipline analyses and support number-crunching operations. This allows developers or avid users seeking to modify the source code to navigate intuitively. Solely written in Python, an RCAIDE installation
@@ -87,6 +90,7 @@ flowchart TB
 ## Capabilities of RCAIDE
 RCAIDE currently possesses the ability to perform the following analyses, each at varying levels of fidelity. Here, we define fidelity as a level of accuracy to the actual physical value. As the level of fidelity increases, so does accuracy. However, this comes with the penalty of computational time and memory.  Having multi-fidelity capability allows RCAIDE to perform energy network analysis, complete flight  vehicle mission analysis, multi-fidelity optimization, design space exploration, artificial intelligence, and model-based systems engineering. Here are some notable use cases of RCAIDE:
 
+* Geometry Parameterization and Visualization
 * Mission Analysis   
 * Optimization 
     * Gradient-based optimization
@@ -104,6 +108,8 @@ RCAIDE currently possesses the ability to perform the following analyses, each a
     * Center of gravity estimation
     * Moment of inertia estimation 
 
+## External Interfaces
+RCAIDE currently supports two external packages, OpenVSP and AVL. Regarding the former, users can automatically generate OpenVSP geometry from RCAIDE and even read in geometry to perform mission simulations. RCAIDE’s AVL interface enables the automatic generation of AVL files in addition to running AVL directly through the built-in Python API. This allows the designers to focus on design and analysis. Currently, the development team is working on an API for SU2, a high-fidelity CFD solver. This capability was a feature of SUAVE, and we want to bring it back for new RCAIDE users.
 
 ## Installing RCAIDE 
 RCAIDE is available on GNU/Linux, MacOS and Windows. We strongly recommend installing RCAIDE within a Python virtual environment to avoid altering any distribution of Python files. Please review the documentation for instructions on creating a virtual environment for RCAIDE.
