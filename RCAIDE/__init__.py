@@ -57,7 +57,6 @@ import os
 
 simplefilter('ignore')
 
-# Define the version of the package
 def get_version():
     """Read the version from the VERSION file."""
     # Get the directory of the current file
@@ -67,4 +66,6 @@ def get_version():
     
     with open(version_file_path, 'r') as version_file:
         return version_file.read().strip()
+
+__version__ = get_version()
 

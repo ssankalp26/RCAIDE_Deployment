@@ -53,7 +53,6 @@ dynamic = ["version"]
 
 [tool.setuptools]
 package-dir = {"" = "."}
-include-package-data = true
 
 [tool.setuptools.dynamic]
 version = {file = "RCAIDE/VERSION"}
