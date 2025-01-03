@@ -61,16 +61,10 @@ simplefilter('ignore')
 def get_version():
     """Read the version from the VERSION file."""
     # Get the directory of the current file
-    current_dir = os.path.dirname(__name__)
+    current_dir = os.path.dirname(__file__)
     # Construct the full path to the VERSION file
     version_file_path = os.path.join(current_dir, 'VERSION')
     
     with open(version_file_path, 'r') as version_file:
         return version_file.read().strip()
-
-__version__ = get_version()
-
-def print_version():
-    """Print the version of the RCAIDE package."""
-    print(f"RCAIDE version: {__version__}")
 
