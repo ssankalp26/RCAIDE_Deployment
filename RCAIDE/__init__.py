@@ -61,13 +61,6 @@ simplefilter('ignore')
 with open(os.path.join(os.path.dirname(__file__), 'VERSION')) as version_file:
     __version__ = version_file.read().strip()
 
-# Make all important items available at package level
-__all__ = [
-    '__version__',
-    'Framework',
-    'Library',
-    'Vehicle',
-    'load',
-    'save'
-]
+# Make version available at package level
+__all__ = ['__version__']
 
