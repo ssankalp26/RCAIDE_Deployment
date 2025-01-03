@@ -51,20 +51,6 @@ dependencies = [
 # Dynamic version configuration
 dynamic = ["version"]
 
-[tool.setuptools.dynamic]
-version = {file = "version.txt"}
-
-[project.urls]
-Homepage = "https://www.rcaide.leadsresearchgroup.com"
-
-[project.optional-dependencies]
-dev = [
-    "pytest",
-    "pytest-cov",
-    "flake8",
-    "black"
-]
-
 [tool.setuptools]
 package-dir = {"" = "."}
 
