@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "RCAIDE_TEST"
 description = "RCAIDE: Research Community Aerospace Interdisciplinary Design Environment"
-readme = "README_PyPI.md"  # Updated to use PyPI-compatible README
+readme = "README_PyPI.md"
 requires-python = ">=3.8"
 license = {text = "GNU Affero General Public License v3.0"}
 classifiers = [
@@ -48,20 +48,18 @@ dependencies = [
     "threadpoolctl",
     "zipp"
 ]
-# Dynamic version configuration
 dynamic = ["version"]
 
 [tool.setuptools]
 package-dir = {"" = "."}
 include-package-data = true
+data-files = [
+    ("RCAIDE", ["RCAIDE/VERSION"])
+]
 
 [tool.setuptools.dynamic]
 version = {file = "RCAIDE/VERSION"}
 
-[tool.setuptools]
-data-files = [
-    ("RCAIDE", ["RCAIDE/VERSION"])
-]
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["RCAIDE*"]
