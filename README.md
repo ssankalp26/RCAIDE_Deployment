@@ -23,7 +23,7 @@ RCAIDE was built to allow users to transition their work to smoothly from SUAVE 
 * **Industry and Government:** NASA, Boeing,  AFRL, Embraer, Joby, Vahana, Argonne National Labs, Bombardier, Raytheon,  BAE, Google,
 * **Academia:**  MIT, Purdue, Embry Riddle, Carnegie Mellon,  Princeton, Virginia Tech, Georgia Tech, Michigan Stanford University,  Cranfield University, University of Sydney, TU Delft,  IIT,  University of Toronto, Concordia University, ISAE
 <p align="center">
-  <img src="https://github.com/leadsgroup/RCAIDE_Website/blob/main/assets/img/SUAVE_Usage.png" width=25% height=25%> 
+  <img src="https://github.com/leadsgroup/RCAIDE_Website/blob/main/assets/img/SUAVE_Usage.png" width=50% height=50%> 
 </p> 
 
 ## Code Architecture 
@@ -97,7 +97,7 @@ RCAIDE currently possesses the ability to perform various analyses at multiple f
   * Advanced parameterization
   * 3D visualization
   <p align="center">
-    <img src="https://github.com/leadsgroup/RCAIDE_Website/blob/main/assets/img/Boeing_737.png" width=25% height=25%> 
+    <img src="https://github.com/leadsgroup/RCAIDE_Website/blob/main/assets/img/Boeing_737.png" width=50% height=50%> 
   </p>
 
 * **Mission Analysis**
@@ -118,7 +118,7 @@ RCAIDE currently possesses the ability to perform various analyses at multiple f
   * Center of gravity analysis
   * Moment of inertia calculations
   <p align="center">
-    <img src="https://github.com/leadsgroup/RCAIDE_Website/blob/main/assets/img/Boeing_737_Weight_Breakdown.png" width=25% height=25%> 
+    <img src="https://github.com/leadsgroup/RCAIDE_Website/blob/main/assets/img/Boeing_737_Weight_Breakdown.png" width=50% height=50%> 
   </p>
 
 ### Advanced Capabilities
@@ -133,7 +133,7 @@ RCAIDE currently possesses the ability to perform various analyses at multiple f
 RCAIDE currently supports two external packages, OpenVSP and AVL. Regarding the former, users can automatically generate OpenVSP geometry from RCAIDE and even read in geometry to perform mission simulations. RCAIDE’s AVL interface enables the automatic generation of AVL files in addition to running AVL directly through the built-in Python API. This allows the designers to focus on design and analysis. Currently, the development team is working on an API for SU2, a high-fidelity CFD solver. This capability was a feature of SUAVE, and we want to bring it back for new RCAIDE users.
 
 <p align="center">
-  <img src="https://github.com/leadsgroup/RCAIDE_Website/blob/main/assets/img/Extenal_Interfaces.png" width=25% height=25%> 
+  <img src="https://github.com/leadsgroup/RCAIDE_Website/blob/main/assets/img/Extenal_Interfaces.png" width=50% height=50%> 
 </p> 
 
 
