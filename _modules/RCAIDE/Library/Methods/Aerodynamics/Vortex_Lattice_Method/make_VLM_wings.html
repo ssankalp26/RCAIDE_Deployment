@@ -134,7 +134,7 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../../../../install.html">
-    Install
+    Installation
   </a>
 </li>
 
@@ -251,7 +251,7 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../../../../install.html">
-    Install
+    Installation
   </a>
 </li>
 
@@ -377,15 +377,13 @@
                 <article class="bd-article">
                   
   <h1>Source code for RCAIDE.Library.Methods.Aerodynamics.Vortex_Lattice_Method.make_VLM_wings</h1><div class="highlight"><pre>
-<span></span><span class="c1">## @ingroup Methods-Aerodynamics-Common-Fidelity_Zero-Lift</span>
-<span class="c1"># make_VLM_wings.py</span>
+<span></span><span class="c1"># make_VLM_wings.py</span>
 
 <span class="c1"># Created:  Jun 2021, A. Blaufox</span>
 
-<span class="c1"># ----------------------------------------------------------------------</span>
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------</span>
 <span class="c1">#  Imports</span>
-<span class="c1"># ----------------------------------------------------------------------</span>
-
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------</span>
 <span class="c1"># package imports </span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
@@ -397,10 +395,9 @@
 <span class="kn">from</span> <span class="nn">RCAIDE.Library.Methods.Geometry.Planform</span> <span class="kn">import</span> <span class="n">populate_control_sections</span>
 <span class="kn">from</span> <span class="nn">RCAIDE.Library.Methods.Geometry.Planform.convert_sweep</span> <span class="kn">import</span> <span class="n">convert_sweep_segments</span>
 
-<span class="c1"># ------------------------------------------------------------------</span>
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------</span>
 <span class="c1"># make_VLM_wings()</span>
-<span class="c1"># ------------------------------------------------------------------  </span>
-<span class="c1">## @ingroup Methods-Aerodynamics-Common-Fidelity_Zero-Lift</span>
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------</span>
 <div class="viewcode-block" id="make_VLM_wings">
 <a class="viewcode-back" href="../../../../../../_autosummary/RCAIDE.Library.Methods.Aerodynamics.Vortex_Lattice_Method.make_VLM_wings.html#RCAIDE.Library.Methods.Aerodynamics.Vortex_Lattice_Method.make_VLM_wings.make_VLM_wings">[docs]</a>
 <span class="k">def</span> <span class="nf">make_VLM_wings</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
@@ -453,7 +450,7 @@
     <span class="c1"># ------------------------------------------------------------------    </span>
     <span class="k">for</span> <span class="n">wing</span> <span class="ow">in</span> <span class="n">wings</span><span class="p">:</span>
         <span class="n">wing</span><span class="o">.</span><span class="n">is_a_control_surface</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">n_segments</span>           <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">n_segments</span>           <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">n_segments</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
             <span class="c1"># convert to preferred format for the panelization loop</span>
             <span class="n">wing</span>       <span class="o">=</span> <span class="n">convert_to_segmented_wing</span><span class="p">(</span><span class="n">wing</span><span class="p">)</span>
@@ -465,7 +462,7 @@
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A hinge_vector is specified, but the surface is set to use a constant hinge fraction&quot;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">control_surfaces</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Input: control surfaces are not supported on all-moving surfaces at this time&#39;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">segment</span> <span class="ow">in</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">:</span> <span class="c1">#unsupported by convention</span>
+            <span class="k">for</span> <span class="n">segment</span> <span class="ow">in</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">:</span> <span class="c1">#unsupported by convention</span>
                 <span class="k">if</span> <span class="s1">&#39;control_surfaces&#39;</span> <span class="ow">in</span> <span class="n">segment</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">segment</span><span class="o">.</span><span class="n">control_surfaces</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Input: control surfaces should be appended to the wing, not its segments. &#39;</span> <span class="o">+</span> 
                                      <span class="s1">&#39;This function will move the control surfaces to wing segments itself.&#39;</span><span class="p">)</span>  
@@ -475,10 +472,11 @@
         
         <span class="c1">#ensure wing has attributes that will be needed later</span>
         <span class="n">wing_halfspan</span> <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">spans</span><span class="o">.</span><span class="n">projected</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="k">if</span> <span class="n">wing</span><span class="o">.</span><span class="n">symmetric</span> <span class="k">else</span> <span class="n">wing</span><span class="o">.</span><span class="n">spans</span><span class="o">.</span><span class="n">projected</span>
+        <span class="n">segment_list</span>  <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_segments</span><span class="p">):</span>   
             <span class="p">(</span><span class="n">ia</span><span class="p">,</span> <span class="n">ib</span><span class="p">)</span>       <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-            <span class="n">seg_a</span>          <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ia</span><span class="p">]</span>
-            <span class="n">seg_b</span>          <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span>            
+            <span class="n">seg_a</span>          <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">segment_list</span><span class="p">[</span><span class="n">ia</span><span class="p">]]</span>
+            <span class="n">seg_b</span>          <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">segment_list</span><span class="p">[</span><span class="n">ib</span><span class="p">]]</span>            
             <span class="n">seg_b</span><span class="o">.</span><span class="n">chord</span>    <span class="o">=</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">root_chord_percent</span> <span class="o">*</span><span class="n">wing</span><span class="o">.</span><span class="n">chords</span><span class="o">.</span><span class="n">root</span>  <span class="c1">##may be worth implementing a self-calculating .chord attribute    </span>
             
             <span class="c1">#guarantee that all segments have leading edge sweep</span>
@@ -491,7 +489,7 @@
             <span class="n">section_span</span>     <span class="o">=</span> <span class="p">(</span><span class="n">seg_b</span><span class="o">.</span><span class="n">percent_span_location</span> <span class="o">-</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">percent_span_location</span><span class="p">)</span> <span class="o">*</span> <span class="n">wing_halfspan</span>
             <span class="n">seg_b</span><span class="o">.</span><span class="n">x_offset</span>   <span class="o">=</span> <span class="mf">0.</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">x_offset</span>   <span class="o">+</span> <span class="n">section_span</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">seg_a</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span><span class="p">)</span>
             <span class="n">seg_b</span><span class="o">.</span><span class="n">dih_offset</span> <span class="o">=</span> <span class="mf">0.</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">dih_offset</span> <span class="o">+</span> <span class="n">section_span</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">seg_a</span><span class="o">.</span><span class="n">dihedral_outboard</span><span class="p">)</span>
-        <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span> <span class="o">=</span> <span class="mf">1e-8</span>
+        <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">segment_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span> <span class="o">=</span> <span class="mf">1e-8</span>
     
     <span class="c1"># each control_surface-turned-wing will have its own unique ID number</span>
     <span class="n">cs_ID</span> <span class="o">=</span> <span class="mi">0</span>
@@ -507,13 +505,14 @@
         <span class="n">seg_breaks</span>  <span class="o">=</span> <span class="n">RCAIDE</span><span class="o">.</span><span class="n">Framework</span><span class="o">.</span><span class="n">Core</span><span class="o">.</span><span class="n">ContainerOrdered</span><span class="p">()</span>
         <span class="n">LE_breaks</span>   <span class="o">=</span> <span class="n">RCAIDE</span><span class="o">.</span><span class="n">Framework</span><span class="o">.</span><span class="n">Core</span><span class="o">.</span><span class="n">ContainerOrdered</span><span class="p">()</span>
         <span class="n">TE_breaks</span>   <span class="o">=</span> <span class="n">RCAIDE</span><span class="o">.</span><span class="n">Framework</span><span class="o">.</span><span class="n">Core</span><span class="o">.</span><span class="n">ContainerOrdered</span><span class="p">()</span>
-        <span class="n">n_segments</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">n_segments</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
         <span class="c1">#process all control surfaces in each segment-------------------------------------</span>
+        <span class="n">segment_list</span>  <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_segments</span><span class="p">):</span>   
             <span class="p">(</span><span class="n">ia</span><span class="p">,</span> <span class="n">ib</span><span class="p">)</span>    <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-            <span class="n">seg_a</span>       <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ia</span><span class="p">]</span>
-            <span class="n">seg_b</span>       <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span>            
+            <span class="n">seg_a</span>       <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">segment_list</span><span class="p">[</span><span class="n">ia</span><span class="p">]]</span>
+            <span class="n">seg_b</span>       <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">segment_list</span><span class="p">[</span><span class="n">ib</span><span class="p">]]</span>            
             
             <span class="n">control_surfaces</span> <span class="o">=</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">control_surfaces</span> <span class="k">if</span> <span class="s1">&#39;control_surfaces&#39;</span> <span class="ow">in</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="n">Data</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">cs</span> <span class="ow">in</span> <span class="n">control_surfaces</span><span class="p">:</span> <span class="c1">#should be no control surfaces on root segment</span>
@@ -599,12 +598,13 @@
     <span class="c1"># Give cs_wings span_breaks arrays</span>
     <span class="c1"># ------------------------------------------------------------------   </span>
     <span class="k">for</span> <span class="n">cs_wing</span> <span class="ow">in</span> <span class="n">wings</span><span class="p">:</span>
+        <span class="n">cs_w_segs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">cs_wing</span><span class="o">.</span><span class="n">is_a_control_surface</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span> <span class="c1">#skip if this wing isn&#39;t actually a control surface</span>
             <span class="k">continue</span>  
         <span class="n">span_breaks</span> <span class="o">=</span> <span class="n">RCAIDE</span><span class="o">.</span><span class="n">Framework</span><span class="o">.</span><span class="n">Core</span><span class="o">.</span><span class="n">ContainerOrdered</span><span class="p">()</span>
-        <span class="n">span_break</span>  <span class="o">=</span> <span class="n">make_span_break_from_segment</span><span class="p">(</span><span class="n">cs_wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">span_break</span>  <span class="o">=</span> <span class="n">make_span_break_from_segment</span><span class="p">(</span><span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">cs_w_segs</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
         <span class="n">span_breaks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">span_break</span><span class="p">)</span>
-        <span class="n">span_break</span>  <span class="o">=</span> <span class="n">make_span_break_from_segment</span><span class="p">(</span><span class="n">cs_wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">span_break</span>  <span class="o">=</span> <span class="n">make_span_break_from_segment</span><span class="p">(</span><span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">cs_w_segs</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
         <span class="n">span_breaks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">span_break</span><span class="p">)</span> 
         <span class="n">cs_wing</span><span class="o">.</span><span class="n">span_breaks</span> <span class="o">=</span> <span class="n">span_breaks</span>
     
@@ -688,7 +688,7 @@
 <span class="sd">    intermediate Data() objects for keys that do not yet exist. Special</span>
 <span class="sd">    copy cases are made for paths that lead to large class objects</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">special_case_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;control_surfaces&#39;</span><span class="p">,</span> <span class="s1">&#39;Segments&#39;</span><span class="p">]</span>
+    <span class="n">special_case_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;control_surfaces&#39;</span><span class="p">,</span> <span class="s1">&#39;segments&#39;</span><span class="p">]</span>
     <span class="n">keys</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
     <span class="n">key</span>  <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -736,8 +736,8 @@
                 <span class="s1">&#39;twists.root&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;twists.tip&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;vortex_lift&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Airfoil&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Segments&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;airfoil&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;segments&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;control_surfaces&#39;</span><span class="p">,</span>
                 <span class="p">]</span>
     <span class="k">elif</span> <span class="n">type_str</span> <span class="o">==</span> <span class="s1">&#39;control_surfaces&#39;</span><span class="p">:</span>
@@ -752,7 +752,7 @@
                  <span class="s1">&#39;configuration_type&#39;</span><span class="p">,</span>      
                  <span class="s1">&#39;gain&#39;</span><span class="p">,</span>      
                  <span class="p">]</span>
-    <span class="k">elif</span> <span class="n">type_str</span> <span class="o">==</span> <span class="s1">&#39;Segments&#39;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">type_str</span> <span class="o">==</span> <span class="s1">&#39;segments&#39;</span><span class="p">:</span>
         <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">,</span>               
                  <span class="s1">&#39;percent_span_location&#39;</span><span class="p">,</span>               
                  <span class="s1">&#39;twist&#39;</span><span class="p">,</span>
@@ -761,7 +761,7 @@
                  <span class="s1">&#39;thickness_to_chord&#39;</span><span class="p">,</span>     
                  <span class="s1">&#39;sweeps.quarter_chord&#39;</span><span class="p">,</span>         
                  <span class="s1">&#39;sweeps.leading_edge&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;Airfoil&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;airfoil&#39;</span><span class="p">,</span> 
                  <span class="p">]</span>        
         
     <span class="k">return</span> <span class="n">paths</span></div>
@@ -873,15 +873,16 @@
     <span class="c1">#convert to segmented wing-------------------------------------------------------------------------------------</span>
     <span class="n">cs_wing</span> <span class="o">=</span> <span class="n">convert_to_segmented_wing</span><span class="p">(</span><span class="n">cs_wing</span><span class="p">)</span>
     
-    <span class="c1"># give segments offsets (in coordinates relative to the cs_wing)</span>
-    <span class="n">cs_wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">x_offset</span>   <span class="o">=</span> <span class="mf">0.</span>
-    <span class="n">cs_wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dih_offset</span> <span class="o">=</span> <span class="mf">0.</span>  
-    <span class="n">cs_wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">x_offset</span>   <span class="o">=</span> <span class="n">wing_halfspan</span> <span class="o">*</span> <span class="n">span_fraction_tot</span> <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">cs_wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span><span class="p">)</span>
-    <span class="n">cs_wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dih_offset</span> <span class="o">=</span> <span class="n">wing_halfspan</span> <span class="o">*</span> <span class="n">span_fraction_tot</span> <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">cs_wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dihedral_outboard</span><span class="p">)</span>    
+    <span class="c1"># give segments offsets (in coordinates relative to the cs_wing) </span>
+    <span class="n">cs_w_segs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>    
+    <span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">cs_w_segs</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">x_offset</span>   <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">cs_w_segs</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">dih_offset</span> <span class="o">=</span> <span class="mf">0.</span>  
+    <span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">cs_w_segs</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">x_offset</span>   <span class="o">=</span> <span class="n">wing_halfspan</span> <span class="o">*</span> <span class="n">span_fraction_tot</span> <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">cs_w_segs</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span><span class="p">)</span>
+    <span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">cs_w_segs</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">dih_offset</span> <span class="o">=</span> <span class="n">wing_halfspan</span> <span class="o">*</span> <span class="n">span_fraction_tot</span> <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">cs_w_segs</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">dihedral_outboard</span><span class="p">)</span>    
     
     <span class="c1">#add airfoil</span>
-    <span class="n">cs_wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Airfoil</span>     <span class="o">=</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">Airfoil</span>
-    <span class="n">cs_wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">Airfoil</span>     <span class="o">=</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">Airfoil</span> <span class="k">if</span> <span class="n">cs</span><span class="o">.</span><span class="n">span_fraction_end</span><span class="o">==</span><span class="n">span_b</span> <span class="k">else</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">Airfoil</span>
+    <span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">cs_w_segs</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">airfoil</span>     <span class="o">=</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">airfoil</span>
+    <span class="n">cs_wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">cs_w_segs</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">airfoil</span>     <span class="o">=</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">airfoil</span> <span class="k">if</span> <span class="n">cs</span><span class="o">.</span><span class="n">span_fraction_end</span><span class="o">==</span><span class="n">span_b</span> <span class="k">else</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">airfoil</span>
     
     <span class="k">return</span> <span class="n">cs_wing</span></div>
 
@@ -913,10 +914,10 @@
 <span class="sd">    Properties Used:</span>
 <span class="sd">    N/A</span>
 <span class="sd">    &quot;&quot;&quot;</span>     
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">wing</span>   
     <span class="c1"># root segment </span>
-    <span class="n">segment</span>                               <span class="o">=</span> <span class="n">RCAIDE</span><span class="o">.</span><span class="n">Library</span><span class="o">.</span><span class="n">Components</span><span class="o">.</span><span class="n">Wings</span><span class="o">.</span><span class="n">Segment</span><span class="p">()</span>
+    <span class="n">segment</span>                               <span class="o">=</span> <span class="n">RCAIDE</span><span class="o">.</span><span class="n">Library</span><span class="o">.</span><span class="n">Components</span><span class="o">.</span><span class="n">Wings</span><span class="o">.</span><span class="n">Segments</span><span class="o">.</span><span class="n">Segment</span><span class="p">()</span>
     <span class="n">segment</span><span class="o">.</span><span class="n">tag</span>                           <span class="o">=</span> <span class="s1">&#39;root_segment&#39;</span>
     <span class="n">segment</span><span class="o">.</span><span class="n">percent_span_location</span>         <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">segment</span><span class="o">.</span><span class="n">twist</span>                         <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">twists</span><span class="o">.</span><span class="n">root</span>
@@ -926,9 +927,9 @@
     <span class="n">segment</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">quarter_chord</span>          <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">quarter_chord</span>
     <span class="n">segment</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span>           <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span>
     <span class="n">segment</span><span class="o">.</span><span class="n">thickness_to_chord</span>            <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">thickness_to_chord</span>
-    <span class="k">if</span> <span class="n">wing</span><span class="o">.</span><span class="n">Airfoil</span><span class="p">:</span> 
-        <span class="n">segment</span><span class="o">.</span><span class="n">append_airfoil</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">Airfoil</span><span class="o">.</span><span class="n">airfoil</span><span class="p">)</span>              
-    <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+    <span class="k">if</span> <span class="n">wing</span><span class="o">.</span><span class="n">airfoil</span><span class="p">:</span> 
+        <span class="n">segment</span><span class="o">.</span><span class="n">append_airfoil</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">airfoil</span><span class="p">)</span>              
+    <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
     
     <span class="c1"># tip segment </span>
     <span class="k">if</span> <span class="n">wing</span><span class="o">.</span><span class="n">taper</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
@@ -936,7 +937,7 @@
     <span class="k">elif</span> <span class="n">wing</span><span class="o">.</span><span class="n">chords</span><span class="o">.</span><span class="n">tip</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
         <span class="n">wing</span><span class="o">.</span><span class="n">chords</span><span class="o">.</span><span class="n">tip</span> <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">chords</span><span class="o">.</span><span class="n">root</span> <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">taper</span>
         
-    <span class="n">segment</span>                               <span class="o">=</span> <span class="n">RCAIDE</span><span class="o">.</span><span class="n">Library</span><span class="o">.</span><span class="n">Components</span><span class="o">.</span><span class="n">Wings</span><span class="o">.</span><span class="n">Segment</span><span class="p">()</span>
+    <span class="n">segment</span>                               <span class="o">=</span> <span class="n">RCAIDE</span><span class="o">.</span><span class="n">Library</span><span class="o">.</span><span class="n">Components</span><span class="o">.</span><span class="n">Wings</span><span class="o">.</span><span class="n">Segments</span><span class="o">.</span><span class="n">Segment</span><span class="p">()</span>
     <span class="n">segment</span><span class="o">.</span><span class="n">tag</span>                           <span class="o">=</span> <span class="s1">&#39;tip_segment&#39;</span>
     <span class="n">segment</span><span class="o">.</span><span class="n">percent_span_location</span>         <span class="o">=</span> <span class="mf">1.</span>
     <span class="n">segment</span><span class="o">.</span><span class="n">twist</span>                         <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">twists</span><span class="o">.</span><span class="n">tip</span>
@@ -946,9 +947,9 @@
     <span class="n">segment</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">quarter_chord</span>          <span class="o">=</span> <span class="mf">0.</span>
     <span class="n">segment</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span>           <span class="o">=</span> <span class="mf">1e-8</span>
     <span class="n">segment</span><span class="o">.</span><span class="n">thickness_to_chord</span>            <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">thickness_to_chord</span>
-    <span class="k">if</span> <span class="n">wing</span><span class="o">.</span><span class="n">Airfoil</span><span class="p">:</span> 
-        <span class="n">segment</span><span class="o">.</span><span class="n">append_airfoil</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">Airfoil</span><span class="o">.</span><span class="n">airfoil</span><span class="p">)</span>             
-    <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
+    <span class="k">if</span> <span class="n">wing</span><span class="o">.</span><span class="n">airfoil</span><span class="p">:</span> 
+        <span class="n">segment</span><span class="o">.</span><span class="n">append_airfoil</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">airfoil</span><span class="p">)</span>             
+    <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> 
     
     <span class="k">return</span> <span class="n">wing</span></div>
 
@@ -1031,7 +1032,7 @@
 <span class="sd">    N/A</span>
 <span class="sd">    &quot;&quot;&quot;</span>       
     <span class="n">span_frac</span>       <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">percent_span_location</span>
-    <span class="n">Airfoil</span>         <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">Airfoil</span>
+    <span class="n">airfoil</span>         <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">airfoil</span>
     <span class="n">dihedral_ob</span>     <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">dihedral_outboard</span>
     <span class="n">sweep_ob_QC</span>     <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">quarter_chord</span>
     <span class="n">sweep_ob_LE</span>     <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span>
@@ -1039,7 +1040,7 @@
     <span class="n">local_chord</span>     <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">chord</span>       <span class="c1">#non-standard attribute</span>
     <span class="n">x_offset</span>        <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">x_offset</span>
     <span class="n">dih_offset</span>      <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">dih_offset</span>   
-    <span class="n">span_break</span> <span class="o">=</span> <span class="n">make_span_break</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">span_frac</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">Airfoil</span><span class="p">,</span>
+    <span class="n">span_break</span> <span class="o">=</span> <span class="n">make_span_break</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">span_frac</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">airfoil</span><span class="p">,</span>
                                  <span class="n">dihedral_ob</span><span class="p">,</span> <span class="n">sweep_ob_QC</span><span class="p">,</span> <span class="n">sweep_ob_LE</span><span class="p">,</span> <span class="n">twist</span><span class="p">,</span> <span class="n">local_chord</span><span class="p">,</span>
                                  <span class="n">x_offset</span><span class="p">,</span> <span class="n">dih_offset</span><span class="p">)</span>  
     <span class="n">span_break</span><span class="o">.</span><span class="n">cuts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span>  
@@ -1078,7 +1079,7 @@
     <span class="n">ib_ob</span>          <span class="o">=</span> <span class="mi">1</span> <span class="c1">#the inboard break of the cs is the outboard part of the span_break</span>
     <span class="n">span_frac</span>      <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">span_fraction_start</span>    
     <span class="n">ob_cut</span>         <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">chord_fraction</span> <span class="k">if</span> <span class="n">is_slat</span> <span class="k">else</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cs</span><span class="o">.</span><span class="n">chord_fraction</span>
-    <span class="n">Airfoil</span>        <span class="o">=</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">Airfoil</span>
+    <span class="n">airfoil</span>        <span class="o">=</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">airfoil</span>
     <span class="n">dihedral_ob</span>    <span class="o">=</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">dihedral_outboard</span>
     <span class="n">sweep_ob_QC</span>    <span class="o">=</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">quarter_chord</span>
     <span class="n">sweep_ob_LE</span>    <span class="o">=</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span>
@@ -1086,7 +1087,7 @@
     <span class="n">local_chord</span>    <span class="o">=</span> <span class="n">cs_wing</span><span class="o">.</span><span class="n">chords</span><span class="o">.</span><span class="n">root</span> <span class="o">/</span> <span class="n">cs</span><span class="o">.</span><span class="n">chord_fraction</span>
     <span class="n">x_offset</span>       <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">cs</span><span class="o">.</span><span class="n">span_fraction_start</span><span class="p">,</span> <span class="p">[</span><span class="n">span_a</span><span class="p">,</span> <span class="n">span_b</span><span class="p">],</span> <span class="p">[</span><span class="n">seg_a</span><span class="o">.</span><span class="n">x_offset</span><span class="p">,</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">x_offset</span><span class="p">])</span>
     <span class="n">dih_offset</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">cs</span><span class="o">.</span><span class="n">span_fraction_start</span><span class="p">,</span> <span class="p">[</span><span class="n">span_a</span><span class="p">,</span> <span class="n">span_b</span><span class="p">],</span> <span class="p">[</span><span class="n">seg_a</span><span class="o">.</span><span class="n">dih_offset</span><span class="p">,</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">dih_offset</span><span class="p">])</span>
-    <span class="n">inboard_span_break</span>  <span class="o">=</span> <span class="n">make_span_break</span><span class="p">(</span><span class="n">cs_ID</span><span class="p">,</span> <span class="n">LE_TE</span><span class="p">,</span> <span class="n">ib_ob</span><span class="p">,</span> <span class="n">span_frac</span><span class="p">,</span> <span class="n">ob_cut</span><span class="p">,</span> <span class="n">Airfoil</span><span class="p">,</span>
+    <span class="n">inboard_span_break</span>  <span class="o">=</span> <span class="n">make_span_break</span><span class="p">(</span><span class="n">cs_ID</span><span class="p">,</span> <span class="n">LE_TE</span><span class="p">,</span> <span class="n">ib_ob</span><span class="p">,</span> <span class="n">span_frac</span><span class="p">,</span> <span class="n">ob_cut</span><span class="p">,</span> <span class="n">airfoil</span><span class="p">,</span>
                                           <span class="n">dihedral_ob</span><span class="p">,</span> <span class="n">sweep_ob_QC</span><span class="p">,</span> <span class="n">sweep_ob_LE</span><span class="p">,</span> <span class="n">twist</span><span class="p">,</span> <span class="n">local_chord</span><span class="p">,</span>
                                           <span class="n">x_offset</span><span class="p">,</span> <span class="n">dih_offset</span><span class="p">)</span>
     
@@ -1095,7 +1096,7 @@
     <span class="n">ib_ob</span>          <span class="o">=</span> <span class="mi">0</span> <span class="c1">#the outboard break of the cs is the inboard part of the span_break</span>
     <span class="n">span_frac</span>      <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">span_fraction_end</span>
     <span class="n">ib_cut</span>         <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">chord_fraction</span> <span class="k">if</span> <span class="n">is_slat</span> <span class="k">else</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cs</span><span class="o">.</span><span class="n">chord_fraction</span>
-    <span class="n">Airfoil</span>        <span class="o">=</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">Airfoil</span>               <span class="k">if</span> <span class="n">is_coincident</span> <span class="k">else</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">Airfoil</span> <span class="c1">#take seg_b value if this outboard break is conicident with seg_b </span>
+    <span class="n">airfoil</span>        <span class="o">=</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">airfoil</span>               <span class="k">if</span> <span class="n">is_coincident</span> <span class="k">else</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">airfoil</span> <span class="c1">#take seg_b value if this outboard break is conicident with seg_b </span>
     <span class="n">dihedral_ob</span>    <span class="o">=</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">dihedral_outboard</span>     <span class="k">if</span> <span class="n">is_coincident</span> <span class="k">else</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">dihedral_outboard</span>
     <span class="n">sweep_ob_QC</span>    <span class="o">=</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">quarter_chord</span>  <span class="k">if</span> <span class="n">is_coincident</span> <span class="k">else</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">quarter_chord</span>
     <span class="n">sweep_ob_LE</span>    <span class="o">=</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span>   <span class="k">if</span> <span class="n">is_coincident</span> <span class="k">else</span> <span class="n">seg_a</span><span class="o">.</span><span class="n">sweeps</span><span class="o">.</span><span class="n">leading_edge</span>
@@ -1103,7 +1104,7 @@
     <span class="n">local_chord</span>    <span class="o">=</span> <span class="n">cs_wing</span><span class="o">.</span><span class="n">chords</span><span class="o">.</span><span class="n">tip</span>  <span class="o">/</span> <span class="n">cs</span><span class="o">.</span><span class="n">chord_fraction</span>
     <span class="n">x_offset</span>       <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">cs</span><span class="o">.</span><span class="n">span_fraction_end</span><span class="p">,</span> <span class="p">[</span><span class="n">span_a</span><span class="p">,</span> <span class="n">span_b</span><span class="p">],</span> <span class="p">[</span><span class="n">seg_a</span><span class="o">.</span><span class="n">x_offset</span><span class="p">,</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">x_offset</span><span class="p">])</span>
     <span class="n">dih_offset</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">cs</span><span class="o">.</span><span class="n">span_fraction_end</span><span class="p">,</span> <span class="p">[</span><span class="n">span_a</span><span class="p">,</span> <span class="n">span_b</span><span class="p">],</span> <span class="p">[</span><span class="n">seg_a</span><span class="o">.</span><span class="n">dih_offset</span><span class="p">,</span> <span class="n">seg_b</span><span class="o">.</span><span class="n">dih_offset</span><span class="p">])</span>    
-    <span class="n">outboard_span_break</span> <span class="o">=</span> <span class="n">make_span_break</span><span class="p">(</span><span class="n">cs_ID</span><span class="p">,</span> <span class="n">LE_TE</span><span class="p">,</span> <span class="n">ib_ob</span><span class="p">,</span> <span class="n">span_frac</span><span class="p">,</span> <span class="n">ib_cut</span><span class="p">,</span> <span class="n">Airfoil</span><span class="p">,</span>
+    <span class="n">outboard_span_break</span> <span class="o">=</span> <span class="n">make_span_break</span><span class="p">(</span><span class="n">cs_ID</span><span class="p">,</span> <span class="n">LE_TE</span><span class="p">,</span> <span class="n">ib_ob</span><span class="p">,</span> <span class="n">span_frac</span><span class="p">,</span> <span class="n">ib_cut</span><span class="p">,</span> <span class="n">airfoil</span><span class="p">,</span>
                                           <span class="n">dihedral_ob</span><span class="p">,</span> <span class="n">sweep_ob_QC</span><span class="p">,</span> <span class="n">sweep_ob_LE</span><span class="p">,</span> <span class="n">twist</span><span class="p">,</span> <span class="n">local_chord</span><span class="p">,</span>
                                           <span class="n">x_offset</span><span class="p">,</span> <span class="n">dih_offset</span><span class="p">)</span>    
     <span class="k">return</span> <span class="n">inboard_span_break</span><span class="p">,</span> <span class="n">outboard_span_break</span></div>
@@ -1111,7 +1112,7 @@
 
 <div class="viewcode-block" id="make_span_break">
 <a class="viewcode-back" href="../../../../../../_autosummary/RCAIDE.Library.Methods.Aerodynamics.Vortex_Lattice_Method.make_VLM_wings.html#RCAIDE.Library.Methods.Aerodynamics.Vortex_Lattice_Method.make_VLM_wings.make_span_break">[docs]</a>
-<span class="k">def</span> <span class="nf">make_span_break</span><span class="p">(</span><span class="n">cs_ID</span><span class="p">,</span> <span class="n">LE_TE</span><span class="p">,</span> <span class="n">ib_ob</span><span class="p">,</span> <span class="n">span_frac</span><span class="p">,</span> <span class="n">chord_cut</span><span class="p">,</span> <span class="n">Airfoil</span><span class="p">,</span>
+<span class="k">def</span> <span class="nf">make_span_break</span><span class="p">(</span><span class="n">cs_ID</span><span class="p">,</span> <span class="n">LE_TE</span><span class="p">,</span> <span class="n">ib_ob</span><span class="p">,</span> <span class="n">span_frac</span><span class="p">,</span> <span class="n">chord_cut</span><span class="p">,</span> <span class="n">airfoil</span><span class="p">,</span>
                     <span class="n">dihedral_ob</span><span class="p">,</span> <span class="n">sweep_ob_QC</span><span class="p">,</span> <span class="n">sweep_ob_LE</span><span class="p">,</span> <span class="n">twist</span><span class="p">,</span> <span class="n">local_chord</span><span class="p">,</span>
                     <span class="n">x_offset</span><span class="p">,</span> <span class="n">dih_offset</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; This gathers information related to a span break into one Data() object.</span>
@@ -1171,7 +1172,7 @@
     <span class="n">span_break</span><span class="o">.</span><span class="n">cuts</span>                 <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span>   <span class="c1">#  [[inboard LE cut, outboard LE cut],</span>
                                                 <span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">]])</span>  <span class="c1">#   [inboard TE cut, outboard TE cut]]</span>
     <span class="n">span_break</span><span class="o">.</span><span class="n">cuts</span><span class="p">[</span><span class="n">LE_TE</span><span class="p">,</span><span class="n">ib_ob</span><span class="p">]</span>    <span class="o">=</span> <span class="n">chord_cut</span>
-    <span class="n">span_break</span><span class="o">.</span><span class="n">Airfoil</span>              <span class="o">=</span> <span class="n">Airfoil</span>
+    <span class="n">span_break</span><span class="o">.</span><span class="n">airfoil</span>              <span class="o">=</span> <span class="n">airfoil</span>
     <span class="n">span_break</span><span class="o">.</span><span class="n">dihedral_outboard</span>    <span class="o">=</span> <span class="n">dihedral_ob</span>
     <span class="n">span_break</span><span class="o">.</span><span class="n">sweep_outboard_QC</span>    <span class="o">=</span> <span class="n">sweep_ob_QC</span>
     <span class="n">span_break</span><span class="o">.</span><span class="n">sweep_outboard_LE</span>    <span class="o">=</span> <span class="n">sweep_ob_LE</span>

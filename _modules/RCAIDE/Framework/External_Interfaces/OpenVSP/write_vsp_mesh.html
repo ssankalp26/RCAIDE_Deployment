@@ -134,7 +134,7 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../../../install.html">
-    Install
+    Installation
   </a>
 </li>
 
@@ -251,7 +251,7 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../../../install.html">
-    Install
+    Installation
   </a>
 </li>
 
@@ -377,8 +377,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for RCAIDE.Framework.External_Interfaces.OpenVSP.write_vsp_mesh</h1><div class="highlight"><pre>
-<span></span><span class="c1">## @ingroup Input_Output-OpenVSP</span>
-<span class="c1"># write_vsp_mesh.py</span>
+<span></span><span class="c1"># write_vsp_mesh.py</span>
 <span class="c1"># </span>
 <span class="c1"># Created:  Oct 2016, T. MacDonald</span>
 <span class="c1"># Modified: Jan 2017, T. MacDonald</span>
@@ -386,6 +385,10 @@
 <span class="c1">#           Jan 2019, T. MacDonald</span>
 <span class="c1">#           Jan 2020, T. MacDonald</span>
 
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------</span>
+<span class="c1">#  IMPORT</span>
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------  </span>
+<span class="c1"># RCAIDE imports </span>
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">vsp</span> <span class="k">as</span> <span class="nn">vsp</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
@@ -398,7 +401,9 @@
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">fileinput</span>
 
-<span class="c1">## @ingroup Input_Output-OpenVSP</span>
+<span class="c1"># ---------------------------------------------------------------------------------------------------------------------- </span>
+<span class="c1"># write_vsp_mesh</span>
+<span class="c1"># ---------------------------------------------------------------------------------------------------------------------- </span>
 <div class="viewcode-block" id="write_vsp_mesh">
 <a class="viewcode-back" href="../../../../../_autosummary/RCAIDE.Framework.External_Interfaces.OpenVSP.write_vsp_mesh.html#RCAIDE.Framework.External_Interfaces.OpenVSP.write_vsp_mesh.write_vsp_mesh">[docs]</a>
 <span class="k">def</span> <span class="nf">write_vsp_mesh</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="n">tag</span><span class="p">,</span><span class="n">half_mesh_flag</span><span class="p">,</span><span class="n">growth_ratio</span><span class="p">,</span><span class="n">growth_limiting_flag</span><span class="p">):</span>
@@ -496,7 +501,9 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;VSP meshing for &#39;</span> <span class="o">+</span> <span class="n">tag</span> <span class="o">+</span> <span class="s1">&#39; completed in &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; s&#39;</span><span class="p">)</span></div>
 
     
-<span class="c1">## @ingroup Input_Output-OpenVSP</span>
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------     </span>
+<span class="c1"># set_sources</span>
+<span class="c1"># ---------------------------------------------------------------------------------------------------------------------- </span>
 <div class="viewcode-block" id="set_sources">
 <a class="viewcode-back" href="../../../../../_autosummary/RCAIDE.Framework.External_Interfaces.OpenVSP.write_vsp_mesh.html#RCAIDE.Framework.External_Interfaces.OpenVSP.write_vsp_mesh.set_sources">[docs]</a>
 <span class="k">def</span> <span class="nf">set_sources</span><span class="p">(</span><span class="n">geometry</span><span class="p">):</span>
@@ -563,15 +570,15 @@
             <span class="c1">#comp_type = comp_type_dict[comp_name]</span>
         <span class="k">if</span> <span class="n">comp_type</span> <span class="o">==</span> <span class="s1">&#39;wing&#39;</span><span class="p">:</span>
             <span class="n">wing</span> <span class="o">=</span> <span class="n">comp_dict</span><span class="p">[</span><span class="n">comp_name</span><span class="p">]</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># check if segments exist</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># check if segments exist</span>
                 <span class="n">num_secs</span> <span class="o">=</span> <span class="mi">1</span>
                 <span class="n">use_base</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">percent_span_location</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span> <span class="c1"># check if first segment starts at the root</span>
-                    <span class="n">num_secs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">percent_span_location</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span> <span class="c1"># check if first segment starts at the root</span>
+                    <span class="n">num_secs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">)</span>
                     <span class="n">use_base</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">num_secs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="n">num_secs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
                     <span class="n">use_base</span> <span class="o">=</span> <span class="kc">True</span>
                     
             <span class="n">u_start</span> <span class="o">=</span> <span class="mf">0.</span>
@@ -580,9 +587,9 @@
             <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_secs</span><span class="p">):</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">ii</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">use_base</span> <span class="o">==</span> <span class="kc">True</span><span class="p">):</span> <span class="c1"># create sources on root segment</span>
                     <span class="n">cr</span> <span class="o">=</span> <span class="n">base_root</span>
-                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">ct</span> <span class="o">=</span> <span class="n">base_root</span>  <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
-                        <span class="n">seg</span> <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">ct</span> <span class="o">=</span> <span class="n">base_root</span>  <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
+                        <span class="n">seg</span> <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="k">if</span> <span class="s1">&#39;vsp_mesh&#39;</span> <span class="ow">in</span> <span class="n">wing</span><span class="p">:</span>
                             <span class="n">custom_flag</span> <span class="o">=</span> <span class="kc">True</span>
@@ -591,21 +598,21 @@
                         <span class="n">ct</span> <span class="o">=</span> <span class="n">base_tip</span>           
                         <span class="n">seg</span> <span class="o">=</span> <span class="n">wing</span>
                     <span class="c1"># extract CFD source parameters</span>
-                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="n">wingtip_flag</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">wingtip_flag</span> <span class="o">=</span> <span class="kc">False</span>
                     <span class="n">add_segment_sources</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span><span class="n">cr</span><span class="p">,</span> <span class="n">ct</span><span class="p">,</span> <span class="n">ii</span><span class="p">,</span> <span class="n">u_start</span><span class="p">,</span> <span class="n">num_secs</span><span class="p">,</span> <span class="n">custom_flag</span><span class="p">,</span> 
                                   <span class="n">wingtip_flag</span><span class="p">,</span><span class="n">seg</span><span class="p">)</span>                        
                 <span class="k">elif</span> <span class="p">(</span><span class="n">ii</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">use_base</span> <span class="o">==</span> <span class="kc">False</span><span class="p">):</span> 
-                    <span class="n">cr</span> <span class="o">=</span> <span class="n">base_root</span> <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
+                    <span class="n">cr</span> <span class="o">=</span> <span class="n">base_root</span> <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
                     <span class="k">if</span> <span class="n">num_secs</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="n">ct</span> <span class="o">=</span> <span class="n">base_root</span>  <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
+                        <span class="n">ct</span> <span class="o">=</span> <span class="n">base_root</span>  <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">ct</span> <span class="o">=</span> <span class="n">base_tip</span>
                     <span class="c1"># extract CFD source parameters</span>
-                    <span class="n">seg</span> <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="s1">&#39;vsp_mesh&#39;</span> <span class="ow">in</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ii</span><span class="p">]:</span>
+                    <span class="n">seg</span> <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="s1">&#39;vsp_mesh&#39;</span> <span class="ow">in</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">ii</span><span class="p">]:</span>
                         <span class="n">custom_flag</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">custom_flag</span> <span class="o">=</span> <span class="kc">False</span>
@@ -617,10 +624,10 @@
                         <span class="n">jj</span> <span class="o">=</span> <span class="mi">1</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">jj</span> <span class="o">=</span> <span class="mi">0</span>
-                    <span class="n">cr</span> <span class="o">=</span> <span class="n">base_root</span> <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
-                    <span class="n">ct</span> <span class="o">=</span> <span class="n">base_root</span> <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">jj</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
-                    <span class="n">seg</span> <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="s1">&#39;vsp_mesh&#39;</span> <span class="ow">in</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]:</span>
+                    <span class="n">cr</span> <span class="o">=</span> <span class="n">base_root</span> <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
+                    <span class="n">ct</span> <span class="o">=</span> <span class="n">base_root</span> <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">jj</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
+                    <span class="n">seg</span> <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="s1">&#39;vsp_mesh&#39;</span> <span class="ow">in</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]:</span>
                         <span class="n">custom_flag</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">custom_flag</span> <span class="o">=</span> <span class="kc">False</span>
@@ -632,10 +639,10 @@
                         <span class="n">jj</span> <span class="o">=</span> <span class="mi">1</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">jj</span> <span class="o">=</span> <span class="mi">0</span>                    
-                    <span class="n">cr</span> <span class="o">=</span> <span class="n">base_root</span> <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
+                    <span class="n">cr</span> <span class="o">=</span> <span class="n">base_root</span> <span class="o">*</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]</span><span class="o">.</span><span class="n">root_chord_percent</span>
                     <span class="n">ct</span> <span class="o">=</span> <span class="n">base_tip</span>
-                    <span class="n">seg</span> <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="s1">&#39;vsp_mesh&#39;</span> <span class="ow">in</span> <span class="n">wing</span><span class="o">.</span><span class="n">Segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]:</span>
+                    <span class="n">seg</span> <span class="o">=</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="s1">&#39;vsp_mesh&#39;</span> <span class="ow">in</span> <span class="n">wing</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">ii</span><span class="o">-</span><span class="n">jj</span><span class="p">]:</span>
                         <span class="n">custom_flag</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">custom_flag</span> <span class="o">=</span> <span class="kc">False</span>
@@ -677,8 +684,10 @@
             <span class="c1">#vsp.AddCFDSource(vsp.POINT_SOURCE,comp,0,len1,rad1,uloc,wloc) </span>
             <span class="c1">#pass        </span>
     
-        
-<span class="c1">## @ingroup Input_Output-OpenVSP</span>
+            
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------         </span>
+<span class="c1"># add_segment_sources</span>
+<span class="c1"># ---------------------------------------------------------------------------------------------------------------------- </span>
 <div class="viewcode-block" id="add_segment_sources">
 <a class="viewcode-back" href="../../../../../_autosummary/RCAIDE.Framework.External_Interfaces.OpenVSP.write_vsp_mesh.html#RCAIDE.Framework.External_Interfaces.OpenVSP.write_vsp_mesh.add_segment_sources">[docs]</a>
 <span class="k">def</span> <span class="nf">add_segment_sources</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span><span class="n">cr</span><span class="p">,</span><span class="n">ct</span><span class="p">,</span><span class="n">ii</span><span class="p">,</span><span class="n">u_start</span><span class="p">,</span><span class="n">num_secs</span><span class="p">,</span><span class="n">custom_flag</span><span class="p">,</span><span class="n">wingtip_flag</span><span class="p">,</span><span class="n">seg</span><span class="p">):</span>
