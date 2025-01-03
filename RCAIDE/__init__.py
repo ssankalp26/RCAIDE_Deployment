@@ -61,7 +61,7 @@ simplefilter('ignore')
 def get_version():
     """Read the version from the VERSION file."""
     # Get the directory of the current file
-    current_dir = os.path.dirname(__file__)
+    current_dir = os.path.dirname(__name__)
     # Construct the full path to the VERSION file
     version_file_path = os.path.join(current_dir, 'VERSION')
     
