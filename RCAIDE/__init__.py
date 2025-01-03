@@ -58,16 +58,13 @@ import os
 simplefilter('ignore')
 
 # Get the version from VERSION file
-with open(os.path.join(os.path.dirname(__file__), 'VERSION')) as version_file:
-    __version__ = version_file.read().strip()
-
-# Make all important items available at package level
-__all__ = [
-    '__version__',
-    'Framework',
-    'Library',
-    'Vehicle',
-    'load',
-    'save'
-]
+try:
+    version_path = os.path.join(os.path.dirname(__file__), 'VERSION')
+    if os.path.exists(version_path):
+        with open(version_path) as version_file:
+            __version__ = version_file.read().strip()
+    else:
+        __version__ = "unknown"
+except Exception:
+    __version__ = "unknown"
 
