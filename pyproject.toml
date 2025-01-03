@@ -58,6 +58,10 @@ include-package-data = true
 [tool.setuptools.dynamic]
 version = {file = "RCAIDE/VERSION"}
 
+[tool.setuptools]
+data-files = [
+    ("RCAIDE", ["RCAIDE/VERSION"])
+]
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["RCAIDE*"]
