@@ -81,10 +81,11 @@ def main():
     descent_throttle_2 = results.segments.descent_2.conditions.energy['port_propulsor'].throttle[3][0]
     single_pt_CL_1     = results.segments.single_point_1.conditions.aerodynamics.coefficients.lift.total[0][0]
     single_pt_CL_2     = results.segments.single_point_2.conditions.aerodynamics.coefficients.lift.total[0][0]     
-    loiter_1_CL        = results.segments.loiter_1.conditions.aerodynamics.coefficients.lift.total[2][0]    
-    loiter_2_CL        = results.segments.loiter_2.conditions.aerodynamics.coefficients.lift.total[2][0]  
-    reserve_1_CL       = results.segments.reserve_loiter.conditions.aerodynamics.coefficients.lift.total[2][0]    
-    reserve_2_CL       = results.segments.reserve_cruise.conditions.aerodynamics.coefficients.lift.total[2][0]
+    cruise_4_CL        = results.segments.cruise_4.conditions.aerodynamics.coefficients.lift.total[2][0]  
+    cruise_5_CL        = results.segments.cruise_5.conditions.aerodynamics.coefficients.lift.total[2][0] 
+    cruise_6_CL        = results.segments.cruise_6.conditions.aerodynamics.coefficients.lift.total[2][0]    
+    cruise_7_CL        = results.segments.cruise_7.conditions.aerodynamics.coefficients.lift.total[2][0]   
+    cruise_8_CL        = results.segments.cruise_8.conditions.aerodynamics.coefficients.lift.total[2][0]
     descent_throttle_3 = results.segments.descent_3.conditions.energy['port_propulsor'].throttle[3][0]
     landing_thrust     = results.segments.landing.conditions.energy['port_propulsor'].thrust[3][0]
     
@@ -94,37 +95,38 @@ def main():
         data = [takeoff_thrust, climb_throttle_1,   climb_throttle_2,   climb_throttle_3,   climb_throttle_4,   climb_throttle_5,  
                 climb_throttle_6,   climb_throttle_7,   climb_throttle_8,   climb_throttle_9,   climb_10_CL,  
                 cruise_CL_1,  cruise_CL_2,  cruise_CL_3,   descent_throttle_1,  curved_cruise_CL, descent_throttle_2,
-                single_pt_CL_1,     single_pt_CL_2,     loiter_1_CL,   loiter_2_CL, reserve_1_CL,reserve_2_CL,
+                single_pt_CL_1,     single_pt_CL_2,     cruise_4_CL,   cruise_5_CL, cruise_6_CL,cruise_7_CL,cruise_8_CL, 
                 descent_throttle_3,  landing_thrust]
         for val in data:
             print(val)
     
     # Truth values
     takeoff_thrust_truth     = 99134.30160723036
-    climb_throttle_1_truth   = 1.395857700992761
-    climb_throttle_2_truth   = 1.0684496850271108
+    climb_throttle_1_truth   = 1.39585770099276
+    climb_throttle_2_truth   = 1.068449685027111
     climb_throttle_3_truth   = 0.5
-    climb_throttle_4_truth   = 0.8680810461834555
-    climb_throttle_5_truth   = 0.8753486891156854
-    climb_throttle_6_truth   = 1.1668519047165973
-    climb_throttle_7_truth   = 1.3116873353539238
+    climb_throttle_4_truth   = 0.8680810461836567
+    climb_throttle_5_truth   = 0.8753486891156845
+    climb_throttle_6_truth   = 1.166851904716598
+    climb_throttle_7_truth   = 1.311687335353929
     climb_throttle_8_truth   = 0.607572398006494
-    climb_throttle_9_truth   =0.8790351465932531
-    climb_10_CL_truth        =1.3872932459767702
-    cruise_CL_1_truth        =0.6738526681840646
-    cruise_CL_2_truth        =0.6686241695532888
-    cruise_CL_3_truth        =0.45025703224309926
-    descent_throttle_1_truth =0.1172784935426404
-    curved_cruise_CL_truth   =1.2889478664259804
-    descent_throttle_2_truth =0.5
-    single_pt_CL_1_truth     =0.0005711272589290667
-    single_pt_CL_2_truth     =0.0006616284953266322
-    loiter_1_CL_truth        =0.47987168527306434
-    loiter_2_CL_truth        =0.47986558324596307
-    reserve_1_CL_truth       =0.3238648058606548
-    reserve_2_CL_truth       =0.3155985775564117
-    descent_throttle_3_truth =0.15179606571216014
-    landing_thrust_truth     =10914.922642740088
+    climb_throttle_9_truth   = 0.8790351465932528
+    climb_10_CL_truth        = 1.38729324597682
+    cruise_CL_1_truth        = 0.6738526681840649
+    cruise_CL_2_truth        = 0.6686241695533797
+    cruise_CL_3_truth        = 0.45025703224293206
+    descent_throttle_1_truth = 0.11727849354251198
+    curved_cruise_CL_truth   = 1.2889478664248029
+    descent_throttle_2_truth = 0.5
+    single_pt_CL_1_truth     = 0.0005711272589290973
+    single_pt_CL_2_truth     = 0.0006616284953266113
+    cruise_4_CL_truth        = 0.47987168527259755
+    cruise_5_CL_truth        = 0.479865583245496
+    cruise_6_CL_truth        = 0.323864805860335
+    cruise_7_CL_truth        = 0.3145883554656963
+    cruise_8_CL_truth        = 0.3064281877131441
+    descent_throttle_3_truth = 0.143230284566259
+    landing_thrust_truth     = 10914.922642740088
     
     # Store errors 
     error = Data()
@@ -147,10 +149,11 @@ def main():
     error.descent_throttle_2 = np.max(np.abs(descent_throttle_2   - descent_throttle_2_truth))
     error.single_pt_CL_1     = np.max(np.abs(single_pt_CL_1       - single_pt_CL_1_truth ))     
     error.single_pt_CL_2     = np.max(np.abs(single_pt_CL_2       - single_pt_CL_2_truth ))  
-    error.loiter_1_CL        = np.max(np.abs(loiter_1_CL          - loiter_1_CL_truth ))      
-    error.loiter_2_CL        = np.max(np.abs(loiter_2_CL          - loiter_2_CL_truth ))   
-    error.reserve_1_CL       = np.max(np.abs(reserve_1_CL         - reserve_1_CL_truth ))      
-    error.reserve_2_CL       = np.max(np.abs(reserve_2_CL         - reserve_2_CL_truth ))         
+    error.cruise_4_CL        = np.max(np.abs(cruise_4_CL         - cruise_4_CL_truth))      
+    error.cruise_5_CL        = np.max(np.abs(cruise_5_CL         - cruise_5_CL_truth))   
+    error.cruise_6_CL        = np.max(np.abs(cruise_6_CL         - cruise_6_CL_truth ))      
+    error.cruise_7_CL        = np.max(np.abs(cruise_7_CL         - cruise_7_CL_truth ))      
+    error.cruise_8_CL        = np.max(np.abs(cruise_8_CL         - cruise_8_CL_truth ))         
     error.descent_throttle_3 = np.max(np.abs(descent_throttle_3   - descent_throttle_3_truth))  
     error.landing_thrust     = np.max(np.abs(landing_thrust       - landing_thrust_truth))
      
@@ -158,7 +161,7 @@ def main():
     print(error)
      
     for k,v in list(error.items()): 
-        assert(np.abs(v)<1e-3)
+        assert(np.abs(v)<1e-6)
         
     plot_results(results)
     return 
@@ -647,7 +650,7 @@ def mission_setup(analyses):
     #   Loiter Segment: Constant Dynamic Pressure Constant Altitude Loiter
     # ------------------------------------------------------------------------------------------------------------------------------------ 
     segment = Segments.Cruise.Constant_Dynamic_Pressure_Constant_Altitude_Loiter(base_segment)
-    segment.tag = "loiter_1" 
+    segment.tag = "cruise_4" 
     segment.analyses.extend(analyses.base) 
     segment.altitude                                                 = 2500  * Units.feet
     segment.dynamic_pressure                                         = 12000 * Units.pascals  
@@ -669,7 +672,7 @@ def mission_setup(analyses):
     #   Loiter Segment: Constant Dynamic Pressure Constant Altitude Loiter
     # ------------------------------------------------------------------------------------------------------------------------------------ 
     segment = Segments.Cruise.Constant_Dynamic_Pressure_Constant_Altitude_Loiter(base_segment)
-    segment.tag = "loiter_2" 
+    segment.tag = "cruise_5" 
     segment.analyses.extend(analyses.base) 
     segment.altitude                                                 = 2500  * Units.feet
     segment.dynamic_pressure                                         = 12000 * Units.pascals  
@@ -692,7 +695,7 @@ def mission_setup(analyses):
     # ------------------------------------------------------------------
     
     segment = Segments.Cruise.Constant_Mach_Constant_Altitude_Loiter(base_segment)
-    segment.tag = "reserve_loiter"
+    segment.tag = "cruise_6"
 
     segment.analyses.extend(analyses.cruise) 
     segment.mach_number                                              = 0.5
@@ -709,12 +712,37 @@ def mission_setup(analyses):
     
     mission.append_segment(segment)    
     
+
+    
+    # ------------------------------------------------------------------
+    #   Loiter Segment: constant mach, constant time
+    # ------------------------------------------------------------------
+    
+    segment = Segments.Cruise.Constant_Speed_Constant_Altitude_Loiter(base_segment)
+    segment.tag = "cruise_7"
+
+    segment.analyses.extend(analyses.cruise) 
+    segment.airpseed                                                 = 168.6785
+    segment.time                                                     = 30.0 * Units.minutes
+               
+    # define flight dynamics to model            
+    segment.flight_dynamics.force_x                                  = True  
+    segment.flight_dynamics.force_z                                  = True     
+    
+    # define flight controls 
+    segment.assigned_control_variables.throttle.active               = True           
+    segment.assigned_control_variables.throttle.assigned_propulsors  = [['starboard_propulsor','port_propulsor']] 
+    segment.assigned_control_variables.body_angle.active             = True                
+    
+    mission.append_segment(segment)    
+    
+        
     # ------------------------------------------------------------------
     #   Cruise Segment: constant speed, constant altitude
     # ------------------------------------------------------------------
     
     segment = Segments.Cruise.Constant_Mach_Constant_Altitude(base_segment)
-    segment.tag = "reserve_cruise"
+    segment.tag = "cruise_8"
     
     segment.analyses.extend( analyses.cruise )
     
@@ -758,7 +786,7 @@ def mission_setup(analyses):
     # ------------------------------------------------------------------------------------------------------------------------------------ 
 
     segment = Segments.Ground.Landing(base_segment)
-    segment.tag = "Landing"
+    segment.tag = "landing"
 
     segment.analyses.extend( analyses.landing )
     segment.velocity_start                                                = 150 * Units.knots

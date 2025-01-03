@@ -5,7 +5,6 @@ import matplotlib
 matplotlib.use('Agg')
 
 import sys, os, traceback, time
-from RCAIDE.Framework.Core import DataOrdered
 
 # Adjust this path as needed so Python can see "Tests" and "Vehicles" directories:
 sys.path.append(os.path.join(sys.path[0], 'Vehicles'))
@@ -15,7 +14,8 @@ modules = [
     'Tests/analysis_aerodynamics/airfoil_panel_method_test.py',    
     'Tests/analysis_aerodynamics/airfoil_panel_method_convergence.py',
     'Tests/analysis_aerodynamics/VLM_control_surface_test.py',    
-    'Tests/analysis_aerodynamics/VLM_moving_surface_test.py',    
+    'Tests/analysis_aerodynamics/VLM_moving_surface_test.py',   
+    'Tests/analysis_aerodynamics/AVL_test.py',     
     'Tests/atmosphere/atmosphere.py',
     'Tests/atmosphere/constant_temperature.py',
     'Tests/analysis_emissions/emissions_test.py',   
@@ -31,25 +31,28 @@ modules = [
     'Tests/geometry/airfoil_interpolation_test.py',    
     'Tests/geometry/wing_volume_test.py',
     'Tests/geometry/wing_fuel_volume_compute.py',
-    'Tests/geometry/fuselage_planform_compute.py',    
+    'Tests/geometry/fuselage_planform_compute.py',  
+    'Tests/future_capability_coverage/coverage_test.py',    
     'Tests/mission_segments/transition_segment_test.py', 
     'Tests/network_electric/electric_btms_test.py', 
     'Tests/network_ducted_fan/electric_ducted_fan_network_test.py',
-     'Tests/network_turbofan/turbofan_network_test.py',
+    'Tests/network_turbofan/turbofan_network_test.py',
     'Tests/network_turbojet/turbojet_network_test.py',
     'Tests/network_turboprop/turboprop_network_test.py',
     'Tests/network_turboshaft/turboshaft_network_test.py',
     'Tests/network_internal_combustion_engine/ICE_test.py',
     'Tests/network_internal_combustion_engine/ICE_constant_speed_test.py',
     'Tests/optimization/optimization_packages.py',
+    'Tests/optimization/multifidelity_optimization.py',
     'Tests/performance/landing_field_length_test.py',
     'Tests/performance/payload_range_test.py',
     'Tests/performance/take_off_field_length_test.py',
     'Tests/performance/take_off_weight_from_tofl_test.py',
     'Tests/performance/aircraft_aerodynamic_analysis_test.py', 
     'Tests/performance/V_n_diagram_test.py', 
-    'Tests/propulsion/propeller_test.py', 
-    
+    'Tests/propulsion/propeller_performance_test.py',  
+    'Tests/propulsion/propeller_non_uniform_inflow.py',  
+    'Tests/propulsion/propeller_wing_interaction_test.py',  
 ]
 
 def run_module_test(module_path):

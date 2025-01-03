@@ -5,7 +5,8 @@
 # ----------------------------------------------------------------------------------------------------------------------
 #  IMPORT
 # ---------------------------------------------------------------------------------------------------------------------- 
-# RCAIDE imports    
+# RCAIDE imports
+import RCAIDE
 from RCAIDE.Framework.Core                import Data 
 from RCAIDE.Library.Components.Component  import Container
 from RCAIDE.Library.Components            import Component
@@ -124,7 +125,7 @@ class Fuselage(Component):
         - xsec_num : int
             Number of cross-sections in OpenVSP model, defaults to None
             
-    Segments : Container
+    segments : Container
         Collection of fuselage segment components, initialized empty
 
     Notes
@@ -206,7 +207,11 @@ class Fuselage(Component):
         self.vsp_data                               = Data()
         self.vsp_data.xsec_surf_id                  = ''    # There is only one XSecSurf in each VSP geom.
         self.vsp_data.xsec_num                      = None  # Number if XSecs in fuselage geom. 
-        self.Segments                               = Container()
+        self.segments                               = Container()
+
+        self.vsp_data                               = Data()
+        self.vsp_data.xsec_id                       = ''       
+        self.vsp_data.shape                         = ''                
         
     def append_segment(self,segment):
         """
@@ -219,11 +224,11 @@ class Fuselage(Component):
         """
 
         # Assert database type
-        if not isinstance(segment,Data):
-            raise Exception('input component must be of type Data()')
+        if not isinstance(segment,RCAIDE.Library.Components.Fuselages.Segments.Segment):
+            raise Exception('input component must be of type Segment')
 
         # Store data
-        self.Segments.append(segment)
+        self.segments.append(segment)
 
         return
     

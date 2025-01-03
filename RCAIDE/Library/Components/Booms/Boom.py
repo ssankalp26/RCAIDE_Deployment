@@ -100,7 +100,7 @@ class Boom(Component):
         - xsec_num : int
             Number of cross-sections in boom geometry. Default is None.
 
-    Segments : Container
+    segments : Container
         Container for boom segments. Default is empty container.
 
     Notes
@@ -177,7 +177,7 @@ class Boom(Component):
         self.vsp_data.xsec_surf_id                  = ''    # There is only one XSecSurf in each VSP geom.
         self.vsp_data.xsec_num                      = None  # Number if XSecs in rotor_boom geom.
                         
-        self.Segments                               = Container()
+        self.segments                               = Container()
         
     def append_segment(self,segment):
         """
@@ -200,7 +200,7 @@ class Boom(Component):
             raise Exception('input component must be of type Data()')
 
         # Store data
-        self.Segments.append(segment) 
+        self.segments.append(segment) 
         
         return 
 

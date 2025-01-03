@@ -5,17 +5,15 @@
 
 # ----------------------------------------------------------------------------------------------------------------------
 #  IMPORT
-# ----------------------------------------------------------------------------------------------------------------------
-
-from RCAIDE.Library.Methods.Utilities import soft_max
+# ---------------------------------------------------------------------------------------------------------------------- 
 
 # package imports 
 import numpy as np
 
 # ----------------------------------------------------------------------------------------------------------------------
 #  METHOD
-# ---------------------------------------------------------------------------------------------------------------------- -Common
-def size_module_from_energy_and_power(battery, energy, power, max='hard'):
+# ----------------------------------------------------------------------------------------------------------------------  
+def size_module_from_energy_and_power(battery, energy, power):
     """
     Uses a soft_max function to calculate the batter mass, maximum energy, and maximum power
     from the energy and power requirements, as well as the specific energy and specific power
@@ -41,13 +39,8 @@ def size_module_from_energy_and_power(battery, energy, power, max='hard'):
     """
     
     energy_mass = energy/battery.cell.specific_energy
-    power_mass  = power/battery.cell.specific_power
-    
-    if max=='soft': #use softmax function (makes it differentiable)
-        mass=soft_max(energy_mass,power_mass)
-        
-    else:
-        mass=np.maximum(energy_mass, power_mass)
+    power_mass  = power/battery.cell.specific_power 
+    mass        = np.maximum(energy_mass, power_mass)
 
     battery.mass_properties.mass   = mass
     battery.maximum_energy         = battery.cell.specific_energy*mass

@@ -9,7 +9,8 @@
 # RCAIDE imports 
 import RCAIDE  
 from RCAIDE.Framework.Core                                    import Units, Data 
-from RCAIDE.Library.Methods.Energy.Sources.Batteries.Common   import size_module_from_mass ,size_module_from_energy_and_power, find_mass_gain_rate, find_total_mass_gain, find_ragone_properties  
+from RCAIDE.Library.Methods.Energy.Sources.Batteries.Common   import size_module_from_mass ,size_module_from_energy_and_power, find_mass_gain_rate, find_total_mass_gain, find_ragone_properties
+from RCAIDE.Library.Methods.Energy.Sources.Batteries.Aluminum_Air import * 
 from RCAIDE.Framework.Mission.Common                          import Conditions
 from RCAIDE.Library.Plots                                     import * 
 
@@ -31,6 +32,9 @@ from Isolated_Battery_Cell   import vehicle_setup , configs_setup
 def main(): 
     Ereq                           = 3000*Units.Wh  
     Preq                           = 2000.  
+
+    # Lithium Air Battery Test 
+    lithium_air_battery_test(Ereq,Preq)
     
     # Aluminum Air Battery Test 
     aluminum_air_battery_test(Ereq,Preq)
@@ -41,11 +45,21 @@ def main():
     # Lithium-Ion Test
     lithium_ion_battery_test()
     return 
+    
      
+def lithium_air_battery_test(Ereq,Preq): 
+    battery_li_air                 = RCAIDE.Library.Components.Energy.Sources.Battery_Modules.Lithium_Air()     
+    return 
+   
+        
 def aluminum_air_battery_test(Ereq,Preq): 
     battery_al_air                 = RCAIDE.Library.Components.Energy.Sources.Battery_Modules.Aluminum_Air()    
     test_size_module_from_energy_and_power(battery_al_air, Ereq, Preq)
     test_mass_gain(battery_al_air, Preq)
+    
+    aluminum_mass  =  find_aluminum_mass(battery_al_air, Ereq)
+    water_mass     =  find_water_mass(battery_al_air, Ereq)
+
     return 
    
 def lithium_sulphur_battery_test(Ereq,Preq):   
@@ -244,7 +258,7 @@ def test_mass_gain(battery,power):
     return
 
 def test_size_module_from_energy_and_power(battery,energy,power):
-    size_module_from_energy_and_power(battery, energy, power)
+    size_module_from_energy_and_power(battery, energy, power) 
     print(battery)
     return
 

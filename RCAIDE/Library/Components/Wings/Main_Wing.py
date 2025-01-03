@@ -8,7 +8,7 @@
 # RCAIDE imports   
 from .Wing import Wing
 from RCAIDE.Framework.Core import Container 
-from RCAIDE.Library.Components.Wings.Segment import Segment
+from RCAIDE.Library.Components.Wings.Segments.Segment import Segment
 from RCAIDE.Library.Methods.Weights.Moment_of_Inertia.compute_wing_moment_of_inertia import  compute_wing_moment_of_inertia
 
 # ---------------------------------------------------------------------------------------------------------------------- 
@@ -23,7 +23,7 @@ class Main_Wing(Wing):
     tag : str
         Unique identifier for the main wing, defaults to 'main_wing'
         
-    Segments : Segment_Container
+    segments : Segment_Container
         Collection of wing segments defining the wing geometry, initialized empty
 
     Notes
@@ -36,7 +36,7 @@ class Main_Wing(Wing):
     --------
     RCAIDE.Library.Components.Wings.Wing
         Base wing class providing core functionality
-    RCAIDE.Library.Components.Wings.Segment
+    RCAIDE.Library.Components.Wings.Segments.Segment
         Wing segment components used to build the wing
     RCAIDE.Library.Components.Wings.Control_Surfaces
         Control surfaces that can be mounted on the wing
@@ -47,7 +47,7 @@ class Main_Wing(Wing):
         Sets default values for the main wing attributes.
         """
         self.tag      = 'main_wing'
-        self.Segments = Segment_Container()
+        self.segments = Segment_Container()
          
     def moment_of_inertia(wing, center_of_gravity):
         """
@@ -81,7 +81,7 @@ class Segment_Container(Container):
 
     See Also
     --------
-    RCAIDE.Library.Components.Wings.Segment
+    RCAIDE.Library.Components.Wings.Segments.Segment
         The segment components stored in this container
     """     
 
