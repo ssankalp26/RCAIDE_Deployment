@@ -57,10 +57,14 @@ import os
 
 simplefilter('ignore')
 
-# Get the version from VERSION file
-with open(os.path.join(os.path.dirname(__file__), 'VERSION')) as version_file:
-    __version__ = version_file.read().strip()
-
-# Make version available at package level
-__all__ = ['__version__']
+# Define the version of the package
+def get_version():
+    """Read the version from the VERSION file."""
+    # Get the directory of the current file
+    current_dir = os.path.dirname(__name__)
+    # Construct the full path to the VERSION file
+    version_file_path = os.path.join(current_dir, 'VERSION')
+    
+    with open(version_file_path, 'r') as version_file:
+        return version_file.read().strip()
 
