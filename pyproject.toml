@@ -19,6 +19,7 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: GNU Affero General Public License v3",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -50,7 +51,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://rcaide.leadsresearch.com"
+Homepage = "https://www.rcaide.leadsresearchgroup.com"
 
 [project.optional-dependencies]
 dev = [
@@ -64,7 +65,7 @@ dev = [
 package-dir = {"" = "."}
 
 [tool.setuptools.dynamic]
-version = {file = "VERSION"}
+version = {file = "RCAIDE/VERSION"}
 
 [tool.setuptools.packages.find]
 where = ["."]
