@@ -14,12 +14,12 @@ jobs:
   # Job for Pull Requests: Runs only on Ubuntu
   test-pr:
     name: Test on Ubuntu (PR)
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8"] #, "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
     steps:
       - name: Check out code
