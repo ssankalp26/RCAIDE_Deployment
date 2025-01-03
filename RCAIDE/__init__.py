@@ -55,14 +55,11 @@ from warnings import simplefilter
 simplefilter('ignore')
 
 # Read version from VERSION file
-from pathlib import Path
 import os
 
 def read_version():
-    version_file = Path(__file__).parent / 'VERSION'
-    if version_file.exists():
-        with open(version_file, 'r') as f:
-            return f.read().strip()
-    return '0.0.0'  # fallback version
+    version_file = os.path.join(os.path.dirname(__file__), 'VERSION')
+    with open(version_file, 'r') as f:
+        return f.read().strip()
 
 __version__ = read_version()
