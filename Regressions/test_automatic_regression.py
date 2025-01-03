@@ -5,7 +5,6 @@ import matplotlib
 matplotlib.use('Agg')
 
 import sys, os, traceback, time
-from RCAIDE.Framework.Core import DataOrdered
 
 # Adjust this path as needed so Python can see "Tests" and "Vehicles" directories:
 sys.path.append(os.path.join(sys.path[0], 'Vehicles'))

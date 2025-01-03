@@ -1,4 +1,3 @@
-## @ingroup Core
 # DataOrdered.py
 #
 # Created:  Jul 2016, E. Botero
@@ -123,7 +122,6 @@ class Property(object):
 #   DataOrdered
 # ----------------------------------------------------------------------        
 
-## @ingroup Core
 class DataOrdered(OrderedDict):
     """ An extension of the Python dict which allows for both tag and '.' usage.
         This is an ordered dictionary. So indexing it will produce deterministic results.

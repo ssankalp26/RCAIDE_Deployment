@@ -1,4 +1,3 @@
-## @ingroup Input_Output-OpenVSP
 # write_vsp_mesh.py
 # 
 # Created:  Oct 2016, T. MacDonald

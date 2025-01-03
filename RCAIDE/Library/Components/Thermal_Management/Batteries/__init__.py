@@ -17,5 +17,4 @@ RCAIDE.Library.Components.Thermal_Management.Heat_Exchangers
 #  IMPORT
 # ---------------------------------------------------------------------------------------------------------------------- 
 from .Air_Cooled                 import Air_Cooled
-from .Cryocooler                 import Cryocooler
 from .Liquid_Cooled_Wavy_Channel import Liquid_Cooled_Wavy_Channel

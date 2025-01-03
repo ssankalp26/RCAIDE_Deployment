@@ -1,12 +1,10 @@
-## @ingroup Methods-Aerodynamics-Common-Fidelity_Zero-Lift
 # make_VLM_wings.py
 
 # Created:  Jun 2021, A. Blaufox
 
-# ----------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 #  Imports
-# ----------------------------------------------------------------------
-
+# ----------------------------------------------------------------------------------------------------------------------
 # package imports 
 import numpy as np
 from copy import deepcopy
@@ -18,10 +16,9 @@ from RCAIDE.Library.Components.Wings.Control_Surfaces import Aileron , Elevator 
 from RCAIDE.Library.Methods.Geometry.Planform import populate_control_sections
 from RCAIDE.Library.Methods.Geometry.Planform.convert_sweep import convert_sweep_segments
 
-# ------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # make_VLM_wings()
-# ------------------------------------------------------------------  
-## @ingroup Methods-Aerodynamics-Common-Fidelity_Zero-Lift
+# ----------------------------------------------------------------------------------------------------------------------
 def make_VLM_wings(geometry, settings):
     """ This parses through geometry.wings to create a Container of Data objects.
         Relevant VLM attributes are copied from geometry.wings to the Container.
