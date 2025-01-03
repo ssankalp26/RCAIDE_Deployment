@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "RCAIDE_TEST"
 description = "RCAIDE: Research Community Aerospace Interdisciplinary Design Environment"
-readme = "README_PyPI.md"
+readme = "README_PyPI.md"  # Updated to use PyPI-compatible README
 requires-python = ">=3.8"
 license = {text = "GNU Affero General Public License v3.0"}
 classifiers = [
@@ -48,6 +48,7 @@ dependencies = [
     "threadpoolctl",
     "zipp"
 ]
+# Dynamic version configuration
 dynamic = ["version"]
 
 [tool.setuptools]
