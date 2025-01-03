@@ -53,13 +53,19 @@ from .save     import save
 
 import importlib.resources
 from warnings import simplefilter
+import os
 
 simplefilter('ignore')
 
 # Define the version of the package
 def get_version():
     """Read the version from the VERSION file."""
-    with open('VERSION', 'r') as version_file:
+    # Get the directory of the current file
+    current_dir = os.path.dirname(__name__)
+    # Construct the full path to the VERSION file
+    version_file_path = os.path.join(current_dir, 'VERSION')
+    
+    with open(version_file_path, 'r') as version_file:
         return version_file.read().strip()
 
 __version__ = get_version()
