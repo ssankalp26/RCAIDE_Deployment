@@ -51,15 +51,20 @@ from .Vehicle  import Vehicle
 from .load     import load 
 from .save     import save
 
+import importlib.resources
 from warnings import simplefilter
+
 simplefilter('ignore')
 
-# Read version from VERSION file
-import os
+# Define the version of the package
+def get_version():
+    """Read the version from the VERSION file."""
+    with open('VERSION', 'r') as version_file:
+        return version_file.read().strip()
 
-def read_version():
-    version_file = os.path.join(os.path.dirname(__file__), 'VERSION')
-    with open(version_file, 'r') as f:
-        return f.read().strip()
+__version__ = get_version()
 
-__version__ = read_version()
+def print_version():
+    """Print the version of the RCAIDE package."""
+    print(f"RCAIDE version: {__version__}")
+
